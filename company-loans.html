@@ -44,11 +44,18 @@
     function fmtMoney(v){return new Intl.NumberFormat('vi-VN').format(Math.round(v||0));}
     function fmtRate(v){return v==null?'—':Number(v).toFixed(2)+'%/năm';}
     function fmtDate(v){if(!v)return '—'; return new Date(v+'T00:00:00').toLocaleDateString('vi-VN',{timeZone:'Asia/Ho_Chi_Minh'});}
+    function calcDaysRemaining(v){ if(!v) return null; const t=new Date(); t.setHours(0,0,0,0); const d=new Date(v+'T00:00:00'); return Math.round((d-t)/86400000); }
+    function isLoanVisible(item){ const days = calcDaysRemaining(item?.maturityDate); return days == null || days >= 0; }
     async function init(){
       const res = await fetch('data/company-loans-current.json');
       const data = await res.json();
-      document.getElementById('summary').innerHTML = `Cập nhật: <strong>${new Date(data.meta.updatedAt).toLocaleString('vi-VN',{timeZone:'Asia/Ho_Chi_Minh'})}</strong><br/>Tổng dư nợ: <strong>${fmtMoney(data.summary.totalOutstanding)} VNĐ</strong><br/>Hạn mức còn lại: <strong>${fmtMoney(data.summary.availableLimit)} VNĐ</strong>`;
-      document.getElementById('maturity-body').innerHTML = (data.maturityFocus||[]).map(item => `<tr><td><strong>${item.bank}</strong><br/><span class="muted">${item.loanCode}</span></td><td>${fmtDate(item.maturityDate)}</td><td class="center">${fmtRate(item.interestRate)}</td><td class="right">${fmtMoney(item.principalOutstanding)}</td><td class="right ${item.bank.includes('Standard')?'bad':'good'}">${fmtMoney(item.projectedSettlement)}</td></tr>`).join('');
+      const bidvOverdraft = (data.bidvOverdraft||[]).filter(isLoanVisible);
+      const bidvWorkingCapital = (data.bidvWorkingCapital||[]).filter(isLoanVisible);
+      const scWorkingCapital = (data.scWorkingCapital||[]).filter(isLoanVisible);
+      const totalOutstanding = [...bidvOverdraft, ...bidvWorkingCapital, ...scWorkingCapital].reduce((sum, item) => sum + Number(item.principalOutstanding || 0), 0);
+      const maturityFocus = (data.maturityFocus||[]).filter(isLoanVisible);
+      document.getElementById('summary').innerHTML = `Cập nhật: <strong>${new Date(data.meta.updatedAt).toLocaleString('vi-VN',{timeZone:'Asia/Ho_Chi_Minh'})}</strong><br/>Tổng dư nợ đang còn hiệu lực: <strong>${fmtMoney(totalOutstanding)} VNĐ</strong><br/>Hạn mức còn lại: <strong>${fmtMoney(data.summary.availableLimit)} VNĐ</strong>`;
+      document.getElementById('maturity-body').innerHTML = maturityFocus.length ? maturityFocus.map(item => `<tr><td><strong>${item.bank}</strong><br/><span class="muted">${item.loanCode}</span></td><td>${fmtDate(item.maturityDate)}</td><td class="center">${fmtRate(item.interestRate)}</td><td class="right">${fmtMoney(item.principalOutstanding)}</td><td class="right ${item.bank.includes('Standard')?'bad':'good'}">${fmtMoney(item.projectedSettlement)}</td></tr>`).join('') : '<tr><td colspan="5" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>';
     }
     init().catch(err => { document.getElementById('summary').innerHTML = '<span class="bad">Không đọc được data/company-loans-current.json</span><br/>' + String(err); });
   </script>

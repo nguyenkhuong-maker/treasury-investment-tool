@@ -1193,6 +1193,10 @@
     const due = new Date(value + 'T00:00:00');
     return Math.round((due - today) / 86400000);
   }
+  function isLoanVisible(item) {
+    const days = calcDaysRemaining(item?.maturityDate);
+    return days == null || days >= 0;
+  }
   function daysChipHtml(value) {
     if (value == null) return '<span class="muted">—</span>';
     const cls = value <= 7 ? 'days-critical' : value <= 30 ? 'days-warn' : value <= 90 ? 'days-ok' : 'days-long';
@@ -1203,14 +1207,14 @@
     return (items || []).reduce((sum, item) => sum + Number(item[key] || 0), 0);
   }
   function renderLoanKpis() {
-    const overdraft = LOANS?.bidvOverdraft || [];
-    const bidvWC = LOANS?.bidvWorkingCapital || [];
-    const scWC = LOANS?.scWorkingCapital || [];
+    const overdraft = (LOANS?.bidvOverdraft || []).filter(isLoanVisible);
+    const bidvWC = (LOANS?.bidvWorkingCapital || []).filter(isLoanVisible);
+    const scWC = (LOANS?.scWorkingCapital || []).filter(isLoanVisible);
     const totalBidv = aggregateLoanValues(overdraft, 'principalOutstanding') + aggregateLoanValues(bidvWC, 'principalOutstanding');
     const totalSc = aggregateLoanValues(scWC, 'principalOutstanding');
-    const total = Number(LOANS?.summary?.totalOutstanding || (totalBidv + totalSc));
+    const total = totalBidv + totalSc;
     const availableLimit = Number(LOANS?.summary?.availableLimit || 0);
-    const focus = (LOANS?.maturityFocus || []).slice().sort((a,b) => new Date(a.maturityDate) - new Date(b.maturityDate));
+    const focus = (LOANS?.maturityFocus || []).filter(isLoanVisible).slice().sort((a,b) => new Date(a.maturityDate) - new Date(b.maturityDate));
     const nearest = focus[0];
     const nearestDays = nearest ? calcDaysRemaining(nearest.maturityDate) : null;
     document.getElementById('loan-total-outstanding').textContent = fmtMoney(total) + ' VNĐ';
@@ -1241,7 +1245,11 @@
   }
   function renderLoanMaturity() {
     const body = document.getElementById('loan-maturity-body');
-    const rows = (LOANS?.maturityFocus || []).slice().sort((a,b) => new Date(a.maturityDate) - new Date(b.maturityDate));
+    const rows = (LOANS?.maturityFocus || []).filter(isLoanVisible).slice().sort((a,b) => new Date(a.maturityDate) - new Date(b.maturityDate));
+    if (!rows.length) {
+      body.innerHTML = '<tr><td colspan="7" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>';
+      return;
+    }
     body.innerHTML = rows.map(item => {
       const days = calcDaysRemaining(item.maturityDate);
       const levelClass = days != null && days <= 7 ? 'style="background:#fff5f5"' : days != null && days <= 30 ? 'style="background:#fffdf5"' : '';
@@ -1258,7 +1266,12 @@
   }
   function renderLoanTable(bodyId, items, includeLimit) {
     const body = document.getElementById(bodyId);
-    body.innerHTML = items.map(item => {
+    const visibleItems = items.filter(isLoanVisible);
+    if (!visibleItems.length) {
+      body.innerHTML = `<tr><td colspan="${includeLimit ? 9 : 8}" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>`;
+      return;
+    }
+    body.innerHTML = visibleItems.map(item => {
       const days = calcDaysRemaining(item.maturityDate);
       const limitCell = includeLimit ? `<td class="right">${item.availableLimit != null ? fmtMoney(item.availableLimit) : '<span class="muted">—</span>'}</td>` : '';
       const codeOrName = includeLimit ? `<td>${item.loanName || ''}</td>` : '';

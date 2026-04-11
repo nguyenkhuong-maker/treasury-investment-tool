@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Company Loans Snapshot</title>
+  <style>
+    :root { --bg:#f5f7fb; --card:#fff; --line:#d9dfeb; --text:#0f172a; --muted:#64748b; --navy:#0b1f4b; --gold:#c9973a; --red:#991b1b; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Inter,Arial,sans-serif; background:var(--bg); color:var(--text); }
+    .wrap { max-width:1200px; margin:0 auto; padding:24px; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; margin-bottom:18px; }
+    .hero { border-top:4px solid var(--gold); }
+    h1,h2 { margin:0 0 12px; }
+    .muted { color:var(--muted); }
+    .note { background:#fbfcfe; border-left:4px solid var(--navy); padding:12px 14px; border-radius:10px; margin-top:12px; }
+    table { width:100%; border-collapse:collapse; margin-top:12px; font-size:14px; }
+    th,td { border:1px solid var(--line); padding:10px; text-align:left; vertical-align:top; }
+    th { background:#f3f6fb; font-size:13px; }
+    .right{text-align:right}.center{text-align:center}.bad{color:var(--red);font-weight:700}.good{color:#166534;font-weight:700}
+    code{background:#eef2f8;padding:2px 6px;border-radius:6px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="card hero">
+      <h1>Company Loans Snapshot</h1>
+      <p class="muted">Đọc trực tiếp từ <code>data/company-loans-current.json</code></p>
+      <div class="note">File này chỉ là view riêng cho phần dư nợ. Dashboard chính vẫn là <strong>index.html</strong>.</div>
+    </section>
+    <section class="card">
+      <h2>Tóm tắt</h2>
+      <div id="summary" class="muted">Đang tải dữ liệu...</div>
+    </section>
+    <section class="card">
+      <h2>Các khoản gần hạn</h2>
+      <table>
+        <thead><tr><th>Ngân hàng / Mã</th><th>Đáo hạn</th><th class="center">Lãi suất</th><th class="right">Dư nợ gốc</th><th class="right">Dự trả</th></tr></thead>
+        <tbody id="maturity-body"></tbody>
+      </table>
+    </section>
+  </div>
+  <script>
+    function fmtMoney(v){return new Intl.NumberFormat('vi-VN').format(Math.round(v||0));}
+    function fmtRate(v){return v==null?'—':Number(v).toFixed(2)+'%/năm';}
+    function fmtDate(v){if(!v)return '—'; return new Date(v+'T00:00:00').toLocaleDateString('vi-VN',{timeZone:'Asia/Ho_Chi_Minh'});}
+    async function init(){
+      const res = await fetch('data/company-loans-current.json');
+      const data = await res.json();
+      document.getElementById('summary').innerHTML = `Cập nhật: <strong>${new Date(data.meta.updatedAt).toLocaleString('vi-VN',{timeZone:'Asia/Ho_Chi_Minh'})}</strong><br/>Tổng dư nợ: <strong>${fmtMoney(data.summary.totalOutstanding)} VNĐ</strong><br/>Hạn mức còn lại: <strong>${fmtMoney(data.summary.availableLimit)} VNĐ</strong>`;
+      document.getElementById('maturity-body').innerHTML = (data.maturityFocus||[]).map(item => `<tr><td><strong>${item.bank}</strong><br/><span class="muted">${item.loanCode}</span></td><td>${fmtDate(item.maturityDate)}</td><td class="center">${fmtRate(item.interestRate)}</td><td class="right">${fmtMoney(item.principalOutstanding)}</td><td class="right ${item.bank.includes('Standard')?'bad':'good'}">${fmtMoney(item.projectedSettlement)}</td></tr>`).join('');
+    }
+    init().catch(err => { document.getElementById('summary').innerHTML = '<span class="bad">Không đọc được data/company-loans-current.json</span><br/>' + String(err); });
+  </script>
+</body>
+</html>

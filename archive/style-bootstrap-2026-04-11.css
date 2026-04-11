@@ -1,0 +1,54 @@
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --line: #d9dfeb;
+  --text: #0f172a;
+  --muted: #64748b;
+  --navy: #0b1f4b;
+  --gold: #c9973a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 18px;
+}
+.hero {
+  border-top: 4px solid var(--gold);
+}
+.eyebrow {
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.muted {
+  color: var(--muted);
+}
+code {
+  background: #eef2f8;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+}

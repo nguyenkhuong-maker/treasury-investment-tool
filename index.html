@@ -725,7 +725,7 @@
       <span class="pill pill-gold">BOD Dashboard</span>
     </div>
 
-    <div class="kpi-grid" id="loan-kpi-grid"></div>
+    <div id="loan-overview-grid" class="grid-2" style="align-items:start"></div>
 
     <div class="section-label" id="loan-maturity">
       <span class="label-text">02 — Lịch đáo hạn quan trọng</span>
@@ -1217,30 +1217,99 @@
     const focus = (LOANS?.maturityFocus || []).filter(isLoanVisible).slice().sort((a,b) => new Date(a.maturityDate) - new Date(b.maturityDate));
     const nearest = focus[0];
     const nearestDays = nearest ? calcDaysRemaining(nearest.maturityDate) : null;
+    const bidvPct = total ? ((totalBidv / total) * 100) : 0;
+    const scPct = total ? ((totalSc / total) * 100) : 0;
+    const totalUtilPct = total && availableLimit ? (total / (total + availableLimit) * 100) : 0;
     document.getElementById('loan-total-outstanding').textContent = fmtMoney(total) + ' VNĐ';
     document.getElementById('loan-available-limit').textContent = fmtMoney(availableLimit) + ' VNĐ';
     document.getElementById('loan-updated-at').textContent = fmtDateTime(LOANS?.meta?.updatedAt);
-    const kpiGrid = document.getElementById('loan-kpi-grid');
-    kpiGrid.innerHTML = `
-      <div class="kpi-card kpi-navy">
-        <div class="kpi-label">Tổng dư nợ gốc (BIDV + SC)</div>
-        <div class="kpi-value">${fmtMoney(total)}</div>
-        <div class="kpi-meta"><span class="pill pill-navy" style="font-size:10.5px">VNĐ</span></div>
+    const wrap = document.getElementById('loan-overview-grid');
+    const circumference = 2 * Math.PI * 70;
+    const bidvArc = (bidvPct / 100) * circumference;
+    const scArc = circumference - bidvArc;
+    wrap.innerHTML = `
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="kpi-card kpi-navy">
+          <div class="kpi-label">Tổng dư nợ gốc (BIDV + SC)</div>
+          <div class="kpi-value">${fmtMoney(total)}</div>
+          <div class="kpi-meta"><span class="pill pill-navy" style="font-size:10.5px">VNĐ</span></div>
+          <div class="util-row">
+            <div class="util-bar-wrap"><div class="util-bar bar-navy" style="width:${totalUtilPct.toFixed(1)}%"></div></div>
+            <span class="util-label">${totalUtilPct.toFixed(1)}% hạn mức</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-gold">
+          <div class="kpi-label">BIDV — Dư nợ gốc cuối kỳ</div>
+          <div class="kpi-value big">${fmtMoney(totalBidv)}</div>
+          <div class="kpi-meta"><span class="pill pill-gold" style="font-size:10.5px">${bidvPct.toFixed(1)}% tổng dư nợ</span></div>
+          <div class="util-row">
+            <div class="util-bar-wrap"><div class="util-bar bar-gold" style="width:${bidvPct.toFixed(1)}%"></div></div>
+            <span class="util-label">${bidvPct.toFixed(1)}% cơ cấu BIDV</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-gold">
+          <div class="kpi-label">SC — Dư nợ gốc cuối kỳ</div>
+          <div class="kpi-value big">${fmtMoney(totalSc)}</div>
+          <div class="kpi-meta"><span class="pill pill-gold" style="font-size:10.5px">${scPct.toFixed(1)}% tổng dư nợ</span></div>
+          <div class="util-row">
+            <div class="util-bar-wrap"><div class="util-bar bar-gold" style="width:${scPct.toFixed(1)}%"></div></div>
+            <span class="util-label">${scPct.toFixed(1)}% cơ cấu SC</span>
+          </div>
+        </div>
       </div>
-      <div class="kpi-card kpi-gold">
-        <div class="kpi-label">BIDV — Dư nợ gốc</div>
-        <div class="kpi-value big">${fmtMoney(totalBidv)}</div>
-        <div class="kpi-meta"><span class="pill pill-gold" style="font-size:10.5px">${total ? ((totalBidv/total)*100).toFixed(1) : '0.0'}% tổng dư nợ</span></div>
-      </div>
-      <div class="kpi-card kpi-gold">
-        <div class="kpi-label">SC — Dư nợ gốc</div>
-        <div class="kpi-value big">${fmtMoney(totalSc)}</div>
-        <div class="kpi-meta"><span class="pill pill-gold" style="font-size:10.5px">${total ? ((totalSc/total)*100).toFixed(1) : '0.0'}% tổng dư nợ</span></div>
-      </div>
-      <div class="kpi-card kpi-red">
-        <div class="kpi-label">Khoản gần hạn nhất</div>
-        <div class="kpi-value" style="font-size:18px; color:var(--red)">${nearest ? nearest.loanCode : '—'}</div>
-        <div class="kpi-meta" style="margin-top:4px"><span class="pill pill-red" style="font-size:10.5px">${nearest ? (fmtDateVN(nearest.maturityDate) + ' · ' + (nearestDays == null ? '—' : (nearestDays + ' ngày'))) : 'Chưa có dữ liệu'}</span></div>
+      <div class="card" style="margin-bottom:0;height:100%">
+        <div class="card-header" style="margin-bottom:16px">
+          <div class="card-title">
+            <div class="card-title-icon">🥧</div>
+            Cơ cấu dư nợ
+          </div>
+          <span class="pill pill-navy" style="font-size:11px">Bấm để xem chi tiết</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:20px">
+          <svg width="200" height="200" viewBox="0 0 200 200" style="overflow:visible">
+            <style>
+              .ds { transition: stroke-width .18s, filter .18s; cursor: pointer; }
+              .ds:hover { stroke-width: 37; filter: brightness(1.1); }
+            </style>
+            <circle class="ds" cx="100" cy="100" r="70" fill="none" stroke="#16a34a" stroke-width="30"
+              stroke-dasharray="${bidvArc.toFixed(2)} ${scArc.toFixed(2)}" stroke-dashoffset="0"
+              transform="rotate(-90 100 100)"
+              onclick="document.getElementById('loan-bidv').scrollIntoView({behavior:'smooth',block:'start'})" />
+            <circle class="ds" cx="100" cy="100" r="70" fill="none" stroke="#2563eb" stroke-width="30"
+              stroke-dasharray="${scArc.toFixed(2)} ${bidvArc.toFixed(2)}" stroke-dashoffset="-${bidvArc.toFixed(2)}"
+              transform="rotate(-90 100 100)"
+              onclick="document.getElementById('loan-sc').scrollIntoView({behavior:'smooth',block:'start'})" />
+            <text x="100" y="94" text-anchor="middle" font-size="11" fill="#64748b" font-family="Inter,sans-serif">Tổng dư nợ</text>
+            <text x="100" y="113" text-anchor="middle" font-size="15" font-weight="700" fill="#0b1f4b" font-family="Inter,sans-serif">${(total/1000000000).toFixed(1)} tỷ VNĐ</text>
+          </svg>
+          <div style="width:100%;display:flex;flex-direction:column;gap:10px">
+            <div onclick="document.getElementById('loan-bidv').scrollIntoView({behavior:'smooth',block:'start'})"
+              style="cursor:pointer;display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:11px;border:1.5px solid #bbf7d0;background:#f0fdf4;transition:background .15s,border-color .15s"
+              onmouseover="this.style.background='#dcfce7';this.style.borderColor='#4ade80'"
+              onmouseout="this.style.background='#f0fdf4';this.style.borderColor='#bbf7d0'">
+              <div style="width:12px;height:12px;border-radius:3px;background:#16a34a;flex-shrink:0"></div>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:700;color:#14532d">BIDV</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:1px">${fmtMoney(totalBidv)} VNĐ</div>
+              </div>
+              <div style="font-size:20px;font-weight:800;color:#16a34a;letter-spacing:-1px">${bidvPct.toFixed(1)}%</div>
+            </div>
+            <div onclick="document.getElementById('loan-sc').scrollIntoView({behavior:'smooth',block:'start'})"
+              style="cursor:pointer;display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:11px;border:1.5px solid #bfdbfe;background:#eff6ff;transition:background .15s,border-color .15s"
+              onmouseover="this.style.background='#dbeafe';this.style.borderColor='#60a5fa'"
+              onmouseout="this.style.background='#eff6ff';this.style.borderColor='#bfdbfe'">
+              <div style="width:12px;height:12px;border-radius:3px;background:#2563eb;flex-shrink:0"></div>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:700;color:#1e3a8a">Standard Chartered</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:1px">${fmtMoney(totalSc)} VNĐ</div>
+              </div>
+              <div style="font-size:20px;font-weight:800;color:#2563eb;letter-spacing:-1px">${scPct.toFixed(1)}%</div>
+            </div>
+          </div>
+          <div style="width:100%;font-size:12px;color:var(--muted)">
+            Khoản gần hạn nhất: <strong style="color:var(--red)">${nearest ? nearest.loanCode : '—'}</strong> ${nearest ? '· ' + fmtDateVN(nearest.maturityDate) + ' · ' + (nearestDays == null ? '—' : nearestDays + ' ngày') : ''}
+          </div>
+        </div>
       </div>`;
   }
   function renderLoanMaturity() {

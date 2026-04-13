@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "name": "Personal Treasury Current Snapshot",
+    "updatedAt": "2026-04-11T15:58:00+07:00",
+    "source": "Google Sheets / dashboard-fix",
+    "hasHistory": false,
+    "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND"
+  },
+  "summary": {
+    "totalPersonalDeposits": 0,
+    "totalPersonalLoans": 0,
+    "netPersonalTreasury": 0
+  },
+  "personalDeposits": [],
+  "personalLoans": []
+}

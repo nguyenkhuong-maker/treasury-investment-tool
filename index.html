@@ -669,6 +669,7 @@
   <div class="tab-nav-inner">
     <button class="tab-btn active" data-tab="dunno"   onclick="switchTab('dunno')">📊 Dư nợ Tín dụng</button>
     <button class="tab-btn"         data-tab="laisuat" onclick="switchTab('laisuat')">📈 Cập nhật lãi suất tiền gửi/trái phiếu</button>
+    <button class="tab-btn"         data-tab="canhan"  onclick="switchTab('canhan')">👤 Sổ tiết kiệm cá nhân</button>
   </div>
 </nav>
 
@@ -1077,6 +1078,110 @@
 </div><!-- #tab-laisuat -->
 
 
+
+<!-- ╔══════════════════════════════════════════════════════╗
+     ║   TAB 3 — SỔ TIẾT KIỆM CÁ NHÂN                      ║
+     ╚══════════════════════════════════════════════════════╝ -->
+<div id="tab-canhan" class="tab-panel">
+  <div class="wrap">
+
+    <div class="card hero-card" style="margin-top:0">
+      <span class="pill pill-dark">PERSONAL TREASURY SNAPSHOT</span>
+      <h1 style="margin-top:12px">Sổ tiết kiệm cá nhân</h1>
+      <h2>Dữ liệu hiện tại từ sheet <strong>dashboard-fix</strong> · Không lưu history</h2>
+      <div class="meta-hero">
+        <div><strong>Nguồn dữ liệu</strong><span id="personal-data-source-label">data/personal-treasury-current.json</span></div>
+        <div><strong>Phạm vi</strong>Tiền gửi tiết kiệm VND từ nguồn hoán đổi USD stables sang VND + khoản vay cá nhân BIDV</div>
+        <div><strong>Nguyên tắc vận hành</strong>Anh cập nhật sheet nguồn, em cập nhật lại snapshot JSON cho dashboard</div>
+      </div>
+      <div class="note-hero">
+        <strong>Cách dùng lâu dài:</strong> phần cá nhân sẽ đọc từ <strong>personal-treasury-current.json</strong>. Chỉ cần snapshot hiện tại, chưa cần lưu history theo tuần / tháng.
+      </div>
+      <div class="actions">
+        <button class="btn-gold" onclick="choosePersonalJson()">&#128193; Chọn personal-treasury-current.json từ máy</button>
+        <button class="btn-secondary" onclick="tryLoadDefaultPersonalJson()">&#8635; Đọc file mặc định</button>
+      </div>
+      <input id="personal-json-file" class="hidden-file" type="file" accept=".json,application/json" />
+      <div id="personal-load-status">Nguồn mặc định: <strong>data/personal-treasury-current.json</strong></div>
+    </div>
+
+    <div class="section-label">
+      <span class="label-text">01 — Tổng quan treasury cá nhân</span>
+      <div class="label-line"></div>
+      <span class="pill pill-gold">Personal Snapshot</span>
+    </div>
+
+    <div class="kpi-row" id="personal-kpi-row">
+      <div class="kpi-box"><strong>Tổng tiền gửi cá nhân</strong><span id="personal-total-deposits">-</span></div>
+      <div class="kpi-box"><strong>Tổng vay cá nhân</strong><span id="personal-total-loans">-</span></div>
+      <div class="kpi-box"><strong>Treasury ròng cá nhân</strong><span id="personal-net-treasury">-</span></div>
+      <div class="kpi-box"><strong>Ngày cập nhật</strong><span id="personal-updated-at">-</span></div>
+    </div>
+
+    <div class="section-label">
+      <span class="label-text">02 — Tiền gửi tiết kiệm cá nhân</span>
+      <div class="label-line"></div>
+    </div>
+    <div class="card">
+      <div class="card-header" style="margin-bottom:4px">
+        <div class="card-title"><div class="card-title-icon">💰</div> Bảng kê tiền gửi tiết kiệm VND</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Chủ sổ</th>
+              <th>Ngân hàng</th>
+              <th>Mã / sổ</th>
+              <th class="right">Số tiền gốc</th>
+              <th class="center">Lãi suất</th>
+              <th>Ngày mở</th>
+              <th>Ngày đáo hạn</th>
+              <th>Thế chấp</th>
+              <th class="right">Lãi dự thu</th>
+              <th class="right">Dự thu cuối kỳ</th>
+            </tr>
+          </thead>
+          <tbody id="personal-deposits-body"></tbody>
+        </table>
+      </div>
+      <div id="personal-deposits-empty" class="empty" style="display:none">Chưa có dữ liệu tiền gửi cá nhân.</div>
+    </div>
+
+    <div class="section-label">
+      <span class="label-text">03 — Khoản vay cá nhân</span>
+      <div class="label-line"></div>
+    </div>
+    <div class="card">
+      <div class="card-header" style="margin-bottom:4px">
+        <div class="card-title"><div class="card-title-icon">🏦</div> Khoản vay cá nhân BIDV</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Người vay</th>
+              <th>Ngân hàng</th>
+              <th>Mã khoản vay</th>
+              <th class="right">Gốc ban đầu</th>
+              <th class="right">Dư nợ gốc</th>
+              <th class="center">Lãi suất</th>
+              <th>Ngày giải ngân</th>
+              <th>Ngày đáo hạn</th>
+              <th class="right">Lãi còn phải trả</th>
+              <th class="right">Dự trả cuối kỳ</th>
+            </tr>
+          </thead>
+          <tbody id="personal-loans-body"></tbody>
+        </table>
+      </div>
+      <div id="personal-loans-empty" class="empty" style="display:none">Chưa có dữ liệu khoản vay cá nhân.</div>
+    </div>
+
+  </div>
+</div><!-- #tab-canhan -->
+
+
 <!-- ══════════════════════════════════════════════════════
      FOOTER
 ═══════════════════════════════════════════════════════ -->
@@ -1393,6 +1498,112 @@
       applyLoanData(data, 'Local: ' + file.name);
     } catch (err) {
       setLoanLoadStatus('<strong class="bad">✗ File JSON dư nợ không hợp lệ.</strong> ' + String(err));
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════
+     PERSONAL TREASURY SNAPSHOT — Core Logic
+  ══════════════════════════════════════════════════════ */
+  let PERSONAL = null;
+
+  function setPersonalDataSourceLabel(text) {
+    const el = document.getElementById('personal-data-source-label');
+    if (el) el.textContent = text;
+  }
+  function setPersonalLoadStatus(html) {
+    const box = document.getElementById('personal-load-status');
+    if (box) box.innerHTML = html;
+  }
+  function renderPersonalSummary() {
+    const summary = PERSONAL?.summary || {};
+    const deposits = (PERSONAL?.personalDeposits || []).reduce((sum, item) => sum + Number(item.principal || 0), 0);
+    const loans = (PERSONAL?.personalLoans || []).reduce((sum, item) => sum + Number(item.principalOutstanding || 0), 0);
+    const net = Number(summary.netPersonalTreasury || (deposits - loans));
+    document.getElementById('personal-total-deposits').textContent = fmtMoney(Number(summary.totalPersonalDeposits || deposits)) + ' VNĐ';
+    document.getElementById('personal-total-loans').textContent = fmtMoney(Number(summary.totalPersonalLoans || loans)) + ' VNĐ';
+    document.getElementById('personal-net-treasury').textContent = fmtMoney(net) + ' VNĐ';
+    document.getElementById('personal-updated-at').textContent = fmtDateTime(PERSONAL?.meta?.updatedAt);
+  }
+  function renderPersonalDeposits() {
+    const body = document.getElementById('personal-deposits-body');
+    const empty = document.getElementById('personal-deposits-empty');
+    const items = PERSONAL?.personalDeposits || [];
+    if (!items.length) {
+      body.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    body.innerHTML = items.map(item => `<tr>
+      <td><strong>${item.owner || ''}</strong></td>
+      <td>${item.bank || ''}</td>
+      <td>${item.depositCode || ''}</td>
+      <td class="right">${fmtMoney(item.principal || 0)}</td>
+      <td class="center">${fmtRate(item.interestRate)}</td>
+      <td>${fmtDateVN(item.openDate)}</td>
+      <td>${fmtDateVN(item.maturityDate)}</td>
+      <td>${item.pledged ? ('Có' + (item.pledgedFor ? ' · ' + item.pledgedFor : '')) : 'Không'}</td>
+      <td class="right">${fmtMoney(item.accruedInterest || 0)}</td>
+      <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
+    </tr>`).join('');
+  }
+  function renderPersonalLoans() {
+    const body = document.getElementById('personal-loans-body');
+    const empty = document.getElementById('personal-loans-empty');
+    const items = PERSONAL?.personalLoans || [];
+    if (!items.length) {
+      body.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    body.innerHTML = items.map(item => `<tr>
+      <td><strong>${item.borrower || ''}</strong></td>
+      <td>${item.bank || ''}</td>
+      <td>${item.loanCode || ''}</td>
+      <td class="right">${fmtMoney(item.principalOriginal || 0)}</td>
+      <td class="right">${fmtMoney(item.principalOutstanding || 0)}</td>
+      <td class="center">${fmtRate(item.interestRate)}</td>
+      <td>${fmtDateVN(item.disbursementDate)}</td>
+      <td>${fmtDateVN(item.maturityDate)}</td>
+      <td class="right">${fmtMoney(item.interestPayable || 0)}</td>
+      <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
+    </tr>`).join('');
+  }
+  function renderPersonalSnapshot() {
+    if (!PERSONAL) return;
+    renderPersonalSummary();
+    renderPersonalDeposits();
+    renderPersonalLoans();
+  }
+  function applyPersonalData(data, sourceLabel) {
+    PERSONAL = data;
+    setPersonalDataSourceLabel(sourceLabel);
+    renderPersonalSnapshot();
+    setPersonalLoadStatus(`<strong class="good">✓ Đã đọc dữ liệu cá nhân:</strong> ${sourceLabel}`);
+  }
+  async function tryLoadDefaultPersonalJson() {
+    try {
+      const res = await fetch('data/personal-treasury-current.json');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      applyPersonalData(data, 'data/personal-treasury-current.json');
+    } catch (err) {
+      setPersonalLoadStatus('<strong class="bad">✗ Không đọc được data/personal-treasury-current.json.</strong> Hãy bấm <strong>Chọn personal-treasury-current.json từ máy</strong> để test local.');
+      throw err;
+    }
+  }
+  function choosePersonalJson() {
+    document.getElementById('personal-json-file').click();
+  }
+  async function loadPersonalJsonFile(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    try {
+      const data = JSON.parse(await file.text());
+      applyPersonalData(data, 'Local: ' + file.name);
+    } catch (err) {
+      setPersonalLoadStatus('<strong class="bad">✗ File JSON cá nhân không hợp lệ.</strong> ' + String(err));
     }
   }
 
@@ -1750,11 +1961,13 @@
   async function init() {
     document.getElementById('local-json-file').addEventListener('change', loadLocalJsonFile);
     document.getElementById('loan-json-file').addEventListener('change', loadLoanJsonFile);
+    document.getElementById('personal-json-file').addEventListener('change', loadPersonalJsonFile);
     document.getElementById('month-select').addEventListener('change', () => { refreshWeekSelector(); refreshCompareWeekSelector(); renderSelectedPeriod(); });
     document.getElementById('week-select').addEventListener('change', () => { refreshCompareWeekSelector(); renderSelectedPeriod(); });
     document.getElementById('compare-week-select').addEventListener('change', renderSelectedPeriod);
     try { await tryLoadDefaultJson(); } catch (e) { console.warn('Default JSON load failed:', e); }
     try { await tryLoadDefaultLoansJson(); } catch (e) { console.warn('Default company loans JSON load failed:', e); }
+    try { await tryLoadDefaultPersonalJson(); } catch (e) { console.warn('Default personal treasury JSON load failed:', e); }
   }
   init();
 </script>

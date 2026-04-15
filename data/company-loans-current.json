@@ -1,13 +1,13 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-04-15T16:06:00+07:00",
+    "updatedAt": "2026-04-15T17:29:00+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC"
   },
   "summary": {
-    "totalOutstanding": 35684683411,
-    "availableLimit": 4604568553
+    "totalOutstanding": 39562093975,
+    "availableLimit": 5677457989
   },
   "maturityFocus": [
     {
@@ -88,6 +88,22 @@
       "projectedSettlement": 6034668499,
       "availableLimit": 2135801,
       "notes": "Khoản BIDV gần hạn nhất."
+    },
+    {
+      "bank": "BIDV",
+      "group": "overdraft",
+      "company": "VIHALI",
+      "loanCode": "8670018067",
+      "loanName": "BIDV TS — Thấu chi",
+      "disbursementDate": "2026-03-03",
+      "maturityDate": "2027-03-03",
+      "interestRate": 7.06,
+      "pledgedAccount": "HĐ TCGKH 04-2024/HĐTD",
+      "principalOutstanding": 3877410564,
+      "interestPayable": 52510545,
+      "projectedSettlement": 3929621109,
+      "availableLimit": 1072889436,
+      "notes": "Khoản thấu chi TS hiện hữu, khác với hạn mức 8690020465 chưa giải ngân."
     },
     {
       "bank": "BIDV",

@@ -1,24 +1,15 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-04-08T15:15:00+07:00",
+    "updatedAt": "2026-04-15T16:04:00+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC"
   },
   "summary": {
-    "totalOutstanding": 39263852076,
-    "availableLimit": 20869319891
+    "totalOutstanding": 34961461717,
+    "availableLimit": 4604568553
   },
   "maturityFocus": [
-    {
-      "bank": "Standard Chartered",
-      "loanCode": "007095194",
-      "maturityDate": "2026-04-10",
-      "interestRate": 4.7,
-      "principalOutstanding": 425279795,
-      "projectedSettlement": 435027441,
-      "notes": "Khoản gần hạn nhất, ưu tiên cao nhất."
-    },
     {
       "bank": "Standard Chartered",
       "loanCode": "007116272",
@@ -93,17 +84,17 @@
       "bank": "BIDV",
       "group": "overdraft",
       "company": "VIHALI",
-      "loanCode": "8670018067",
+      "loanCode": "8690020465",
       "loanName": "BIDV TS — Thấu chi",
-      "disbursementDate": "2026-03-03",
-      "maturityDate": "2027-03-03",
-      "interestRate": 7.06,
-      "pledgedAccount": "HĐ TCGKH 04-2024/TDTG",
-      "principalOutstanding": 3877410564,
-      "interestPayable": 52510545,
-      "projectedSettlement": 3929621109,
-      "availableLimit": 1072889436,
-      "notes": "Khoản thấu chi tenor dài hơn."
+      "disbursementDate": "2026-03-26",
+      "maturityDate": "2027-03-26",
+      "interestRate": 5.2,
+      "pledgedAccount": "HĐ TCGKH 05-2024/HĐTD",
+      "principalOutstanding": 0,
+      "interestPayable": 0,
+      "projectedSettlement": 0,
+      "availableLimit": 4600000000,
+      "notes": "Hạn mức chưa giải ngân, không tính là dư nợ active."
     }
   ],
   "bidvWorkingCapital": [
@@ -249,20 +240,6 @@
     }
   ],
   "scWorkingCapital": [
-    {
-      "bank": "Standard Chartered",
-      "group": "working-capital",
-      "company": "VIHALI",
-      "loanCode": "007095194",
-      "loanName": "SC VLĐ",
-      "disbursementDate": "2025-10-14",
-      "maturityDate": "2026-04-10",
-      "interestRate": 4.7,
-      "principalOutstanding": 425279795,
-      "interestPayable": 9747642,
-      "projectedSettlement": 435027441,
-      "notes": "Khế ước gần hạn nhất."
-    },
     {
       "bank": "Standard Chartered",
       "group": "working-capital",

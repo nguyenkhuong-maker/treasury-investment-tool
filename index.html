@@ -1300,7 +1300,8 @@
   }
   function isLoanVisible(item) {
     const days = calcDaysRemaining(item?.maturityDate);
-    return days == null || days >= 0;
+    const principal = Number(item?.principalOutstanding || 0);
+    return (days == null || days >= 0) && principal > 0;
   }
   function daysChipHtml(value) {
     if (value == null) return '<span class="muted">—</span>';

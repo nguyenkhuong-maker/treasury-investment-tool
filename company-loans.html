@@ -46,6 +46,7 @@
     function fmtDate(v){if(!v)return '—'; return new Date(v+'T00:00:00').toLocaleDateString('vi-VN',{timeZone:'Asia/Ho_Chi_Minh'});}
     function calcDaysRemaining(v){ if(!v) return null; const t=new Date(); t.setHours(0,0,0,0); const d=new Date(v+'T00:00:00'); return Math.round((d-t)/86400000); }
     function isLoanVisible(item){ const days = calcDaysRemaining(item?.maturityDate); const principal = Number(item?.principalOutstanding || 0); return (days == null || days >= 0) && principal > 0; }
+    function isFacilityVisible(item){ const days = calcDaysRemaining(item?.maturityDate); return days == null || days >= 0; }
     async function init(){
       const res = await fetch('data/company-loans-current.json');
       const data = await res.json();

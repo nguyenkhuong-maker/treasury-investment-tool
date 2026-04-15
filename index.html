@@ -1303,6 +1303,10 @@
     const principal = Number(item?.principalOutstanding || 0);
     return (days == null || days >= 0) && principal > 0;
   }
+  function isFacilityVisible(item) {
+    const days = calcDaysRemaining(item?.maturityDate);
+    return days == null || days >= 0;
+  }
   function daysChipHtml(value) {
     if (value == null) return '<span class="muted">—</span>';
     const cls = value <= 7 ? 'days-critical' : value <= 30 ? 'days-warn' : value <= 90 ? 'days-ok' : 'days-long';
@@ -1441,7 +1445,7 @@
   }
   function renderLoanTable(bodyId, items, includeLimit) {
     const body = document.getElementById(bodyId);
-    const visibleItems = items.filter(isLoanVisible);
+    const visibleItems = items.filter(includeLimit ? isFacilityVisible : isLoanVisible);
     if (!visibleItems.length) {
       body.innerHTML = `<tr><td colspan="${includeLimit ? 9 : 8}" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>`;
       return;

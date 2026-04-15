@@ -1,12 +1,12 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-04-15T16:04:00+07:00",
+    "updatedAt": "2026-04-15T16:06:00+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC"
   },
   "summary": {
-    "totalOutstanding": 34961461717,
+    "totalOutstanding": 35684683411,
     "availableLimit": 4604568553
   },
   "maturityFocus": [
@@ -17,7 +17,7 @@
       "interestRate": 4.8,
       "principalOutstanding": 1852526894,
       "projectedSettlement": 1895891250,
-      "notes": "Khoản lớn, theo dõi chặt."
+      "notes": "Khế ước gần hạn lớn."
     },
     {
       "bank": "BIDV",
@@ -26,7 +26,7 @@
       "interestRate": 5.2,
       "principalOutstanding": 6034668499,
       "projectedSettlement": 6034668499,
-      "notes": "BIDV gần hạn nhất."
+      "notes": "Khoản BIDV gần hạn nhất."
     },
     {
       "bank": "Standard Chartered",
@@ -35,7 +35,7 @@
       "interestRate": 4.8,
       "principalOutstanding": 412783278,
       "projectedSettlement": 422445799,
-      "notes": "SC tiếp theo trong đầu tháng 5."
+      "notes": "Khế ước gần hạn đầu tháng 5."
     },
     {
       "bank": "BIDV",
@@ -44,7 +44,16 @@
       "interestRate": 5.2,
       "principalOutstanding": 10750152548,
       "projectedSettlement": 10771593948,
-      "notes": "Khoản thấu chi BIDV chính."
+      "notes": "Khoản thấu chi hạn mức, ngày đến hạn chung."
+    },
+    {
+      "bank": "Standard Chartered",
+      "loanCode": "007142807",
+      "maturityDate": "2026-05-15",
+      "interestRate": 4.84,
+      "principalOutstanding": 469012053,
+      "projectedSettlement": 480144472,
+      "notes": "Khế ước active."
     }
   ],
   "bidvOverdraft": [
@@ -94,7 +103,7 @@
       "interestPayable": 0,
       "projectedSettlement": 0,
       "availableLimit": 4600000000,
-      "notes": "Hạn mức chưa giải ngân, không tính là dư nợ active."
+      "notes": "Hạn mức chưa giải ngân, vẫn hiển thị trong BIDV thấu chi nhưng không tính vào dư nợ active."
     }
   ],
   "bidvWorkingCapital": [
@@ -477,6 +486,20 @@
       "interestPayable": 57230008,
       "projectedSettlement": 2100729688,
       "notes": "Khế ước active."
+    },
+    {
+      "bank": "Standard Chartered",
+      "group": "working-capital",
+      "company": "VIHALI",
+      "loanCode": "007349292",
+      "loanName": "SC VLĐ",
+      "disbursementDate": "2026-04-13",
+      "maturityDate": "2026-10-09",
+      "interestRate": 5.75,
+      "principalOutstanding": 723221694,
+      "interestPayable": 20393861,
+      "projectedSettlement": 743615555,
+      "notes": "Khoản giải ngân mới từ Drive data ngày 15/04/2026."
     }
   ]
 }

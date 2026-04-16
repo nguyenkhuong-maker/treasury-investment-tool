@@ -2148,36 +2148,3 @@
 </script>
 </body>
 </html>
- công.</strong> Nếu vẫn lỗi khi mở local, dùng nút <strong style="color:var(--gold-light)">Chọn history.json từ máy</strong>.');
-    } catch (err) {
-      setLocalLoadStatus('<strong class="bad">&#10007; Không đọc được data/history.json.</strong> Hãy bấm <strong style="color:var(--gold-light)">Chọn history.json từ máy</strong> để test local.');
-      throw err;
-    }
-  }
-  function chooseLocalJson() { document.getElementById('local-json-file').click(); }
-  async function loadLocalJsonFile(event) {
-    const file = event.target.files && event.target.files[0];
-    if (!file) return;
-    try {
-      const data = JSON.parse(await file.text());
-      applyHistoryData(data, 'Local: ' + file.name);
-      setLocalLoadStatus('<strong style="color:var(--gold-light)">&#10003; Đã nạp file local thành công:</strong> ' + file.name);
-    } catch (err) {
-      setLocalLoadStatus('<strong class="bad">&#10007; File JSON không hợp lệ.</strong> ' + String(err));
-    }
-  }
-  async function init() {
-    document.getElementById('local-json-file').addEventListener('change', loadLocalJsonFile);
-    document.getElementById('loan-json-file').addEventListener('change', loadLoanJsonFile);
-    document.getElementById('personal-json-file').addEventListener('change', loadPersonalJsonFile);
-    document.getElementById('month-select').addEventListener('change', () => { refreshWeekSelector(); refreshCompareWeekSelector(); renderSelectedPeriod(); });
-    document.getElementById('week-select').addEventListener('change', () => { refreshCompareWeekSelector(); renderSelectedPeriod(); });
-    document.getElementById('compare-week-select').addEventListener('change', renderSelectedPeriod);
-    try { await tryLoadDefaultJson(); } catch (e) { console.warn('Default JSON load failed:', e); }
-    try { await tryLoadDefaultLoansJson(); } catch (e) { console.warn('Default company loans JSON load failed:', e); }
-    try { await tryLoadDefaultPersonalJson(); } catch (e) { console.warn('Default personal treasury JSON load failed:', e); }
-  }
-  init();
-</script>
-</body>
-</html>

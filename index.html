@@ -863,7 +863,6 @@
               <th class="right">Lãi dự thu</th>
               <th class="right">Số cuối kỳ</th>
               <th>Đang đảm bảo cho khoản vay</th>
-              <th>Ghi chú</th>
             </tr>
           </thead>
           <tbody id="loan-company-deposits-body"></tbody>
@@ -1572,8 +1571,18 @@
     const totalInterest = aggregateLoanValues(visibleItems, 'interestPayable');
     const totalProjected = aggregateLoanValues(visibleItems, 'projectedSettlement');
     const avgRate = averageRate(visibleItems);
-    body.innerHTML = `<tr>
-      <td><strong>${label}</strong></td>
+    const detailRows = visibleItems.map(item => `<tr>
+      <td><strong>${item.loanCode || ''}</strong></td>
+      <td>${fmtDateVN(item.disbursementDate)}</td>
+      <td>${fmtDateVN(item.maturityDate)}</td>
+      <td class="center">${daysChipHtml(calcDaysRemaining(item.maturityDate))}</td>
+      <td class="center">${fmtRate(item.interestRate)}</td>
+      <td class="right">${fmtMoney(item.principalOutstanding || 0)}</td>
+      <td class="right">${fmtMoney(item.interestPayable || 0)}</td>
+      <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
+    </tr>`).join('');
+    body.innerHTML = `<tr class="vld-toggle-row" onclick="toggleVLD(this)">
+      <td><span class="vld-arrow">▶</span><strong>${label}</strong></td>
       <td class="center">${visibleItems.length}</td>
       <td>${fmtDateVN(nearest?.maturityDate)}</td>
       <td class="center">${daysChipHtml(days)}</td>
@@ -1581,6 +1590,29 @@
       <td class="right">${fmtMoney(totalPrincipal)}</td>
       <td class="right">${fmtMoney(totalInterest)}</td>
       <td class="right">${fmtMoney(totalProjected)}</td>
+    </tr>
+    <tr style="display:none">
+      <td colspan="8" style="padding:0;background:#fbfcfe">
+        <div class="detail-content">
+          <div class="table-wrap" style="margin-top:0">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mã khoản vay</th>
+                  <th>Ngày giải ngân</th>
+                  <th>Ngày đáo hạn</th>
+                  <th class="center">Còn lại</th>
+                  <th class="center">Lãi suất</th>
+                  <th class="right">Dư nợ gốc</th>
+                  <th class="right">Lãi còn phải trả</th>
+                  <th class="right">Dự trả gốc+lãi</th>
+                </tr>
+              </thead>
+              <tbody>${detailRows}</tbody>
+            </table>
+          </div>
+        </div>
+      </td>
     </tr>`;
   }
   function renderCompanyDepositTable() {
@@ -1588,7 +1620,7 @@
     const items = LOANS?.companyDeposits || [];
     if (!body) return;
     if (!items.length) {
-      body.innerHTML = '<tr><td colspan="11" class="center muted">Chưa có dữ liệu sổ tiết kiệm VIHALI tại BIDV.</td></tr>';
+      body.innerHTML = '<tr><td colspan="10" class="center muted">Chưa có dữ liệu sổ tiết kiệm VIHALI tại BIDV.</td></tr>';
       return;
     }
     body.innerHTML = items.map(item => `<tr>
@@ -1602,7 +1634,6 @@
       <td class="right">${fmtMoney(item.accruedInterest || 0)}</td>
       <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
       <td>${formatLinkedLoanLabel(item)}</td>
-      <td>${item.mappingNote || item.notes || ''}</td>
     </tr>`).join('');
   }
   function renderLoanSnapshot() {

@@ -807,8 +807,6 @@
               <th class="right">Lãi còn phải trả</th>
               <th class="right">Dự trả gốc+lãi</th>
               <th class="right">Hạn mức còn lại</th>
-              <th>Cụm sổ bảo đảm</th>
-              <th>Mã sổ/STK</th>
             </tr>
           </thead>
           <tbody id="loan-bidv-overdraft-body"></tbody>
@@ -819,22 +817,20 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title"><div class="card-title-icon">📄</div>BIDV — Vốn lưu động</div>
-        <span class="pill pill-navy" style="font-size:11px">Từng khế ước</span>
+        <span class="pill pill-navy" style="font-size:11px">Tổng hợp cụm vay</span>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Mã khế ước</th>
-              <th>Ngày giải ngân</th>
-              <th>Ngày đáo hạn</th>
+              <th>Nhóm khoản vay</th>
+              <th class="center">Số khế ước</th>
+              <th>Ngày đáo hạn gần nhất</th>
               <th class="center">Còn lại</th>
-              <th class="center">Lãi suất</th>
+              <th class="center">Lãi suất bình quân</th>
               <th class="right">Dư nợ gốc</th>
               <th class="right">Lãi còn phải trả</th>
               <th class="right">Dự trả gốc+lãi</th>
-              <th>Cụm sổ bảo đảm</th>
-              <th>Mã sổ/STK</th>
             </tr>
           </thead>
           <tbody id="loan-bidv-wc-body"></tbody>
@@ -885,21 +881,20 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title"><div class="card-title-icon">🏛</div>Standard Chartered — Vốn lưu động</div>
+        <span class="pill pill-blue" style="font-size:11px">Tổng hợp cụm vay</span>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Mã khế ước</th>
-              <th>Ngày giải ngân</th>
-              <th>Ngày đáo hạn</th>
+              <th>Nhóm khoản vay</th>
+              <th class="center">Số khế ước</th>
+              <th>Ngày đáo hạn gần nhất</th>
               <th class="center">Còn lại</th>
-              <th class="center">Lãi suất</th>
+              <th class="center">Lãi suất bình quân</th>
               <th class="right">Dư nợ gốc</th>
               <th class="right">Lãi còn phải trả</th>
               <th class="right">Dự trả gốc+lãi</th>
-              <th>Cụm sổ bảo đảm</th>
-              <th>Mã sổ/STK</th>
             </tr>
           </thead>
           <tbody id="loan-sc-wc-body"></tbody>
@@ -1250,8 +1245,6 @@
               <th>Ngày đáo hạn</th>
               <th class="right">Lãi còn phải trả</th>
               <th class="right">Dự trả cuối kỳ</th>
-              <th>Cụm sổ bảo đảm</th>
-              <th>Mã sổ/STK</th>
             </tr>
           </thead>
           <tbody id="personal-loans-body"></tbody>
@@ -1532,7 +1525,7 @@
     const body = document.getElementById(bodyId);
     const visibleItems = items.filter(includeLimit ? isFacilityVisible : isLoanVisible);
     if (!visibleItems.length) {
-      body.innerHTML = `<tr><td colspan="${includeLimit ? 11 : 10}" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>`;
+      body.innerHTML = `<tr><td colspan="${includeLimit ? 9 : 8}" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>`;
       return;
     }
     body.innerHTML = visibleItems.map(item => {
@@ -1550,10 +1543,39 @@
         <td class="right">${fmtMoney(item.interestPayable || 0)}</td>
         <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
         ${limitCell}
-        <td>${item.collateralGroupName || '—'}</td>
-        <td>${fmtList(item.depositCodes)}</td>
       </tr>`;
     }).join('');
+  }
+  function averageRate(items) {
+    const vals = (items || []).map(item => Number(item.interestRate || 0)).filter(v => v > 0);
+    if (!vals.length) return null;
+    return vals.reduce((s, v) => s + v, 0) / vals.length;
+  }
+  function renderLoanGroupSummary(bodyId, items, label) {
+    const body = document.getElementById(bodyId);
+    const visibleItems = (items || []).filter(isLoanVisible);
+    if (!body) return;
+    if (!visibleItems.length) {
+      body.innerHTML = '<tr><td colspan="8" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>';
+      return;
+    }
+    const sorted = visibleItems.slice().sort((a,b) => new Date(a.maturityDate) - new Date(b.maturityDate));
+    const nearest = sorted[0];
+    const days = calcDaysRemaining(nearest?.maturityDate);
+    const totalPrincipal = aggregateLoanValues(visibleItems, 'principalOutstanding');
+    const totalInterest = aggregateLoanValues(visibleItems, 'interestPayable');
+    const totalProjected = aggregateLoanValues(visibleItems, 'projectedSettlement');
+    const avgRate = averageRate(visibleItems);
+    body.innerHTML = `<tr>
+      <td><strong>${label}</strong></td>
+      <td class="center">${visibleItems.length}</td>
+      <td>${fmtDateVN(nearest?.maturityDate)}</td>
+      <td class="center">${daysChipHtml(days)}</td>
+      <td class="center">${fmtRate(avgRate)}</td>
+      <td class="right">${fmtMoney(totalPrincipal)}</td>
+      <td class="right">${fmtMoney(totalInterest)}</td>
+      <td class="right">${fmtMoney(totalProjected)}</td>
+    </tr>`;
   }
   function renderCompanyDepositTable() {
     const body = document.getElementById('loan-company-deposits-body');
@@ -1582,9 +1604,9 @@
     renderLoanKpis();
     renderLoanMaturity();
     renderLoanTable('loan-bidv-overdraft-body', LOANS.bidvOverdraft || [], true);
-    renderLoanTable('loan-bidv-wc-body', LOANS.bidvWorkingCapital || [], false);
+    renderLoanGroupSummary('loan-bidv-wc-body', LOANS.bidvWorkingCapital || [], 'BIDV - Vốn lưu động');
     renderCompanyDepositTable();
-    renderLoanTable('loan-sc-wc-body', LOANS.scWorkingCapital || [], false);
+    renderLoanGroupSummary('loan-sc-wc-body', LOANS.scWorkingCapital || [], 'SC - Vốn lưu động');
   }
   function applyLoanData(data, sourceLabel) {
     LOANS = data;
@@ -1684,8 +1706,6 @@
       <td>${fmtDateVN(item.maturityDate)}</td>
       <td class="right">${fmtMoney(item.interestPayable || 0)}</td>
       <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
-      <td>${item.securedBy || '—'}</td>
-      <td>${fmtList(item.linkedDeposits)}</td>
     </tr>`).join('');
   }
   function renderPersonalSnapshot() {
@@ -2059,6 +2079,39 @@
       const data = await res.json();
       applyHistoryData(data, 'data/history.json');
       setLocalLoadStatus('<strong style="color:var(--gold-light)">&#10003; Đã đọc dữ liệu mặc định thành công.</strong> Nếu vẫn lỗi khi mở local, dùng nút <strong style="color:var(--gold-light)">Chọn history.json từ máy</strong>.');
+    } catch (err) {
+      setLocalLoadStatus('<strong class="bad">&#10007; Không đọc được data/history.json.</strong> Hãy bấm <strong style="color:var(--gold-light)">Chọn history.json từ máy</strong> để test local.');
+      throw err;
+    }
+  }
+  function chooseLocalJson() { document.getElementById('local-json-file').click(); }
+  async function loadLocalJsonFile(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    try {
+      const data = JSON.parse(await file.text());
+      applyHistoryData(data, 'Local: ' + file.name);
+      setLocalLoadStatus('<strong style="color:var(--gold-light)">&#10003; Đã nạp file local thành công:</strong> ' + file.name);
+    } catch (err) {
+      setLocalLoadStatus('<strong class="bad">&#10007; File JSON không hợp lệ.</strong> ' + String(err));
+    }
+  }
+  async function init() {
+    document.getElementById('local-json-file').addEventListener('change', loadLocalJsonFile);
+    document.getElementById('loan-json-file').addEventListener('change', loadLoanJsonFile);
+    document.getElementById('personal-json-file').addEventListener('change', loadPersonalJsonFile);
+    document.getElementById('month-select').addEventListener('change', () => { refreshWeekSelector(); refreshCompareWeekSelector(); renderSelectedPeriod(); });
+    document.getElementById('week-select').addEventListener('change', () => { refreshCompareWeekSelector(); renderSelectedPeriod(); });
+    document.getElementById('compare-week-select').addEventListener('change', renderSelectedPeriod);
+    try { await tryLoadDefaultJson(); } catch (e) { console.warn('Default JSON load failed:', e); }
+    try { await tryLoadDefaultLoansJson(); } catch (e) { console.warn('Default company loans JSON load failed:', e); }
+    try { await tryLoadDefaultPersonalJson(); } catch (e) { console.warn('Default personal treasury JSON load failed:', e); }
+  }
+  init();
+</script>
+</body>
+</html>
+ công.</strong> Nếu vẫn lỗi khi mở local, dùng nút <strong style="color:var(--gold-light)">Chọn history.json từ máy</strong>.');
     } catch (err) {
       setLocalLoadStatus('<strong class="bad">&#10007; Không đọc được data/history.json.</strong> Hãy bấm <strong style="color:var(--gold-light)">Chọn history.json từ máy</strong> để test local.');
       throw err;

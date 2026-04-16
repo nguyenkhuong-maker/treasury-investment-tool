@@ -781,6 +781,8 @@
               <th class="right">Lãi còn phải trả</th>
               <th class="right">Dự trả gốc+lãi</th>
               <th class="right">Hạn mức còn lại</th>
+              <th>Cụm sổ bảo đảm</th>
+              <th>Mã sổ/STK</th>
             </tr>
           </thead>
           <tbody id="loan-bidv-overdraft-body"></tbody>
@@ -804,6 +806,8 @@
               <th class="right">Dư nợ gốc</th>
               <th class="right">Lãi còn phải trả</th>
               <th class="right">Dự trả gốc+lãi</th>
+              <th>Cụm sổ bảo đảm</th>
+              <th>Mã sổ/STK</th>
             </tr>
           </thead>
           <tbody id="loan-bidv-wc-body"></tbody>
@@ -834,6 +838,7 @@
               <th class="right">Số tiền trên sổ</th>
               <th class="right">Lãi dự thu</th>
               <th class="right">Số cuối kỳ</th>
+              <th>Đang đảm bảo cho</th>
               <th>Ghi chú</th>
             </tr>
           </thead>
@@ -864,6 +869,8 @@
               <th class="right">Dư nợ gốc</th>
               <th class="right">Lãi còn phải trả</th>
               <th class="right">Dự trả gốc+lãi</th>
+              <th>Cụm sổ bảo đảm</th>
+              <th>Mã sổ/STK</th>
             </tr>
           </thead>
           <tbody id="loan-sc-wc-body"></tbody>
@@ -1182,6 +1189,7 @@
               <th>Thế chấp</th>
               <th class="right">Lãi dự thu</th>
               <th class="right">Dự thu cuối kỳ</th>
+              <th>Đang đảm bảo cho</th>
             </tr>
           </thead>
           <tbody id="personal-deposits-body"></tbody>
@@ -1213,6 +1221,8 @@
               <th>Ngày đáo hạn</th>
               <th class="right">Lãi còn phải trả</th>
               <th class="right">Dự trả cuối kỳ</th>
+              <th>Cụm sổ bảo đảm</th>
+              <th>Mã sổ/STK</th>
             </tr>
           </thead>
           <tbody id="personal-loans-body"></tbody>
@@ -1486,11 +1496,14 @@
       </tr>`;
     }).join('');
   }
+  function fmtList(items) {
+    return Array.isArray(items) && items.length ? items.join(', ') : '—';
+  }
   function renderLoanTable(bodyId, items, includeLimit) {
     const body = document.getElementById(bodyId);
     const visibleItems = items.filter(includeLimit ? isFacilityVisible : isLoanVisible);
     if (!visibleItems.length) {
-      body.innerHTML = `<tr><td colspan="${includeLimit ? 9 : 8}" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>`;
+      body.innerHTML = `<tr><td colspan="${includeLimit ? 11 : 10}" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>`;
       return;
     }
     body.innerHTML = visibleItems.map(item => {
@@ -1508,6 +1521,8 @@
         <td class="right">${fmtMoney(item.interestPayable || 0)}</td>
         <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
         ${limitCell}
+        <td>${item.collateralGroupName || '—'}</td>
+        <td>${fmtList(item.depositCodes)}</td>
       </tr>`;
     }).join('');
   }
@@ -1516,7 +1531,7 @@
     const items = LOANS?.companyDeposits || [];
     if (!body) return;
     if (!items.length) {
-      body.innerHTML = '<tr><td colspan="10" class="center muted">Chưa có dữ liệu sổ tiết kiệm VIHALI tại BIDV.</td></tr>';
+      body.innerHTML = '<tr><td colspan="11" class="center muted">Chưa có dữ liệu sổ tiết kiệm VIHALI tại BIDV.</td></tr>';
       return;
     }
     body.innerHTML = items.map(item => `<tr>
@@ -1529,7 +1544,8 @@
       <td class="right">${fmtMoney(item.bookAmount || item.principal || 0)}</td>
       <td class="right">${fmtMoney(item.accruedInterest || 0)}</td>
       <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
-      <td>${item.notes || ''}</td>
+      <td>${fmtList(item.linkedLoanCodes)}</td>
+      <td>${item.mappingNote || item.notes || ''}</td>
     </tr>`).join('');
   }
   function renderLoanSnapshot() {
@@ -1615,6 +1631,7 @@
       <td>${item.pledged ? ('Có' + (item.pledgedFor ? ' · ' + item.pledgedFor : '')) : 'Không'}</td>
       <td class="right">${fmtMoney(item.accruedInterest || 0)}</td>
       <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
+      <td>${fmtList(item.linkedLoanCodes)}</td>
     </tr>`).join('');
   }
   function renderPersonalLoans() {
@@ -1638,6 +1655,8 @@
       <td>${fmtDateVN(item.maturityDate)}</td>
       <td class="right">${fmtMoney(item.interestPayable || 0)}</td>
       <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
+      <td>${item.securedBy || '—'}</td>
+      <td>${fmtList(item.linkedDeposits)}</td>
     </tr>`).join('');
   }
   function renderPersonalSnapshot() {

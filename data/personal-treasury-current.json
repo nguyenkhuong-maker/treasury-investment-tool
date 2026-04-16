@@ -30,7 +30,22 @@
       "pledgedAmount": 7858000000,
       "unpledgedAmount": 369326000,
       "accruedInterest": 430165176,
-      "projectedSettlement": 8657491176
+      "projectedSettlement": 8657491176,
+      "linkedLoanCodes": [
+        "407004096429",
+        "405004152702",
+        "409004187568",
+        "401004238120",
+        "405004265499",
+        "404004377692",
+        "405004401881",
+        "404004478705",
+        "400004586176",
+        "406004639406"
+      ],
+      "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 810004228033 + tín chấp",
+      "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động BIDV; phần đảm bảo bằng sổ chiếm 60% hạn mức.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Hồ Thị Yến Nhi",
@@ -49,7 +64,13 @@
       "pledgedAmount": 7069900000,
       "unpledgedAmount": 717198936,
       "accruedInterest": 384913636,
-      "projectedSettlement": 7787098936
+      "projectedSettlement": 7787098936,
+      "linkedLoanCodes": [
+        "1440280147"
+      ],
+      "collateralGroupName": "Cụm 2 sổ cá nhân BIDV của Hồ Thị Yến Nhi",
+      "mappingNote": "Đang đảm bảo cho khoản vay 1440280147.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Hồ Thị Yến Nhi",
@@ -68,7 +89,13 @@
       "pledgedAmount": 3200000000,
       "unpledgedAmount": 307868800,
       "accruedInterest": 157468800,
-      "projectedSettlement": 3507868800
+      "projectedSettlement": 3507868800,
+      "linkedLoanCodes": [
+        "1440280147"
+      ],
+      "collateralGroupName": "Cụm 2 sổ cá nhân BIDV của Hồ Thị Yến Nhi",
+      "mappingNote": "Đang đảm bảo cho khoản vay 1440280147.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Hồ Thị Yến Nhi",
@@ -87,7 +114,13 @@
       "pledgedAmount": 6036800000,
       "unpledgedAmount": 313913600,
       "accruedInterest": 313913600,
-      "projectedSettlement": 6350713600
+      "projectedSettlement": 6350713600,
+      "linkedLoanCodes": [
+        "1440328001"
+      ],
+      "collateralGroupName": "Sổ cá nhân BIDV của Hồ Thị Yến Nhi",
+      "mappingNote": "Đang đảm bảo cho khoản vay 1440328001.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Hồ Thị Yến Nhi",
@@ -125,7 +158,30 @@
       "pledgedAmount": 12015235000,
       "unpledgedAmount": 0,
       "accruedInterest": 672853160,
-      "projectedSettlement": 12688088160
+      "projectedSettlement": 12688088160,
+      "linkedLoanCodes": [
+        "007116272",
+        "007124748",
+        "007142807",
+        "007157673",
+        "007170054",
+        "007177691",
+        "007204823",
+        "007213292",
+        "007219384",
+        "007230274",
+        "007249501",
+        "007259697",
+        "007265357",
+        "007285498",
+        "007295472",
+        "007305767",
+        "007332686",
+        "007349292"
+      ],
+      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Hồ Thị Yến Nhi",
@@ -144,7 +200,30 @@
       "pledgedAmount": 9544500000,
       "unpledgedAmount": 544036500,
       "accruedInterest": 544036500,
-      "projectedSettlement": 10088536500
+      "projectedSettlement": 10088536500,
+      "linkedLoanCodes": [
+        "007116272",
+        "007124748",
+        "007142807",
+        "007157673",
+        "007170054",
+        "007177691",
+        "007204823",
+        "007213292",
+        "007219384",
+        "007230274",
+        "007249501",
+        "007259697",
+        "007265357",
+        "007285498",
+        "007295472",
+        "007305767",
+        "007332686",
+        "007349292"
+      ],
+      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Đặng Thu Thảo",
@@ -182,7 +261,13 @@
       "pledgedAmount": 5000000000,
       "unpledgedAmount": 255000000,
       "accruedInterest": 266985000,
-      "projectedSettlement": 5255000000
+      "projectedSettlement": 5255000000,
+      "linkedLoanCodes": [
+        "PERSONAL-BIDV-REFINANCE-01"
+      ],
+      "collateralGroupName": "Cụm 6 sổ cá nhân BIDV của Đặng Thu Thảo",
+      "mappingNote": "Đang đảm bảo cho khoản vay PERSONAL-BIDV-REFINANCE-01.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Đặng Thu Thảo",
@@ -201,7 +286,13 @@
       "pledgedAmount": 5000000000,
       "unpledgedAmount": 255000000,
       "accruedInterest": 266985000,
-      "projectedSettlement": 5255000000
+      "projectedSettlement": 5255000000,
+      "linkedLoanCodes": [
+        "PERSONAL-BIDV-REFINANCE-01"
+      ],
+      "collateralGroupName": "Cụm 6 sổ cá nhân BIDV của Đặng Thu Thảo",
+      "mappingNote": "Đang đảm bảo cho khoản vay PERSONAL-BIDV-REFINANCE-01.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Đặng Thu Thảo",
@@ -220,7 +311,13 @@
       "pledgedAmount": 5000000000,
       "unpledgedAmount": 255000000,
       "accruedInterest": 266985000,
-      "projectedSettlement": 5255000000
+      "projectedSettlement": 5255000000,
+      "linkedLoanCodes": [
+        "PERSONAL-BIDV-REFINANCE-01"
+      ],
+      "collateralGroupName": "Cụm 6 sổ cá nhân BIDV của Đặng Thu Thảo",
+      "mappingNote": "Đang đảm bảo cho khoản vay PERSONAL-BIDV-REFINANCE-01.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Đặng Thu Thảo",
@@ -239,7 +336,13 @@
       "pledgedAmount": 5000000000,
       "unpledgedAmount": 255000000,
       "accruedInterest": 266985000,
-      "projectedSettlement": 5255000000
+      "projectedSettlement": 5255000000,
+      "linkedLoanCodes": [
+        "PERSONAL-BIDV-REFINANCE-01"
+      ],
+      "collateralGroupName": "Cụm 6 sổ cá nhân BIDV của Đặng Thu Thảo",
+      "mappingNote": "Đang đảm bảo cho khoản vay PERSONAL-BIDV-REFINANCE-01.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Đặng Thu Thảo",
@@ -258,7 +361,13 @@
       "pledgedAmount": 5000000000,
       "unpledgedAmount": 255000000,
       "accruedInterest": 266985000,
-      "projectedSettlement": 5255000000
+      "projectedSettlement": 5255000000,
+      "linkedLoanCodes": [
+        "PERSONAL-BIDV-REFINANCE-01"
+      ],
+      "collateralGroupName": "Cụm 6 sổ cá nhân BIDV của Đặng Thu Thảo",
+      "mappingNote": "Đang đảm bảo cho khoản vay PERSONAL-BIDV-REFINANCE-01.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Đặng Thu Thảo",
@@ -277,7 +386,13 @@
       "pledgedAmount": 5000000000,
       "unpledgedAmount": 255000000,
       "accruedInterest": 266985000,
-      "projectedSettlement": 5255000000
+      "projectedSettlement": 5255000000,
+      "linkedLoanCodes": [
+        "PERSONAL-BIDV-REFINANCE-01"
+      ],
+      "collateralGroupName": "Cụm 6 sổ cá nhân BIDV của Đặng Thu Thảo",
+      "mappingNote": "Đang đảm bảo cho khoản vay PERSONAL-BIDV-REFINANCE-01.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Đặng Thu Thảo",
@@ -426,7 +541,7 @@
       "maturityDate": "2026-07-11",
       "interestPayable": 638465754,
       "projectedSettlement": 28013465754,
-      "securedBy": "Cụm 6 sổ BIDV của Đặng Thu Thảo",
+      "securedBy": "Cụm 6 sổ cá nhân BIDV của Đặng Thu Thảo",
       "linkedDeposits": [
         "813005446854",
         "817005446883",
@@ -434,7 +549,9 @@
         "816005446824",
         "814005446865",
         "813005446875"
-      ]
+      ],
+      "mappingStatus": "confirmed",
+      "mappingNote": "Đảm bảo bằng 6 sổ cá nhân 813005446854 + 817005446883 + 817005446887 + 816005446824 + 814005446865 + 813005446875."
     }
   ]
 }

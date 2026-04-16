@@ -1,13 +1,13 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-04-16T09:20:00+07:00",
+    "updatedAt": "2026-04-16T10:28:00+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC"
   },
   "summary": {
-    "totalOutstanding": 35684683411,
-    "availableLimit": 4604568553
+    "totalOutstanding": 39561793975,
+    "availableLimit": 5677453689
   },
   "maturityFocus": [
     {
@@ -43,7 +43,7 @@
       "maturityDate": "2026-05-07",
       "interestRate": 5.2,
       "principalOutstanding": 10750152548,
-      "projectedSettlement": 10771593948,
+      "projectedSettlement": 10783846177,
       "notes": "Khoản thấu chi hạn mức, ngày đến hạn chung."
     },
     {
@@ -68,8 +68,8 @@
       "interestRate": 5.2,
       "pledgedAccount": "AAC7305098",
       "principalOutstanding": 10750152548,
-      "interestPayable": 21441400,
-      "projectedSettlement": 10771593948,
+      "interestPayable": 33693629,
+      "projectedSettlement": 10783846177,
       "availableLimit": 2432752,
       "notes": "Khoản thấu chi hạn mức, ngày đến hạn chung."
     },
@@ -79,15 +79,31 @@
       "company": "VIHALI",
       "loanCode": "1440328001",
       "loanName": "BIDV TN — Thấu chi",
-      "disbursementDate": "2025-10-04",
+      "disbursementDate": "2025-05-05",
       "maturityDate": "2026-04-29",
       "interestRate": 5.2,
       "pledgedAccount": "-",
       "principalOutstanding": 6034668499,
       "interestPayable": 0,
       "projectedSettlement": 6034668499,
-      "availableLimit": 2135801,
+      "availableLimit": 2131501,
       "notes": "Khoản BIDV gần hạn nhất."
+    },
+    {
+      "bank": "BIDV",
+      "group": "overdraft",
+      "company": "VIHALI",
+      "loanCode": "8670018067",
+      "loanName": "BIDV TS — Thấu chi",
+      "disbursementDate": "2026-03-03",
+      "maturityDate": "2027-03-03",
+      "interestRate": 7.06,
+      "pledgedAccount": "HĐ TGCKH 04-2024/HĐTG",
+      "principalOutstanding": 3877110564,
+      "interestPayable": 82516570,
+      "projectedSettlement": 3959627134,
+      "availableLimit": 1072889436,
+      "notes": "Khoản thấu chi TS hiện hữu, khác với hạn mức 8690020465 chưa giải ngân."
     },
     {
       "bank": "BIDV",
@@ -98,10 +114,10 @@
       "disbursementDate": "2026-03-26",
       "maturityDate": "2027-03-26",
       "interestRate": 5.2,
-      "pledgedAccount": "HĐ TCGKH 05-2024/HĐTD",
+      "pledgedAccount": "HĐ TGCKH 05-2024/HĐTG",
       "principalOutstanding": 0,
-      "interestPayable": 0,
-      "projectedSettlement": 0,
+      "interestPayable": 24700517,
+      "projectedSettlement": 3532438619,
       "availableLimit": 4600000000,
       "notes": "Hạn mức chưa giải ngân, vẫn hiển thị trong BIDV thấu chi nhưng không tính vào dư nợ active."
     }
@@ -113,12 +129,12 @@
       "company": "VIHALI",
       "loanCode": "407004096429",
       "loanName": "BIDV VLĐ",
-      "disbursementDate": "2025-01-21",
+      "disbursementDate": "2025-11-21",
       "maturityDate": "2026-05-19",
       "interestRate": 6.2,
       "principalOutstanding": 84426000,
-      "interestPayable": 200772,
-      "projectedSettlement": 84626772,
+      "interestPayable": 315499,
+      "projectedSettlement": 84741499,
       "notes": "Khế ước active."
     },
     {
@@ -131,8 +147,8 @@
       "maturityDate": "2026-05-29",
       "interestRate": 7.3,
       "principalOutstanding": 131688024,
-      "interestPayable": 368726,
-      "projectedSettlement": 132056750,
+      "interestPayable": 579427,
+      "projectedSettlement": 132267451,
       "notes": "Khế ước active."
     },
     {
@@ -145,8 +161,8 @@
       "maturityDate": "2026-06-08",
       "interestRate": 7.3,
       "principalOutstanding": 286819973,
-      "interestPayable": 803096,
-      "projectedSettlement": 287623069,
+      "interestPayable": 1262008,
+      "projectedSettlement": 288081981,
       "notes": "Khế ước active."
     },
     {
@@ -159,8 +175,8 @@
       "maturityDate": "2026-06-19",
       "interestRate": 7.3,
       "principalOutstanding": 122412650,
-      "interestPayable": 342755,
-      "projectedSettlement": 122755405,
+      "interestPayable": 538616,
+      "projectedSettlement": 122951266,
       "notes": "Khế ước active."
     },
     {
@@ -173,8 +189,8 @@
       "maturityDate": "2026-06-26",
       "interestRate": 7.3,
       "principalOutstanding": 42689574,
-      "interestPayable": 119531,
-      "projectedSettlement": 42809105,
+      "interestPayable": 187834,
+      "projectedSettlement": 42877408,
       "notes": "Khế ước active."
     },
     {
@@ -187,8 +203,8 @@
       "maturityDate": "2026-07-24",
       "interestRate": 7.3,
       "principalOutstanding": 59906663,
-      "interestPayable": 167739,
-      "projectedSettlement": 60074402,
+      "interestPayable": 263589,
+      "projectedSettlement": 60170252,
       "notes": "Khế ước active."
     },
     {
@@ -201,8 +217,8 @@
       "maturityDate": "2026-07-31",
       "interestRate": 7.3,
       "principalOutstanding": 109334705,
-      "interestPayable": 306137,
-      "projectedSettlement": 109640842,
+      "interestPayable": 481073,
+      "projectedSettlement": 109815778,
       "notes": "Khế ước active."
     },
     {
@@ -215,8 +231,8 @@
       "maturityDate": "2026-08-21",
       "interestRate": 7.3,
       "principalOutstanding": 103618200,
-      "interestPayable": 290131,
-      "projectedSettlement": 103908331,
+      "interestPayable": 455920,
+      "projectedSettlement": 104074120,
       "notes": "Khế ước active."
     },
     {
@@ -229,8 +245,8 @@
       "maturityDate": "2026-09-14",
       "interestRate": 7.3,
       "principalOutstanding": 120665554,
-      "interestPayable": 337864,
-      "projectedSettlement": 121003418,
+      "interestPayable": 530928,
+      "projectedSettlement": 121196482,
       "notes": "Khế ước active."
     },
     {
@@ -240,11 +256,11 @@
       "loanCode": "406004639406",
       "loanName": "BIDV VLĐ",
       "disbursementDate": "2026-04-02",
-      "maturityDate": "2026-09-27",
+      "maturityDate": "2026-09-29",
       "interestRate": 7.5,
       "principalOutstanding": 102079434,
-      "interestPayable": 293653,
-      "projectedSettlement": 102373087,
+      "interestPayable": 461455,
+      "projectedSettlement": 102540889,
       "notes": "Khế ước active."
     }
   ],
@@ -330,7 +346,7 @@
       "interestRate": 5.15,
       "principalOutstanding": 431819984,
       "interestPayable": 10967045,
-      "projectedSettlement": 442787029,
+      "projectedSettlement": 442787028,
       "notes": "Khế ước active."
     },
     {
@@ -399,7 +415,7 @@
       "maturityDate": "2026-07-29",
       "interestRate": 5.75,
       "principalOutstanding": 2066131470,
-      "interestPayable": 58587654,
+      "interestPayable": 58587564,
       "projectedSettlement": 2124719034,
       "notes": "Khế ước active."
     },
@@ -413,7 +429,7 @@
       "maturityDate": "2026-08-05",
       "interestRate": 5.75,
       "principalOutstanding": 775494845,
-      "interestPayable": 21989195,
+      "interestPayable": 21990059,
       "projectedSettlement": 797484904,
       "notes": "Khế ước active."
     },
@@ -483,7 +499,7 @@
       "maturityDate": "2026-09-25",
       "interestRate": 5.75,
       "principalOutstanding": 2043429680,
-      "interestPayable": 57230008,
+      "interestPayable": 57300008,
       "projectedSettlement": 2100729688,
       "notes": "Khế ước active."
     },

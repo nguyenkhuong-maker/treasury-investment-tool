@@ -862,7 +862,7 @@
               <th class="right">Số tiền trên sổ</th>
               <th class="right">Lãi dự thu</th>
               <th class="right">Số cuối kỳ</th>
-              <th>Đang đảm bảo cho</th>
+              <th>Đang đảm bảo cho khoản vay</th>
               <th>Ghi chú</th>
             </tr>
           </thead>
@@ -1213,7 +1213,7 @@
               <th>Thế chấp</th>
               <th class="right">Lãi dự thu</th>
               <th class="right">Dự thu cuối kỳ</th>
-              <th>Đang đảm bảo cho</th>
+              <th>Đang đảm bảo cho khoản vay</th>
             </tr>
           </thead>
           <tbody id="personal-deposits-body"></tbody>
@@ -1521,6 +1521,12 @@
   function fmtList(items) {
     return Array.isArray(items) && items.length ? items.join(', ') : '—';
   }
+  function formatLinkedLoanLabel(item) {
+    const group = String(item?.collateralGroupName || '');
+    if (group.includes('BIDV VLĐ')) return 'BIDV - Vốn lưu động';
+    if (group.includes('SC VLĐ')) return 'SC - Vốn lưu động';
+    return fmtList(item?.linkedLoanCodes);
+  }
   function renderLoanTable(bodyId, items, includeLimit) {
     const body = document.getElementById(bodyId);
     const visibleItems = items.filter(includeLimit ? isFacilityVisible : isLoanVisible);
@@ -1595,7 +1601,7 @@
       <td class="right">${fmtMoney(item.bookAmount || item.principal || 0)}</td>
       <td class="right">${fmtMoney(item.accruedInterest || 0)}</td>
       <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
-      <td>${fmtList(item.linkedLoanCodes)}</td>
+      <td>${formatLinkedLoanLabel(item)}</td>
       <td>${item.mappingNote || item.notes || ''}</td>
     </tr>`).join('');
   }
@@ -1682,7 +1688,7 @@
       <td>${item.pledged ? ('Có' + (item.pledgedFor ? ' · ' + item.pledgedFor : '')) : 'Không'}</td>
       <td class="right">${fmtMoney(item.accruedInterest || 0)}</td>
       <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
-      <td>${fmtList(item.linkedLoanCodes)}</td>
+      <td>${formatLinkedLoanLabel(item)}</td>
     </tr>`).join('');
   }
   function renderPersonalLoans() {

@@ -83,7 +83,8 @@ Dùng cho **snapshot hiện tại** của dư nợ vay công ty, **không lưu h
   },
   "bidvOverdraft": [],
   "bidvWorkingCapital": [],
-  "scWorkingCapital": []
+  "scWorkingCapital": [],
+  "companyDeposits": []
 }
 ```
 
@@ -142,6 +143,27 @@ Dùng cho **snapshot hiện tại** của dư nợ vay công ty, **không lưu h
   "interestPayable": 9747642,
   "projectedSettlement": 435027441,
   "notes": "Khế ước gần hạn."
+}
+```
+
+### `companyDeposits[]`
+```json
+{
+  "bank": "BIDV-TrSon",
+  "company": "VIHALI",
+  "owner": "Vihali",
+  "depositCode": "814003085258",
+  "payoutType": "Cuối kỳ",
+  "principal": 4956962302,
+  "openDate": "2026-02-21",
+  "maturityDate": "2027-02-21",
+  "interestRate": 6.2,
+  "bookAmount": 4956962302,
+  "accruedInterest": 307331663,
+  "projectedSettlement": 5264293965,
+  "pledgedAmount": 4956962302,
+  "unpledgedAmount": 0,
+  "notes": "Thế chấp cho hạn mức thấu chi."
 }
 ```
 

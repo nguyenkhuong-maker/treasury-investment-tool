@@ -517,5 +517,41 @@
       "projectedSettlement": 743615555,
       "notes": "Khoản giải ngân mới từ Drive data ngày 15/04/2026."
     }
+  ],
+  "companyDeposits": [
+    {
+      "bank": "BIDV-TrSon",
+      "company": "VIHALI",
+      "owner": "Vihali",
+      "depositCode": "814003085258",
+      "payoutType": "Cuối kỳ",
+      "principal": 4956962302,
+      "openDate": "2026-02-21",
+      "maturityDate": "2027-02-21",
+      "interestRate": 6.2,
+      "bookAmount": 4956962302,
+      "accruedInterest": 307331663,
+      "projectedSettlement": 5264293965,
+      "pledgedAmount": 4956962302,
+      "unpledgedAmount": 0,
+      "notes": "Thế chấp cho hạn mức thấu chi."
+    },
+    {
+      "bank": "BIDV-TrSon",
+      "company": "VIHALI",
+      "owner": "Vihali",
+      "depositCode": "818003661334",
+      "payoutType": "Cuối kỳ",
+      "principal": 4603972800,
+      "openDate": "2026-03-22",
+      "maturityDate": "2027-03-22",
+      "interestRate": 7.1,
+      "bookAmount": 4603972800,
+      "accruedInterest": 326882069,
+      "projectedSettlement": 4930854869,
+      "pledgedAmount": 4603972800,
+      "unpledgedAmount": 0,
+      "notes": "Thế chấp cho hạn mức thấu chi."
+    }
   ]
 }

@@ -667,9 +667,9 @@
 ═══════════════════════════════════════════════════════ -->
 <nav class="tab-nav">
   <div class="tab-nav-inner">
-    <button class="tab-btn active" data-tab="laisuat" onclick="switchTab('laisuat')">📈 Cập nhật lãi suất tiền gửi/trái phiếu</button>
-    <button class="tab-btn"         data-tab="dunno"   onclick="switchTab('dunno')">📊 Dư nợ Tín dụng</button>
-    <button class="tab-btn"         data-tab="canhan"  onclick="switchTab('canhan')">👤 Sổ tiết kiệm cá nhân</button>
+    <button class="tab-btn active" data-tab="laisuat" onclick="switchTab('laisuat')">📈 CẬP NHẬT LÃI SUẤT TIỀN GỬI/TRÁI PHIẾU</button>
+    <button class="tab-btn"         data-tab="dunno"   onclick="switchTab('dunno')">📊 CTY VIHALI</button>
+    <button class="tab-btn"         data-tab="canhan"  onclick="switchTab('canhan')">👤 CÁ NHÂN</button>
   </div>
 </nav>
 
@@ -682,7 +682,7 @@
   <div class="dunno-subheader">
     <div class="dunno-sh-inner">
       <div>
-        <div class="dunno-sh-brand">Vihali Corporation — Báo cáo Tín dụng</div>
+        <div class="dunno-sh-brand">CTY VIHALI — BÁO CÁO TÍN DỤNG</div>
         <div class="dunno-sh-title">Dư nợ BIDV &amp; Standard Chartered</div>
         <div class="dunno-sh-sub">Cập nhật lần cuối: <span id="loan-updated-at">--</span> &nbsp;·&nbsp; Snapshot dư nợ hiện tại</div>
       </div>
@@ -700,6 +700,7 @@
       <a href="#loan-overview" class="active" onclick="setSubnav(this)">📊 Tổng quan</a>
       <a href="#loan-maturity" onclick="setSubnav(this)">⏱ Lịch đáo hạn</a>
       <a href="#loan-bidv" onclick="setSubnav(this)">🏦 BIDV</a>
+      <a href="#loan-company-deposits" onclick="setSubnav(this)">💰 STK VIHALI</a>
       <a href="#loan-sc" onclick="setSubnav(this)">🏛 Standard Chartered</a>
     </div>
   </nav>
@@ -809,8 +810,39 @@
       </div>
     </div>
 
+    <div class="section-label" id="loan-company-deposits">
+      <span class="label-text">04 — Sổ tiết kiệm BIDV của VIHALI</span>
+      <div class="label-line"></div>
+      <span class="pill pill-gold">Tài sản bảo đảm</span>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><div class="card-title-icon">💰</div>BIDV — Sổ tiết kiệm của VIHALI</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Ngân hàng</th>
+              <th>Mã STK</th>
+              <th>Hình thức trả lãi</th>
+              <th>Ngày gửi</th>
+              <th>Ngày đáo hạn</th>
+              <th class="center">Lãi suất</th>
+              <th class="right">Số tiền trên sổ</th>
+              <th class="right">Lãi dự thu</th>
+              <th class="right">Số cuối kỳ</th>
+              <th>Ghi chú</th>
+            </tr>
+          </thead>
+          <tbody id="loan-company-deposits-body"></tbody>
+        </table>
+      </div>
+    </div>
+
     <div class="section-label" id="loan-sc">
-      <span class="label-text">04 — Standard Chartered</span>
+      <span class="label-text">05 — Standard Chartered</span>
       <div class="label-line"></div>
       <span class="pill pill-blue">Dư nợ SC</span>
     </div>
@@ -1087,7 +1119,7 @@
 
     <div class="card hero-card" style="margin-top:0">
       <span class="pill pill-dark">PERSONAL TREASURY SNAPSHOT</span>
-      <h1 style="margin-top:12px">Sổ tiết kiệm cá nhân</h1>
+      <h1 style="margin-top:12px">CÁ NHÂN</h1>
       <h2>Dữ liệu hiện tại từ sheet <strong>dashboard-fix</strong> · Không lưu history</h2>
       <div class="meta-hero">
         <div><strong>Nguồn dữ liệu</strong><span id="personal-data-source-label">data/personal-treasury-current.json</span></div>
@@ -1468,12 +1500,34 @@
       </tr>`;
     }).join('');
   }
+  function renderCompanyDepositTable() {
+    const body = document.getElementById('loan-company-deposits-body');
+    const items = LOANS?.companyDeposits || [];
+    if (!body) return;
+    if (!items.length) {
+      body.innerHTML = '<tr><td colspan="10" class="center muted">Chưa có dữ liệu sổ tiết kiệm VIHALI tại BIDV.</td></tr>';
+      return;
+    }
+    body.innerHTML = items.map(item => `<tr>
+      <td>${item.bank || ''}</td>
+      <td><strong>${item.depositCode || ''}</strong></td>
+      <td>${item.payoutType || ''}</td>
+      <td>${fmtDateVN(item.openDate)}</td>
+      <td>${fmtDateVN(item.maturityDate)}</td>
+      <td class="center">${fmtRate(item.interestRate)}</td>
+      <td class="right">${fmtMoney(item.bookAmount || item.principal || 0)}</td>
+      <td class="right">${fmtMoney(item.accruedInterest || 0)}</td>
+      <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
+      <td>${item.notes || ''}</td>
+    </tr>`).join('');
+  }
   function renderLoanSnapshot() {
     if (!LOANS) return;
     renderLoanKpis();
     renderLoanMaturity();
     renderLoanTable('loan-bidv-overdraft-body', LOANS.bidvOverdraft || [], true);
     renderLoanTable('loan-bidv-wc-body', LOANS.bidvWorkingCapital || [], false);
+    renderCompanyDepositTable();
     renderLoanTable('loan-sc-wc-body', LOANS.scWorkingCapital || [], false);
   }
   function applyLoanData(data, sourceLabel) {

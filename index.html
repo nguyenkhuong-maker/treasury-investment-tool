@@ -33,7 +33,7 @@
       --shadow:      0 1px 3px rgba(11,31,75,.04), 0 2px 8px rgba(11,31,75,.04);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-padding-top: 168px; } /* topbar 64 + tabnav 50 + subnav 44 + buffer */
+    html { scroll-padding-top: 168px; } /* sticky header + tab nav + buffer */
     body {
       font-family: 'Inter', Arial, sans-serif;
       background: var(--bg);
@@ -96,59 +96,6 @@
     /* ══ Tab Panels ═══════════════════════════════════════════════ */
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
-
-    /* ══ Sub-header (Dư nợ tab) ═══════════════════════════════════ */
-    .dunno-subheader {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a8a 100%);
-      padding: 26px 28px 22px;
-      position: relative; overflow: hidden;
-    }
-    .dunno-subheader::before {
-      content: '';
-      position: absolute; top: -60px; right: -60px;
-      width: 280px; height: 280px;
-      border-radius: 50%; background: rgba(201,151,58,.07);
-    }
-    .dunno-sh-inner {
-      max-width: 1440px; margin: 0 auto;
-      display: flex; justify-content: space-between;
-      align-items: center; flex-wrap: wrap; gap: 16px;
-      position: relative; z-index: 1;
-    }
-    .dunno-sh-brand { font-size: 10.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 4px; }
-    .dunno-sh-title { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -.3px; }
-    .dunno-sh-sub { font-size: 12.5px; color: rgba(255,255,255,.55); margin-top: 3px; }
-    .dunno-sh-right { text-align: right; color: rgba(255,255,255,.75); font-size: 13px; line-height: 1.8; }
-    .dunno-sh-right strong { color: #fff; }
-    .gold-bar { height: 3px; background: linear-gradient(90deg, var(--gold), rgba(201,151,58,.3) 65%, transparent); }
-    .confidential-badge {
-      display: inline-block;
-      background: rgba(201,151,58,.2); border: 1px solid var(--gold);
-      color: var(--gold); font-size: 10px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      padding: 3px 10px; border-radius: 4px; margin-bottom: 8px;
-    }
-
-    /* ══ Internal Subnav (inside Dư nợ tab) ══════════════════════ */
-    .subnav {
-      background: var(--navy);
-      border-bottom: 1px solid rgba(255,255,255,.07);
-      position: sticky; top: 114px; z-index: 200; /* below main tab-nav */
-    }
-    .subnav-inner {
-      max-width: 1440px; margin: 0 auto;
-      padding: 0 28px; display: flex; gap: 4px; overflow-x: auto;
-    }
-    .subnav-inner a {
-      display: block; padding: 10px 16px;
-      font-size: 12.5px; font-weight: 500;
-      color: rgba(255,255,255,.55);
-      text-decoration: none; white-space: nowrap;
-      border-bottom: 2.5px solid transparent;
-      transition: color .15s, border-color .15s;
-    }
-    .subnav-inner a:hover { color: #fff; border-bottom-color: rgba(201,151,58,.45); }
-    .subnav-inner a.active { color: var(--gold); border-bottom-color: var(--gold); }
 
     /* ══ Wrap ═════════════════════════════════════════════════════ */
     .wrap {
@@ -506,30 +453,6 @@
       text-transform: uppercase; letter-spacing: .4px; vertical-align: top;
     }
 
-    /* ══ Collateral Connector (BIDV loans ↔ STK) ════════════════ */
-    .collateral-connector {
-      display: flex; align-items: center; gap: 0;
-      margin: 4px 0 4px 20px;
-    }
-    .collateral-connector-line {
-      width: 2px; height: 28px;
-      background: linear-gradient(180deg, var(--gold-light), var(--gold));
-      border-radius: 999px; flex-shrink: 0;
-    }
-    .collateral-connector-label {
-      margin-left: 10px;
-      font-size: 10.5px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 1.2px;
-      color: var(--gold); opacity: .85;
-    }
-    .collateral-card {
-      border: 1.5px solid var(--gold-light) !important;
-      background: #fffdf7 !important;
-    }
-    .collateral-card .card-title-icon {
-      background: var(--gold-soft); border-color: var(--gold-light);
-    }
-
     /* ══ Empty state ══════════════════════════════════════════════ */
     .empty {
       padding: 20px; border: 1.5px dashed var(--border);
@@ -578,10 +501,7 @@
       .topbar-badge { display: none; }
       .tab-nav { top: 56px; }
       .tab-nav-inner { padding: 0 18px; }
-      .subnav { top: 106px; }
-      .subnav-inner { padding: 0 18px; }
       html { scroll-padding-top: 160px; }
-      .dunno-subheader { padding: 20px 18px 18px; }
       .card { padding: 18px 18px; }
       .section-label .pill { display: none; }
     }
@@ -600,19 +520,8 @@
       .tab-nav-inner { padding: 0 10px; gap: 0; }
       .tab-btn { padding: 12px 16px; font-size: 12.5px; }
 
-      /* Subnav */
-      .subnav { top: 96px; }
-      .subnav-inner { padding: 0 10px; gap: 2px; }
-      .subnav-inner a { padding: 9px 12px; font-size: 12px; }
-
-      /* Scroll offset for triple sticky */
-      html { scroll-padding-top: 175px; }
-
-      /* Subheader banner */
-      .dunno-subheader { padding: 16px 14px 14px; }
-      .dunno-sh-title { font-size: 16px; }
-      .dunno-sh-sub { font-size: 11.5px; }
-      .dunno-sh-right { display: none; }
+      /* Scroll offset for sticky header */
+      html { scroll-padding-top: 120px; }
 
       /* Layout */
       .wrap { padding: 14px 12px 48px; }
@@ -661,7 +570,7 @@
       thead th, tbody td { padding: 6px 7px; font-size: 11px; }
     }
     @media print {
-      .print-btn, .topbar, .tab-nav, .subnav { display: none; }
+      .print-btn, .topbar, .tab-nav { display: none; }
       body { background: #fff; }
       .tab-panel { display: block !important; }
       .card { box-shadow: none; break-inside: avoid; }
@@ -1481,12 +1390,6 @@
     document.querySelector('[data-tab="' + tabId + '"]').classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (tabId === 'laisuat' && HISTORY) renderSelectedPeriod();
-  }
-
-  /* ── Subnav Highlight ───────────────────────────────── */
-  function setSubnav(el) {
-    document.querySelectorAll('.subnav-inner a').forEach(a => a.classList.remove('active'));
-    el.classList.add('active');
   }
 
   /* ══════════════════════════════════════════════════════

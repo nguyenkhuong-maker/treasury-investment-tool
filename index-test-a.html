@@ -722,6 +722,7 @@
     .testa-legend-left { display:flex; align-items:center; gap:10px; }
     .testa-dot { width:10px; height:10px; border-radius:999px; }
     .testa-grid-2 { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:18px; }
+    .testa-grid-2 > *, .testa-overview-grid > *, .testa-hero-row > * { min-width: 0; }
     .testa-maturity-table thead th { background:#f8fafc; }
     .testa-callout { border-left:4px solid #2563eb; background:#f8fbff; padding:12px 14px; border-radius:0 10px 10px 0; color:#546579; font-size:13px; }
     .testa-anchor { scroll-margin-top: 130px; }
@@ -755,7 +756,8 @@
       .testa-donut-wrap { justify-content:center; }
       .mobile-hide { display:none; }
       .testa-card-clean table, .card table { min-width: 980px; }
-      .table-wrap { overflow:auto; -webkit-overflow-scrolling: touch; }
+      .testa-card-clean, .card, .testa-toolbar, .testa-hero, .testa-stat, .testa-micro-card { min-width: 0; }
+      .table-wrap { width: 100%; max-width: 100%; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
     }
 
   </style>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vihali — Treasury Dashboard</title>
+  <title>Vihali — Treasury Dashboard (Test A)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -668,7 +668,7 @@
       thead tr, tr.total-row td { print-color-adjust: exact; }
     }
 
-    /* ══ Unified dashboard UI refresh ═════════════════════════════ */
+    /* ══ Test A — Company UI refresh ═════════════════════════════ */
     .testa-wrap { max-width: 1440px; margin: 0 auto; padding: 28px 28px 60px; }
     .testa-stack { display:flex; flex-direction:column; gap:18px; }
     .testa-hero {
@@ -769,13 +769,13 @@
   <div class="topbar-brand">
     <div class="topbar-logo">VH</div>
     <div>
-      <div class="topbar-title">Vihali Treasury Dashboard</div>
-      <div class="topbar-subtitle">Quản lý tín dụng, lãi suất và treasury hợp nhất</div>
+      <div class="topbar-title">Vihali Treasury Dashboard · Test A</div>
+      <div class="topbar-subtitle">Bản test UI Hướng A — không ảnh hưởng file index chính</div>
     </div>
   </div>
   <div class="topbar-right">
     <span class="topbar-clock" id="live-clock">--:--:--</span>
-    <span class="topbar-badge">BOD · Internal Only</span>
+    <span class="topbar-badge">TEST A · SAFE COPY</span>
   </div>
 </header>
 
@@ -800,9 +800,9 @@
       <section class="testa-hero testa-anchor">
         <div class="testa-hero-row">
           <div style="flex:1;min-width:320px">
-            <div class="testa-eyebrow">CTY VIHALI · Treasury Dashboard</div>
+            <div class="testa-eyebrow">CTY VIHALI · Test A · UI refresh only</div>
             <h1>Dư nợ BIDV &amp; Standard Chartered</h1>
-            <p>Dashboard công ty hợp nhất cho BIDV và Standard Chartered, giữ nguyên logic đọc <strong>company-loans-current.json</strong> và toàn bộ business rules hiện tại.</p>
+            <p>Bản test theo hướng A: làm mới giao diện tab công ty, vẫn giữ nguyên logic đọc <strong>company-loans-current.json</strong> và toàn bộ business rules hiện tại.</p>
             <div class="testa-badges">
               <span class="testa-badge blue">Snapshot hiện tại</span>
               <span class="testa-badge gold">BOD Dashboard</span>
@@ -826,7 +826,7 @@
         <div class="testa-toolbar-head">
           <div>
             <div class="testa-toolbar-title">Nguồn dữ liệu dư nợ công ty</div>
-            <div class="testa-toolbar-note"><strong>Nguyên tắc vận hành:</strong> phần dư nợ vay đọc từ <strong>data/company-loans-current.json</strong>. Giao diện mới giữ nguyên cấu trúc dữ liệu và logic vận hành.</div>
+            <div class="testa-toolbar-note"><strong>Nguyên tắc vận hành:</strong> phần dư nợ vay đọc từ <strong>data/company-loans-current.json</strong>. Bản test này chỉ đổi UI, không thay cấu trúc dữ liệu.</div>
           </div>
         </div>
         <div class="testa-actions">
@@ -841,7 +841,7 @@
         <div class="testa-section-head">
           <span class="label">01 — Tổng quan điều hành</span>
           <div class="line"></div>
-          <span class="pill pill-navy">BOD Dashboard</span>
+          <span class="pill pill-navy">Test A</span>
         </div>
         <div id="loan-overview-grid" class="testa-overview-grid"></div>
       </section>
@@ -1013,9 +1013,9 @@
       <section class="testa-hero testa-anchor">
         <div class="testa-hero-row">
           <div style="flex:1;min-width:320px">
-            <div class="testa-eyebrow">TREASURY RATE DASHBOARD</div>
+            <div class="testa-eyebrow">TREASURY RATE DASHBOARD · Test A</div>
             <h1>Cập nhật lãi suất tiền gửi / trái phiếu</h1>
-            <p>Tab lãi suất được trình bày theo cùng ngôn ngữ UI với tab công ty và cá nhân: nhìn nhanh kỳ dữ liệu, best rate, best spread và phương án ngắn hạn trước khi soi bảng chi tiết.</p>
+            <p>Em đề xuất chuyển tab lãi suất sang cùng ngôn ngữ UI với tab công ty và cá nhân: nhìn nhanh kỳ dữ liệu, best rate, best spread và phương án ngắn hạn trước khi soi bảng chi tiết.</p>
             <div class="testa-badges">
               <span class="testa-badge blue">Nguồn: <span id="data-source-label">data/history.json</span></span>
               <span class="testa-badge gold">JSON cập nhật theo tuần</span>
@@ -1039,7 +1039,7 @@
         <div class="testa-toolbar-head">
           <div>
             <div class="testa-toolbar-title">Điều khiển kỳ dữ liệu</div>
-            <div class="testa-toolbar-note"><strong>Nguyên tắc dùng:</strong> nhìn nhanh kỳ xem, trạng thái dữ liệu và tuần so sánh ngay trên cùng; sau đó mới xuống các bảng chi tiết.</div>
+            <div class="testa-toolbar-note"><strong>Đề xuất UI:</strong> cho anh nhìn nhanh kỳ xem, trạng thái availability và tuần so sánh ngay trên cùng; sau đó mới xuống các bảng chi tiết.</div>
           </div>
         </div>
         <div class="form-grid">
@@ -1274,9 +1274,9 @@
       <section class="testa-hero testa-anchor">
         <div class="testa-hero-row">
           <div style="flex:1;min-width:320px">
-            <div class="testa-eyebrow">CÁ NHÂN · Treasury Snapshot</div>
+            <div class="testa-eyebrow">CÁ NHÂN · Test A · UI refresh aligned with company tab</div>
             <h1>Sổ tiết kiệm &amp; Khoản vay cá nhân</h1>
-            <p>Phần treasury cá nhân được trình bày đồng bộ với tab công ty, nhưng vẫn giữ nguyên logic đọc <strong>personal-treasury-current.json</strong> và snapshot hiện hành.</p>
+            <p>Tối ưu lại theo cùng ngôn ngữ giao diện với tab công ty, nhưng vẫn giữ nguyên logic đọc <strong>personal-treasury-current.json</strong> và snapshot hiện hành.</p>
             <div class="testa-badges">
               <span class="testa-badge blue">Personal treasury snapshot</span>
               <span class="testa-badge gold">Dashboard-fix source</span>
@@ -1300,7 +1300,7 @@
         <div class="testa-toolbar-head">
           <div>
             <div class="testa-toolbar-title">Nguồn dữ liệu treasury cá nhân</div>
-            <div class="testa-toolbar-note"><strong>Nguyên tắc vận hành:</strong> phần cá nhân vẫn đọc từ <strong>data/personal-treasury-current.json</strong>. Giao diện mới chỉ tối ưu cách nhìn và giữ nguyên logic dữ liệu.</div>
+            <div class="testa-toolbar-note"><strong>Nguyên tắc vận hành:</strong> phần cá nhân vẫn đọc từ <strong>data/personal-treasury-current.json</strong>. Bản test này chỉ tối ưu UI cho đồng bộ với tab công ty.</div>
           </div>
         </div>
         <div class="testa-callout" style="margin-bottom:14px"><strong>Nguồn dữ liệu:</strong> <span id="personal-data-source-label">data/personal-treasury-current.json</span></div>
@@ -1923,7 +1923,7 @@
               <div class="testa-micro-sub">${nearestLoan ? fmtDateVN(nearestLoan.maturityDate) + ' · ' + (calcDaysRemaining(nearestLoan.maturityDate) ?? '—') + ' ngày' : 'Chưa có khoản vay đủ ngày đáo hạn để xếp hạng'}</div>
             </div>
           </div>
-          <div class="testa-callout">Khối này giúp anh nhìn nhanh cấu trúc treasury cá nhân theo cùng layout với tab công ty: số tổng, tỷ trọng, khoản gần hạn và số sổ đang thế chấp.</div>
+          <div class="testa-callout">Bản test này ưu tiên giúp anh nhìn nhanh cấu trúc cá nhân theo cùng layout với tab công ty: số tổng, tỷ trọng, khoản gần hạn và số sổ đang thế chấp.</div>
         </div>
       </div>`;
   }
@@ -2229,30 +2229,30 @@
       </div>
       <div class="testa-card-clean">
         <div class="testa-card-head">
-          <div class="testa-card-title"><span class="testa-card-icon">🔎</span> Cách đọc nhanh tab lãi suất</div>
-          <div class="testa-mini">Overview vận hành</div>
+          <div class="testa-card-title"><span class="testa-card-icon">🔎</span> Đề xuất nhanh cho tab lãi suất</div>
+          <div class="testa-mini">Test trực tiếp trên file Test A</div>
         </div>
         <div class="rate-insight-list">
           <div class="rate-insight-item">
             <div>
-              <strong>Bắt đầu từ 4 KPI phía trái</strong>
-              <div class="meta">Best rate, best spread, best short-term và best ultra short giúp nhìn nhanh hướng đi của tuần đang xem.</div>
+              <strong>Nên thêm block overview phía trên các bảng</strong>
+              <div class="meta">Anh nhìn nhanh best rate / best spread / best short-term trước, đỡ phải quét toàn bảng từ trên xuống dưới mỗi lần đổi tuần.</div>
             </div>
-            <span class="rate-badge">Overview</span>
+            <span class="rate-badge">Đã test</span>
           </div>
           <div class="rate-insight-item">
             <div>
-              <strong>Dùng toolbar để đổi kỳ dữ liệu</strong>
-              <div class="meta">Tháng, tuần, tuần so sánh, nút nạp JSON và trạng thái dữ liệu được gom về cùng một khu cho dễ thao tác.</div>
+              <strong>Nên gom phần điều khiển kỳ dữ liệu thành một toolbar</strong>
+              <div class="meta">Tháng, tuần, tuần so sánh, nút nạp JSON và trạng thái dữ liệu ở cùng một khu, ít phân mảnh hơn.</div>
             </div>
-            <span class="rate-badge">Control</span>
+            <span class="rate-badge">Áp dụng</span>
           </div>
           <div class="rate-insight-item">
             <div>
-              <strong>Sau đó xuống bảng chi tiết & khuyến nghị</strong>
+              <strong>Nên giữ bảng chi tiết nhưng bổ sung lớp đọc nhanh</strong>
               <div class="meta">${compareNote}</div>
             </div>
-            <span class="rate-badge">Detail</span>
+            <span class="rate-badge">Scannable</span>
           </div>
         </div>
       </div>`;

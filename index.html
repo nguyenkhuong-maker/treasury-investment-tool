@@ -1393,10 +1393,15 @@
     const overdraft = (LOANS?.bidvOverdraft || []).filter(isLoanVisible);
     const bidvWC = (LOANS?.bidvWorkingCapital || []).filter(isLoanVisible);
     const scWC = (LOANS?.scWorkingCapital || []).filter(isLoanVisible);
+    const companyDeposits = (LOANS?.companyDeposits || []).filter(item => {
+      const days = calcDaysRemaining(item.maturityDate);
+      return days == null || days >= 0;
+    });
     const totalBidv = aggregateLoanValues(overdraft, 'principalOutstanding') + aggregateLoanValues(bidvWC, 'principalOutstanding');
     const totalSc = aggregateLoanValues(scWC, 'principalOutstanding');
     const total = totalBidv + totalSc;
     const availableLimit = Number(LOANS?.summary?.availableLimit || 0);
+    const totalCompanyDepositsActive = companyDeposits.reduce((sum, item) => sum + Number(item.bookAmount || item.principal || 0), 0);
     const focus = (LOANS?.maturityFocus || []).filter(isLoanVisible).slice().sort((a,b) => new Date(a.maturityDate) - new Date(b.maturityDate));
     const nearest = focus[0];
     const nearestDays = nearest ? calcDaysRemaining(nearest.maturityDate) : null;
@@ -1404,13 +1409,10 @@
       const d = calcDaysRemaining(item.maturityDate);
       return d != null && d >= 0 && d <= 30;
     }).length;
-    const overdue = focus.filter(item => {
-      const d = calcDaysRemaining(item.maturityDate);
-      return d != null && d < 0;
-    }).length;
     const bidvPct = total ? ((totalBidv / total) * 100) : 0;
     const scPct = total ? ((totalSc / total) * 100) : 0;
     const totalUtilPct = total && availableLimit ? (total / (total + availableLimit) * 100) : 0;
+    const depositCoveragePct = total ? Math.min((totalCompanyDepositsActive / total) * 100, 100) : 0;
     document.getElementById('loan-total-outstanding').textContent = fmtMoney(total) + ' VNĐ';
     document.getElementById('loan-available-limit').textContent = fmtMoney(availableLimit) + ' VNĐ';
     document.getElementById('loan-updated-at').textContent = fmtDateTime(LOANS?.meta?.updatedAt);
@@ -1439,10 +1441,10 @@
           <div class="testa-progress"><span style="width:${Math.min((near30/Math.max(focus.length || 1,1))*100,100).toFixed(1)}%;background:#d97706"></span></div>
         </div>
         <div class="testa-kpi-card red">
-          <div class="testa-kpi-label">Khoản quá hạn</div>
-          <div class="testa-kpi-value">${overdue}</div>
-          <div class="testa-kpi-sub">Logic hiện tại vẫn tự ẩn khoản quá hạn khỏi phần active</div>
-          <div class="testa-progress"><span style="width:${overdue ? 100 : 0}%;background:#dc2626"></span></div>
+          <div class="testa-kpi-label">Tổng tiền gửi VIHALI active</div>
+          <div class="testa-kpi-value">${fmtMoney(totalCompanyDepositsActive)}</div>
+          <div class="testa-kpi-sub">${companyDeposits.length} sổ công ty còn hiệu lực trên dashboard</div>
+          <div class="testa-progress"><span style="width:${depositCoveragePct.toFixed(1)}%;background:#dc2626"></span></div>
         </div>
       </div>
       <div class="testa-card-clean">

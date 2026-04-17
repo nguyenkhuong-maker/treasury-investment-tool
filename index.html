@@ -179,15 +179,6 @@
     }
     .hero-card .note-hero strong { color: var(--gold-light); }
     .hero-card label { color: rgba(255,255,255,.8); }
-    #local-load-status,
-    #personal-load-status {
-      background: rgba(255,255,255,.07);
-      border-left: 3px solid rgba(255,255,255,.3);
-      color: rgba(255,255,255,.7);
-      padding: 11px 14px;
-      border-radius: 0 8px 8px 0;
-      font-size: 13px; margin-top: 12px; line-height: 1.65;
-    }
 
     /* ══ KPI grid — Dư nợ style ═══════════════════════════════════ */
     .kpi-grid {
@@ -271,14 +262,6 @@
     .alert-gold  { background: var(--gold-soft); border-left: 4px solid var(--gold); color: #7a5a1c; }
     .alert-red   { background: var(--red-bg); border-left: 4px solid #dc2626; color: var(--red); }
     .alert-green { background: var(--green-bg); border-left: 4px solid #16a34a; color: var(--green); }
-    .note {
-      background: var(--blue-bg); border-left: 3px solid var(--blue);
-      padding: 12px 14px; border-radius: 0 8px 8px 0;
-      font-size: 13.5px; margin-top: 14px; line-height: 1.65;
-    }
-    .note strong { color: var(--navy); }
-    .note-gold { background: var(--amber-bg); border-left-color: var(--gold); }
-    .note-gold strong { color: var(--amber); }
 
     /* ══ Meta grids ═══════════════════════════════════════════════ */
     .meta-hero {
@@ -623,7 +606,6 @@
     .testa-card-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
     .testa-card-title { font-size:16px; font-weight:700; color:#0b1f4b; display:flex; align-items:center; gap:10px; }
     .testa-card-icon { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#eff6ff; border:1px solid #dbeafe; }
-    .testa-mini { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#64748b; }
     .testa-donut-wrap { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
     .testa-donut-meta { flex:1; min-width:220px; display:flex; flex-direction:column; gap:10px; }
     .testa-legend { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 14px; border-radius:12px; cursor:pointer; border:1px solid #e6edf5; }
@@ -633,7 +615,6 @@
     .testa-grid-2 { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:18px; }
     .testa-grid-2 > *, .testa-overview-grid > *, .testa-hero-row > * { min-width: 0; }
     .testa-maturity-table thead th { background:#f8fafc; }
-    .testa-callout { border-left:4px solid #2563eb; background:#f8fbff; padding:12px 14px; border-radius:0 10px 10px 0; color:#546579; font-size:13px; }
     .testa-anchor { scroll-margin-top: 130px; }
 
     .testa-card-clean table thead th { background:#f8fafc; }
@@ -713,7 +694,6 @@
           <div style="flex:1;min-width:320px">
             <div class="testa-eyebrow">CTY VIHALI · Treasury Dashboard</div>
             <h1>Dư nợ BIDV &amp; Standard Chartered</h1>
-            <p>Dashboard công ty hợp nhất cho BIDV và Standard Chartered, giữ nguyên logic đọc <strong>company-loans-current.json</strong> và toàn bộ business rules hiện tại.</p>
             <div class="testa-badges">
               <span class="testa-badge blue">Snapshot hiện tại</span>
               <span class="testa-badge gold">BOD Dashboard</span>
@@ -737,7 +717,6 @@
         <div class="testa-toolbar-head">
           <div>
             <div class="testa-toolbar-title">Nguồn dữ liệu dư nợ công ty</div>
-            <div class="testa-toolbar-note"><strong>Nguyên tắc vận hành:</strong> phần dư nợ vay đọc từ <strong>data/company-loans-current.json</strong>. Giao diện mới giữ nguyên cấu trúc dữ liệu và logic vận hành.</div>
           </div>
         </div>
         <div class="testa-actions">
@@ -745,7 +724,6 @@
           <button class="btn-secondary" onclick="tryLoadDefaultLoansJson()">↻ Đọc file mặc định</button>
         </div>
         <input id="loan-json-file" class="hidden-file" type="file" accept=".json,application/json" />
-        <div id="loan-load-status" class="note" style="margin-top:14px">Nguồn mặc định: <strong>data/company-loans-current.json</strong></div>
       </section>
 
       <section class="testa-section" id="loan-overview">
@@ -766,7 +744,6 @@
         <div class="testa-card-clean">
           <div class="testa-card-head">
             <div class="testa-card-title"><span class="testa-card-icon">⏱</span> Các khoản gần hạn cần theo dõi</div>
-            <div class="testa-mini">Sắp xếp theo ngày đáo hạn</div>
           </div>
           <div class="table-wrap testa-maturity-table">
             <table>
@@ -797,7 +774,6 @@
           <div class="testa-card-clean">
             <div class="testa-card-head">
               <div class="testa-card-title"><span class="testa-card-icon">🏦</span> BIDV — Thấu chi</div>
-              <div class="testa-mini">Khoản vay / hạn mức quay vòng</div>
             </div>
             <div class="table-wrap">
               <table>
@@ -821,7 +797,6 @@
           <div class="testa-card-clean">
             <div class="testa-card-head">
               <div class="testa-card-title"><span class="testa-card-icon">📄</span> BIDV — Vốn lưu động</div>
-              <div class="testa-mini">Tổng hợp cụm vay</div>
             </div>
             <div class="table-wrap">
               <table>
@@ -853,7 +828,6 @@
         <div class="testa-card-clean">
           <div class="testa-card-head">
             <div class="testa-card-title"><span class="testa-card-icon">🏛</span> Standard Chartered — Vốn lưu động</div>
-            <div class="testa-mini">Tổng hợp cụm vay còn hiệu lực</div>
           </div>
           <div class="table-wrap">
             <table>
@@ -884,9 +858,7 @@
         <div class="testa-card-clean">
           <div class="testa-card-head">
             <div class="testa-card-title"><span class="testa-card-icon">🛡</span> Sổ tiết kiệm cầm cố của VIHALI</div>
-            <div class="testa-mini">Để cuối tab theo luồng đọc: dư nợ → SC → tài sản bảo đảm</div>
           </div>
-          <div class="testa-callout">Khu vực này vẫn dùng đúng data hiện tại từ <strong>companyDeposits</strong>. Em đã chuyển xuống cuối tab như anh dặn để dễ theo dõi luồng khoản vay trước, tài sản bảo đảm sau.</div>
           <div class="table-wrap" style="margin-top:14px">
             <table>
               <thead>
@@ -926,7 +898,6 @@
           <div style="flex:1;min-width:320px">
             <div class="testa-eyebrow">TREASURY RATE DASHBOARD</div>
             <h1>Cập nhật lãi suất tiền gửi / trái phiếu</h1>
-            <p>Tab lãi suất được trình bày theo cùng ngôn ngữ UI với tab công ty và cá nhân: nhìn nhanh kỳ dữ liệu, best rate, best spread và phương án ngắn hạn trước khi soi bảng chi tiết.</p>
             <div class="testa-badges">
               <span class="testa-badge blue">Nguồn: <span id="data-source-label">data/history.json</span></span>
               <span class="testa-badge gold">JSON cập nhật theo tuần</span>
@@ -950,7 +921,6 @@
         <div class="testa-toolbar-head">
           <div>
             <div class="testa-toolbar-title">Điều khiển kỳ dữ liệu</div>
-            <div class="testa-toolbar-note"><strong>Nguyên tắc dùng:</strong> nhìn nhanh kỳ xem, trạng thái dữ liệu và tuần so sánh ngay trên cùng; sau đó mới xuống các bảng chi tiết.</div>
           </div>
         </div>
         <div class="form-grid">
@@ -978,8 +948,7 @@
           <div class="testa-micro-card"><div class="testa-micro-label">Trạng thái dữ liệu</div><div class="testa-micro-value" id="current-availability">-</div></div>
           <div class="testa-micro-card"><div class="testa-micro-label">So sánh với</div><div class="testa-micro-value" id="current-comparison">Không so sánh</div></div>
         </div>
-        <div id="period-note" class="testa-callout" style="margin-top:14px">Chưa có ghi chú.</div>
-        <div id="local-load-status" class="note" style="margin-top:14px">Bấm <strong>Chọn history.json từ máy</strong> để test local, hoặc <strong>Đọc file mặc định</strong> nếu chạy qua server.</div>
+        <div id="period-note" class="testa-toolbar-note" style="margin-top:14px">Chưa có ghi chú.</div>
       </section>
 
       <section class="testa-section" id="rate-overview-section">
@@ -1000,7 +969,6 @@
         <div class="testa-card-clean">
           <div class="testa-card-head">
             <div class="testa-card-title"><span class="testa-card-icon">🏦</span> Bảng so sánh tiền gửi trung hạn</div>
-            <div class="testa-mini">Ưu tiên best rate + best net benefit</div>
           </div>
           <div class="table-wrap">
             <table>
@@ -1033,7 +1001,6 @@
         <div class="testa-card-clean">
           <div class="testa-card-head">
             <div class="testa-card-title"><span class="testa-card-icon">📊</span> Bảng đầu tư ngắn hạn 1–3 tháng</div>
-            <div class="testa-mini">Dùng khi cần neo tiền ngắn hơn</div>
           </div>
           <div class="table-wrap">
             <table>
@@ -1064,7 +1031,6 @@
         <div class="testa-card-clean">
           <div class="testa-card-head">
             <div class="testa-card-title"><span class="testa-card-icon">⚡</span> Phương án dưới 1 tháng</div>
-            <div class="testa-mini">Tiền chờ rút / chờ giải ngân</div>
           </div>
           <div class="table-wrap">
             <table>
@@ -1095,7 +1061,6 @@
         <div class="testa-card-clean">
           <div class="testa-card-head">
             <div class="testa-card-title"><span class="testa-card-icon">💡</span> Khuyến nghị đầu tư theo số tiền &amp; tenor</div>
-            <div class="testa-mini">Top 3 theo lãi ước tính</div>
           </div>
           <div class="grid-2">
             <div>
@@ -1124,13 +1089,11 @@
               <div class="testa-actions">
                 <button class="btn-primary" onclick="runRecommendation()">▶ Đưa ra khuyến nghị</button>
               </div>
-              <div id="recommend-summary" class="testa-callout" style="margin-top:14px">Nhập số tiền và tenor để nhận khuyến nghị.</div>
+              <div id="recommend-summary" class="testa-toolbar-note" style="margin-top:14px">Nhập số tiền và tenor để nhận khuyến nghị.</div>
             </div>
             <div>
-              <div class="testa-callout" style="margin-top:0">
-                <strong>Nguyên tắc xếp hạng:</strong> hệ thống lấy <strong>Top 3 option theo tiền lãi ước tính</strong> trong đúng kỳ dữ liệu đang xem.<br/><br/>
-                <strong>Công thức:</strong> Tiền lãi = <strong>Số tiền × lãi suất năm × số ngày / 365</strong>.<br/><br/>
-                Với sản phẩm <strong>qua đêm</strong>, hệ thống tính theo <strong>quay vòng hằng ngày</strong> cho tenor ngắn.
+              <div class="testa-toolbar-note" style="margin-top:0">
+                Xếp hạng theo Top 3 tiền lãi ước tính của đúng kỳ đang xem. Công thức: số tiền × lãi suất năm × số ngày / 365; sản phẩm qua đêm tính theo quay vòng hằng ngày.
               </div>
             </div>
           </div>
@@ -1161,7 +1124,6 @@
         <div class="testa-card-clean">
           <div class="testa-card-head">
             <div class="testa-card-title"><span class="testa-card-icon">🧭</span> Gợi ý điều hành theo kỳ đang xem</div>
-            <div class="testa-mini">Summary để ra quyết định nhanh</div>
           </div>
           <div class="table-wrap">
             <table class="summary-table">
@@ -1187,7 +1149,6 @@
           <div style="flex:1;min-width:320px">
             <div class="testa-eyebrow">CÁ NHÂN · Treasury Snapshot</div>
             <h1>Sổ tiết kiệm &amp; Khoản vay cá nhân</h1>
-            <p>Phần treasury cá nhân được trình bày đồng bộ với tab công ty, nhưng vẫn giữ nguyên logic đọc <strong>personal-treasury-current.json</strong> và snapshot hiện hành.</p>
             <div class="testa-badges">
               <span class="testa-badge blue">Personal treasury snapshot</span>
               <span class="testa-badge gold">Dashboard-fix source</span>
@@ -1211,16 +1172,13 @@
         <div class="testa-toolbar-head">
           <div>
             <div class="testa-toolbar-title">Nguồn dữ liệu treasury cá nhân</div>
-            <div class="testa-toolbar-note"><strong>Nguyên tắc vận hành:</strong> phần cá nhân vẫn đọc từ <strong>data/personal-treasury-current.json</strong>. Giao diện mới chỉ tối ưu cách nhìn và giữ nguyên logic dữ liệu.</div>
           </div>
         </div>
-        <div class="testa-callout" style="margin-bottom:14px"><strong>Nguồn dữ liệu:</strong> <span id="personal-data-source-label">data/personal-treasury-current.json</span></div>
         <div class="testa-actions">
           <button class="btn-gold" onclick="choosePersonalJson()">📁 Chọn personal-treasury-current.json từ máy</button>
           <button class="btn-secondary" onclick="tryLoadDefaultPersonalJson()">↻ Đọc file mặc định</button>
         </div>
         <input id="personal-json-file" class="hidden-file" type="file" accept=".json,application/json" />
-        <div id="personal-load-status" class="note" style="margin-top:14px">Nguồn mặc định: <strong>data/personal-treasury-current.json</strong></div>
       </section>
 
       <section class="testa-section" id="personal-overview">
@@ -1241,7 +1199,6 @@
         <div class="testa-card-clean">
           <div class="testa-card-head">
             <div class="testa-card-title"><span class="testa-card-icon">💰</span> Bảng kê tiền gửi tiết kiệm VND</div>
-            <div class="testa-mini">Bao gồm cả khoản đã thế chấp / chưa thế chấp</div>
           </div>
           <div class="table-wrap">
             <table>
@@ -1276,7 +1233,6 @@
         <div class="testa-card-clean">
           <div class="testa-card-head">
             <div class="testa-card-title"><span class="testa-card-icon">🏦</span> Khoản vay cá nhân BIDV</div>
-            <div class="testa-mini">Giữ nguyên logic snapshot hiện hành</div>
           </div>
           <div class="table-wrap">
             <table>
@@ -1492,7 +1448,6 @@
       <div class="testa-card-clean">
         <div class="testa-card-head">
           <div class="testa-card-title"><span class="testa-card-icon">🥧</span> Cơ cấu dư nợ theo ngân hàng</div>
-          <div class="testa-mini">Click để nhảy xuống block chi tiết</div>
         </div>
         <div class="testa-donut-wrap">
           <svg width="220" height="220" viewBox="0 0 220 220" style="overflow:visible;flex-shrink:0">
@@ -1531,7 +1486,7 @@
               </div>
               <div style="font-size:24px;font-weight:800;color:#2563eb;letter-spacing:-.8px">${scPct.toFixed(1)}%</div>
             </div>
-            <div class="testa-callout">Khoản gần hạn nhất: <strong style="color:#0f172a">${nearest ? nearest.loanCode : '—'}</strong>${nearest ? ' · ' + fmtDateVN(nearest.maturityDate) + ' · ' + (nearestDays == null ? '—' : nearestDays + ' ngày') : ''}</div>
+            <div class="testa-toolbar-note">Khoản gần hạn nhất: <strong style="color:#0f172a">${nearest ? nearest.loanCode : '—'}</strong>${nearest ? ' · ' + fmtDateVN(nearest.maturityDate) + ' · ' + (nearestDays == null ? '—' : nearestDays + ' ngày') : ''}</div>
           </div>
         </div>
       </div>`;
@@ -1793,7 +1748,6 @@
       <div class="testa-card-clean">
         <div class="testa-card-head">
           <div class="testa-card-title"><span class="testa-card-icon">👤</span> Góc nhìn nhanh treasury cá nhân</div>
-          <div class="testa-mini">Snapshot tổng hợp</div>
         </div>
         <div class="testa-donut-meta" style="min-width:0">
           <div class="testa-legend" style="cursor:default">
@@ -1828,7 +1782,6 @@
               <div class="testa-micro-sub">${nearestLoan ? fmtDateVN(nearestLoan.maturityDate) + ' · ' + (calcDaysRemaining(nearestLoan.maturityDate) ?? '—') + ' ngày' : 'Chưa có khoản vay đủ ngày đáo hạn để xếp hạng'}</div>
             </div>
           </div>
-          <div class="testa-callout">Khối này giúp anh nhìn nhanh cấu trúc treasury cá nhân theo cùng layout với tab công ty: số tổng, tỷ trọng, khoản gần hạn và số sổ đang thế chấp.</div>
         </div>
       </div>`;
   }
@@ -2135,7 +2088,6 @@
       <div class="testa-card-clean">
         <div class="testa-card-head">
           <div class="testa-card-title"><span class="testa-card-icon">🔎</span> Cách đọc nhanh tab lãi suất</div>
-          <div class="testa-mini">Overview vận hành</div>
         </div>
         <div class="rate-insight-list">
           <div class="rate-insight-item">

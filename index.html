@@ -1649,7 +1649,7 @@
   }
   async function tryLoadDefaultLoansJson() {
     try {
-      const res = await fetch('data/company-loans-current.json');
+      const res = await fetch(withCacheBust('data/company-loans-current.json'));
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
       applyLoanData(data, 'data/company-loans-current.json');
@@ -1864,7 +1864,7 @@
   }
   async function tryLoadDefaultPersonalJson() {
     try {
-      const res = await fetch('data/personal-treasury-current.json');
+      const res = await fetch(withCacheBust('data/personal-treasury-current.json'));
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
       applyPersonalData(data, 'data/personal-treasury-current.json');
@@ -2310,6 +2310,10 @@
     refreshCompareWeekSelector();
     renderSelectedPeriod();
   }
+  const DASHBOARD_CACHE_BUST = new URLSearchParams(window.location.search).get('v') || String(Date.now());
+  function withCacheBust(url) {
+    return url + (url.includes('?') ? '&' : '?') + 'v=' + encodeURIComponent(DASHBOARD_CACHE_BUST);
+  }
   function applyHistoryData(data, sourceLabel) {
     HISTORY = data;
     setDataSourceLabel(sourceLabel);
@@ -2318,7 +2322,7 @@
   }
   async function tryLoadDefaultJson() {
     try {
-      const res = await fetch('data/history.json');
+      const res = await fetch(withCacheBust('data/history.json'));
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
       applyHistoryData(data, 'data/history.json');

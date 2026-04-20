@@ -1,13 +1,17 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-04-20T15:47:00+07:00",
+    "updatedAt": "2026-04-20T17:59:00+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC"
   },
   "summary": {
     "totalOutstanding": 39561793975,
-    "availableLimit": 22477453689
+    "availableLimit": 37986921325,
+    "bidvAvailableLimit": 35026022912,
+    "scAvailableLimit": 2960898413,
+    "bidvOverdraftAvailableLimit": 22477453689,
+    "bidvWorkingCapitalAvailableLimit": 12548569223
   },
   "maturityFocus": [
     {
@@ -116,9 +120,13 @@
       "interestPayable": 0,
       "projectedSettlement": 0,
       "availableLimit": 16800000000,
-      "notes": "Hạn mức thấu chi mới trên sheet BIDV, chưa giải ngân.",
-      "mappingStatus": "unmapped",
-      "mappingNote": "Sheet nguồn hiện chưa thể hiện STK/cụm tài sản bảo đảm rõ ở dòng hạn mức này."
+      "notes": "Hạn mức thấu chi mới trên sheet BIDV, chưa giải ngân; map với sổ 818016673105.",
+      "mappingStatus": "confirmed",
+      "mappingNote": "Đảm bảo bằng 1 sổ cá nhân BIDV 818016673105 theo xác nhận của anh Nguyên; hạn mức còn lại lấy theo cột C sheet Loan-BIDV.",
+      "depositCodes": [
+        "818016673105"
+      ],
+      "collateralGroupName": "Sổ cá nhân BIDV của Hồ Thị Yến Nhi"
     },
     {
       "bank": "BIDV",
@@ -134,13 +142,13 @@
       "interestPayable": 97519583,
       "projectedSettlement": 3974630147,
       "availableLimit": 1072889436,
-      "notes": "Khoản thấu chi TS hiện hữu, khác với hạn mức 8690020465 chưa giải ngân.",
+      "notes": "Khoản thấu chi TS hiện hữu; hạn mức còn lại lấy theo cột C Hạn mức của sheet Loan-BIDV.",
       "collateralGroupName": "Sổ công ty VIHALI BIDV",
       "depositCodes": [
         "814003085258"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Đảm bảo bằng 1 sổ công ty VIHALI BIDV 814003085258."
+      "mappingNote": "Đảm bảo bằng 1 sổ công ty VIHALI BIDV 814003085258; hạn mức còn lại lấy theo cột C Hạn mức (4.950.000.000), không lấy theo số gốc trên sổ."
     },
     {
       "bank": "BIDV",
@@ -156,13 +164,13 @@
       "interestPayable": 29191521,
       "projectedSettlement": 3536929623,
       "availableLimit": 4600000000,
-      "notes": "Hạn mức chưa giải ngân, vẫn hiển thị trong BIDV thấu chi nhưng không tính vào dư nợ active.",
+      "notes": "Hạn mức chưa giải ngân, vẫn hiển thị trong BIDV thấu chi nhưng không tính vào dư nợ active; hạn mức còn lại lấy theo cột C Hạn mức của sheet Loan-BIDV.",
       "collateralGroupName": "Sổ công ty VIHALI BIDV",
       "depositCodes": [
         "818003661334"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Đảm bảo bằng 1 sổ công ty VIHALI BIDV 818003661334."
+      "mappingNote": "Đảm bảo bằng 1 sổ công ty VIHALI BIDV 818003661334; hạn mức còn lại lấy theo cột C Hạn mức (4.600.000.000), không lấy theo số gốc trên sổ."
     }
   ],
   "bidvWorkingCapital": [

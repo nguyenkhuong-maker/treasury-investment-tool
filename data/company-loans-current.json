@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-04-16T10:28:00+07:00",
+    "updatedAt": "2026-04-20T15:25:00+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC"
   },
@@ -43,7 +43,7 @@
       "maturityDate": "2026-05-07",
       "interestRate": 5.2,
       "principalOutstanding": 10750152548,
-      "projectedSettlement": 10783846177,
+      "projectedSettlement": 10789972291,
       "notes": "Khoản thấu chi hạn mức, ngày đến hạn chung."
     },
     {
@@ -68,8 +68,8 @@
       "interestRate": 5.2,
       "pledgedAccount": "AAC7305098",
       "principalOutstanding": 10750152548,
-      "interestPayable": 33693629,
-      "projectedSettlement": 10783846177,
+      "interestPayable": 39819743,
+      "projectedSettlement": 10789972291,
       "availableLimit": 2432752,
       "notes": "Khoản thấu chi hạn mức, ngày đến hạn chung.",
       "collateralGroupName": "Cụm 2 sổ cá nhân BIDV của Hồ Thị Yến Nhi",
@@ -113,8 +113,8 @@
       "interestRate": 7.06,
       "pledgedAccount": "HĐ TGCKH 04-2024/HĐTG",
       "principalOutstanding": 3877110564,
-      "interestPayable": 82516570,
-      "projectedSettlement": 3959627134,
+      "interestPayable": 97519583,
+      "projectedSettlement": 3974630147,
       "availableLimit": 1072889436,
       "notes": "Khoản thấu chi TS hiện hữu, khác với hạn mức 8690020465 chưa giải ngân.",
       "collateralGroupName": "Sổ công ty VIHALI BIDV",
@@ -135,8 +135,8 @@
       "interestRate": 5.2,
       "pledgedAccount": "HĐ TGCKH 05-2024/HĐTG",
       "principalOutstanding": 0,
-      "interestPayable": 24700517,
-      "projectedSettlement": 3532438619,
+      "interestPayable": 29191521,
+      "projectedSettlement": 3536929623,
       "availableLimit": 4600000000,
       "notes": "Hạn mức chưa giải ngân, vẫn hiển thị trong BIDV thấu chi nhưng không tính vào dư nợ active.",
       "collateralGroupName": "Sổ công ty VIHALI BIDV",

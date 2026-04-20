@@ -600,6 +600,9 @@
     .testa-kpi-label { color:#64748b; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }
     .testa-kpi-value { color:#0f172a; font-size:27px; font-weight:800; line-height:1.1; letter-spacing:-.7px; }
     .testa-kpi-sub { color:#64748b; font-size:12px; margin-top:8px; }
+    .testa-kpi-list { margin:8px 0 0 18px; padding:0; color:#475569; font-size:12px; line-height:1.55; }
+    .testa-kpi-list li { margin:3px 0; }
+    .testa-kpi-list strong { color:#0f172a; font-weight:700; }
     .testa-progress { margin-top:12px; height:8px; background:#eef3f8; border-radius:999px; overflow:hidden; }
     .testa-progress > span { display:block; height:100%; border-radius:999px; }
     .testa-card-clean { background:#fff; border:1px solid #e6edf5; border-radius:16px; padding:20px; box-shadow: var(--shadow); }
@@ -1401,6 +1404,9 @@
     const totalSc = aggregateLoanValues(scWC, 'principalOutstanding');
     const total = totalBidv + totalSc;
     const availableLimit = Number(LOANS?.summary?.availableLimit || 0);
+    const bidvOverdraftAvailableLimit = Number(LOANS?.summary?.bidvOverdraftAvailableLimit || 0);
+    const bidvWorkingCapitalAvailableLimit = Number(LOANS?.summary?.bidvWorkingCapitalAvailableLimit || 0);
+    const scWorkingCapitalAvailableLimit = Number(LOANS?.summary?.scAvailableLimit || 0);
     const totalCompanyDepositsActive = companyDeposits.reduce((sum, item) => sum + Number(item.bookAmount || item.principal || 0), 0);
     const focus = (LOANS?.maturityFocus || []).filter(isLoanVisible).slice().sort((a,b) => new Date(a.maturityDate) - new Date(b.maturityDate));
     const nearest = focus[0];
@@ -1431,7 +1437,13 @@
         <div class="testa-kpi-card green">
           <div class="testa-kpi-label">Hạn mức còn lại</div>
           <div class="testa-kpi-value">${fmtMoney(availableLimit)}</div>
-          <div class="testa-kpi-sub">Mức đệm thanh khoản hiện tại của khoản vay công ty</div>
+          <div class="testa-kpi-sub">Mức đệm thanh khoản hiện tại của khoản vay công ty
+            <ul class="testa-kpi-list">
+              <li>Hạn mức BIDV thấu chi còn: <strong>${fmtMoney(bidvOverdraftAvailableLimit)}</strong></li>
+              <li>Hạn mức BIDV vốn lưu động còn: <strong>${fmtMoney(bidvWorkingCapitalAvailableLimit)}</strong></li>
+              <li>Hạn mức SC vốn lưu động còn: <strong>${fmtMoney(scWorkingCapitalAvailableLimit)}</strong></li>
+            </ul>
+          </div>
           <div class="testa-progress"><span style="width:${Math.max(0,100-totalUtilPct).toFixed(1)}%;background:#16a34a"></span></div>
         </div>
         <div class="testa-kpi-card amber">

@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-04-21T11:19:00+07:00",
+    "updatedAt": "2026-04-21T11:35:00+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -9,6 +9,11 @@
       "BIDV TS": "BIDV chi nhánh Trường Sơn",
       "BIDV TN — Thấu chi": "Khoản vay thấu chi tại BIDV chi nhánh Thống Nhất",
       "BIDV TS — Thấu chi": "Khoản vay thấu chi tại BIDV chi nhánh Trường Sơn"
+    },
+    "reportingGuidance": {
+      "bidvOverdraftGrouping": "Nếu dữ liệu BIDV thấu chi đã có branchName/reportingGroupLabel thì phải gọi theo tên chi nhánh đầy đủ, không dùng nhãn thứ tự như nhóm thứ nhất/thứ hai.",
+      "preferExplicitBranchName": true,
+      "forbidOrdinalGroupLabelsWhenBranchKnown": true
     }
   },
   "summary": {
@@ -88,7 +93,11 @@
         "811004405940"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Đảm bảo bằng 2 sổ cá nhân BIDV 817004356078 và 811004405940."
+      "mappingNote": "Đảm bảo bằng 2 sổ cá nhân BIDV 817004356078 và 811004405940.",
+      "branchCode": "TN",
+      "branchName": "BIDV chi nhánh Thống Nhất",
+      "reportingGroupCode": "bidv-overdraft-tn",
+      "reportingGroupLabel": "Ngân hàng BIDV — chi nhánh Thống Nhất (nhóm thấu chi)"
     },
     {
       "bank": "BIDV",
@@ -110,7 +119,11 @@
         "816010497431"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Đảm bảo bằng 1 sổ cá nhân BIDV 816010497431."
+      "mappingNote": "Đảm bảo bằng 1 sổ cá nhân BIDV 816010497431.",
+      "branchCode": "TN",
+      "branchName": "BIDV chi nhánh Thống Nhất",
+      "reportingGroupCode": "bidv-overdraft-tn",
+      "reportingGroupLabel": "Ngân hàng BIDV — chi nhánh Thống Nhất (nhóm thấu chi)"
     },
     {
       "bank": "BIDV",
@@ -132,7 +145,11 @@
       "depositCodes": [
         "818016673105"
       ],
-      "collateralGroupName": "Sổ cá nhân BIDV của Hồ Thị Yến Nhi"
+      "collateralGroupName": "Sổ cá nhân BIDV của Hồ Thị Yến Nhi",
+      "branchCode": "TN",
+      "branchName": "BIDV chi nhánh Thống Nhất",
+      "reportingGroupCode": "bidv-overdraft-tn",
+      "reportingGroupLabel": "Ngân hàng BIDV — chi nhánh Thống Nhất (nhóm thấu chi)"
     },
     {
       "bank": "BIDV",
@@ -154,7 +171,11 @@
         "814003085258"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Đảm bảo bằng 1 sổ công ty VIHALI BIDV 814003085258; hạn mức còn lại lấy theo cột C Hạn mức (4.950.000.000), không lấy theo số gốc trên sổ."
+      "mappingNote": "Đảm bảo bằng 1 sổ công ty VIHALI BIDV 814003085258; hạn mức còn lại lấy theo cột C Hạn mức (4.950.000.000), không lấy theo số gốc trên sổ.",
+      "branchCode": "TS",
+      "branchName": "BIDV chi nhánh Trường Sơn",
+      "reportingGroupCode": "bidv-overdraft-ts",
+      "reportingGroupLabel": "Ngân hàng BIDV — chi nhánh Trường Sơn (nhóm thấu chi)"
     },
     {
       "bank": "BIDV",
@@ -176,7 +197,11 @@
         "818003661334"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Đảm bảo bằng 1 sổ công ty VIHALI BIDV 818003661334; hạn mức còn lại lấy theo cột C Hạn mức (4.600.000.000), không lấy theo số gốc trên sổ."
+      "mappingNote": "Đảm bảo bằng 1 sổ công ty VIHALI BIDV 818003661334; hạn mức còn lại lấy theo cột C Hạn mức (4.600.000.000), không lấy theo số gốc trên sổ.",
+      "branchCode": "TS",
+      "branchName": "BIDV chi nhánh Trường Sơn",
+      "reportingGroupCode": "bidv-overdraft-ts",
+      "reportingGroupLabel": "Ngân hàng BIDV — chi nhánh Trường Sơn (nhóm thấu chi)"
     }
   ],
   "bidvWorkingCapital": [
@@ -805,6 +830,33 @@
       ],
       "collateralGroupName": "Sổ công ty VIHALI BIDV",
       "mappingNote": "Đang đảm bảo cho khoản vay 8690020465."
+    }
+  ],
+  "bidvOverdraftGroups": [
+    {
+      "groupCode": "bidv-overdraft-tn",
+      "branchCode": "TN",
+      "branchName": "BIDV chi nhánh Thống Nhất",
+      "displayLabel": "Ngân hàng BIDV — chi nhánh Thống Nhất (nhóm thấu chi)",
+      "loanCodes": [
+        "1440280147",
+        "1440328001",
+        "8610037624"
+      ],
+      "totalOutstanding": 16784821047,
+      "totalAvailableLimit": 16804564253
+    },
+    {
+      "groupCode": "bidv-overdraft-ts",
+      "branchCode": "TS",
+      "branchName": "BIDV chi nhánh Trường Sơn",
+      "displayLabel": "Ngân hàng BIDV — chi nhánh Trường Sơn (nhóm thấu chi)",
+      "loanCodes": [
+        "8670018067",
+        "8690020465"
+      ],
+      "totalOutstanding": 3877110564,
+      "totalAvailableLimit": 5672889436
     }
   ]
 }

@@ -77,7 +77,7 @@ Dùng cho **snapshot hiện tại** của dư nợ vay công ty, **không lưu h
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-04-21T11:19:00+07:00",
+    "updatedAt": "2026-04-21T11:35:00+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -85,9 +85,15 @@ Dùng cho **snapshot hiện tại** của dư nợ vay công ty, **không lưu h
       "BIDV TS": "BIDV chi nhánh Trường Sơn",
       "BIDV TN — Thấu chi": "Khoản vay thấu chi tại BIDV chi nhánh Thống Nhất",
       "BIDV TS — Thấu chi": "Khoản vay thấu chi tại BIDV chi nhánh Trường Sơn"
+    },
+    "reportingGuidance": {
+      "bidvOverdraftGrouping": "Nếu dữ liệu BIDV thấu chi đã có branchName/reportingGroupLabel thì phải gọi theo tên chi nhánh đầy đủ, không dùng nhãn thứ tự như nhóm thứ nhất/thứ hai.",
+      "preferExplicitBranchName": true,
+      "forbidOrdinalGroupLabelsWhenBranchKnown": true
     }
   },
   "bidvOverdraft": [],
+  "bidvOverdraftGroups": [],
   "bidvWorkingCapital": [],
   "scWorkingCapital": [],
   "companyDeposits": []
@@ -111,7 +117,28 @@ Dùng cho **snapshot hiện tại** của dư nợ vay công ty, **không lưu h
   "interestPayable": 18378343,
   "projectedSettlement": 10768530891,
   "availableLimit": 2432752,
-  "notes": "Khoản hạn mức thấu chi, ngày đến hạn chung."
+  "notes": "Khoản hạn mức thấu chi, ngày đến hạn chung.",
+  "branchCode": "TN",
+  "branchName": "BIDV chi nhánh Thống Nhất",
+  "reportingGroupCode": "bidv-overdraft-tn",
+  "reportingGroupLabel": "Ngân hàng BIDV — chi nhánh Thống Nhất (nhóm thấu chi)"
+}
+```
+
+### `bidvOverdraftGroups[]`
+```json
+{
+  "groupCode": "bidv-overdraft-tn",
+  "branchCode": "TN",
+  "branchName": "BIDV chi nhánh Thống Nhất",
+  "displayLabel": "Ngân hàng BIDV — chi nhánh Thống Nhất (nhóm thấu chi)",
+  "loanCodes": [
+    "1440280147",
+    "1440328001",
+    "8610037624"
+  ],
+  "totalOutstanding": 16784821047,
+  "totalAvailableLimit": 16804564253
 }
 ```
 

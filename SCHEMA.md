@@ -77,9 +77,15 @@ Dùng cho **snapshot hiện tại** của dư nợ vay công ty, **không lưu h
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-04-11T10:24:00+07:00",
+    "updatedAt": "2026-04-21T11:19:00+07:00",
     "hasHistory": false,
-    "source": "Google Sheets / Loan-BIDV / Loan-SC"
+    "source": "Google Sheets / Loan-BIDV / Loan-SC",
+    "abbreviationDefinitions": {
+      "BIDV TN": "BIDV chi nhánh Thống Nhất",
+      "BIDV TS": "BIDV chi nhánh Trường Sơn",
+      "BIDV TN — Thấu chi": "Khoản vay thấu chi tại BIDV chi nhánh Thống Nhất",
+      "BIDV TS — Thấu chi": "Khoản vay thấu chi tại BIDV chi nhánh Trường Sơn"
+    }
   },
   "bidvOverdraft": [],
   "bidvWorkingCapital": [],

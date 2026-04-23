@@ -8,13 +8,13 @@
     :root {
       --navy:#0b1f4b;
       --navy-2:#1e3a8a;
-      --gold:#d4af37;
       --bg:#f8fafc;
       --card:#ffffff;
       --text:#0f172a;
       --muted:#64748b;
       --line:#e2e8f0;
       --ok:#15803d;
+      --warn:#a16207;
       --soft-blue:#eff6ff;
       --soft-gold:#fff7e6;
       --soft-green:#ecfdf5;
@@ -32,19 +32,13 @@
       background: linear-gradient(135deg, var(--navy), var(--navy-2));
       color: #fff;
       border-radius: 20px;
-      padding: 22px;
+      padding: 20px 22px;
       box-shadow: 0 18px 60px rgba(15,23,42,.14);
     }
-    .hero h1 { margin: 0 0 8px; font-size: 28px; }
-    .hero p { margin: 0; color: rgba(255,255,255,.86); line-height: 1.6; }
-    .hero-meta { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
-    .pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 12px; border-radius: 999px;
-      background: rgba(255,255,255,.12); color: #fff; font-size: 13px; border: 1px solid rgba(255,255,255,.16);
-    }
+    .hero h1 { margin: 0; font-size: 26px; }
+    .hero p { margin: 8px 0 0; color: rgba(255,255,255,.88); line-height: 1.6; }
     .toolbar {
-      margin-top: 18px; display: grid; grid-template-columns: 260px 1fr; gap: 14px;
+      margin-top: 18px; display: grid; grid-template-columns: 280px 1fr; gap: 14px;
       background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px;
       box-shadow: 0 8px 24px rgba(15,23,42,.04);
     }
@@ -53,7 +47,7 @@
       width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:#fff; font:inherit;
     }
     .toolbar-note {
-      padding:12px 14px; border-radius:12px; background:#f8fafc; border:1px dashed #cbd5e1; color:var(--muted); line-height:1.6; font-size:13px;
+      display:flex; align-items:center; padding:12px 14px; border-radius:12px; background:#f8fafc; border:1px solid #e2e8f0; color:var(--muted); line-height:1.6; font-size:13px;
     }
     .plans {
       margin-top: 18px; display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items:start;
@@ -63,40 +57,46 @@
       box-shadow: 0 12px 28px rgba(15,23,42,.06);
     }
     .plan-head { padding: 18px; border-bottom: 1px solid var(--line); }
-    .plan-title-row { display:flex; justify-content:space-between; gap:12px; align-items:start; }
+    .plan-title-row { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
     .plan-title { margin:0; font-size:22px; color:var(--navy); }
-    .badges { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .plan-meta { margin-top: 6px; font-size:13px; color:var(--muted); }
+    .badges, .actions { display:flex; flex-wrap:wrap; gap:8px; }
+    .badges { margin-top:10px; }
     .badge { display:inline-flex; align-items:center; padding:7px 10px; border-radius:999px; font-size:12px; font-weight:700; }
     .badge.blue { background:var(--soft-blue); color:#1d4ed8; }
-    .badge.gold { background:var(--soft-gold); color:#a16207; }
+    .badge.gold { background:var(--soft-gold); color:var(--warn); }
     .badge.green { background:var(--soft-green); color:var(--ok); }
     .badge.gray { background:#f1f5f9; color:#475569; }
     .highlights { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-top:14px; }
     .highlight { background:#f8fafc; border:1px solid var(--line); border-radius:14px; padding:12px; }
     .highlight .label { font-size:12px; color:var(--muted); }
     .highlight .value { margin-top:6px; font-weight:800; }
+    .head-actions { margin-top: 14px; }
     .section { padding:18px; border-top:1px solid var(--line); background:linear-gradient(180deg,#fff,#fafcff); }
     .section h3 { margin:0 0 12px; font-size:18px; color:var(--navy); }
-    .section-grid { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:14px; }
-    .panel { background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px; }
-    .panel .label { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
-    .panel .value { margin-top:6px; font-size:14px; line-height:1.6; }
+    .section.compact { padding-top: 14px; padding-bottom: 14px; }
     .iframe-wrap { background:#f8fafc; padding:14px; }
     iframe { width:100%; min-height:920px; border:1px solid var(--line); border-radius:14px; background:#fff; }
     .timeline { display:grid; gap:10px; }
     .timeline-item {
       border:1px solid var(--line); border-radius:14px; padding:12px 14px; background:#fff;
-      display:grid; grid-template-columns:180px 1fr; gap:12px;
+      display:grid; grid-template-columns:170px 1fr; gap:12px;
     }
     .timeline-time { font-size:12px; color:var(--muted); }
     .timeline-body { font-size:14px; line-height:1.55; }
-    .actions { display:flex; gap:10px; flex-wrap:wrap; }
-    .btn {
+    .btn, button.btn {
       display:inline-flex; align-items:center; justify-content:center; gap:8px; text-decoration:none;
-      padding:11px 14px; border-radius:12px; border:1px solid var(--line); background:#fff; color:var(--navy); font-weight:700;
+      padding:11px 14px; border-radius:12px; border:1px solid var(--line); background:#fff; color:var(--navy); font-weight:700; cursor:pointer; font:inherit;
     }
+    .btn.primary, button.btn.primary {
+      background: var(--navy); color:#fff; border-color: var(--navy);
+    }
+    .btn.print, button.btn.print {
+      background: #fff; color: var(--navy);
+    }
+    .helper-note { margin-top: 10px; font-size: 12px; color: var(--muted); }
     @media (max-width: 1180px) {
-      .toolbar, .plans, .highlights, .section-grid { grid-template-columns: 1fr; }
+      .toolbar, .plans, .highlights { grid-template-columns: 1fr; }
       .timeline-item { grid-template-columns:1fr; }
     }
     @media (max-width: 768px) {
@@ -109,17 +109,9 @@
 </head>
 <body>
   <div class="wrap">
-    <section class="hero">
-      <h1>🗂 Kế hoạch ngân quỹ theo tháng</h1>
-      <p>
-        Trang live này dùng để xem lại kế hoạch ngân quỹ theo tháng cho cả <strong>công ty</strong> và <strong>cá nhân</strong>.
-        Tháng 5/2026 hiện đã được <strong>chốt đưa lên live page</strong>, đồng thời vẫn giữ tháng 4/2026 để tra cứu lại.
-      </p>
-      <div class="hero-meta">
-        <span class="pill">Công ty + Cá nhân song song</span>
-        <span class="pill">Approval status hiển thị rõ</span>
-        <span class="pill">T05/2026 đã live trên GitHub Pages</span>
-      </div>
+    <section class="hero" id="heroBlock">
+      <h1>Kế hoạch ngân quỹ theo tháng</h1>
+      <p>Xem kế hoạch ngân quỹ VIHALI và CÁ NHÂN theo từng tháng, ưu tiên thao tác gọn để đọc nhanh, in báo cáo và trình CFO khi cần.</p>
     </section>
 
     <section class="toolbar">
@@ -133,12 +125,21 @@
     <section class="plans" id="plans"></section>
   </div>
 
-  <script src="./data/monthly-plans/live-index.js?v=20260423-1710"></script>
+  <script src="./data/monthly-plans/live-index.js?v=20260423-1723"></script>
   <script>
     const DB = window.MONTHLY_PLANS_LIVE_DATA;
     const monthSelect = document.getElementById('monthSelect');
     const toolbarNote = document.getElementById('toolbarNote');
     const plansEl = document.getElementById('plans');
+    const heroBlock = document.getElementById('heroBlock');
+    const CFO_APPROVAL_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyMyXnoXOj4PJ7f5w4fPaXzbt4DpsRfA6mxIWEFV3LeYCKUO0aWle-W20CZxzEjvMhWyA/exec';
+    const REVIEW_TEST_EMAIL = DB.meta.reviewTestEmail || 'kdhn1911@gmail.com';
+
+    if (window.self !== window.top) {
+      heroBlock.style.display = 'none';
+      document.body.style.background = '#f8fafc';
+      document.querySelector('.wrap').style.paddingTop = '14px';
+    }
 
     function buildOptions() {
       DB.availableMonths.forEach((item) => {
@@ -154,31 +155,81 @@
       return `<span class="badge ${kind}">${text}</span>`;
     }
 
-    function renderTimeline(items) {
-      return `<div class="timeline">${items.map((item) => `
-        <div class="timeline-item">
-          <div class="timeline-time">${item.at}<br/><span>${item.label}</span></div>
-          <div class="timeline-body">${item.note}</div>
-        </div>
-      `).join('')}</div>`;
+    function statusMeta(plan) {
+      if (plan.status === 'approved') return { label: 'Đã duyệt CFO', cls: 'green' };
+      if (plan.status === 'ready_for_cfo') return { label: 'Sẵn sàng trình CFO', cls: 'gold' };
+      return { label: 'Bản kế hoạch', cls: 'gray' };
     }
 
-    function renderPlan(plan, month) {
+    function timelineItems(plan) {
+      return (plan.timeline || []).filter((item) => ['cfo_reviewed', 'approved', 'published'].includes(item.type));
+    }
+
+    function renderTimeline(plan) {
+      const items = timelineItems(plan);
+      if (!items.length) return '';
+      return `
+        <div class="section">
+          <h3>🕒 Timeline</h3>
+          <div class="timeline">${items.map((item) => `
+            <div class="timeline-item">
+              <div class="timeline-time">${item.at}<br/><span>${item.label}</span></div>
+              <div class="timeline-body">${item.note}</div>
+            </div>
+          `).join('')}</div>
+        </div>
+      `;
+    }
+
+    function printPlanReport(plan) {
+      const printWindow = window.open(plan.sourceHtml, '_blank');
+      if (!printWindow) {
+        alert('Trình duyệt đang chặn popup. Anh cho phép mở tab mới rồi thử lại giúp em nhé.');
+        return;
+      }
+      printWindow.addEventListener('load', () => {
+        setTimeout(() => printWindow.print(), 300);
+      }, { once: true });
+    }
+
+    async function sendPlanToCfo(monthKey, plan) {
+      const payload = {
+        planId: plan.id,
+        month: monthKey,
+        planType: plan.type,
+        title: plan.title,
+        version: plan.version,
+        contentHash: `${plan.id}:${plan.version}`,
+        planUrl: new URL(plan.sourceHtml.replace(/^\.\//, ''), window.location.href).href
+      };
+
+      try {
+        await fetch(CFO_APPROVAL_WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        alert(`Đã gửi yêu cầu trình CFO cho ${plan.title}. Anh kiểm tra inbox ${REVIEW_TEST_EMAIL} giúp em nhé.`);
+      } catch (error) {
+        console.error(error);
+        alert('Không gọi được Apps Script Web App. Anh thử lại giúp em nhé.');
+      }
+    }
+
+    function renderPlan(plan, monthKey, month) {
+      const status = statusMeta(plan);
       return `
         <article class="plan-card">
           <div class="plan-head">
             <div class="plan-title-row">
               <div>
                 <h2 class="plan-title">${plan.type === 'company' ? '🏢' : '👤'} ${plan.title}</h2>
+                <div class="plan-meta">${month.monthLabel} · ${month.periodLabel}</div>
                 <div class="badges">
-                  ${badge(month.monthLabel, 'blue')}
                   ${badge('Version ' + plan.version, 'gray')}
-                  ${badge('Đã chốt live', 'green')}
+                  ${badge(status.label, status.cls)}
                 </div>
-              </div>
-              <div style="font-size:13px;color:#64748b;line-height:1.6">
-                Prepared: ${plan.preparedAt}<br/>
-                Approved: ${plan.approvedAt}
               </div>
             </div>
             <div class="highlights">
@@ -189,47 +240,65 @@
                 </div>
               `).join('')}
             </div>
-          </div>
-
-          <div class="section">
-            <h3>📌 Trạng thái phê duyệt</h3>
-            <div class="section-grid">
-              <div class="panel">
-                <div class="label">Approver</div>
-                <div class="value"><strong>${plan.approvedBy}</strong><br/>Trạng thái chốt live đã được ghi nhận cho ${month.monthLabel}.</div>
+            ${plan.allowSendToCfo ? `
+              <div class="head-actions actions">
+                <button class="btn primary" data-action="send-cfo" data-plan-id="${plan.id}">📨 Gửi CFO</button>
               </div>
-              <div class="panel">
-                <div class="label">Ghi chú vận hành</div>
-                <div class="value">${month.governanceNote}<br/>Kế hoạch hiện đang ở trạng thái live để xem lại trên GitHub Pages.</div>
-              </div>
-            </div>
+              <div class="helper-note">Mail test hiện tại: ${REVIEW_TEST_EMAIL}</div>
+            ` : ''}
           </div>
 
           <div class="iframe-wrap">
             <iframe src="${plan.sourceHtml}" title="${plan.title}"></iframe>
           </div>
 
-          <div class="section">
-            <h3>🕒 Timeline</h3>
-            ${renderTimeline(plan.timeline)}
-          </div>
+          ${renderTimeline(plan)}
 
-          <div class="section">
-            <h3>🔗 Tài liệu liên quan</h3>
+          <div class="section compact">
+            <h3>📄 Tài liệu liên quan</h3>
             <div class="actions">
-              <a class="btn" href="${plan.sourceHtml}" target="_blank" rel="noreferrer">Mở bản HTML</a>
-              ${plan.sourcePdf ? `<a class="btn" href="${plan.sourcePdf}" target="_blank" rel="noreferrer">Mở bản PDF</a>` : ''}
+              <a class="btn" href="${plan.sourcePdf}" target="_blank" rel="noreferrer">Mở bản PDF</a>
+              <button class="btn print" data-action="print-report" data-plan-id="${plan.id}">In báo cáo</button>
             </div>
           </div>
         </article>
       `;
     }
 
+    function currentMonth() {
+      return DB.months[monthSelect.value];
+    }
+
+    function currentPlans() {
+      const month = currentMonth();
+      return [month.company, month.personal];
+    }
+
+    function bindActions() {
+      const monthKey = monthSelect.value;
+      const planMap = new Map(currentPlans().map((plan) => [plan.id, plan]));
+
+      document.querySelectorAll('[data-action="print-report"]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const plan = planMap.get(btn.dataset.planId);
+          if (plan) printPlanReport(plan);
+        });
+      });
+
+      document.querySelectorAll('[data-action="send-cfo"]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const plan = planMap.get(btn.dataset.planId);
+          if (plan) await sendPlanToCfo(monthKey, plan);
+        });
+      });
+    }
+
     function render() {
       const monthKey = monthSelect.value;
       const month = DB.months[monthKey];
       toolbarNote.innerHTML = `<strong>${month.monthLabel}</strong> · ${month.periodLabel}<br/>${DB.meta.note}`;
-      plansEl.innerHTML = [month.company, month.personal].map((plan) => renderPlan(plan, month)).join('');
+      plansEl.innerHTML = [month.company, month.personal].map((plan) => renderPlan(plan, monthKey, month)).join('');
+      bindActions();
     }
 
     monthSelect.addEventListener('change', render);

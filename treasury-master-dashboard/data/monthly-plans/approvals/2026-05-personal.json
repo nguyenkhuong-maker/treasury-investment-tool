@@ -2,11 +2,14 @@
   "planId": "2026-05-personal",
   "month": "2026-05",
   "planType": "personal",
+  "planTypeLabel": "C? NH?N",
   "makerEmail": "nguyen.khuong@atherlabs.com",
   "approverEmail": "kdhn1911@gmail.com",
   "version": "Draft 1",
   "contentHash": "sha256:test-personal-2026-05-draft1",
-  "status": "revision_requested",
+  "status": "pending_cfo_review",
+  "submittedAt": "2026-04-23T10:01:57.300Z",
   "channel": "google_apps_script_mail",
-  "reviewedAt": "2026-04-23T09:50:51.308Z"
+  "planUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/plans/2026-05/personal.html",
+  "title": "K? ho?ch qu?n l? Individual Treasury"
 }

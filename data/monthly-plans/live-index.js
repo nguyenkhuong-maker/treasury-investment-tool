@@ -1,7 +1,7 @@
 window.MONTHLY_PLANS_LIVE_DATA = {
   meta: {
     name: "Treasury Monthly Plans Live Index",
-    updatedAt: "2026-04-23T18:36:00+07:00",
+    updatedAt: "2026-04-23T19:02:00+07:00",
     defaultMonth: "2026-05",
     reviewTestEmail: "duc.ho@atherlabs.com",
     note: "Chọn tháng kế hoạch để xem, in báo cáo hoặc trình CFO."
@@ -39,8 +39,13 @@ window.MONTHLY_PLANS_LIVE_DATA = {
               { label: "Chi", value: "14.847 tỷ VND", tone: "red" }
             ]
           },
-          { label: "Hạn mức khả dụng cuối kỳ", value: "2.881 tỷ VND" },
-          { label: "Thanh khoản", value: "Mỏng nhất 223 triệu ngày 29/05" }
+          {
+            label: "Cuối kỳ & thanh khoản",
+            rows: [
+              { label: "HM khả dụng cuối kỳ", value: "2.881 tỷ VND" },
+              { label: "Thanh khoản", value: "Mỏng nhất 223 triệu ngày 29/05" }
+            ]
+          }
         ],
         sourceHtml: "./plans/2026-05/company.html",
         sourcePdf: "./plans/2026-05/company.pdf",

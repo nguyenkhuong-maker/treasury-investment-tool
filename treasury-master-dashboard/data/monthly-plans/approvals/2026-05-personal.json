@@ -1,0 +1,12 @@
+{
+  "planId": "2026-05-personal",
+  "month": "2026-05",
+  "planType": "personal",
+  "makerEmail": "nguyen.khuong@atherlabs.com",
+  "approverEmail": "kdhn1911@gmail.com",
+  "version": "Draft 1",
+  "contentHash": "sha256:test-personal-2026-05-draft1",
+  "status": "pending_cfo_review",
+  "submittedAt": "2026-04-23T09:49:02.177Z",
+  "channel": "google_apps_script_mail"
+}

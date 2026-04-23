@@ -50,7 +50,7 @@ window.MONTHLY_PLANS_LIVE_DATA = {
         allowSendToCfo: true,
         highlights: [
           { label: "Tiền gửi đầu kỳ", value: "122.249 tỷ VND" },
-          { label: "Tăng / giảm", value: "+20.920 tỷ cơ cấu lại" },
+          { label: "Tăng / giảm", value: "0 VND" },
           { label: "Dư nợ vay cuối kỳ", value: "27.250 tỷ VND" },
           { label: "Thanh khoản VPBank", value: "1.031 tỷ VND" }
         ],

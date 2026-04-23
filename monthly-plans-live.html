@@ -772,8 +772,15 @@
       }
     }
 
-    window.addEventListener('load', equalizeHeads);
-    window.addEventListener('resize', equalizeHeads);
+    /* ── Báo chiều cao thực lên parent index.html để auto-resize iframe ── */
+    function notifyParentHeight() {
+      if (window.parent === window) return;
+      const h = document.documentElement.scrollHeight || document.body.scrollHeight;
+      window.parent.postMessage({ type: 'treasury-iframe-height', height: h }, '*');
+    }
+
+    window.addEventListener('load', function() { equalizeHeads(); notifyParentHeight(); });
+    window.addEventListener('resize', function() { equalizeHeads(); notifyParentHeight(); });
 
     async function loadApproval(plan) {
       if (approvalCache.has(plan.id)) return approvalCache.get(plan.id);
@@ -803,6 +810,7 @@
       plansEl.innerHTML = plans.map((plan, index) => renderPlan(plan, monthKey, month, approvals[index])).join('');
       bindActions();
       scheduleEqualize();
+      setTimeout(notifyParentHeight, 700);
     }
 
     monthSelect.addEventListener('change', render);

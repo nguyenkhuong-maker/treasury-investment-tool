@@ -2222,17 +2222,6 @@
     try { await tryLoadDefaultLoansJson(); } catch (e) { console.warn('Default company loans JSON load failed:', e); }
     try { await tryLoadDefaultPersonalJson(); } catch (e) { console.warn('Default personal treasury JSON load failed:', e); }
   }
-  init();
-</script>
-</body>
-</html>
- { refreshCompareWeekSelector(); renderSelectedPeriod(); });
-    document.getElementById('compare-week-select').addEventListener('change', renderSelectedPeriod);
-    try { await tryLoadDefaultJson(); } catch (e) { console.warn('Default JSON load failed:', e); }
-    try { await tryLoadDefaultLoansJson(); } catch (e) { console.warn('Default company loans JSON load failed:', e); }
-    try { await tryLoadDefaultPersonalJson(); } catch (e) { console.warn('Default personal treasury JSON load failed:', e); }
-  }
-  init();
 
   /* ── FIX 1: Tab persistence ────────────────────────────────
      Lưu tab đang active vào localStorage, khôi phục khi reload.
@@ -2244,16 +2233,11 @@
       _origSwitch(tabId);
       try { localStorage.setItem('treasury-active-tab', tabId); } catch (e) {}
     };
-    // Khôi phục tab đã lưu (chạy sau init để HISTORY có thể đã sẵn sàng)
-    const saved = (() => { try { return localStorage.getItem('treasury-active-tab'); } catch (e) { return null; } })();
-    if (saved && document.getElementById('tab-' + saved)) {
-      switchTab(saved);
-    }
   })();
 
   /* ── FIX 2: iframe KE HOACH auto-height ────────────────────
-     Nhan postMessage tu monthly-plans-live.html de resize iframe
-     theo dung chieu cao noi dung thuc, khong can hardcode.
+     Nhận postMessage từ monthly-plans-live.html để resize iframe
+     theo đúng chiều cao nội dung thực, không cần hardcode.
   ─────────────────────────────────────────────── */
   window.addEventListener('message', function(e) {
     if (e.data && e.data.type === 'treasury-iframe-height') {
@@ -2262,6 +2246,13 @@
         var h = Math.max(Number(e.data.height) || 0, 800);
         frame.style.minHeight = h + 'px';
       }
+    }
+  });
+
+  init().then(function() {
+    const saved = (() => { try { return localStorage.getItem('treasury-active-tab'); } catch (e) { return null; } })();
+    if (saved && document.getElementById('tab-' + saved)) {
+      switchTab(saved);
     }
   });
 </script>

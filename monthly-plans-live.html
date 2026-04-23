@@ -136,7 +136,7 @@
     <section class="plans" id="plans"></section>
   </div>
 
-  <script src="./data/monthly-plans/live-index.js?v=20260423-1748"></script>
+  <script src="./data/monthly-plans/live-index.js?v=20260423-1758"></script>
   <script>
     const DB = window.MONTHLY_PLANS_LIVE_DATA;
     const monthSelect = document.getElementById('monthSelect');
@@ -145,8 +145,7 @@
     const heroBlock = document.getElementById('heroBlock');
     const CFO_APPROVAL_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyMyXnoXOj4PJ7f5w4fPaXzbt4DpsRfA6mxIWEFV3LeYCKUO0aWle-W20CZxzEjvMhWyA/exec';
     const REVIEW_TEST_EMAIL = DB.meta.reviewTestEmail || 'kdhn1911@gmail.com';
-    const APPROVAL_CACHE_BUST = '20260423-1752';
-    const SEND_COOLDOWN_MS = 15000;
+    const APPROVAL_CACHE_BUST = '20260423-1758';
     const APPROVAL_PATHS = [
       './data/monthly-plans/approvals',
       './treasury-master-dashboard/data/monthly-plans/approvals'
@@ -175,29 +174,60 @@
       }
     }
 
-    function isSendCoolingDown(planId) {
-      const state = getSendState(planId);
-      return !!(state && state.cooldownUntil && Date.now() < state.cooldownUntil);
-    }
-
-    function sendButtonMeta(plan) {
+    function sendButtonMeta(plan, approval) {
       const state = getSendState(plan.id);
+      const approvalStatus = approval?.status || null;
+
+      if (approvalStatus === 'approved') {
+        setSendState(plan.id, { status: 'approved', updatedAt: Date.now() });
+        return {
+          hidden: true,
+          disabled: true,
+          label: '',
+          helper: `Mail test hiện tại: ${REVIEW_TEST_EMAIL}`
+        };
+      }
+
+      if (approvalStatus === 'revision_requested') {
+        setSendState(plan.id, { status: 'idle', updatedAt: Date.now() });
+        return {
+          hidden: false,
+          disabled: false,
+          label: '📨 Gửi CFO',
+          helper: `CFO đã yêu cầu điều chỉnh. Anh có thể gửi lại tới ${REVIEW_TEST_EMAIL}.`
+        };
+      }
+
+      if (approvalStatus === 'pending_cfo_review') {
+        setSendState(plan.id, { status: 'sent', updatedAt: Date.now() });
+        return {
+          hidden: false,
+          disabled: true,
+          label: 'Đã gửi',
+          helper: `Đã gửi mail review tới ${approval.approverEmail || REVIEW_TEST_EMAIL}, chờ hành động tiếp theo từ CFO.`
+        };
+      }
+
       if (state?.status === 'sending') {
         return {
+          hidden: false,
           disabled: true,
           label: 'Đang gửi...',
           helper: `Đang gửi mail review tới ${REVIEW_TEST_EMAIL}...`
         };
       }
-      if (state?.status === 'sent' && state.cooldownUntil && Date.now() < state.cooldownUntil) {
-        const remain = Math.max(1, Math.ceil((state.cooldownUntil - Date.now()) / 1000));
+
+      if (state?.status === 'sent') {
         return {
+          hidden: false,
           disabled: true,
-          label: 'Đã gửi, chờ CFO',
-          helper: `Đã gửi mail. Anh chờ ${remain}s rồi hẵng bấm lại để tránh spam request.`
+          label: 'Đã gửi',
+          helper: `Đã gửi mail review tới ${REVIEW_TEST_EMAIL}, chờ hành động tiếp theo từ CFO.`
         };
       }
+
       return {
+        hidden: false,
         disabled: false,
         label: '📨 Gửi CFO',
         helper: `Mail test hiện tại: ${REVIEW_TEST_EMAIL}`
@@ -237,7 +267,7 @@
 
     function approvalStatusMeta(plan, approval) {
       const status = approval?.status || plan.status;
-      if (status === 'approved') return { label: 'Đã duyệt CFO', cls: 'green' };
+      if (status === 'approved') return { label: 'Đã được CFO duyệt', cls: 'green' };
       if (status === 'revision_requested') return { label: 'Cần điều chỉnh', cls: 'red' };
       if (status === 'pending_cfo_review') return { label: 'Đang chờ CFO duyệt', cls: 'gold' };
       if (status === 'ready_for_cfo') return { label: 'Sẵn sàng trình CFO', cls: 'gold' };
@@ -316,11 +346,6 @@
     }
 
     async function sendPlanToCfo(monthKey, plan) {
-      if (isSendCoolingDown(plan.id)) {
-        render();
-        return;
-      }
-
       const payload = {
         planId: plan.id,
         month: monthKey,
@@ -353,18 +378,15 @@
         });
         setSendState(plan.id, {
           status: 'sent',
-          updatedAt: Date.now(),
-          cooldownUntil: Date.now() + SEND_COOLDOWN_MS
+          updatedAt: Date.now()
         });
         render();
-        setTimeout(() => render(), SEND_COOLDOWN_MS + 300);
         alert(`Đã gửi yêu cầu trình CFO cho ${plan.title}. Anh kiểm tra inbox ${REVIEW_TEST_EMAIL} giúp em nhé.`);
       } catch (error) {
         console.error(error);
         setSendState(plan.id, {
           status: 'idle',
-          updatedAt: Date.now(),
-          cooldownUntil: 0
+          updatedAt: Date.now()
         });
         render();
         alert('Không gọi được Apps Script Web App. Anh thử lại giúp em nhé.');
@@ -420,7 +442,7 @@
 
     function renderPlan(plan, monthKey, month, approval) {
       const status = approvalStatusMeta(plan, approval);
-      const sendMeta = sendButtonMeta(plan);
+      const sendMeta = sendButtonMeta(plan, approval);
       return `
         <article class="plan-card">
           <div class="plan-head">
@@ -437,7 +459,7 @@
             <div class="highlights">
               ${plan.highlights.map((item) => renderHighlight(item)).join('')}
             </div>
-            ${plan.allowSendToCfo ? `
+            ${plan.allowSendToCfo && !sendMeta.hidden ? `
               <div class="head-actions actions">
                 <button class="btn primary" data-action="send-cfo" data-plan-id="${plan.id}" ${sendMeta.disabled ? 'disabled' : ''}>${sendMeta.label}</button>
               </div>
@@ -497,6 +519,7 @@
       const month = DB.months[monthKey];
       toolbarNote.innerHTML = `<strong>${month.monthLabel}</strong> · ${month.periodLabel}<br/>${DB.meta.note}`;
       const plans = [month.company, month.personal];
+      approvalCache.clear();
       const approvals = await Promise.all(plans.map((plan) => loadApproval(plan)));
       plansEl.innerHTML = plans.map((plan, index) => renderPlan(plan, monthKey, month, approvals[index])).join('');
       bindActions();

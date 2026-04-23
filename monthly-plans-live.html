@@ -150,8 +150,10 @@
       grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
       gap: 10px;
       margin-top: 16px;
+      align-items: start;
     }
     .highlight {
+      align-self: start;
       background: #f8fafc;
       border: 1px solid var(--line);
       border-radius: 14px;
@@ -361,6 +363,7 @@
     const APPROVAL_CACHE_BUST = siteVersion;
     const PLAN_ASSET_BUST = siteVersion;
     const SEND_STATE_VERSION = siteVersion;
+    const LAYOUT_VERSION = '20260423-1851';
     const APPROVAL_PATHS = [
       './data/monthly-plans/approvals',
       './treasury-master-dashboard/data/monthly-plans/approvals'

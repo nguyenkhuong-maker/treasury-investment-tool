@@ -113,12 +113,12 @@
       <h1>🗂 Kế hoạch ngân quỹ theo tháng</h1>
       <p>
         Trang live này dùng để xem lại kế hoạch ngân quỹ theo tháng cho cả <strong>công ty</strong> và <strong>cá nhân</strong>.
-        Tháng 4/2026 hiện đã được <strong>CFO duyệt</strong> trước khi đưa lên GitHub Pages.
+        Tháng 5/2026 hiện đã được <strong>chốt đưa lên live page</strong>, đồng thời vẫn giữ tháng 4/2026 để tra cứu lại.
       </p>
       <div class="hero-meta">
         <span class="pill">Công ty + Cá nhân song song</span>
         <span class="pill">Approval status hiển thị rõ</span>
-        <span class="pill">Sẵn sàng mở rộng cho tháng 5/2026</span>
+        <span class="pill">T05/2026 đã live trên GitHub Pages</span>
       </div>
     </section>
 
@@ -173,7 +173,7 @@
                 <div class="badges">
                   ${badge(month.monthLabel, 'blue')}
                   ${badge('Version ' + plan.version, 'gray')}
-                  ${badge('CFO đã duyệt', 'green')}
+                  ${badge('Đã chốt live', 'green')}
                 </div>
               </div>
               <div style="font-size:13px;color:#64748b;line-height:1.6">
@@ -196,7 +196,7 @@
             <div class="section-grid">
               <div class="panel">
                 <div class="label">Approver</div>
-                <div class="value"><strong>${plan.approvedBy}</strong><br/>CFO approval đã được ghi nhận cho kế hoạch tháng 4/2026.</div>
+                <div class="value"><strong>${plan.approvedBy}</strong><br/>Trạng thái chốt live đã được ghi nhận cho ${month.monthLabel}.</div>
               </div>
               <div class="panel">
                 <div class="label">Ghi chú vận hành</div>
@@ -218,7 +218,7 @@
             <h3>🔗 Tài liệu liên quan</h3>
             <div class="actions">
               <a class="btn" href="${plan.sourceHtml}" target="_blank" rel="noreferrer">Mở bản HTML</a>
-              <a class="btn" href="${plan.sourcePdf}" target="_blank" rel="noreferrer">Mở bản PDF</a>
+              ${plan.sourcePdf ? `<a class="btn" href="${plan.sourcePdf}" target="_blank" rel="noreferrer">Mở bản PDF</a>` : ''}
             </div>
           </div>
         </article>

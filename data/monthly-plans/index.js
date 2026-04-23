@@ -1,22 +1,75 @@
 window.MONTHLY_PLANS_TEST_DATA = {
   meta: {
     name: "Treasury Monthly Plans Test Index",
-    updatedAt: "2026-04-23T10:08:00+07:00",
+    updatedAt: "2026-04-23T12:12:00+07:00",
     generatedBy: "Vesper",
-    defaultMonth: "2026-04",
+    defaultMonth: "2026-05",
     storageMode: "browser-local-storage-for-test",
-    designatedApproverEmail: "nguyen.khuong@atherlabs.com",
-    note: "Bản test Pha 1 để anh Nguyên xem concept kế hoạch tháng trên Index trước khi nhập vào dashboard chính."
+    makerEmail: "nguyen.khuong@atherlabs.com",
+    designatedApproverEmail: "kdhn1911@gmail.com",
+    note: "Bản test để anh Nguyên xem concept kế hoạch tháng trên Index trước khi nhập vào dashboard chính."
   },
   availableMonths: [
+    {
+      key: "2026-05",
+      label: "Tháng 5/2026",
+      periodLabel: "01/05/2026 - 15/06/2026",
+      status: "draft"
+    },
     {
       key: "2026-04",
       label: "Tháng 4/2026",
       periodLabel: "01/04/2026 - 15/05/2026",
-      status: "ready-for-review"
+      status: "approved"
     }
   ],
   months: {
+    "2026-05": {
+      monthLabel: "Tháng 5/2026",
+      periodLabel: "01/05/2026 - 15/06/2026",
+      company: {
+        id: "2026-05-company",
+        type: "company",
+        title: "Kế hoạch dòng tiền & hạn mức thấu chi khả dụng",
+        status: "draft",
+        version: "Draft 2",
+        owner: "Finance Team",
+        approver: "CFO",
+        preparedAt: "23/04/2026 12:20 GMT+7",
+        highlights: [
+          { label: "HM khả dụng đầu kỳ", value: "13.938 tỷ VND" },
+          { label: "Thu DOPA 01/06", value: "3.790 tỷ VND" },
+          { label: "Số dư cuối kỳ", value: "2.881 tỷ VND" },
+          { label: "Thanh khoản", value: "Dương, buffer mỏng cuối T5" }
+        ],
+        contentHash: "sha256:test-company-2026-05-draft2",
+        sourceHtml: "./plans/2026-05/company.html",
+        sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 5-2026/KE_HOACH_DONG_TIEN_VA_HAN_MUC_THAU_CHI_KHA_DUNG_01-05-2026_15-06-2026.md"
+      },
+      personal: {
+        id: "2026-05-personal",
+        type: "personal",
+        title: "Kế hoạch quản lý Individual Treasury",
+        status: "draft",
+        version: "Draft 1",
+        owner: "Finance Team",
+        approver: "CFO",
+        preparedAt: "23/04/2026 13:56 GMT+7",
+        highlights: [
+          { label: "Tổng tiền gửi", value: "122.249 tỷ VND" },
+          { label: "Lãi dự thu", value: "6.835 tỷ VND" },
+          { label: "Gửi mới VPBank 12m", value: "20.920 tỷ VND" },
+          { label: "VPB cuối kỳ", value: "1.031 tỷ VND" }
+        ],
+        contentHash: "sha256:test-personal-2026-05-draft1",
+        sourceHtml: "./plans/2026-05/personal.html",
+        sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 5-2026/KE_HOACH_QUAN_LY_INDIVIDUAL_TREASURY_01-05-2026_15-06-2026.md"
+      },
+      automationPreview: {
+        nextDraftWindow: "25-28 hằng tháng",
+        expectedOutput: "Draft công ty tháng 5 đã dựng; phần cá nhân sẽ bổ sung sau khi anh Nguyên chốt tiếp."
+      }
+    },
     "2026-04": {
       monthLabel: "Tháng 4/2026",
       periodLabel: "01/04/2026 - 15/05/2026",

@@ -152,16 +152,17 @@
       <h1>🗂 Treasury Monthly Plans — Test Index</h1>
       <p>
         Bản test này đang hiển thị <strong>cả 2 kế hoạch trên cùng 1 trang</strong> và mô phỏng đúng flow anh Nguyên chốt:
-        <strong>Draft → Gửi CFO → CFO yêu cầu điều chỉnh / duyệt → Người lập hoàn thành điều chỉnh → Gửi lại CFO → Duyệt</strong>.
+        <strong>Draft → Trình CFO → CFO yêu cầu điều chỉnh / duyệt → Người lập hoàn thành điều chỉnh → Trình lại CFO → Duyệt</strong>.
       </p>
       <div class="hero-meta">
         <span class="pill">Hiển thị đồng thời Công ty + Cá nhân</span>
-        <span class="pill">Approver test: nguyen.khuong@atherlabs.com</span>
+        <span class="pill">Người trình: nguyen.khuong@atherlabs.com</span>
+        <span class="pill">Mail nhận test: kdhn1911@gmail.com</span>
         <span class="pill">Có timeline log gửi / điều chỉnh / duyệt</span>
       </div>
       <div class="notice">
         <strong>Lưu ý:</strong> đây vẫn là bản test local. Flow mail đang mô phỏng bằng magic-link mock,
-        nhưng logic đã gần giống bản production: có round review, có note CFO, có phản hồi của người lập, có gửi lại CFO, và có timeline log theo từng bước.
+        nhưng logic đã gần giống bản production: có round review, có note CFO, có phản hồi của người lập, có trình lại CFO, và có timeline log theo từng bước.
       </div>
     </section>
 
@@ -190,6 +191,8 @@
     const plansEl = document.getElementById('plans');
     const resetAllBtn = document.getElementById('resetAllBtn');
     const designatedApproverEmail = DB.meta.designatedApproverEmail;
+    const CFO_APPROVAL_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyMyXnoXOj4PJ7f5w4fPaXzbt4DpsRfA6mxIWEFV3LeYCKUO0aWle-W20CZxzEjvMhWyA/exec';
+    const PUBLIC_DASHBOARD_BASE_URL = 'https://nguyenkhuong-maker.github.io/treasury-investment-tool/';
 
     function buildMonthOptions() {
       DB.availableMonths.forEach((item) => {
@@ -260,9 +263,9 @@
     }
 
     function makerSendLabel(status) {
-      if (status === 'revision_completed') return '📨 Gửi lại cho CFO';
-      if (status === 'pending_cfo_review') return '📨 Gửi lại email CFO';
-      return '📨 Gửi cho CFO';
+      if (status === 'revision_completed') return '📨 Trình lại CFO';
+      if (status === 'pending_cfo_review') return '📨 Trình lại CFO';
+      return '📨 Trình CFO';
     }
 
     function latestRound(state) {
@@ -271,7 +274,7 @@
 
     function renderTimeline(state) {
       if (!state.timeline || !state.timeline.length) {
-        return '<div class="panel"><div class="value muted">Chưa có log nào. Khi bắt đầu gửi CFO và review, timeline sẽ hiện ở đây.</div></div>';
+        return '<div class="panel"><div class="value muted">Chưa có log nào. Khi bắt đầu trình CFO và review, timeline sẽ hiện ở đây.</div></div>';
       }
       return `<div class="timeline">${state.timeline.slice().reverse().map((item) => `
         <div class="timeline-item">
@@ -333,7 +336,7 @@
             </div>
             <div class="panel">
               <div class="label">Round đang theo dõi</div>
-              <div class="value">${round ? `Round ${round.round}<br/>Gửi lúc: ${round.sentAtLabel}` : 'Chưa gửi CFO lần nào.'}</div>
+              <div class="value">${round ? `Round ${round.round}<br/>Trình lúc: ${round.sentAtLabel}` : 'Chưa trình CFO lần nào.'}</div>
             </div>
           </div>
         </div>
@@ -341,7 +344,7 @@
         <div class="section">
           <div class="section-head">
             <h3>🛠 Box người lập kế hoạch</h3>
-            <div class="section-note">Người lập đọc note CFO, hoàn thành điều chỉnh, rồi gửi lại CFO</div>
+            <div class="section-note">Người lập đọc note CFO, hoàn thành điều chỉnh, rồi trình lại CFO</div>
           </div>
           <div class="action-grid">
             <div class="panel">
@@ -356,10 +359,10 @@
               <div class="label">Gợi ý thao tác</div>
               <div class="value">
                 1. Hoàn thành draft<br/>
-                2. Bấm gửi cho CFO<br/>
+                2. Bấm trình CFO<br/>
                 3. Nếu CFO yêu cầu điều chỉnh, người lập cập nhật kế hoạch<br/>
                 4. Bấm <strong>Đã hoàn thành điều chỉnh</strong><br/>
-                5. Bấm <strong>Gửi lại cho CFO</strong>
+                5. Bấm <strong>Trình lại CFO</strong>
               </div>
               <div class="actions">
                 <button class="btn ghost" data-role="clear-workflow" data-plan-id="${plan.id}">Reset workflow plan này</button>
@@ -370,13 +373,13 @@
 
         <div class="section">
           <div class="section-head">
-            <h3>✉️ Box gửi CFO</h3>
+            <h3>✉️ Box trình CFO</h3>
             <div class="section-note">Mail mock + link review dành riêng cho ${designatedApproverEmail}</div>
           </div>
           <div class="approval-grid">
             <div class="panel">
               <div class="label">Approval link hiện tại</div>
-              <div class="value">${latestLink ? `<a class="link-btn" href="${latestLink}" target="_blank" rel="noreferrer">🔗 Mở link review / duyệt của CFO</a>` : '<span class="muted">Chưa có link. Hãy bấm gửi cho CFO trước.</span>'}</div>
+              <div class="value">${latestLink ? `<a class="link-btn" href="${latestLink}" target="_blank" rel="noreferrer">🔗 Mở link review / duyệt của CFO</a>` : '<span class="muted">Chưa có link. Hãy bấm trình CFO trước.</span>'}</div>
               <div class="label" style="margin-top:12px">Tình trạng vòng hiện tại</div>
               <div class="value">${round ? `Round ${round.round} · ${statusMeta(state.status).label}` : 'Chưa có review round nào.'}</div>
             </div>
@@ -412,7 +415,7 @@
         renderAll();
       });
 
-      sendBtn.addEventListener('click', () => {
+      sendBtn.addEventListener('click', async () => {
         window.TreasuryApprovalMock.createOrRefreshRequest({
           ...plan,
           month: monthKey,
@@ -420,6 +423,32 @@
           periodLabel: month.periodLabel
         }, designatedApproverEmail);
         renderAll();
+
+        try {
+          const relativePlanPath = plan.sourceHtml.replace(/^\.\//, '');
+          const payload = {
+            planId: plan.id,
+            month: monthKey,
+            planType: plan.type,
+            title: plan.title,
+            version: plan.version,
+            contentHash: plan.contentHash,
+            planUrl: new URL(relativePlanPath, PUBLIC_DASHBOARD_BASE_URL).href
+          };
+
+          await fetch(CFO_APPROVAL_WEB_APP_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+
+          alert(`Đã gửi request trình CFO sang Apps Script. Anh kiểm tra inbox ${designatedApproverEmail} giúp em nhé.`);
+          console.log('Apps Script approval request sent:', payload);
+        } catch (err) {
+          console.error(err);
+          alert('Đã tạo round review local, nhưng không gọi được Apps Script Web App.');
+        }
       });
 
       clearBtn.addEventListener('click', () => {

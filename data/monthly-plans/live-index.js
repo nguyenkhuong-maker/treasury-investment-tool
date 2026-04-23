@@ -1,7 +1,7 @@
 window.MONTHLY_PLANS_LIVE_DATA = {
   meta: {
     name: "Treasury Monthly Plans Live Index",
-    updatedAt: "2026-04-23T17:23:00+07:00",
+    updatedAt: "2026-04-23T17:30:00+07:00",
     defaultMonth: "2026-05",
     reviewTestEmail: "kdhn1911@gmail.com",
     note: "Chọn tháng kế hoạch để xem, in báo cáo hoặc trình CFO."
@@ -31,10 +31,11 @@ window.MONTHLY_PLANS_LIVE_DATA = {
         status: "ready_for_cfo",
         allowSendToCfo: true,
         highlights: [
-          { label: "HM khả dụng đầu kỳ", value: "13.938 tỷ VND" },
-          { label: "Thu DOPA 01/06", value: "3.790 tỷ VND" },
-          { label: "Số dư cuối kỳ", value: "2.881 tỷ VND" },
-          { label: "Thanh khoản", value: "Dương, buffer mỏng cuối T5" }
+          { label: "Hạn mức khả dụng đầu kỳ", value: "13.938 tỷ VND" },
+          { label: "Tổng thu trong kỳ", value: "3.790 tỷ VND" },
+          { label: "Tổng chi trong kỳ", value: "14.847 tỷ VND" },
+          { label: "Hạn mức khả dụng cuối kỳ", value: "2.881 tỷ VND" },
+          { label: "Thanh khoản", value: "Mỏng nhất 223 triệu ngày 29/05" }
         ],
         sourceHtml: "./plans/2026-05/company.html",
         sourcePdf: "./plans/2026-05/company.pdf",

@@ -98,6 +98,9 @@
       align-items: start;
     }
     .plan-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 22px;
@@ -109,6 +112,7 @@
 
     /* ── PLAN HEADER ── */
     .plan-head {
+      min-height: 300px;
       padding: 22px 22px 18px;
       border-bottom: 1px solid var(--line);
       background: linear-gradient(180deg, #fafcff 0%, #fff 100%);
@@ -320,8 +324,33 @@
     <section class="plans" id="plans"></section>
   </div>
 
-  <script src="./data/monthly-plans/live-index.js?v=20260423-1820"></script>
   <script>
+    (async function () {
+    async function loadSiteVersion() {
+      try {
+        const res = await fetch('./data/site-version.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error('site-version fetch failed');
+        const data = await res.json();
+        return data.version || String(Date.now());
+      } catch (error) {
+        console.error('loadSiteVersion failed', error);
+        return String(Date.now());
+      }
+    }
+
+    async function loadDataScript(version) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = `./data/monthly-plans/live-index.js?v=${version}`;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.body.appendChild(script);
+      });
+    }
+
+    const siteVersion = await loadSiteVersion();
+    await loadDataScript(siteVersion);
+
     const DB = window.MONTHLY_PLANS_LIVE_DATA;
     const monthSelect = document.getElementById('monthSelect');
     const toolbarNote = document.getElementById('toolbarNote');
@@ -329,9 +358,9 @@
     const heroBlock = document.getElementById('heroBlock');
     const CFO_APPROVAL_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyMyXnoXOj4PJ7f5w4fPaXzbt4DpsRfA6mxIWEFV3LeYCKUO0aWle-W20CZxzEjvMhWyA/exec';
     const REVIEW_TEST_EMAIL = DB.meta.reviewTestEmail || 'duc.ho@atherlabs.com';
-    const APPROVAL_CACHE_BUST = '20260423-1806';
-    const PLAN_ASSET_BUST = '20260423-1806';
-    const SEND_STATE_VERSION = '20260423-1806';
+    const APPROVAL_CACHE_BUST = siteVersion;
+    const PLAN_ASSET_BUST = siteVersion;
+    const SEND_STATE_VERSION = siteVersion;
     const APPROVAL_PATHS = [
       './data/monthly-plans/approvals',
       './treasury-master-dashboard/data/monthly-plans/approvals'
@@ -732,6 +761,7 @@
     monthSelect.addEventListener('change', render);
     buildOptions();
     render();
+    })();
   </script>
 </body>
 </html>

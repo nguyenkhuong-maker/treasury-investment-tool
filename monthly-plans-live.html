@@ -66,6 +66,7 @@
     .badge.blue { background:var(--soft-blue); color:#1d4ed8; }
     .badge.gold { background:var(--soft-gold); color:var(--warn); }
     .badge.green { background:var(--soft-green); color:var(--ok); }
+    .badge.red { background:#fef2f2; color:#b91c1c; }
     .badge.gray { background:#f1f5f9; color:#475569; }
     .highlights { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; margin-top:14px; }
     .highlight { background:#f8fafc; border:1px solid var(--line); border-radius:14px; padding:12px; }
@@ -81,6 +82,10 @@
     .section { padding:18px; border-top:1px solid var(--line); background:linear-gradient(180deg,#fff,#fafcff); }
     .section h3 { margin:0 0 12px; font-size:18px; color:var(--navy); }
     .section.compact { padding-top: 14px; padding-bottom: 14px; }
+    .status-box { display:grid; gap:10px; }
+    .status-card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px 14px; }
+    .status-card .title { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+    .status-card .body { margin-top:6px; font-size:14px; line-height:1.6; }
     .iframe-wrap { background:#f8fafc; padding:14px; }
     iframe { width:100%; min-height:920px; border:1px solid var(--line); border-radius:14px; background:#fff; }
     .timeline { display:grid; gap:10px; }
@@ -131,7 +136,7 @@
     <section class="plans" id="plans"></section>
   </div>
 
-  <script src="./data/monthly-plans/live-index.js?v=20260423-1735"></script>
+  <script src="./data/monthly-plans/live-index.js?v=20260423-1742"></script>
   <script>
     const DB = window.MONTHLY_PLANS_LIVE_DATA;
     const monthSelect = document.getElementById('monthSelect');
@@ -140,6 +145,8 @@
     const heroBlock = document.getElementById('heroBlock');
     const CFO_APPROVAL_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyMyXnoXOj4PJ7f5w4fPaXzbt4DpsRfA6mxIWEFV3LeYCKUO0aWle-W20CZxzEjvMhWyA/exec';
     const REVIEW_TEST_EMAIL = DB.meta.reviewTestEmail || 'kdhn1911@gmail.com';
+    const APPROVAL_CACHE_BUST = '20260423-1740';
+    const approvalCache = new Map();
 
     if (window.self !== window.top) {
       heroBlock.style.display = 'none';
@@ -161,22 +168,59 @@
       return `<span class="badge ${kind}">${text}</span>`;
     }
 
-    function statusMeta(plan) {
-      if (plan.status === 'approved') return { label: 'Đã duyệt CFO', cls: 'green' };
-      if (plan.status === 'ready_for_cfo') return { label: 'Sẵn sàng trình CFO', cls: 'gold' };
+    function formatApprovalTime(iso) {
+      if (!iso) return '';
+      const date = new Date(iso);
+      if (Number.isNaN(date.getTime())) return iso;
+      return new Intl.DateTimeFormat('vi-VN', {
+        timeZone: 'Asia/Ho_Chi_Minh',
+        day: '2-digit', month: '2-digit', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', hour12: false
+      }).format(date).replace(',', '') + ' GMT+7';
+    }
+
+    function approvalStatusMeta(plan, approval) {
+      const status = approval?.status || plan.status;
+      if (status === 'approved') return { label: 'Đã duyệt CFO', cls: 'green' };
+      if (status === 'revision_requested') return { label: 'Cần điều chỉnh', cls: 'red' };
+      if (status === 'pending_cfo_review') return { label: 'Đang chờ CFO duyệt', cls: 'gold' };
+      if (status === 'ready_for_cfo') return { label: 'Sẵn sàng trình CFO', cls: 'gold' };
       return { label: 'Bản kế hoạch', cls: 'gray' };
     }
 
-    function timelineItems(plan) {
+    function buildTimeline(plan, approval) {
+      if (approval) {
+        const items = [];
+        items.push({
+          at: formatApprovalTime(approval.submittedAt || approval.reviewedAt || approval.approvedAt),
+          label: approval.status === 'pending_cfo_review' ? 'Đã trình CFO' : 'Đã trình CFO',
+          note: `Đã gửi mail review tới ${approval.approverEmail || REVIEW_TEST_EMAIL}.`
+        });
+        if (approval.status === 'revision_requested') {
+          items.push({
+            at: formatApprovalTime(approval.reviewedAt),
+            label: 'CFO yêu cầu điều chỉnh',
+            note: 'CFO đã phản hồi cần điều chỉnh kế hoạch.'
+          });
+        }
+        if (approval.status === 'approved') {
+          items.push({
+            at: formatApprovalTime(approval.approvedAt || approval.reviewedAt),
+            label: 'CFO duyệt',
+            note: `Kế hoạch đã được ${approval.approvedBy || approval.approverEmail || 'CFO'} duyệt.`
+          });
+        }
+        return items;
+      }
       return (plan.timeline || []).filter((item) => ['cfo_reviewed', 'approved', 'published'].includes(item.type));
     }
 
-    function renderTimeline(plan) {
-      const items = timelineItems(plan);
+    function renderTimeline(plan, approval) {
+      const items = buildTimeline(plan, approval);
       if (!items.length) return '';
       return `
         <div class="section">
-          <h3>🕒 Timeline</h3>
+          <h3>🕒 Log CFO</h3>
           <div class="timeline">${items.map((item) => `
             <div class="timeline-item">
               <div class="timeline-time">${item.at}<br/><span>${item.label}</span></div>
@@ -185,6 +229,24 @@
           `).join('')}</div>
         </div>
       `;
+    }
+
+    async function loadApproval(plan) {
+      if (approvalCache.has(plan.id)) return approvalCache.get(plan.id);
+      try {
+        const res = await fetch(`./data/monthly-plans/approvals/${plan.id}.json?v=${APPROVAL_CACHE_BUST}`, { cache: 'no-store' });
+        if (!res.ok) {
+          approvalCache.set(plan.id, null);
+          return null;
+        }
+        const data = await res.json();
+        approvalCache.set(plan.id, data);
+        return data;
+      } catch (error) {
+        console.error('load approval failed', plan.id, error);
+        approvalCache.set(plan.id, null);
+        return null;
+      }
     }
 
     function printPlanReport(plan) {
@@ -216,6 +278,13 @@
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
+        approvalCache.set(plan.id, {
+          planId: plan.id,
+          approverEmail: REVIEW_TEST_EMAIL,
+          status: 'pending_cfo_review',
+          submittedAt: new Date().toISOString()
+        });
+        render();
         alert(`Đã gửi yêu cầu trình CFO cho ${plan.title}. Anh kiểm tra inbox ${REVIEW_TEST_EMAIL} giúp em nhé.`);
       } catch (error) {
         console.error(error);
@@ -247,8 +316,31 @@
       `;
     }
 
-    function renderPlan(plan, monthKey, month) {
-      const status = statusMeta(plan);
+    function renderApprovalStatus(plan, approval) {
+      if (!approval && !plan.allowSendToCfo) return '';
+      const status = approvalStatusMeta(plan, approval);
+      const timeText = approval?.approvedAt || approval?.reviewedAt || approval?.submittedAt;
+      const latestText = timeText ? formatApprovalTime(timeText) : 'Chưa có cập nhật mới';
+      const actorText = approval?.approvedBy || approval?.approverEmail || REVIEW_TEST_EMAIL;
+      return `
+        <div class="section compact">
+          <h3>📌 Trạng thái CFO</h3>
+          <div class="status-box">
+            <div class="status-card">
+              <div class="title">Trạng thái hiện tại</div>
+              <div class="body">${badge(status.label, status.cls)}</div>
+            </div>
+            <div class="status-card">
+              <div class="title">Cập nhật gần nhất</div>
+              <div class="body">${latestText}${approval?.status === 'approved' ? `<br/>Người duyệt: <strong>${actorText}</strong>` : ''}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderPlan(plan, monthKey, month, approval) {
+      const status = approvalStatusMeta(plan, approval);
       return `
         <article class="plan-card">
           <div class="plan-head">
@@ -273,11 +365,13 @@
             ` : ''}
           </div>
 
+          ${renderApprovalStatus(plan, approval)}
+
           <div class="iframe-wrap">
             <iframe src="${plan.sourceHtml}" title="${plan.title}"></iframe>
           </div>
 
-          ${renderTimeline(plan)}
+          ${renderTimeline(plan, approval)}
 
           <div class="section compact">
             <h3>📄 Tài liệu liên quan</h3>
@@ -318,11 +412,13 @@
       });
     }
 
-    function render() {
+    async function render() {
       const monthKey = monthSelect.value;
       const month = DB.months[monthKey];
       toolbarNote.innerHTML = `<strong>${month.monthLabel}</strong> · ${month.periodLabel}<br/>${DB.meta.note}`;
-      plansEl.innerHTML = [month.company, month.personal].map((plan) => renderPlan(plan, monthKey, month)).join('');
+      const plans = [month.company, month.personal];
+      const approvals = await Promise.all(plans.map((plan) => loadApproval(plan)));
+      plansEl.innerHTML = plans.map((plan, index) => renderPlan(plan, monthKey, month, approvals[index])).join('');
       bindActions();
     }
 

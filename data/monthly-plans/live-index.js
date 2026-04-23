@@ -1,7 +1,7 @@
 window.MONTHLY_PLANS_LIVE_DATA = {
   meta: {
     name: "Treasury Monthly Plans Live Index",
-    updatedAt: "2026-04-23T17:30:00+07:00",
+    updatedAt: "2026-04-23T17:35:00+07:00",
     defaultMonth: "2026-05",
     reviewTestEmail: "kdhn1911@gmail.com",
     note: "Chọn tháng kế hoạch để xem, in báo cáo hoặc trình CFO."
@@ -32,8 +32,13 @@ window.MONTHLY_PLANS_LIVE_DATA = {
         allowSendToCfo: true,
         highlights: [
           { label: "Hạn mức khả dụng đầu kỳ", value: "13.938 tỷ VND" },
-          { label: "Tổng thu trong kỳ", value: "3.790 tỷ VND" },
-          { label: "Tổng chi trong kỳ", value: "14.847 tỷ VND" },
+          {
+            label: "Dòng tiền trong kỳ",
+            rows: [
+              { label: "Thu", value: "3.790 tỷ VND", tone: "green" },
+              { label: "Chi", value: "14.847 tỷ VND", tone: "red" }
+            ]
+          },
           { label: "Hạn mức khả dụng cuối kỳ", value: "2.881 tỷ VND" },
           { label: "Thanh khoản", value: "Mỏng nhất 223 triệu ngày 29/05" }
         ],
@@ -50,10 +55,29 @@ window.MONTHLY_PLANS_LIVE_DATA = {
         status: "ready_for_cfo",
         allowSendToCfo: true,
         highlights: [
-          { label: "Tổng tiền gửi", value: "122.249 tỷ VND" },
-          { label: "Lãi dự thu", value: "6.835 tỷ VND" },
-          { label: "Gửi mới VPBank 12m", value: "20.920 tỷ VND" },
-          { label: "VPB cuối kỳ", value: "1.031 tỷ VND" }
+          {
+            label: "Tiền gửi",
+            rows: [
+              { label: "Đầu kỳ", value: "122.249 tỷ VND" },
+              { label: "Tăng / giảm", value: "+20.920 tỷ cơ cấu lại" },
+              { label: "Cuối kỳ", value: "122.249 tỷ VND" }
+            ]
+          },
+          {
+            label: "Dư nợ vay",
+            rows: [
+              { label: "Đầu kỳ", value: "27.250 tỷ VND" },
+              { label: "Tăng / giảm", value: "Không đổi" },
+              { label: "Cuối kỳ", value: "27.250 tỷ VND" }
+            ]
+          },
+          {
+            label: "Thanh khoản",
+            rows: [
+              { label: "VPBank chị Thảo", value: "1.031 tỷ VND" },
+              { label: "VPBank anh Tín", value: "0 VND" }
+            ]
+          }
         ],
         sourceHtml: "./plans/2026-05/personal.html",
         sourcePdf: "./plans/2026-05/personal.pdf",

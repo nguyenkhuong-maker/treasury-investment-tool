@@ -67,10 +67,16 @@
     .badge.gold { background:var(--soft-gold); color:var(--warn); }
     .badge.green { background:var(--soft-green); color:var(--ok); }
     .badge.gray { background:#f1f5f9; color:#475569; }
-    .highlights { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-top:14px; }
+    .highlights { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; margin-top:14px; }
     .highlight { background:#f8fafc; border:1px solid var(--line); border-radius:14px; padding:12px; }
     .highlight .label { font-size:12px; color:var(--muted); }
     .highlight .value { margin-top:6px; font-weight:800; }
+    .metric-list { margin-top:8px; display:grid; gap:8px; }
+    .metric-row { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+    .metric-row .metric-label { font-size:12px; color:var(--muted); }
+    .metric-row .metric-value { font-size:15px; font-weight:800; text-align:right; }
+    .metric-row .metric-value.green { color:#15803d; }
+    .metric-row .metric-value.red { color:#b91c1c; }
     .head-actions { margin-top: 14px; }
     .section { padding:18px; border-top:1px solid var(--line); background:linear-gradient(180deg,#fff,#fafcff); }
     .section h3 { margin:0 0 12px; font-size:18px; color:var(--navy); }
@@ -125,7 +131,7 @@
     <section class="plans" id="plans"></section>
   </div>
 
-  <script src="./data/monthly-plans/live-index.js?v=20260423-1730"></script>
+  <script src="./data/monthly-plans/live-index.js?v=20260423-1735"></script>
   <script>
     const DB = window.MONTHLY_PLANS_LIVE_DATA;
     const monthSelect = document.getElementById('monthSelect');
@@ -217,6 +223,30 @@
       }
     }
 
+    function renderHighlight(item) {
+      if (item.rows && item.rows.length) {
+        return `
+          <div class="highlight">
+            <div class="label">${item.label}</div>
+            <div class="metric-list">
+              ${item.rows.map((row) => `
+                <div class="metric-row">
+                  <div class="metric-label">${row.label}</div>
+                  <div class="metric-value ${row.tone || ''}">${row.value}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+      return `
+        <div class="highlight">
+          <div class="label">${item.label}</div>
+          <div class="value">${item.value}</div>
+        </div>
+      `;
+    }
+
     function renderPlan(plan, monthKey, month) {
       const status = statusMeta(plan);
       return `
@@ -233,12 +263,7 @@
               </div>
             </div>
             <div class="highlights">
-              ${plan.highlights.map((item) => `
-                <div class="highlight">
-                  <div class="label">${item.label}</div>
-                  <div class="value">${item.value}</div>
-                </div>
-              `).join('')}
+              ${plan.highlights.map((item) => renderHighlight(item)).join('')}
             </div>
             ${plan.allowSendToCfo ? `
               <div class="head-actions actions">

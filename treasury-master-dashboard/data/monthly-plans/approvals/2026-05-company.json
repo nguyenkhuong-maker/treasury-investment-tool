@@ -2,11 +2,16 @@
   "planId": "2026-05-company",
   "month": "2026-05",
   "planType": "company",
+  "planTypeLabel": "VIHALI",
   "makerEmail": "nguyen.khuong@atherlabs.com",
   "approverEmail": "kdhn1911@gmail.com",
   "version": "Draft 2",
   "contentHash": "sha256:test-company-2026-05-draft2",
-  "status": "pending_cfo_review",
-  "submittedAt": "2026-04-23T09:51:49.849Z",
-  "channel": "google_apps_script_mail"
+  "status": "approved",
+  "channel": "google_apps_script_mail",
+  "reviewedAt": "2026-04-23T10:00:17.530Z",
+  "title": "K? ho?ch d?ng ti?n & h?n m?c th?u chi kh? d?ng",
+  "planUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/plans/2026-05/company.html",
+  "approvedBy": "kdhn1911@gmail.com",
+  "approvedAt": "2026-04-23T10:00:17.530Z"
 }

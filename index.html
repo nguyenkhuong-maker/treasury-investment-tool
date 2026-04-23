@@ -103,154 +103,19 @@
       padding: 28px 28px 60px;
     }
 
-    /* ══ Section Label ════════════════════════════════════════════ */
-    .section-label {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 16px; margin-top: 32px;
-    }
-    .section-label.no-top { margin-top: 0; }
-    .section-label .label-line { flex: 1; height: 1px; background: var(--border); }
-    .section-label .label-text {
-      font-size: 10.5px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--muted); white-space: nowrap;
-    }
-
-    /* ══ Card ═════════════════════════════════════════════════════ */
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border-soft);
-      border-radius: 14px;
-      padding: 24px 26px;
-      margin-bottom: 18px;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute; top: 0; left: 0;
-      width: 4px; height: 100%;
-      background: linear-gradient(180deg, var(--navy-light), var(--gold));
-      opacity: 0; transition: opacity .2s;
-      border-radius: 14px 0 0 14px;
-    }
-    .card:hover::before { opacity: 1; }
-    .card-header {
-      display: flex; align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px; flex-wrap: wrap; gap: 8px;
-    }
-    .card-title {
-      font-size: 16px; font-weight: 700; color: var(--navy);
-      display: flex; align-items: center; gap: 10px;
-    }
-    .card-title-icon {
-      width: 32px; height: 32px;
-      background: var(--gold-soft); border: 1px solid var(--gold-light);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 15px; flex-shrink: 0;
-    }
-
-    /* ══ Hero Card (Treasury tab) ═════════════════════════════════ */
-    .hero-card {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-      border: none; color: #fff;
-    }
-    .hero-card::before { display: none; }
-    .hero-card h1 { color: #fff; font-size: 22px; margin-bottom: 4px; }
-    .hero-card h2 { color: rgba(255,255,255,.5); font-size: 13px; font-weight: 400; border: none; padding: 0; margin-bottom: 20px; }
-    .hero-card .meta-hero div {
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
-      border-radius: 10px; padding: 11px 14px;
-      font-size: 13px; color: rgba(255,255,255,.85);
-    }
-    .hero-card .meta-hero div strong {
-      color: var(--gold-light); display: block; font-size: 11px;
-      text-transform: uppercase; letter-spacing: .6px; margin-bottom: 3px;
-    }
-    .hero-card .note-hero {
-      background: rgba(255,255,255,.07);
-      border-left: 3px solid var(--gold);
-      padding: 12px 14px;
-      border-radius: 0 8px 8px 0;
-      font-size: 13.5px; margin-top: 16px; line-height: 1.65;
-    }
-    .hero-card .note-hero strong { color: var(--gold-light); }
-    .hero-card label { color: rgba(255,255,255,.8); }
-
-    /* ══ KPI grid — Dư nợ style ═══════════════════════════════════ */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-    }
-    .kpi-card {
-      border: 1px solid var(--border-soft); border-radius: 12px;
-      padding: 18px 16px 14px; background: #fafcff;
-      position: relative; overflow: hidden;
-    }
-    .kpi-card::before {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-    }
-    .kpi-card.kpi-navy::before  { background: var(--navy); }
-    .kpi-card.kpi-green::before { background: #16a34a; }
-    .kpi-card.kpi-amber::before { background: #d97706; }
-    .kpi-card.kpi-red::before   { background: #dc2626; }
-    .kpi-card.kpi-gold::before  { background: var(--gold); }
-    .kpi-label { font-size: 11px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-    .kpi-value { font-size: 28px; font-weight: 800; line-height: 1.15; color: var(--blue); letter-spacing: -.5px; margin-bottom: 6px; }
-    .kpi-value.big { font-size: 17px; font-weight: 700; letter-spacing: -.2px; color: var(--navy); }
-    .kpi-meta { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
-
-    /* ══ KPI box — Treasury style ═════════════════════════════════ */
-    .kpi-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px; margin-top: 16px;
-    }
-    .kpi-box {
-      background: #fafcff; border: 1px solid var(--border-soft);
-      border-radius: 10px; padding: 14px 16px;
-      transition: box-shadow .15s;
-    }
-    .kpi-box:hover { box-shadow: 0 4px 14px rgba(11,31,75,.1); }
-    .kpi-box strong {
-      display: block; font-size: 11px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: .7px;
-      color: var(--muted); margin-bottom: 5px;
-    }
-    .kpi-box span { font-size: 15px; font-weight: 600; color: var(--blue); }
-
-    /* ══ Utilization Bar ══════════════════════════════════════════ */
-    .util-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
-    .util-bar-wrap { flex: 1; height: 6px; background: #e5e9f0; border-radius: 999px; overflow: hidden; }
-    .util-bar { height: 100%; border-radius: 999px; transition: width .4s; }
-    .util-bar.bar-green { background: #16a34a; }
-    .util-bar.bar-amber { background: #d97706; }
-    .util-bar.bar-red   { background: #dc2626; }
-    .util-bar.bar-navy  { background: var(--navy-light); }
-    .util-bar.bar-gold  { background: var(--gold); }
-    .util-label { font-size: 11px; font-weight: 600; color: var(--muted); white-space: nowrap; }
-
-    /* ══ Grid ═════════════════════════════════════════════════════ */
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-    /* ══ Pills ════════════════════════════════════════════════════ */
-    .pill {
+    /* ══ Lightweight chips used across all tabs ═════════════════ */
+    .ui-chip {
       display: inline-flex; align-items: center; gap: 4px;
       padding: 3px 10px; border-radius: 999px;
       font-size: 11.5px; font-weight: 600; letter-spacing: .2px;
     }
-    .pill-navy   { background: rgba(11,31,75,.08);  color: var(--navy);  border: 1px solid rgba(11,31,75,.12); }
-    .pill-gold   { background: var(--gold-soft);    color: #7a5a1c;      border: 1px solid var(--gold-light); }
-    .pill-green  { background: var(--green-bg);     color: var(--green); border: 1px solid #86efac; }
-    .pill-amber  { background: var(--amber-bg);     color: var(--amber); border: 1px solid #fcd34d; }
-    .pill-red    { background: var(--red-bg);       color: var(--red);   border: 1px solid #fca5a5; }
-    .pill-blue   { background: var(--blue-bg);      color: var(--blue);  border: 1px solid #93c5fd; }
-    .pill-dark   { background: var(--navy); color: var(--gold); border: 1px solid var(--navy-mid); padding: 4px 12px; font-size: 12px; letter-spacing: .5px; }
+    .ui-chip-navy   { background: rgba(11,31,75,.08);  color: var(--navy);  border: 1px solid rgba(11,31,75,.12); }
+    .ui-chip-gold   { background: var(--gold-soft);    color: #7a5a1c;      border: 1px solid var(--gold-light); }
+    .ui-chip-green  { background: var(--green-bg);     color: var(--green); border: 1px solid #86efac; }
+    .ui-chip-amber  { background: var(--amber-bg);     color: var(--amber); border: 1px solid #fcd34d; }
+    .ui-chip-red    { background: var(--red-bg);       color: var(--red);   border: 1px solid #fca5a5; }
+    .ui-chip-blue   { background: var(--blue-bg);      color: var(--blue);  border: 1px solid #93c5fd; }
+    .ui-chip-dark   { background: var(--navy); color: var(--gold); border: 1px solid var(--navy-mid); padding: 4px 12px; font-size: 12px; letter-spacing: .5px; }
 
     /* ══ Alert / Note ═════════════════════════════════════════════ */
     .alert {
@@ -262,27 +127,6 @@
     .alert-gold  { background: var(--gold-soft); border-left: 4px solid var(--gold); color: #7a5a1c; }
     .alert-red   { background: var(--red-bg); border-left: 4px solid #dc2626; color: var(--red); }
     .alert-green { background: var(--green-bg); border-left: 4px solid #16a34a; color: var(--green); }
-
-    /* ══ Meta grids ═══════════════════════════════════════════════ */
-    .meta-hero {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 10px; margin-top: 16px;
-    }
-    .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 10px;
-    }
-    .meta-item {
-      background: #f8fafd; border: 1px solid var(--border-soft);
-      border-radius: 10px; padding: 12px 14px;
-    }
-    .meta-item .meta-key {
-      font-size: 11px; font-weight: 600; letter-spacing: .5px;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
-    }
-    .meta-item .meta-val { font-size: 13.5px; font-weight: 500; color: var(--text); }
 
     /* ══ Form controls ════════════════════════════════════════════ */
     .form-grid {
@@ -476,7 +320,6 @@
     /* ══ Responsive ═══════════════════════════════════════════════ */
     /* ── Tablet (≤900px) ──────────────────────────────────── */
     @media (max-width: 900px) {
-      .grid-2 { grid-template-columns: 1fr; }
       .wrap { padding: 20px 18px 52px; }
       thead th, tbody td { padding: 8px 10px; font-size: 12.5px; }
       .topbar { padding: 0 18px; height: 56px; }
@@ -485,8 +328,6 @@
       .tab-nav { top: 56px; }
       .tab-nav-inner { padding: 0 18px; }
       html { scroll-padding-top: 160px; }
-      .card { padding: 18px 18px; }
-      .section-label .pill { display: none; }
     }
 
     /* ── Mobile (≤640px) ──────────────────────────────────── */
@@ -508,15 +349,6 @@
 
       /* Layout */
       .wrap { padding: 14px 12px 48px; }
-      .card { padding: 16px 14px; border-radius: 11px; margin-bottom: 14px; }
-      .card-header { gap: 6px; margin-bottom: 14px; }
-      .card-title { font-size: 14.5px; gap: 8px; }
-      .card-title-icon { width: 28px; height: 28px; font-size: 13px; border-radius: 7px; }
-
-      /* KPI cards */
-      .kpi-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .kpi-value { font-size: 20px; }
-      .kpi-value.big { font-size: 18px; }
 
       /* Mini-kpis */
       .mini-kpis { gap: 8px; }
@@ -529,103 +361,92 @@
       .num, .num-bold { font-size: 11.5px; }
       .days-chip { font-size: 10px; padding: 2px 7px; }
 
-      /* Section labels */
-      .section-label { margin-top: 22px; margin-bottom: 12px; }
-      .section-label .label-text { font-size: 9.5px; letter-spacing: 1px; }
-      .section-label .pill { display: none; }
-
       /* Alert boxes */
       .alert { padding: 10px 12px; font-size: 12.5px; }
 
       /* Print button */
       .print-btn { bottom: 14px; right: 14px; padding: 9px 16px; font-size: 12px; }
-
-      /* Lãi suất tab hero */
-      .hero-card { padding: 18px 16px; }
-      .hero-card h1 { font-size: 18px; }
     }
 
     /* ── Small mobile (≤400px) ────────────────────────────── */
     @media (max-width: 400px) {
-      .kpi-grid { grid-template-columns: 1fr; }
       .tab-btn { padding: 11px 12px; font-size: 12px; }
-      .card { padding: 14px 12px; }
       thead th, tbody td { padding: 6px 7px; font-size: 11px; }
     }
     @media print {
       .print-btn, .topbar, .tab-nav { display: none; }
       body { background: #fff; }
       .tab-panel { display: block !important; }
-      .card { box-shadow: none; break-inside: avoid; }
+      .ui-card { box-shadow: none; break-inside: avoid; }
       thead tr, tr.total-row td { print-color-adjust: exact; }
     }
 
     /* ══ Unified dashboard UI refresh ═════════════════════════════ */
-    .testa-wrap { max-width: 1440px; margin: 0 auto; padding: 28px 28px 60px; }
-    .testa-stack { display:flex; flex-direction:column; gap:18px; }
-    .testa-hero {
+    .ui-wrap { max-width: 1440px; margin: 0 auto; padding: 28px 28px 60px; }
+    .ui-stack { display:flex; flex-direction:column; gap:18px; }
+    .ui-hero {
       background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
       border: 1px solid #dbe7f5; border-radius: 18px; padding: 24px 26px;
       box-shadow: 0 1px 3px rgba(11,31,75,.05), 0 8px 24px rgba(11,31,75,.05);
     }
-    .testa-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: #64748b; margin-bottom: 8px; }
-    .testa-hero-row { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; flex-wrap:wrap; }
-    .testa-hero h1 { font-size: 28px; line-height:1.15; letter-spacing:-.5px; color:#0b1f4b; margin:0 0 8px; }
-    .testa-hero p { color:#5b6b84; font-size:14px; margin:0; }
-    .testa-badges { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
-    .testa-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; font-size:11px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; }
-    .testa-badge.blue { background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; }
-    .testa-badge.gold { background:#fff8eb; color:#b45309; border:1px solid #fcd34d; }
-    .testa-badge.green { background:#f0fdf4; color:#15803d; border:1px solid #bbf7d0; }
-    .testa-stat-grid { display:grid; grid-template-columns:repeat(2, minmax(180px, 1fr)); gap:12px; min-width:340px; }
-    .testa-stat { background:#fff; border:1px solid #e6edf5; border-radius:14px; padding:14px 16px; }
-    .testa-stat-label { color:#64748b; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
-    .testa-stat-value { color:#0f172a; font-size:22px; font-weight:800; letter-spacing:-.6px; line-height:1.15; }
-    .testa-toolbar { background:#fff; border:1px solid #e6edf5; border-radius:16px; padding:18px 20px; box-shadow: var(--shadow); }
-    .testa-toolbar-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:12px; }
-    .testa-toolbar-title { font-size:16px; font-weight:700; color:#0b1f4b; }
-    .testa-toolbar-note { font-size:13px; color:#64748b; max-width:840px; }
-    .testa-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
-    .testa-section { margin-top:8px; }
-    .testa-section-head { display:flex; align-items:center; gap:10px; margin:10px 0 14px; }
-    .testa-section-head .line { flex:1; height:1px; background:#dbe4ef; }
-    .testa-section-head .label { font-size:11px; font-weight:700; color:#64748b; letter-spacing:1.4px; text-transform:uppercase; }
-    .testa-overview-grid { display:grid; grid-template-columns: minmax(320px, 1.2fr) minmax(320px, .9fr); gap:18px; align-items:stretch; }
-    .testa-kpi-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; }
-    .testa-kpi-card { background:#fff; border:1px solid #e6edf5; border-radius:16px; padding:18px; box-shadow: var(--shadow); }
-    .testa-kpi-card.blue { border-top:4px solid #2563eb; }
-    .testa-kpi-card.green { border-top:4px solid #16a34a; }
-    .testa-kpi-card.amber { border-top:4px solid #d97706; }
-    .testa-kpi-card.red { border-top:4px solid #dc2626; }
-    .testa-kpi-label { color:#64748b; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }
-    .testa-kpi-value { color:#0f172a; font-size:27px; font-weight:800; line-height:1.1; letter-spacing:-.7px; }
-    .testa-kpi-sub { color:#64748b; font-size:12px; margin-top:8px; }
-    .testa-kpi-list { margin:8px 0 0 18px; padding:0; color:#475569; font-size:12px; line-height:1.55; }
-    .testa-kpi-list li { margin:3px 0; }
-    .testa-kpi-list strong { color:#0f172a; font-weight:700; }
-    .testa-progress { margin-top:12px; height:8px; background:#eef3f8; border-radius:999px; overflow:hidden; }
-    .testa-progress > span { display:block; height:100%; border-radius:999px; }
-    .testa-card-clean { background:#fff; border:1px solid #e6edf5; border-radius:16px; padding:20px; box-shadow: var(--shadow); }
-    .testa-card-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
-    .testa-card-title { font-size:16px; font-weight:700; color:#0b1f4b; display:flex; align-items:center; gap:10px; }
-    .testa-card-icon { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#eff6ff; border:1px solid #dbeafe; }
-    .testa-donut-wrap { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
-    .testa-donut-meta { flex:1; min-width:220px; display:flex; flex-direction:column; gap:10px; }
-    .testa-legend { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 14px; border-radius:12px; cursor:pointer; border:1px solid #e6edf5; }
-    .testa-legend:hover { background:#f8fbff; }
-    .testa-legend-left { display:flex; align-items:center; gap:10px; }
-    .testa-dot { width:10px; height:10px; border-radius:999px; }
-    .testa-grid-2 { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:18px; }
-    .testa-grid-2 > *, .testa-overview-grid > *, .testa-hero-row > * { min-width: 0; }
-    .testa-maturity-table thead th { background:#f8fafc; }
-    .testa-anchor { scroll-margin-top: 130px; }
+    .ui-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: #64748b; margin-bottom: 8px; }
+    .ui-hero-row { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+    .ui-hero h1 { font-size: 28px; line-height:1.15; letter-spacing:-.5px; color:#0b1f4b; margin:0 0 8px; }
+    .ui-hero p { color:#5b6b84; font-size:14px; margin:0; }
+    .ui-badges { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .ui-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; font-size:11px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; }
+    .ui-badge.blue { background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; }
+    .ui-badge.gold { background:#fff8eb; color:#b45309; border:1px solid #fcd34d; }
+    .ui-badge.green { background:#f0fdf4; color:#15803d; border:1px solid #bbf7d0; }
+    .ui-stat-grid { display:grid; grid-template-columns:repeat(2, minmax(180px, 1fr)); gap:12px; min-width:340px; }
+    .ui-stat { background:#fff; border:1px solid #e6edf5; border-radius:14px; padding:14px 16px; }
+    .ui-stat-label { color:#64748b; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+    .ui-stat-value { color:#0f172a; font-size:22px; font-weight:800; letter-spacing:-.6px; line-height:1.15; }
+    .ui-toolbar { background:#fff; border:1px solid #e6edf5; border-radius:16px; padding:18px 20px; box-shadow: var(--shadow); }
+    .ui-toolbar-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:12px; }
+    .ui-toolbar-title { font-size:16px; font-weight:700; color:#0b1f4b; }
+    .ui-toolbar-note { font-size:13px; color:#64748b; max-width:840px; }
+    .ui-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+    .ui-section { margin-top:8px; }
+    .ui-section-head { display:flex; align-items:center; gap:10px; margin:10px 0 14px; }
+    .ui-section-head .line { flex:1; height:1px; background:#dbe4ef; }
+    .ui-section-head .label { font-size:11px; font-weight:700; color:#64748b; letter-spacing:1.4px; text-transform:uppercase; }
+    .ui-overview-grid { display:grid; grid-template-columns: minmax(320px, 1.2fr) minmax(320px, .9fr); gap:18px; align-items:stretch; }
+    .ui-kpi-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; }
+    .ui-kpi-card { background:#fff; border:1px solid #e6edf5; border-radius:16px; padding:18px; box-shadow: var(--shadow); }
+    .ui-kpi-card.blue { border-top:4px solid #2563eb; }
+    .ui-kpi-card.green { border-top:4px solid #16a34a; }
+    .ui-kpi-card.amber { border-top:4px solid #d97706; }
+    .ui-kpi-card.red { border-top:4px solid #dc2626; }
+    .ui-kpi-label { color:#64748b; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }
+    .ui-kpi-value { color:#0f172a; font-size:27px; font-weight:800; line-height:1.1; letter-spacing:-.7px; }
+    .ui-kpi-sub { color:#64748b; font-size:12px; margin-top:8px; }
+    .ui-kpi-list { margin:8px 0 0 18px; padding:0; color:#475569; font-size:12px; line-height:1.55; }
+    .ui-kpi-list li { margin:3px 0; }
+    .ui-kpi-list strong { color:#0f172a; font-weight:700; }
+    .ui-progress { margin-top:12px; height:8px; background:#eef3f8; border-radius:999px; overflow:hidden; }
+    .ui-progress > span { display:block; height:100%; border-radius:999px; }
+    .ui-card { background:#fff; border:1px solid #e6edf5; border-radius:16px; padding:20px; box-shadow: var(--shadow); }
+    .ui-card-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
+    .ui-card-title { font-size:16px; font-weight:700; color:#0b1f4b; display:flex; align-items:center; gap:10px; }
+    .ui-card-icon { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#eff6ff; border:1px solid #dbeafe; }
+    .ui-donut-wrap { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+    .ui-donut-meta { flex:1; min-width:220px; display:flex; flex-direction:column; gap:10px; }
+    .ui-legend { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 14px; border-radius:12px; cursor:pointer; border:1px solid #e6edf5; }
+    .ui-legend:hover { background:#f8fbff; }
+    .ui-legend-left { display:flex; align-items:center; gap:10px; }
+    .ui-dot { width:10px; height:10px; border-radius:999px; }
+    .ui-grid-2 { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:18px; }
+    .ui-grid-2 > *, .ui-overview-grid > *, .ui-hero-row > * { min-width: 0; }
+    .ui-maturity-table thead th { background:#f8fafc; }
+    .ui-anchor { scroll-margin-top: 130px; }
 
-    .testa-card-clean table thead th { background:#f8fafc; }
-    .testa-micro-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
-    .testa-micro-card { background:#fff; border:1px solid #e6edf5; border-radius:14px; padding:14px 16px; }
-    .testa-micro-label { color:#64748b; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
-    .testa-micro-value { color:#0f172a; font-size:20px; font-weight:800; line-height:1.1; letter-spacing:-.5px; }
-    .testa-micro-sub { color:#64748b; font-size:12px; margin-top:6px; }
+    .ui-card table thead th { background:#f8fafc; }
+    .ui-micro-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
+    .ui-micro-card { background:#fff; border:1px solid #e6edf5; border-radius:14px; padding:14px 16px; }
+    .ui-micro-label { color:#64748b; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+    .ui-micro-value { color:#0f172a; font-size:20px; font-weight:800; line-height:1.1; letter-spacing:-.5px; }
+    .ui-micro-sub { color:#64748b; font-size:12px; margin-top:6px; }
     .status-chip { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
     .status-chip.pledged { color:#b45309; background:#fff7ed; border:1px solid #fdba74; }
     .status-chip.unpledged { color:#166534; background:#f0fdf4; border:1px solid #86efac; }
@@ -637,19 +458,19 @@
     .td-subnote { margin-top:6px; font-size:12px; color:#64748b; }
     .row-critical td { background:#fff5f5; }
     .row-soon td { background:#fffaf0; }
-    .testa-card-clean .table-wrap thead th { position: sticky; top: 0; z-index: 2; background:#f8fafc; }
+    .ui-card .table-wrap thead th { position: sticky; top: 0; z-index: 2; background:#f8fafc; }
     @media (max-width: 1080px) {
-      .testa-overview-grid, .testa-grid-2 { grid-template-columns:1fr; }
+      .ui-overview-grid, .ui-grid-2 { grid-template-columns:1fr; }
     }
     @media (max-width: 720px) {
-      .testa-wrap { padding: 18px 16px 40px; }
-      .testa-hero { padding:18px; }
-      .testa-hero h1 { font-size:22px; }
-      .testa-stat-grid, .testa-kpi-grid { grid-template-columns:1fr; min-width:0; }
-      .testa-donut-wrap { justify-content:center; }
+      .ui-wrap { padding: 18px 16px 40px; }
+      .ui-hero { padding:18px; }
+      .ui-hero h1 { font-size:22px; }
+      .ui-stat-grid, .ui-kpi-grid { grid-template-columns:1fr; min-width:0; }
+      .ui-donut-wrap { justify-content:center; }
       .mobile-hide { display:none; }
-      .testa-card-clean table, .card table { min-width: 980px; }
-      .testa-card-clean, .card, .testa-toolbar, .testa-hero, .testa-stat, .testa-micro-card { min-width: 0; }
+      .ui-card table { min-width: 980px; }
+      .ui-card, .ui-toolbar, .ui-hero, .ui-stat, .ui-micro-card { min-width: 0; }
       .table-wrap { width: 100%; max-width: 100%; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
     }
 
@@ -691,65 +512,65 @@
      ║   TAB 1 — DƯ NỢ TÍN DỤNG                           ║
      ╚══════════════════════════════════════════════════════╝ -->
 <div id="tab-dunno" class="tab-panel">
-  <div class="testa-wrap">
-    <div class="testa-stack">
-      <section class="testa-hero testa-anchor">
-        <div class="testa-hero-row">
+  <div class="ui-wrap">
+    <div class="ui-stack">
+      <section class="ui-hero ui-anchor">
+        <div class="ui-hero-row">
           <div style="flex:1;min-width:320px">
-            <div class="testa-eyebrow">CTY VIHALI · Treasury Dashboard</div>
+            <div class="ui-eyebrow">CTY VIHALI · Treasury Dashboard</div>
             <h1>Dư nợ BIDV &amp; Standard Chartered</h1>
-            <div class="testa-badges">
-              <span class="testa-badge blue">Snapshot hiện tại</span>
-              <span class="testa-badge gold">BOD Dashboard</span>
-              <span class="testa-badge green">Cập nhật: <span id="loan-updated-at">--</span></span>
+            <div class="ui-badges">
+              <span class="ui-badge blue">Snapshot hiện tại</span>
+              <span class="ui-badge gold">BOD Dashboard</span>
+              <span class="ui-badge green">Cập nhật: <span id="loan-updated-at">--</span></span>
             </div>
           </div>
-          <div class="testa-stat-grid">
-            <div class="testa-stat">
-              <div class="testa-stat-label">Tổng dư nợ active</div>
-              <div class="testa-stat-value" id="loan-total-outstanding">--</div>
+          <div class="ui-stat-grid">
+            <div class="ui-stat">
+              <div class="ui-stat-label">Tổng dư nợ active</div>
+              <div class="ui-stat-value" id="loan-total-outstanding">--</div>
             </div>
-            <div class="testa-stat">
-              <div class="testa-stat-label">Hạn mức còn lại</div>
-              <div class="testa-stat-value" id="loan-available-limit">--</div>
+            <div class="ui-stat">
+              <div class="ui-stat-label">Hạn mức còn lại</div>
+              <div class="ui-stat-value" id="loan-available-limit">--</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="testa-toolbar">
-        <div class="testa-toolbar-head">
+      <section class="ui-toolbar">
+        <div class="ui-toolbar-head">
           <div>
-            <div class="testa-toolbar-title">Nguồn dữ liệu dư nợ công ty</div>
+            <div class="ui-toolbar-title">Nguồn dữ liệu dư nợ công ty</div>
           </div>
         </div>
-        <div class="testa-actions">
+        <div class="ui-actions">
           <button class="btn-gold" onclick="chooseLoanJson()">📁 Chọn company-loans-current.json từ máy</button>
           <button class="btn-secondary" onclick="tryLoadDefaultLoansJson()">↻ Đọc file mặc định</button>
         </div>
         <input id="loan-json-file" class="hidden-file" type="file" accept=".json,application/json" />
       </section>
 
-      <section class="testa-section" id="loan-overview">
-        <div class="testa-section-head">
+      <section class="ui-section" id="loan-overview">
+        <div class="ui-section-head">
           <span class="label">01 — Tổng quan điều hành</span>
           <div class="line"></div>
-          <span class="pill pill-navy">BOD Dashboard</span>
+          <span class="ui-chip ui-chip-navy">BOD Dashboard</span>
         </div>
-        <div id="loan-overview-grid" class="testa-overview-grid"></div>
+        <div id="loan-overview-grid" class="ui-overview-grid"></div>
       </section>
 
-      <section class="testa-section testa-anchor" id="loan-maturity">
-        <div class="testa-section-head">
+      <section class="ui-section ui-anchor" id="loan-maturity">
+        <div class="ui-section-head">
           <span class="label">02 — Lịch đáo hạn quan trọng</span>
           <div class="line"></div>
-          <span class="pill pill-red">Ưu tiên theo dõi</span>
+          <span class="ui-chip ui-chip-red">Ưu tiên theo dõi</span>
         </div>
-        <div class="testa-card-clean">
-          <div class="testa-card-head">
-            <div class="testa-card-title"><span class="testa-card-icon">⏱</span> Các khoản gần hạn cần theo dõi</div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">⏱</span> Các khoản gần hạn cần theo dõi</div>
           </div>
-          <div class="table-wrap testa-maturity-table">
+          <div class="table-wrap ui-maturity-table">
             <table>
               <thead>
                 <tr>
@@ -768,16 +589,16 @@
         </div>
       </section>
 
-      <section class="testa-section testa-anchor" id="loan-bidv">
-        <div class="testa-section-head">
+      <section class="ui-section ui-anchor" id="loan-bidv">
+        <div class="ui-section-head">
           <span class="label">03 — BIDV</span>
           <div class="line"></div>
-          <span class="pill pill-gold">Overdraft + VLĐ</span>
+          <span class="ui-chip ui-chip-gold">Overdraft + VLĐ</span>
         </div>
-        <div class="testa-grid-2">
-          <div class="testa-card-clean">
-            <div class="testa-card-head">
-              <div class="testa-card-title"><span class="testa-card-icon">🏦</span> BIDV — Thấu chi</div>
+        <div class="ui-grid-2">
+          <div class="ui-card">
+            <div class="ui-card-head">
+              <div class="ui-card-title"><span class="ui-card-icon">🏦</span> BIDV — Thấu chi</div>
             </div>
             <div class="table-wrap">
               <table>
@@ -798,9 +619,9 @@
               </table>
             </div>
           </div>
-          <div class="testa-card-clean">
-            <div class="testa-card-head">
-              <div class="testa-card-title"><span class="testa-card-icon">📄</span> BIDV — Vốn lưu động</div>
+          <div class="ui-card">
+            <div class="ui-card-head">
+              <div class="ui-card-title"><span class="ui-card-icon">📄</span> BIDV — Vốn lưu động</div>
             </div>
             <div class="table-wrap">
               <table>
@@ -823,15 +644,15 @@
         </div>
       </section>
 
-      <section class="testa-section testa-anchor" id="loan-sc">
-        <div class="testa-section-head">
+      <section class="ui-section ui-anchor" id="loan-sc">
+        <div class="ui-section-head">
           <span class="label">04 — Standard Chartered</span>
           <div class="line"></div>
-          <span class="pill pill-blue">Working Capital</span>
+          <span class="ui-chip ui-chip-blue">Working Capital</span>
         </div>
-        <div class="testa-card-clean">
-          <div class="testa-card-head">
-            <div class="testa-card-title"><span class="testa-card-icon">🏛</span> Standard Chartered — Vốn lưu động</div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">🏛</span> Standard Chartered — Vốn lưu động</div>
           </div>
           <div class="table-wrap">
             <table>
@@ -853,15 +674,15 @@
         </div>
       </section>
 
-      <section class="testa-section" id="loan-company-deposits">
-        <div class="testa-section-head">
+      <section class="ui-section" id="loan-company-deposits">
+        <div class="ui-section-head">
           <span class="label">05 — Tài sản đảm bảo BIDV</span>
           <div class="line"></div>
-          <span class="pill pill-gold">Cầm cố STK</span>
+          <span class="ui-chip ui-chip-gold">Cầm cố STK</span>
         </div>
-        <div class="testa-card-clean">
-          <div class="testa-card-head">
-            <div class="testa-card-title"><span class="testa-card-icon">🛡</span> Sổ tiết kiệm cầm cố của VIHALI</div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">🛡</span> Sổ tiết kiệm cầm cố của VIHALI</div>
           </div>
           <div class="table-wrap" style="margin-top:14px">
             <table>
@@ -895,36 +716,36 @@
      ║   TAB 2 — LÃI SUẤT & TIỀN GỬI                      ║
      ╚══════════════════════════════════════════════════════╝ -->
 <div id="tab-laisuat" class="tab-panel active">
-  <div class="testa-wrap">
-    <div class="testa-stack">
-      <section class="testa-hero testa-anchor">
-        <div class="testa-hero-row">
+  <div class="ui-wrap">
+    <div class="ui-stack">
+      <section class="ui-hero ui-anchor">
+        <div class="ui-hero-row">
           <div style="flex:1;min-width:320px">
-            <div class="testa-eyebrow">TREASURY RATE DASHBOARD</div>
+            <div class="ui-eyebrow">TREASURY RATE DASHBOARD</div>
             <h1>Cập nhật lãi suất tiền gửi / trái phiếu</h1>
-            <div class="testa-badges">
-              <span class="testa-badge blue">Nguồn: <span id="data-source-label">data/history.json</span></span>
-              <span class="testa-badge gold">JSON cập nhật theo tuần</span>
-              <span class="testa-badge green">HTML cố định · sửa dữ liệu là chính</span>
+            <div class="ui-badges">
+              <span class="ui-badge blue">Nguồn: <span id="data-source-label">data/history.json</span></span>
+              <span class="ui-badge gold">JSON cập nhật theo tuần</span>
+              <span class="ui-badge green">HTML cố định · sửa dữ liệu là chính</span>
             </div>
           </div>
-          <div class="testa-stat-grid">
-            <div class="testa-stat">
-              <div class="testa-stat-label">Kỳ đang xem</div>
-              <div class="testa-stat-value" id="current-period">-</div>
+          <div class="ui-stat-grid">
+            <div class="ui-stat">
+              <div class="ui-stat-label">Kỳ đang xem</div>
+              <div class="ui-stat-value" id="current-period">-</div>
             </div>
-            <div class="testa-stat">
-              <div class="testa-stat-label">Ngày cập nhật</div>
-              <div class="testa-stat-value" id="current-updated-at">-</div>
+            <div class="ui-stat">
+              <div class="ui-stat-label">Ngày cập nhật</div>
+              <div class="ui-stat-value" id="current-updated-at">-</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="testa-toolbar">
-        <div class="testa-toolbar-head">
+      <section class="ui-toolbar">
+        <div class="ui-toolbar-head">
           <div>
-            <div class="testa-toolbar-title">Điều khiển kỳ dữ liệu</div>
+            <div class="ui-toolbar-title">Điều khiển kỳ dữ liệu</div>
           </div>
         </div>
         <div class="form-grid">
@@ -941,38 +762,38 @@
             <select id="compare-week-select"></select>
           </div>
         </div>
-        <div class="testa-actions">
+        <div class="ui-actions">
           <button class="btn-primary" onclick="renderSelectedPeriod()">▶ Xem dữ liệu</button>
           <button class="btn-secondary" onclick="resetToDefaultPeriod()">↻ Về kỳ mặc định</button>
           <button class="btn-gold" onclick="chooseLocalJson()">📁 Chọn history.json từ máy</button>
           <button class="btn-secondary" onclick="tryLoadDefaultJson()">↻ Đọc file mặc định</button>
         </div>
         <input id="local-json-file" class="hidden-file" type="file" accept=".json,application/json" />
-        <div class="testa-micro-grid" style="margin-top:14px">
-          <div class="testa-micro-card"><div class="testa-micro-label">Trạng thái dữ liệu</div><div class="testa-micro-value" id="current-availability">-</div></div>
-          <div class="testa-micro-card"><div class="testa-micro-label">So sánh với</div><div class="testa-micro-value" id="current-comparison">Không so sánh</div></div>
+        <div class="ui-micro-grid" style="margin-top:14px">
+          <div class="ui-micro-card"><div class="ui-micro-label">Trạng thái dữ liệu</div><div class="ui-micro-value" id="current-availability">-</div></div>
+          <div class="ui-micro-card"><div class="ui-micro-label">So sánh với</div><div class="ui-micro-value" id="current-comparison">Không so sánh</div></div>
         </div>
-        <div id="period-note" class="testa-toolbar-note" style="margin-top:14px">Chưa có ghi chú.</div>
+        <div id="period-note" class="ui-toolbar-note" style="margin-top:14px">Chưa có ghi chú.</div>
       </section>
 
-      <section class="testa-section" id="rate-overview-section">
-        <div class="testa-section-head">
+      <section class="ui-section" id="rate-overview-section">
+        <div class="ui-section-head">
           <span class="label">01 — Góc nhìn nhanh</span>
           <div class="line"></div>
-          <span class="pill pill-blue">Overview</span>
+          <span class="ui-chip ui-chip-blue">Overview</span>
         </div>
-        <div id="rate-overview-grid" class="testa-overview-grid"></div>
+        <div id="rate-overview-grid" class="ui-overview-grid"></div>
       </section>
 
-      <section class="testa-section">
-        <div class="testa-section-head">
+      <section class="ui-section">
+        <div class="ui-section-head">
           <span class="label">02 — Tiền gửi trung hạn</span>
           <div class="line"></div>
-          <span class="pill pill-gold">6–12 tháng</span>
+          <span class="ui-chip ui-chip-gold">6–12 tháng</span>
         </div>
-        <div class="testa-card-clean">
-          <div class="testa-card-head">
-            <div class="testa-card-title"><span class="testa-card-icon">🏦</span> Bảng so sánh tiền gửi trung hạn</div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">🏦</span> Bảng so sánh tiền gửi trung hạn</div>
           </div>
           <div class="table-wrap">
             <table>
@@ -996,15 +817,15 @@
         </div>
       </section>
 
-      <section class="testa-section">
-        <div class="testa-section-head">
+      <section class="ui-section">
+        <div class="ui-section-head">
           <span class="label">03 — Đầu tư ngắn hạn 1–3 tháng</span>
           <div class="line"></div>
-          <span class="pill pill-blue">1–3 tháng</span>
+          <span class="ui-chip ui-chip-blue">1–3 tháng</span>
         </div>
-        <div class="testa-card-clean">
-          <div class="testa-card-head">
-            <div class="testa-card-title"><span class="testa-card-icon">📊</span> Bảng đầu tư ngắn hạn 1–3 tháng</div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">📊</span> Bảng đầu tư ngắn hạn 1–3 tháng</div>
           </div>
           <div class="table-wrap">
             <table>
@@ -1026,15 +847,15 @@
         </div>
       </section>
 
-      <section class="testa-section">
-        <div class="testa-section-head">
+      <section class="ui-section">
+        <div class="ui-section-head">
           <span class="label">04 — Phương án dưới 1 tháng</span>
           <div class="line"></div>
-          <span class="pill pill-amber">Ultra short</span>
+          <span class="ui-chip ui-chip-amber">Ultra short</span>
         </div>
-        <div class="testa-card-clean">
-          <div class="testa-card-head">
-            <div class="testa-card-title"><span class="testa-card-icon">⚡</span> Phương án dưới 1 tháng</div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">⚡</span> Phương án dưới 1 tháng</div>
           </div>
           <div class="table-wrap">
             <table>
@@ -1056,17 +877,17 @@
         </div>
       </section>
 
-      <section class="testa-section">
-        <div class="testa-section-head">
+      <section class="ui-section">
+        <div class="ui-section-head">
           <span class="label">05 — Công cụ khuyến nghị đầu tư</span>
           <div class="line"></div>
-          <span class="pill pill-green">Auto-rank</span>
+          <span class="ui-chip ui-chip-green">Auto-rank</span>
         </div>
-        <div class="testa-card-clean">
-          <div class="testa-card-head">
-            <div class="testa-card-title"><span class="testa-card-icon">💡</span> Khuyến nghị đầu tư theo số tiền &amp; tenor</div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">💡</span> Khuyến nghị đầu tư theo số tiền &amp; tenor</div>
           </div>
-          <div class="grid-2">
+          <div class="ui-grid-2">
             <div>
               <div class="form-grid">
                 <div>
@@ -1090,13 +911,13 @@
                   </select>
                 </div>
               </div>
-              <div class="testa-actions">
+              <div class="ui-actions">
                 <button class="btn-primary" onclick="runRecommendation()">▶ Đưa ra khuyến nghị</button>
               </div>
-              <div id="recommend-summary" class="testa-toolbar-note" style="margin-top:14px">Nhập số tiền và tenor để nhận khuyến nghị.</div>
+              <div id="recommend-summary" class="ui-toolbar-note" style="margin-top:14px">Nhập số tiền và tenor để nhận khuyến nghị.</div>
             </div>
             <div>
-              <div class="testa-toolbar-note" style="margin-top:0">
+              <div class="ui-toolbar-note" style="margin-top:0">
                 Xếp hạng theo Top 3 tiền lãi ước tính của đúng kỳ đang xem. Công thức: số tiền × lãi suất năm × số ngày / 365; sản phẩm qua đêm tính theo quay vòng hằng ngày.
               </div>
             </div>
@@ -1119,15 +940,15 @@
         </div>
       </section>
 
-      <section class="testa-section">
-        <div class="testa-section-head">
+      <section class="ui-section">
+        <div class="ui-section-head">
           <span class="label">06 — Gợi ý điều hành</span>
           <div class="line"></div>
-          <span class="pill pill-navy">Chiến lược</span>
+          <span class="ui-chip ui-chip-navy">Chiến lược</span>
         </div>
-        <div class="testa-card-clean">
-          <div class="testa-card-head">
-            <div class="testa-card-title"><span class="testa-card-icon">🧭</span> Gợi ý điều hành theo kỳ đang xem</div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">🧭</span> Gợi ý điều hành theo kỳ đang xem</div>
           </div>
           <div class="table-wrap">
             <table class="summary-table">
@@ -1146,63 +967,63 @@
      ║   TAB 3 — SỔ TIẾT KIỆM CÁ NHÂN                      ║
      ╚══════════════════════════════════════════════════════╝ -->
 <div id="tab-canhan" class="tab-panel">
-  <div class="testa-wrap">
-    <div class="testa-stack">
-      <section class="testa-hero testa-anchor">
-        <div class="testa-hero-row">
+  <div class="ui-wrap">
+    <div class="ui-stack">
+      <section class="ui-hero ui-anchor">
+        <div class="ui-hero-row">
           <div style="flex:1;min-width:320px">
-            <div class="testa-eyebrow">CÁ NHÂN · Treasury Snapshot</div>
+            <div class="ui-eyebrow">CÁ NHÂN · Treasury Snapshot</div>
             <h1>Sổ tiết kiệm &amp; Khoản vay cá nhân</h1>
-            <div class="testa-badges">
-              <span class="testa-badge blue">Personal treasury snapshot</span>
-              <span class="testa-badge gold">Dashboard-fix source</span>
-              <span class="testa-badge green">Cập nhật: <span id="personal-updated-at">--</span></span>
+            <div class="ui-badges">
+              <span class="ui-badge blue">Personal treasury snapshot</span>
+              <span class="ui-badge gold">Dashboard-fix source</span>
+              <span class="ui-badge green">Cập nhật: <span id="personal-updated-at">--</span></span>
             </div>
           </div>
-          <div class="testa-stat-grid">
-            <div class="testa-stat">
-              <div class="testa-stat-label">Tổng tiền gửi cá nhân</div>
-              <div class="testa-stat-value" id="personal-hero-total-deposits">--</div>
+          <div class="ui-stat-grid">
+            <div class="ui-stat">
+              <div class="ui-stat-label">Tổng tiền gửi cá nhân</div>
+              <div class="ui-stat-value" id="personal-hero-total-deposits">--</div>
             </div>
-            <div class="testa-stat">
-              <div class="testa-stat-label">Treasury ròng cá nhân</div>
-              <div class="testa-stat-value" id="personal-hero-net-treasury">--</div>
+            <div class="ui-stat">
+              <div class="ui-stat-label">Treasury ròng cá nhân</div>
+              <div class="ui-stat-value" id="personal-hero-net-treasury">--</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="testa-toolbar">
-        <div class="testa-toolbar-head">
+      <section class="ui-toolbar">
+        <div class="ui-toolbar-head">
           <div>
-            <div class="testa-toolbar-title">Nguồn dữ liệu treasury cá nhân</div>
+            <div class="ui-toolbar-title">Nguồn dữ liệu treasury cá nhân</div>
           </div>
         </div>
-        <div class="testa-actions">
+        <div class="ui-actions">
           <button class="btn-gold" onclick="choosePersonalJson()">📁 Chọn personal-treasury-current.json từ máy</button>
           <button class="btn-secondary" onclick="tryLoadDefaultPersonalJson()">↻ Đọc file mặc định</button>
         </div>
         <input id="personal-json-file" class="hidden-file" type="file" accept=".json,application/json" />
       </section>
 
-      <section class="testa-section" id="personal-overview">
-        <div class="testa-section-head">
+      <section class="ui-section" id="personal-overview">
+        <div class="ui-section-head">
           <span class="label">01 — Tổng quan treasury cá nhân</span>
           <div class="line"></div>
-          <span class="pill pill-gold">Personal Snapshot</span>
+          <span class="ui-chip ui-chip-gold">Personal Snapshot</span>
         </div>
-        <div id="personal-overview-grid" class="testa-overview-grid"></div>
+        <div id="personal-overview-grid" class="ui-overview-grid"></div>
       </section>
 
-      <section class="testa-section" id="personal-deposits-section">
-        <div class="testa-section-head">
+      <section class="ui-section" id="personal-deposits-section">
+        <div class="ui-section-head">
           <span class="label">02 — Tiền gửi tiết kiệm cá nhân</span>
           <div class="line"></div>
-          <span class="pill pill-gold">Tiết kiệm VND</span>
+          <span class="ui-chip ui-chip-gold">Tiết kiệm VND</span>
         </div>
-        <div class="testa-card-clean">
-          <div class="testa-card-head">
-            <div class="testa-card-title"><span class="testa-card-icon">💰</span> Bảng kê tiền gửi tiết kiệm VND</div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">💰</span> Bảng kê tiền gửi tiết kiệm VND</div>
           </div>
           <div class="table-wrap">
             <table>
@@ -1228,15 +1049,15 @@
         </div>
       </section>
 
-      <section class="testa-section" id="personal-loans-section">
-        <div class="testa-section-head">
+      <section class="ui-section" id="personal-loans-section">
+        <div class="ui-section-head">
           <span class="label">03 — Khoản vay cá nhân</span>
           <div class="line"></div>
-          <span class="pill pill-navy">Dư nợ cá nhân</span>
+          <span class="ui-chip ui-chip-navy">Dư nợ cá nhân</span>
         </div>
-        <div class="testa-card-clean">
-          <div class="testa-card-head">
-            <div class="testa-card-title"><span class="testa-card-icon">🏦</span> Khoản vay cá nhân BIDV</div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">🏦</span> Khoản vay cá nhân BIDV</div>
           </div>
           <div class="table-wrap">
             <table>
@@ -1461,43 +1282,43 @@
     const bidvArc = (bidvPct / 100) * circumference;
     const scArc = circumference - bidvArc;
     wrap.innerHTML = `
-      <div class="testa-kpi-grid">
-        <div class="testa-kpi-card blue">
-          <div class="testa-kpi-label">Tổng dư nợ active</div>
-          <div class="testa-kpi-value">${fmtMoney(total)}</div>
-          <div class="testa-kpi-sub">BIDV + SC đang còn hiệu lực trên dashboard</div>
-          <div class="testa-progress"><span style="width:${Math.min(totalUtilPct,100).toFixed(1)}%;background:#2563eb"></span></div>
+      <div class="ui-kpi-grid">
+        <div class="ui-kpi-card blue">
+          <div class="ui-kpi-label">Tổng dư nợ active</div>
+          <div class="ui-kpi-value">${fmtMoney(total)}</div>
+          <div class="ui-kpi-sub">BIDV + SC đang còn hiệu lực trên dashboard</div>
+          <div class="ui-progress"><span style="width:${Math.min(totalUtilPct,100).toFixed(1)}%;background:#2563eb"></span></div>
         </div>
-        <div class="testa-kpi-card green">
-          <div class="testa-kpi-label">Hạn mức còn lại</div>
-          <div class="testa-kpi-value">${fmtMoney(availableLimit)}</div>
-          <div class="testa-kpi-sub">Mức đệm thanh khoản hiện tại của khoản vay công ty
-            <ul class="testa-kpi-list">
+        <div class="ui-kpi-card green">
+          <div class="ui-kpi-label">Hạn mức còn lại</div>
+          <div class="ui-kpi-value">${fmtMoney(availableLimit)}</div>
+          <div class="ui-kpi-sub">Mức đệm thanh khoản hiện tại của khoản vay công ty
+            <ul class="ui-kpi-list">
               <li>Hạn mức BIDV thấu chi còn: <strong>${fmtMoney(bidvOverdraftAvailableLimit)}</strong></li>
               <li>Hạn mức BIDV vốn lưu động còn: <strong>${fmtMoney(bidvWorkingCapitalAvailableLimit)}</strong></li>
               <li>Hạn mức SC vốn lưu động còn: <strong>${fmtMoney(scWorkingCapitalAvailableLimit)}</strong></li>
             </ul>
           </div>
-          <div class="testa-progress"><span style="width:${Math.max(0,100-totalUtilPct).toFixed(1)}%;background:#16a34a"></span></div>
+          <div class="ui-progress"><span style="width:${Math.max(0,100-totalUtilPct).toFixed(1)}%;background:#16a34a"></span></div>
         </div>
-        <div class="testa-kpi-card amber">
-          <div class="testa-kpi-label">Khoản gần đáo hạn ≤ 30 ngày</div>
-          <div class="testa-kpi-value">${near30}</div>
-          <div class="testa-kpi-sub">${nearest ? 'Gần nhất: ' + nearest.loanCode + ' · ' + fmtDateVN(nearest.maturityDate) : 'Chưa có khoản gần hạn'}</div>
-          <div class="testa-progress"><span style="width:${Math.min((near30/Math.max(focus.length || 1,1))*100,100).toFixed(1)}%;background:#d97706"></span></div>
+        <div class="ui-kpi-card amber">
+          <div class="ui-kpi-label">Khoản gần đáo hạn ≤ 30 ngày</div>
+          <div class="ui-kpi-value">${near30}</div>
+          <div class="ui-kpi-sub">${nearest ? 'Gần nhất: ' + nearest.loanCode + ' · ' + fmtDateVN(nearest.maturityDate) : 'Chưa có khoản gần hạn'}</div>
+          <div class="ui-progress"><span style="width:${Math.min((near30/Math.max(focus.length || 1,1))*100,100).toFixed(1)}%;background:#d97706"></span></div>
         </div>
-        <div class="testa-kpi-card red">
-          <div class="testa-kpi-label">Tổng tiền gửi VIHALI active</div>
-          <div class="testa-kpi-value">${fmtMoney(totalCompanyDepositsActive)}</div>
-          <div class="testa-kpi-sub">${companyDeposits.length} sổ công ty còn hiệu lực trên dashboard</div>
-          <div class="testa-progress"><span style="width:${depositCoveragePct.toFixed(1)}%;background:#dc2626"></span></div>
+        <div class="ui-kpi-card red">
+          <div class="ui-kpi-label">Tổng tiền gửi VIHALI active</div>
+          <div class="ui-kpi-value">${fmtMoney(totalCompanyDepositsActive)}</div>
+          <div class="ui-kpi-sub">${companyDeposits.length} sổ công ty còn hiệu lực trên dashboard</div>
+          <div class="ui-progress"><span style="width:${depositCoveragePct.toFixed(1)}%;background:#dc2626"></span></div>
         </div>
       </div>
-      <div class="testa-card-clean">
-        <div class="testa-card-head">
-          <div class="testa-card-title"><span class="testa-card-icon">🥧</span> Cơ cấu dư nợ theo ngân hàng</div>
+      <div class="ui-card">
+        <div class="ui-card-head">
+          <div class="ui-card-title"><span class="ui-card-icon">🥧</span> Cơ cấu dư nợ theo ngân hàng</div>
         </div>
-        <div class="testa-donut-wrap">
+        <div class="ui-donut-wrap">
           <svg width="220" height="220" viewBox="0 0 220 220" style="overflow:visible;flex-shrink:0">
             <circle cx="110" cy="110" r="70" fill="none" stroke="#e2e8f0" stroke-width="26"></circle>
             <circle cx="110" cy="110" r="70" fill="none" stroke="#16a34a" stroke-width="26"
@@ -1513,10 +1334,10 @@
             <text x="110" y="103" text-anchor="middle" font-size="11" fill="#64748b" font-family="Inter,sans-serif">Tổng active</text>
             <text x="110" y="124" text-anchor="middle" font-size="18" font-weight="800" fill="#0f172a" font-family="Inter,sans-serif">${(total/1000000000).toFixed(1)} tỷ</text>
           </svg>
-          <div class="testa-donut-meta">
-            <div class="testa-legend" onclick="document.getElementById('loan-bidv').scrollIntoView({behavior:'smooth',block:'start'})">
-              <div class="testa-legend-left">
-                <span class="testa-dot" style="background:#16a34a"></span>
+          <div class="ui-donut-meta">
+            <div class="ui-legend" onclick="document.getElementById('loan-bidv').scrollIntoView({behavior:'smooth',block:'start'})">
+              <div class="ui-legend-left">
+                <span class="ui-dot" style="background:#16a34a"></span>
                 <div>
                   <div style="font-size:13px;font-weight:700;color:#14532d">BIDV</div>
                   <div style="font-size:12px;color:#64748b">${fmtMoney(totalBidv)} VNĐ</div>
@@ -1524,9 +1345,9 @@
               </div>
               <div style="font-size:24px;font-weight:800;color:#16a34a;letter-spacing:-.8px">${bidvPct.toFixed(1)}%</div>
             </div>
-            <div class="testa-legend" onclick="document.getElementById('loan-sc').scrollIntoView({behavior:'smooth',block:'start'})">
-              <div class="testa-legend-left">
-                <span class="testa-dot" style="background:#2563eb"></span>
+            <div class="ui-legend" onclick="document.getElementById('loan-sc').scrollIntoView({behavior:'smooth',block:'start'})">
+              <div class="ui-legend-left">
+                <span class="ui-dot" style="background:#2563eb"></span>
                 <div>
                   <div style="font-size:13px;font-weight:700;color:#1e3a8a">Standard Chartered</div>
                   <div style="font-size:12px;color:#64748b">${fmtMoney(totalSc)} VNĐ</div>
@@ -1534,7 +1355,7 @@
               </div>
               <div style="font-size:24px;font-weight:800;color:#2563eb;letter-spacing:-.8px">${scPct.toFixed(1)}%</div>
             </div>
-            <div class="testa-toolbar-note">Khoản gần hạn nhất: <strong style="color:#0f172a">${nearest ? nearest.loanCode : '—'}</strong>${nearest ? ' · ' + fmtDateVN(nearest.maturityDate) + ' · ' + (nearestDays == null ? '—' : nearestDays + ' ngày') : ''}</div>
+            <div class="ui-toolbar-note">Khoản gần hạn nhất: <strong style="color:#0f172a">${nearest ? nearest.loanCode : '—'}</strong>${nearest ? ' · ' + fmtDateVN(nearest.maturityDate) + ' · ' + (nearestDays == null ? '—' : nearestDays + ' ngày') : ''}</div>
           </div>
         </div>
       </div>`;
@@ -1767,40 +1588,40 @@
     const wrap = document.getElementById('personal-overview-grid');
     if (!wrap) return;
     wrap.innerHTML = `
-      <div class="testa-kpi-grid">
-        <div class="testa-kpi-card blue">
-          <div class="testa-kpi-label">Tổng tiền gửi cá nhân</div>
-          <div class="testa-kpi-value">${fmtMoney(totalDeposits)}</div>
-          <div class="testa-kpi-sub">${depositsItems.length} khoản tiền gửi / số dư đang theo dõi</div>
-          <div class="testa-progress"><span style="width:100%;background:#2563eb"></span></div>
+      <div class="ui-kpi-grid">
+        <div class="ui-kpi-card blue">
+          <div class="ui-kpi-label">Tổng tiền gửi cá nhân</div>
+          <div class="ui-kpi-value">${fmtMoney(totalDeposits)}</div>
+          <div class="ui-kpi-sub">${depositsItems.length} khoản tiền gửi / số dư đang theo dõi</div>
+          <div class="ui-progress"><span style="width:100%;background:#2563eb"></span></div>
         </div>
-        <div class="testa-kpi-card amber">
-          <div class="testa-kpi-label">Tổng vay cá nhân</div>
-          <div class="testa-kpi-value">${fmtMoney(totalLoans)}</div>
-          <div class="testa-kpi-sub">${loansItems.length} khoản vay cá nhân còn trong snapshot</div>
-          <div class="testa-progress"><span style="width:${Math.min(loanShare,100).toFixed(1)}%;background:#d97706"></span></div>
+        <div class="ui-kpi-card amber">
+          <div class="ui-kpi-label">Tổng vay cá nhân</div>
+          <div class="ui-kpi-value">${fmtMoney(totalLoans)}</div>
+          <div class="ui-kpi-sub">${loansItems.length} khoản vay cá nhân còn trong snapshot</div>
+          <div class="ui-progress"><span style="width:${Math.min(loanShare,100).toFixed(1)}%;background:#d97706"></span></div>
         </div>
-        <div class="testa-kpi-card green">
-          <div class="testa-kpi-label">Treasury ròng cá nhân</div>
-          <div class="testa-kpi-value">${fmtMoney(net)}</div>
-          <div class="testa-kpi-sub">Chênh lệch tiền gửi trừ dư nợ cá nhân hiện tại</div>
-          <div class="testa-progress"><span style="width:${Math.max(0, Math.min((net && totalDeposits) ? (net / totalDeposits) * 100 : 0, 100)).toFixed(1)}%;background:#16a34a"></span></div>
+        <div class="ui-kpi-card green">
+          <div class="ui-kpi-label">Treasury ròng cá nhân</div>
+          <div class="ui-kpi-value">${fmtMoney(net)}</div>
+          <div class="ui-kpi-sub">Chênh lệch tiền gửi trừ dư nợ cá nhân hiện tại</div>
+          <div class="ui-progress"><span style="width:${Math.max(0, Math.min((net && totalDeposits) ? (net / totalDeposits) * 100 : 0, 100)).toFixed(1)}%;background:#16a34a"></span></div>
         </div>
-        <div class="testa-kpi-card red">
-          <div class="testa-kpi-label">Sổ đang thế chấp</div>
-          <div class="testa-kpi-value">${pledgedCount}</div>
-          <div class="testa-kpi-sub">${unpledgedCount} khoản còn lại chưa thế chấp / không ghi nhận thế chấp</div>
-          <div class="testa-progress"><span style="width:${depositsItems.length ? ((pledgedCount / depositsItems.length) * 100).toFixed(1) : 0}%;background:#dc2626"></span></div>
+        <div class="ui-kpi-card red">
+          <div class="ui-kpi-label">Sổ đang thế chấp</div>
+          <div class="ui-kpi-value">${pledgedCount}</div>
+          <div class="ui-kpi-sub">${unpledgedCount} khoản còn lại chưa thế chấp / không ghi nhận thế chấp</div>
+          <div class="ui-progress"><span style="width:${depositsItems.length ? ((pledgedCount / depositsItems.length) * 100).toFixed(1) : 0}%;background:#dc2626"></span></div>
         </div>
       </div>
-      <div class="testa-card-clean">
-        <div class="testa-card-head">
-          <div class="testa-card-title"><span class="testa-card-icon">👤</span> Góc nhìn nhanh treasury cá nhân</div>
+      <div class="ui-card">
+        <div class="ui-card-head">
+          <div class="ui-card-title"><span class="ui-card-icon">👤</span> Góc nhìn nhanh treasury cá nhân</div>
         </div>
-        <div class="testa-donut-meta" style="min-width:0">
-          <div class="testa-legend" style="cursor:default">
-            <div class="testa-legend-left">
-              <span class="testa-dot" style="background:#2563eb"></span>
+        <div class="ui-donut-meta" style="min-width:0">
+          <div class="ui-legend" style="cursor:default">
+            <div class="ui-legend-left">
+              <span class="ui-dot" style="background:#2563eb"></span>
               <div>
                 <div style="font-size:13px;font-weight:700;color:#1e3a8a">Tỷ trọng tiền gửi</div>
                 <div style="font-size:12px;color:#64748b">${fmtMoney(totalDeposits)} VNĐ</div>
@@ -1808,9 +1629,9 @@
             </div>
             <div style="font-size:24px;font-weight:800;color:#2563eb;letter-spacing:-.8px">${depositShare.toFixed(1)}%</div>
           </div>
-          <div class="testa-legend" style="cursor:default">
-            <div class="testa-legend-left">
-              <span class="testa-dot" style="background:#d97706"></span>
+          <div class="ui-legend" style="cursor:default">
+            <div class="ui-legend-left">
+              <span class="ui-dot" style="background:#d97706"></span>
               <div>
                 <div style="font-size:13px;font-weight:700;color:#92400e">Tỷ trọng dư nợ cá nhân</div>
                 <div style="font-size:12px;color:#64748b">${fmtMoney(totalLoans)} VNĐ</div>
@@ -1818,16 +1639,16 @@
             </div>
             <div style="font-size:24px;font-weight:800;color:#d97706;letter-spacing:-.8px">${loanShare.toFixed(1)}%</div>
           </div>
-          <div class="testa-micro-grid">
-            <div class="testa-micro-card">
-              <div class="testa-micro-label">Sổ gần đáo hạn nhất</div>
-              <div class="testa-micro-value">${nearestDeposit ? nearestDeposit.depositCode || nearestDeposit.certificateNumber || nearestDeposit.bank || 'Có dữ liệu' : '—'}</div>
-              <div class="testa-micro-sub">${nearestDeposit ? fmtDateVN(nearestDeposit.maturityDate) + ' · ' + (calcDaysRemaining(nearestDeposit.maturityDate) ?? '—') + ' ngày' : 'Chưa có khoản tiền gửi đủ ngày đáo hạn để xếp hạng'}</div>
+          <div class="ui-micro-grid">
+            <div class="ui-micro-card">
+              <div class="ui-micro-label">Sổ gần đáo hạn nhất</div>
+              <div class="ui-micro-value">${nearestDeposit ? nearestDeposit.depositCode || nearestDeposit.certificateNumber || nearestDeposit.bank || 'Có dữ liệu' : '—'}</div>
+              <div class="ui-micro-sub">${nearestDeposit ? fmtDateVN(nearestDeposit.maturityDate) + ' · ' + (calcDaysRemaining(nearestDeposit.maturityDate) ?? '—') + ' ngày' : 'Chưa có khoản tiền gửi đủ ngày đáo hạn để xếp hạng'}</div>
             </div>
-            <div class="testa-micro-card">
-              <div class="testa-micro-label">Khoản vay gần đáo hạn</div>
-              <div class="testa-micro-value">${nearestLoan ? nearestLoan.loanCode || nearestLoan.bank || 'Có dữ liệu' : '—'}</div>
-              <div class="testa-micro-sub">${nearestLoan ? fmtDateVN(nearestLoan.maturityDate) + ' · ' + (calcDaysRemaining(nearestLoan.maturityDate) ?? '—') + ' ngày' : 'Chưa có khoản vay đủ ngày đáo hạn để xếp hạng'}</div>
+            <div class="ui-micro-card">
+              <div class="ui-micro-label">Khoản vay gần đáo hạn</div>
+              <div class="ui-micro-value">${nearestLoan ? nearestLoan.loanCode || nearestLoan.bank || 'Có dữ liệu' : '—'}</div>
+              <div class="ui-micro-sub">${nearestLoan ? fmtDateVN(nearestLoan.maturityDate) + ' · ' + (calcDaysRemaining(nearestLoan.maturityDate) ?? '—') + ' ngày' : 'Chưa có khoản vay đủ ngày đáo hạn để xếp hạng'}</div>
             </div>
           </div>
         </div>
@@ -2107,35 +1928,35 @@
     }
 
     wrap.innerHTML = `
-      <div class="testa-kpi-grid">
-        <div class="testa-kpi-card blue">
-          <div class="testa-kpi-label">Best rate trung hạn</div>
-          <div class="testa-kpi-value">${bestMedium ? bestMedium.rate.toFixed(2) + '%/năm' : '—'}</div>
-          <div class="testa-kpi-sub">${bestMedium ? bestMedium.name + ' · ' + bestMedium.tenor : 'Chưa có dữ liệu trung hạn'}</div>
-          <div class="testa-progress"><span style="width:${bestMedium ? Math.min((bestMedium.rate / 10) * 100, 100).toFixed(1) : 0}%;background:#2563eb"></span></div>
+      <div class="ui-kpi-grid">
+        <div class="ui-kpi-card blue">
+          <div class="ui-kpi-label">Best rate trung hạn</div>
+          <div class="ui-kpi-value">${bestMedium ? bestMedium.rate.toFixed(2) + '%/năm' : '—'}</div>
+          <div class="ui-kpi-sub">${bestMedium ? bestMedium.name + ' · ' + bestMedium.tenor : 'Chưa có dữ liệu trung hạn'}</div>
+          <div class="ui-progress"><span style="width:${bestMedium ? Math.min((bestMedium.rate / 10) * 100, 100).toFixed(1) : 0}%;background:#2563eb"></span></div>
         </div>
-        <div class="testa-kpi-card green">
-          <div class="testa-kpi-label">Best net benefit DN vay</div>
-          <div class="testa-kpi-value">${bestNet ? '+' + bestNet.net.toFixed(2) + '%/năm' : '—'}</div>
-          <div class="testa-kpi-sub">${bestNet ? bestNet.name + ' · borrow ' + fmtRate(bestNet.borrow) + ' / best ' + fmtRate(bestNet.bestRate) : 'Chưa có option có dữ liệu hỗ trợ DN vay'}</div>
-          <div class="testa-progress"><span style="width:${bestNet ? Math.min((bestNet.net / 3) * 100, 100).toFixed(1) : 0}%;background:#16a34a"></span></div>
+        <div class="ui-kpi-card green">
+          <div class="ui-kpi-label">Best net benefit DN vay</div>
+          <div class="ui-kpi-value">${bestNet ? '+' + bestNet.net.toFixed(2) + '%/năm' : '—'}</div>
+          <div class="ui-kpi-sub">${bestNet ? bestNet.name + ' · borrow ' + fmtRate(bestNet.borrow) + ' / best ' + fmtRate(bestNet.bestRate) : 'Chưa có option có dữ liệu hỗ trợ DN vay'}</div>
+          <div class="ui-progress"><span style="width:${bestNet ? Math.min((bestNet.net / 3) * 100, 100).toFixed(1) : 0}%;background:#16a34a"></span></div>
         </div>
-        <div class="testa-kpi-card amber">
-          <div class="testa-kpi-label">Best short-term</div>
-          <div class="testa-kpi-value">${bestShort ? bestShort.rate.toFixed(2) + '%/năm' : '—'}</div>
-          <div class="testa-kpi-sub">${bestShort ? bestShort.name + ' · ' + bestShort.tenor + (bestShort.minAmount ? ' · min ' + fmtMoney(bestShort.minAmount) : '') : 'Chưa có dữ liệu 1–3 tháng'}</div>
-          <div class="testa-progress"><span style="width:${bestShort ? Math.min((bestShort.rate / 10) * 100, 100).toFixed(1) : 0}%;background:#d97706"></span></div>
+        <div class="ui-kpi-card amber">
+          <div class="ui-kpi-label">Best short-term</div>
+          <div class="ui-kpi-value">${bestShort ? bestShort.rate.toFixed(2) + '%/năm' : '—'}</div>
+          <div class="ui-kpi-sub">${bestShort ? bestShort.name + ' · ' + bestShort.tenor + (bestShort.minAmount ? ' · min ' + fmtMoney(bestShort.minAmount) : '') : 'Chưa có dữ liệu 1–3 tháng'}</div>
+          <div class="ui-progress"><span style="width:${bestShort ? Math.min((bestShort.rate / 10) * 100, 100).toFixed(1) : 0}%;background:#d97706"></span></div>
         </div>
-        <div class="testa-kpi-card red">
-          <div class="testa-kpi-label">Best ultra short</div>
-          <div class="testa-kpi-value">${bestUltra ? bestUltra.rate.toFixed(2) + '%/năm' : '—'}</div>
-          <div class="testa-kpi-sub">${bestUltra ? bestUltra.name + ' · ' + bestUltra.tenor + (bestUltra.rollable ? ' · quay vòng' : '') : 'Chưa có dữ liệu dưới 1 tháng'}</div>
-          <div class="testa-progress"><span style="width:${bestUltra ? Math.min((bestUltra.rate / 10) * 100, 100).toFixed(1) : 0}%;background:#dc2626"></span></div>
+        <div class="ui-kpi-card red">
+          <div class="ui-kpi-label">Best ultra short</div>
+          <div class="ui-kpi-value">${bestUltra ? bestUltra.rate.toFixed(2) + '%/năm' : '—'}</div>
+          <div class="ui-kpi-sub">${bestUltra ? bestUltra.name + ' · ' + bestUltra.tenor + (bestUltra.rollable ? ' · quay vòng' : '') : 'Chưa có dữ liệu dưới 1 tháng'}</div>
+          <div class="ui-progress"><span style="width:${bestUltra ? Math.min((bestUltra.rate / 10) * 100, 100).toFixed(1) : 0}%;background:#dc2626"></span></div>
         </div>
       </div>
-      <div class="testa-card-clean">
-        <div class="testa-card-head">
-          <div class="testa-card-title"><span class="testa-card-icon">🔎</span> Cách đọc nhanh tab lãi suất</div>
+      <div class="ui-card">
+        <div class="ui-card-head">
+          <div class="ui-card-title"><span class="ui-card-icon">🔎</span> Cách đọc nhanh tab lãi suất</div>
         </div>
         <div class="rate-insight-list">
           <div class="rate-insight-item">
@@ -2203,7 +2024,7 @@
         <td class="center ${rateClass(item.rates?.['12m'], twelve.max, twelve.min)}">${fmtRate(item.rates?.['12m'])}</td>
         <td class="center ${rateClass(item.corpBorrowRate, support.max, support.min)}">${fmtRate(item.corpBorrowRate)}</td>
         <td class="center ${net != null ? rateClass(net, netMax, netMin) : ''}">${net != null ? ('+' + net.toFixed(2) + '%/năm') : ''}</td>
-        <td><span class="pill ${item.strategy && item.strategy.includes('hỗ trợ') ? 'pill-green' : 'pill-amber'}">${item.strategy || ''}</span></td>
+        <td><span class="ui-chip ${item.strategy && item.strategy.includes('hỗ trợ') ? 'ui-chip-green' : 'ui-chip-amber'}">${item.strategy || ''}</span></td>
         <td class="muted">${item.comment || ''}</td>
         <td style="white-space:nowrap;font-size:12.5px">${cl || '<span class="muted">—</span>'}</td>
       </tr>`;
@@ -2327,9 +2148,9 @@
     body.innerHTML = products.map((item, i) => {
       const extra = item.minAmount ? ` · Tối thiểu ${fmtMoney(item.minAmount)} VND` : '';
       const roll  = item.rollable && item.tenorKey === '1d' && tenorKey !== '1d' ? ' · Tính quay vòng qua đêm.' : '';
-      const rc = i === 0 ? 'pill-green' : i === 1 ? 'pill-blue' : 'pill-amber';
+      const rc = i === 0 ? 'ui-chip-green' : i === 1 ? 'ui-chip-blue' : 'ui-chip-amber';
       return `<tr>
-        <td class="center"><span class="pill ${rc}">#${i+1}</span></td>
+        <td class="center"><span class="ui-chip ${rc}">#${i+1}</span></td>
         <td><strong>${item.name}</strong></td>
         <td>${TENORS[tenorKey].label}</td>
         <td class="center">${fmtRate(item.rate)}</td>
@@ -2402,6 +2223,47 @@
     try { await tryLoadDefaultPersonalJson(); } catch (e) { console.warn('Default personal treasury JSON load failed:', e); }
   }
   init();
+</script>
+</body>
+</html>
+ { refreshCompareWeekSelector(); renderSelectedPeriod(); });
+    document.getElementById('compare-week-select').addEventListener('change', renderSelectedPeriod);
+    try { await tryLoadDefaultJson(); } catch (e) { console.warn('Default JSON load failed:', e); }
+    try { await tryLoadDefaultLoansJson(); } catch (e) { console.warn('Default company loans JSON load failed:', e); }
+    try { await tryLoadDefaultPersonalJson(); } catch (e) { console.warn('Default personal treasury JSON load failed:', e); }
+  }
+  init();
+
+  /* ── FIX 1: Tab persistence ────────────────────────────────
+     Lưu tab đang active vào localStorage, khôi phục khi reload.
+     Không đụng đến data/render logic.
+  ─────────────────────────────────────────────────────────── */
+  (function applyTabPersistence() {
+    const _origSwitch = switchTab;
+    window.switchTab = function(tabId) {
+      _origSwitch(tabId);
+      try { localStorage.setItem('treasury-active-tab', tabId); } catch (e) {}
+    };
+    // Khôi phục tab đã lưu (chạy sau init để HISTORY có thể đã sẵn sàng)
+    const saved = (() => { try { return localStorage.getItem('treasury-active-tab'); } catch (e) { return null; } })();
+    if (saved && document.getElementById('tab-' + saved)) {
+      switchTab(saved);
+    }
+  })();
+
+  /* ── FIX 2: iframe KE HOACH auto-height ────────────────────
+     Nhan postMessage tu monthly-plans-live.html de resize iframe
+     theo dung chieu cao noi dung thuc, khong can hardcode.
+  ─────────────────────────────────────────────── */
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'treasury-iframe-height') {
+      var frame = document.getElementById('monthlyPlansFrame');
+      if (frame) {
+        var h = Math.max(Number(e.data.height) || 0, 800);
+        frame.style.minHeight = h + 'px';
+      }
+    }
+  });
 </script>
 </body>
 </html>

@@ -1,16 +1,16 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-04-23T13:30:00+07:00",
+    "updatedAt": "2026-04-23T13:47:39+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet"
   },
   "summary": {
-    "totalPersonalDeposits": 138897219355,
+    "totalPersonalDeposits": 128956301308,
     "totalPersonalLoans": 27375000000,
-    "netPersonalTreasury": 111522219355
+    "netPersonalTreasury": 101581301308
   },
   "personalDeposits": [
     {
@@ -390,7 +390,8 @@
         "007295472",
         "007305767",
         "007332686",
-        "007349292"
+        "007349292",
+        "007365017"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -432,7 +433,8 @@
         "007295472",
         "007305767",
         "007332686",
-        "007349292"
+        "007349292",
+        "007365017"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -464,17 +466,17 @@
       "depositCode": "VPB-PL-DTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "09388885678",
-      "principal": 12199051507,
-      "amountOnCertificate": 12199051507,
+      "principal": 2258133460,
+      "amountOnCertificate": 2258133460,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 12199051507,
+      "unpledgedAmount": 2258133460,
       "accruedInterest": 0,
-      "projectedSettlement": 12199051507
+      "projectedSettlement": 2258133460
     },
     {
       "owner": "Nguyễn Trung Tín",

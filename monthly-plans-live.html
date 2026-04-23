@@ -136,7 +136,7 @@
     <section class="plans" id="plans"></section>
   </div>
 
-  <script src="./data/monthly-plans/live-index.js?v=20260423-1742"></script>
+  <script src="./data/monthly-plans/live-index.js?v=20260423-1748"></script>
   <script>
     const DB = window.MONTHLY_PLANS_LIVE_DATA;
     const monthSelect = document.getElementById('monthSelect');
@@ -145,7 +145,11 @@
     const heroBlock = document.getElementById('heroBlock');
     const CFO_APPROVAL_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyMyXnoXOj4PJ7f5w4fPaXzbt4DpsRfA6mxIWEFV3LeYCKUO0aWle-W20CZxzEjvMhWyA/exec';
     const REVIEW_TEST_EMAIL = DB.meta.reviewTestEmail || 'kdhn1911@gmail.com';
-    const APPROVAL_CACHE_BUST = '20260423-1740';
+    const APPROVAL_CACHE_BUST = '20260423-1748';
+    const APPROVAL_PATHS = [
+      './data/monthly-plans/approvals',
+      './treasury-master-dashboard/data/monthly-plans/approvals'
+    ];
     const approvalCache = new Map();
 
     if (window.self !== window.top) {
@@ -233,20 +237,19 @@
 
     async function loadApproval(plan) {
       if (approvalCache.has(plan.id)) return approvalCache.get(plan.id);
-      try {
-        const res = await fetch(`./data/monthly-plans/approvals/${plan.id}.json?v=${APPROVAL_CACHE_BUST}`, { cache: 'no-store' });
-        if (!res.ok) {
-          approvalCache.set(plan.id, null);
-          return null;
+      for (const basePath of APPROVAL_PATHS) {
+        try {
+          const res = await fetch(`${basePath}/${plan.id}.json?v=${APPROVAL_CACHE_BUST}`, { cache: 'no-store' });
+          if (!res.ok) continue;
+          const data = await res.json();
+          approvalCache.set(plan.id, data);
+          return data;
+        } catch (error) {
+          console.error('load approval failed', plan.id, basePath, error);
         }
-        const data = await res.json();
-        approvalCache.set(plan.id, data);
-        return data;
-      } catch (error) {
-        console.error('load approval failed', plan.id, error);
-        approvalCache.set(plan.id, null);
-        return null;
       }
+      approvalCache.set(plan.id, null);
+      return null;
     }
 
     function printPlanReport(plan) {

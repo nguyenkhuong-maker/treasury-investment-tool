@@ -6,7 +6,7 @@
   "approverEmail": "kdhn1911@gmail.com",
   "version": "Draft 1",
   "contentHash": "sha256:test-personal-2026-05-draft1",
-  "status": "pending_cfo_review",
-  "submittedAt": "2026-04-23T09:49:02.177Z",
-  "channel": "google_apps_script_mail"
+  "status": "revision_requested",
+  "channel": "google_apps_script_mail",
+  "reviewedAt": "2026-04-23T09:50:51.308Z"
 }

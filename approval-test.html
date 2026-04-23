@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CFO Approval Test</title>
+  <style>
+    :root {
+      --navy:#0b1f4b;
+      --navy-2:#1e3a8a;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --line:#e2e8f0;
+      --ok:#15803d;
+      --warn:#b45309;
+      --bad:#b91c1c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 200px);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      width: min(920px, 100%);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 18px 60px rgba(15,23,42,.1);
+      overflow: hidden;
+    }
+    .head {
+      padding: 24px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+    }
+    .head h1 { margin: 0 0 8px; font-size: 28px; }
+    .head p { margin: 0; color: rgba(255,255,255,.86); line-height: 1.55; }
+    .body { padding: 24px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fff;
+    }
+    .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .value { margin-top: 6px; font-size: 15px; line-height: 1.6; }
+    .status {
+      margin-top: 16px; padding: 14px 16px; border-radius: 16px; border: 1px solid var(--line); line-height: 1.6;
+    }
+    .status.ok { background: #ecfdf5; color: var(--ok); border-color: #bbf7d0; }
+    .status.bad { background: #fef2f2; color: var(--bad); border-color: #fecaca; }
+    .status.warn { background: #fff7ed; color: var(--warn); border-color: #fed7aa; }
+    .status.info { background: #f8fafc; color: #334155; }
+    .field { margin-top: 16px; }
+    .field label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 700; color: var(--muted); }
+    input[type="email"], textarea {
+      width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; font: inherit;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    .actions { margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap; }
+    button, a.btn {
+      border: 1px solid var(--line); background: #fff; color: var(--navy); text-decoration: none;
+      padding: 12px 16px; border-radius: 12px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+    }
+    button.primary { background: linear-gradient(135deg, var(--navy), var(--navy-2)); color: #fff; border-color: transparent; }
+    button.warn { background: #fff7ed; color: #9a3412; border-color: #fed7aa; }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+    .muted { color: var(--muted); }
+    @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="head">
+      <h1>✉️ CFO Review / Approval Test</h1>
+      <p>
+        Đây là trang mô phỏng link mail của CFO. CFO sẽ có 1 ô ghi chú và 2 nút:
+        <strong>Cần điều chỉnh</strong> hoặc <strong>Duyệt kế hoạch</strong>.
+      </p>
+    </div>
+    <div class="body" id="app"></div>
+  </div>
+
+  <script src="./data/monthly-plans/approval-test-helpers.js"></script>
+  <script>
+    const app = document.getElementById('app');
+    const params = new URLSearchParams(location.search);
+    const token = params.get('token');
+
+    function renderNotFound(message) {
+      app.innerHTML = `
+        <div class="status bad"><strong>${message || 'Không tìm thấy approval request.'}</strong></div>
+        <div class="actions"><a class="btn" href="./index-plan-test.html">← Quay lại test index</a></div>
+      `;
+    }
+
+    function statusBlock(state, round) {
+      if (state.status === 'approved') {
+        return `<div class="status ok"><strong>✅ Kế hoạch đã được duyệt.</strong><br/>Approved by: ${state.approvedBy}<br/>Approved at: ${state.approvedAtLabel}<br/>Version: ${state.version} · Hash: ${state.contentHash}</div>`;
+      }
+      if (state.status === 'revision_requested') {
+        return `<div class="status warn"><strong>🛠 CFO đã yêu cầu điều chỉnh.</strong><br/>Ghi chú hiện tại: ${round && round.cfoNote ? round.cfoNote : 'Chưa có ghi chú.'}</div>`;
+      }
+      if (state.status === 'revision_completed') {
+        return `<div class="status info"><strong>📨 Người lập đã hoàn thành điều chỉnh.</strong><br/>Vui lòng xem lại rồi chọn duyệt hoặc yêu cầu điều chỉnh tiếp.</div>`;
+      }
+      return `<div class="status info"><strong>🕒 Đang chờ CFO review.</strong><br/>CFO có thể ghi chú rồi chọn Cần điều chỉnh hoặc Duyệt kế hoạch.</div>`;
+    }
+
+    function renderRequest() {
+      const state = window.TreasuryApprovalMock.getWorkflowStateByToken(token);
+      if (!state) return renderNotFound('Không tìm thấy approval request.');
+      const round = (state.rounds || []).find((item) => item.round === state.currentRound);
+      if (!round || state.latestToken !== token) {
+        return renderNotFound('Link này đã cũ vì kế hoạch đã được gửi lại ở round mới hơn.');
+      }
+
+      app.innerHTML = `
+        <div class="grid">
+          <div class="panel">
+            <div class="label">Kế hoạch</div>
+            <div class="value"><strong>${state.planTitle}</strong><br/>${state.monthLabel} · ${state.periodLabel}</div>
+            <div class="label" style="margin-top:14px">Round hiện tại</div>
+            <div class="value">Round ${round.round}<br/>Gửi lúc: ${round.sentAtLabel}</div>
+            <div class="label" style="margin-top:14px">Link kế hoạch</div>
+            <div class="value"><a class="btn" href="${state.sourceHtml}" target="_blank" rel="noreferrer">Mở file kế hoạch</a></div>
+          </div>
+          <div class="panel">
+            <div class="label">Approver được chỉ định</div>
+            <div class="value"><strong>${state.allowedApproverEmail}</strong></div>
+            <div class="label" style="margin-top:14px">Trạng thái</div>
+            <div class="value">${state.status}<br/><span class="muted">Version: ${state.version} · Hash: ${state.contentHash}</span></div>
+          </div>
+        </div>
+        ${statusBlock(state, round)}
+        <div class="field">
+          <label>Email xác nhận</label>
+          <input id="emailInput" type="email" placeholder="nguyen.khuong@atherlabs.com" value="${state.allowedApproverEmail}" ${state.status === 'approved' ? 'disabled' : ''} />
+        </div>
+        <div class="field">
+          <label>Ghi chú của CFO</label>
+          <textarea id="noteInput" placeholder="Ví dụ: Giảm giả định thu DOPA, giữ buffer tối thiểu 2 tỷ, rà lại mốc đáo hạn..." ${state.status === 'approved' ? 'disabled' : ''}>${round.cfoNote || ''}</textarea>
+        </div>
+        <div class="actions">
+          <button id="revisionBtn" class="warn" ${state.status === 'approved' ? 'disabled' : ''}>🛠 Cần điều chỉnh</button>
+          <button id="approveBtn" class="primary" ${state.status === 'approved' ? 'disabled' : ''}>✅ Duyệt kế hoạch</button>
+          <a class="btn" href="./index-plan-test.html">← Quay lại test index</a>
+        </div>
+      `;
+
+      const revisionBtn = document.getElementById('revisionBtn');
+      const approveBtn = document.getElementById('approveBtn');
+      const emailInput = document.getElementById('emailInput');
+      const noteInput = document.getElementById('noteInput');
+
+      revisionBtn.addEventListener('click', () => {
+        const result = window.TreasuryApprovalMock.requestRevision(token, emailInput.value.trim(), noteInput.value);
+        if (!result.ok) {
+          alert(result.message || 'Không thể gửi yêu cầu điều chỉnh.');
+          return;
+        }
+        renderRequest();
+      });
+
+      approveBtn.addEventListener('click', () => {
+        const result = window.TreasuryApprovalMock.approveByToken(token, emailInput.value.trim(), noteInput.value);
+        if (!result.ok) {
+          alert(result.message || 'Không thể duyệt kế hoạch.');
+          return;
+        }
+        renderRequest();
+      });
+    }
+
+    if (!token) renderNotFound('Thiếu token approval.');
+    else renderRequest();
+  </script>
+</body>
+</html>

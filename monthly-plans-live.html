@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Treasury Monthly Plans</title>
+  <style>
+    :root {
+      --navy:#0b1f4b;
+      --navy-2:#1e3a8a;
+      --gold:#d4af37;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --line:#e2e8f0;
+      --ok:#15803d;
+      --soft-blue:#eff6ff;
+      --soft-gold:#fff7e6;
+      --soft-green:#ecfdf5;
+      --soft-slate:#f8fafc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 180px);
+      color: var(--text);
+    }
+    .wrap { max-width: 1480px; margin: 0 auto; padding: 22px; }
+    .hero {
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      color: #fff;
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 18px 60px rgba(15,23,42,.14);
+    }
+    .hero h1 { margin: 0 0 8px; font-size: 28px; }
+    .hero p { margin: 0; color: rgba(255,255,255,.86); line-height: 1.6; }
+    .hero-meta { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 12px; border-radius: 999px;
+      background: rgba(255,255,255,.12); color: #fff; font-size: 13px; border: 1px solid rgba(255,255,255,.16);
+    }
+    .toolbar {
+      margin-top: 18px; display: grid; grid-template-columns: 260px 1fr; gap: 14px;
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px;
+      box-shadow: 0 8px 24px rgba(15,23,42,.04);
+    }
+    .field label { display:block; margin-bottom:8px; font-size:12px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+    select {
+      width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:#fff; font:inherit;
+    }
+    .toolbar-note {
+      padding:12px 14px; border-radius:12px; background:#f8fafc; border:1px dashed #cbd5e1; color:var(--muted); line-height:1.6; font-size:13px;
+    }
+    .plans {
+      margin-top: 18px; display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items:start;
+    }
+    .plan-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+      box-shadow: 0 12px 28px rgba(15,23,42,.06);
+    }
+    .plan-head { padding: 18px; border-bottom: 1px solid var(--line); }
+    .plan-title-row { display:flex; justify-content:space-between; gap:12px; align-items:start; }
+    .plan-title { margin:0; font-size:22px; color:var(--navy); }
+    .badges { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .badge { display:inline-flex; align-items:center; padding:7px 10px; border-radius:999px; font-size:12px; font-weight:700; }
+    .badge.blue { background:var(--soft-blue); color:#1d4ed8; }
+    .badge.gold { background:var(--soft-gold); color:#a16207; }
+    .badge.green { background:var(--soft-green); color:var(--ok); }
+    .badge.gray { background:#f1f5f9; color:#475569; }
+    .highlights { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-top:14px; }
+    .highlight { background:#f8fafc; border:1px solid var(--line); border-radius:14px; padding:12px; }
+    .highlight .label { font-size:12px; color:var(--muted); }
+    .highlight .value { margin-top:6px; font-weight:800; }
+    .section { padding:18px; border-top:1px solid var(--line); background:linear-gradient(180deg,#fff,#fafcff); }
+    .section h3 { margin:0 0 12px; font-size:18px; color:var(--navy); }
+    .section-grid { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:14px; }
+    .panel { background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px; }
+    .panel .label { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+    .panel .value { margin-top:6px; font-size:14px; line-height:1.6; }
+    .iframe-wrap { background:#f8fafc; padding:14px; }
+    iframe { width:100%; min-height:920px; border:1px solid var(--line); border-radius:14px; background:#fff; }
+    .timeline { display:grid; gap:10px; }
+    .timeline-item {
+      border:1px solid var(--line); border-radius:14px; padding:12px 14px; background:#fff;
+      display:grid; grid-template-columns:180px 1fr; gap:12px;
+    }
+    .timeline-time { font-size:12px; color:var(--muted); }
+    .timeline-body { font-size:14px; line-height:1.55; }
+    .actions { display:flex; gap:10px; flex-wrap:wrap; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px; text-decoration:none;
+      padding:11px 14px; border-radius:12px; border:1px solid var(--line); background:#fff; color:var(--navy); font-weight:700;
+    }
+    @media (max-width: 1180px) {
+      .toolbar, .plans, .highlights, .section-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns:1fr; }
+    }
+    @media (max-width: 768px) {
+      .wrap { padding:14px; }
+      .hero h1 { font-size:22px; }
+      .plan-title-row { flex-direction:column; }
+      iframe { min-height:760px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>🗂 Kế hoạch ngân quỹ theo tháng</h1>
+      <p>
+        Trang live này dùng để xem lại kế hoạch ngân quỹ theo tháng cho cả <strong>công ty</strong> và <strong>cá nhân</strong>.
+        Tháng 4/2026 hiện đã được <strong>CFO duyệt</strong> trước khi đưa lên GitHub Pages.
+      </p>
+      <div class="hero-meta">
+        <span class="pill">Công ty + Cá nhân song song</span>
+        <span class="pill">Approval status hiển thị rõ</span>
+        <span class="pill">Sẵn sàng mở rộng cho tháng 5/2026</span>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="field">
+        <label>Tháng kế hoạch</label>
+        <select id="monthSelect"></select>
+      </div>
+      <div class="toolbar-note" id="toolbarNote"></div>
+    </section>
+
+    <section class="plans" id="plans"></section>
+  </div>
+
+  <script src="./data/monthly-plans/live-index.js"></script>
+  <script>
+    const DB = window.MONTHLY_PLANS_LIVE_DATA;
+    const monthSelect = document.getElementById('monthSelect');
+    const toolbarNote = document.getElementById('toolbarNote');
+    const plansEl = document.getElementById('plans');
+
+    function buildOptions() {
+      DB.availableMonths.forEach((item) => {
+        const option = document.createElement('option');
+        option.value = item.key;
+        option.textContent = `${item.label} · ${item.periodLabel}`;
+        if (item.key === DB.meta.defaultMonth) option.selected = true;
+        monthSelect.appendChild(option);
+      });
+    }
+
+    function badge(text, kind) {
+      return `<span class="badge ${kind}">${text}</span>`;
+    }
+
+    function renderTimeline(items) {
+      return `<div class="timeline">${items.map((item) => `
+        <div class="timeline-item">
+          <div class="timeline-time">${item.at}<br/><span>${item.label}</span></div>
+          <div class="timeline-body">${item.note}</div>
+        </div>
+      `).join('')}</div>`;
+    }
+
+    function renderPlan(plan, month) {
+      return `
+        <article class="plan-card">
+          <div class="plan-head">
+            <div class="plan-title-row">
+              <div>
+                <h2 class="plan-title">${plan.type === 'company' ? '🏢' : '👤'} ${plan.title}</h2>
+                <div class="badges">
+                  ${badge(month.monthLabel, 'blue')}
+                  ${badge('Version ' + plan.version, 'gray')}
+                  ${badge('CFO đã duyệt', 'green')}
+                </div>
+              </div>
+              <div style="font-size:13px;color:#64748b;line-height:1.6">
+                Prepared: ${plan.preparedAt}<br/>
+                Approved: ${plan.approvedAt}
+              </div>
+            </div>
+            <div class="highlights">
+              ${plan.highlights.map((item) => `
+                <div class="highlight">
+                  <div class="label">${item.label}</div>
+                  <div class="value">${item.value}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>📌 Trạng thái phê duyệt</h3>
+            <div class="section-grid">
+              <div class="panel">
+                <div class="label">Approver</div>
+                <div class="value"><strong>${plan.approvedBy}</strong><br/>CFO approval đã được ghi nhận cho kế hoạch tháng 4/2026.</div>
+              </div>
+              <div class="panel">
+                <div class="label">Ghi chú vận hành</div>
+                <div class="value">${month.governanceNote}<br/>Kế hoạch hiện đang ở trạng thái live để xem lại trên GitHub Pages.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="iframe-wrap">
+            <iframe src="${plan.sourceHtml}" title="${plan.title}"></iframe>
+          </div>
+
+          <div class="section">
+            <h3>🕒 Timeline</h3>
+            ${renderTimeline(plan.timeline)}
+          </div>
+
+          <div class="section">
+            <h3>🔗 Tài liệu liên quan</h3>
+            <div class="actions">
+              <a class="btn" href="${plan.sourceHtml}" target="_blank" rel="noreferrer">Mở bản HTML</a>
+              <a class="btn" href="${plan.sourcePdf}" target="_blank" rel="noreferrer">Mở bản PDF</a>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function render() {
+      const monthKey = monthSelect.value;
+      const month = DB.months[monthKey];
+      toolbarNote.innerHTML = `<strong>${month.monthLabel}</strong> · ${month.periodLabel}<br/>${DB.meta.note}`;
+      plansEl.innerHTML = [month.company, month.personal].map((plan) => renderPlan(plan, month)).join('');
+    }
+
+    monthSelect.addEventListener('change', render);
+    buildOptions();
+    render();
+  </script>
+</body>
+</html>

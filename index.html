@@ -682,6 +682,7 @@
     <button class="tab-btn active" data-tab="laisuat" onclick="switchTab('laisuat')">📈 LÃI SUẤT &amp; TIỀN GỬI</button>
     <button class="tab-btn"         data-tab="dunno"   onclick="switchTab('dunno')">📊 CTY VIHALI</button>
     <button class="tab-btn"         data-tab="canhan"  onclick="switchTab('canhan')">👤 CÁ NHÂN</button>
+    <button class="tab-btn"         data-tab="kehoach" onclick="switchTab('kehoach')">🗂 KẾ HOẠCH</button>
   </div>
 </nav>
 
@@ -1262,6 +1263,27 @@
     </div>
   </div>
 </div><!-- #tab-canhan -->
+
+
+<!-- ╔══════════════════════════════════════════════════════╗
+     ║   TAB 4 — KẾ HOẠCH NGÂN QUỸ THEO THÁNG             ║
+     ╚══════════════════════════════════════════════════════╝ -->
+<div id="tab-kehoach" class="tab-panel">
+  <div style="padding:24px 20px 28px; max-width: 1600px; margin: 0 auto;">
+    <div style="background:linear-gradient(135deg,#0b1f4b,#1e3a8a);color:#fff;border-radius:18px;padding:22px 24px;box-shadow:0 18px 60px rgba(15,23,42,.14);margin-bottom:18px;">
+      <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:700;">Treasury Monthly Plans</div>
+      <h1 style="margin:8px 0 10px;font-size:28px;line-height:1.2;">Kế hoạch ngân quỹ theo tháng</h1>
+      <div style="font-size:14px;line-height:1.7;color:rgba(255,255,255,.86);max-width:960px;">
+        Xem lại kế hoạch ngân quỹ công ty và cá nhân theo từng tháng. Tháng 4/2026 hiện đã được CFO duyệt và đã đưa lên live page để anh xem trực tiếp ngay trong dashboard này.
+      </div>
+    </div>
+    <iframe
+      src="./monthly-plans-live.html"
+      title="Treasury Monthly Plans"
+      style="width:100%;min-height:2600px;border:1px solid #e2e8f0;border-radius:18px;background:#fff;box-shadow:0 10px 30px rgba(15,23,42,.06);"
+    ></iframe>
+  </div>
+</div><!-- #tab-kehoach -->
 
 
 <!-- ══════════════════════════════════════════════════════

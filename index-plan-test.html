@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Treasury Monthly Plans — Test Index</title>
+  <style>
+    :root {
+      --navy:#0b1f4b;
+      --navy-2:#1e3a8a;
+      --gold:#d4af37;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --line:#e2e8f0;
+      --ok:#15803d;
+      --warn:#b45309;
+      --bad:#b91c1c;
+      --soft-blue:#eff6ff;
+      --soft-green:#ecfdf5;
+      --soft-gold:#fff7e6;
+      --soft-red:#fef2f2;
+      --soft-slate:#f8fafc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 180px);
+    }
+    .wrap { max-width: 1420px; margin: 0 auto; padding: 24px; }
+    .hero {
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      color: #fff;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 18px 60px rgba(15, 23, 42, .16);
+    }
+    .hero h1 { margin: 0 0 10px; font-size: 28px; }
+    .hero p { margin: 0; color: rgba(255,255,255,.86); line-height: 1.6; }
+    .hero-meta { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 12px; border-radius: 999px;
+      background: rgba(255,255,255,.12); color: #fff; font-size: 13px; border: 1px solid rgba(255,255,255,.16);
+    }
+    .notice {
+      margin-top: 14px; padding: 12px 14px; border-radius: 12px;
+      background: rgba(212,175,55,.14); border: 1px solid rgba(212,175,55,.25); color: #fff8de;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .toolbar {
+      margin-top: 20px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px;
+      display: grid; grid-template-columns: 260px 1fr auto; gap: 14px; align-items: end;
+      box-shadow: 0 8px 24px rgba(15,23,42,.05);
+    }
+    .field label { display: block; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .04em; }
+    select, textarea {
+      width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fff; font-size: 14px; color: var(--text);
+      font: inherit;
+    }
+    textarea { min-height: 92px; resize: vertical; }
+    .inline-note {
+      padding: 12px 14px; border-radius: 12px; border: 1px dashed #cbd5e1; background: #f8fafc; color: var(--muted); font-size: 13px; line-height: 1.6;
+    }
+    .btn, .link-btn {
+      padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: #fff; color: var(--navy); font-weight: 700; cursor: pointer;
+      text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn.primary { background: linear-gradient(135deg, var(--navy), var(--navy-2)); color: #fff; border-color: transparent; }
+    .btn.warn { background: #fff7ed; color: #9a3412; border-color: #fed7aa; }
+    .btn.ok { background: #ecfdf5; color: var(--ok); border-color: #bbf7d0; }
+    .btn.ghost { background: #fff; color: #475569; }
+    .meta-strip {
+      margin-top: 16px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px;
+    }
+    .meta-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px;
+      box-shadow: 0 8px 24px rgba(15,23,42,.04);
+    }
+    .meta-card .k { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .meta-card .v { margin-top: 6px; font-size: 18px; font-weight: 800; color: var(--navy); }
+    .meta-card .s { margin-top: 6px; font-size: 13px; color: var(--muted); }
+    .plans { margin-top: 18px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: start; }
+    .plan-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+      box-shadow: 0 12px 28px rgba(15,23,42,.06);
+    }
+    .plan-head { padding: 18px 18px 14px; border-bottom: 1px solid var(--line); }
+    .plan-title-row { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+    .plan-title { margin: 0; font-size: 22px; color: var(--navy); }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .badge { display: inline-flex; align-items: center; padding: 7px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+    .badge.blue { background: var(--soft-blue); color: #1d4ed8; }
+    .badge.gold { background: var(--soft-gold); color: #a16207; }
+    .badge.green { background: var(--soft-green); color: var(--ok); }
+    .badge.gray { background: #f1f5f9; color: #475569; }
+    .badge.red { background: var(--soft-red); color: var(--bad); }
+    .badge.slate { background: var(--soft-slate); color: #334155; }
+    .highlights { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+    .highlight { background: #f8fafc; border: 1px solid var(--line); border-radius: 16px; padding: 12px; }
+    .highlight .label { font-size: 12px; color: var(--muted); }
+    .highlight .value { margin-top: 6px; font-weight: 800; color: var(--text); }
+    .iframe-wrap { background: #f8fafc; padding: 14px; }
+    iframe {
+      width: 100%; min-height: 920px; border: 1px solid var(--line); border-radius: 14px; background: #fff;
+    }
+    .section { padding: 18px; border-top: 1px solid var(--line); background: linear-gradient(180deg, #fff, #fafcff); }
+    .section h3 { margin: 0 0 12px; font-size: 18px; color: var(--navy); }
+    .section-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 12px; }
+    .section-note { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .status-grid, .action-grid, .approval-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .panel {
+      border: 1px solid var(--line); border-radius: 16px; padding: 14px; background: #fff;
+    }
+    .panel .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .panel .value { margin-top: 6px; font-size: 14px; line-height: 1.6; }
+    .actions { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .timeline { display: grid; gap: 10px; }
+    .timeline-item {
+      border: 1px solid var(--line); background: #fff; border-radius: 14px; padding: 12px 14px;
+      display: grid; grid-template-columns: 180px 1fr; gap: 12px;
+    }
+    .timeline-time { font-size: 12px; color: var(--muted); }
+    .timeline-body { font-size: 14px; color: var(--text); line-height: 1.55; }
+    .timeline-body strong { color: var(--navy); }
+    .email-preview {
+      margin-top: 12px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 14px; padding: 14px;
+    }
+    .email-preview pre {
+      margin: 0; white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; color: #334155;
+    }
+    .muted { color: var(--muted); }
+    @media (max-width: 1180px) {
+      .toolbar, .meta-strip, .highlights, .status-grid, .action-grid, .approval-grid, .plans { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .wrap { padding: 14px; }
+      .hero h1 { font-size: 22px; }
+      .plan-title-row, .section-head { flex-direction: column; align-items: start; }
+      iframe { min-height: 760px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>🗂 Treasury Monthly Plans — Test Index</h1>
+      <p>
+        Bản test này đang hiển thị <strong>cả 2 kế hoạch trên cùng 1 trang</strong> và mô phỏng đúng flow anh Nguyên chốt:
+        <strong>Draft → Gửi CFO → CFO yêu cầu điều chỉnh / duyệt → Người lập hoàn thành điều chỉnh → Gửi lại CFO → Duyệt</strong>.
+      </p>
+      <div class="hero-meta">
+        <span class="pill">Hiển thị đồng thời Công ty + Cá nhân</span>
+        <span class="pill">Approver test: nguyen.khuong@atherlabs.com</span>
+        <span class="pill">Có timeline log gửi / điều chỉnh / duyệt</span>
+      </div>
+      <div class="notice">
+        <strong>Lưu ý:</strong> đây vẫn là bản test local. Flow mail đang mô phỏng bằng magic-link mock,
+        nhưng logic đã gần giống bản production: có round review, có note CFO, có phản hồi của người lập, có gửi lại CFO, và có timeline log theo từng bước.
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="field">
+        <label>Tháng kế hoạch</label>
+        <select id="monthSelect"></select>
+      </div>
+      <div class="inline-note">
+        <strong>Chế độ xem:</strong> luôn hiển thị cả 2 kế hoạch trên cùng 1 trang theo ý anh.<br/>
+        Khi anh chốt flow, Vesper sẽ đưa nguyên logic này sang tab thật trong dashboard chính.
+      </div>
+      <button class="btn ghost" id="resetAllBtn">Reset toàn bộ workflow tháng đang xem</button>
+    </section>
+
+    <section class="meta-strip" id="metaStrip"></section>
+    <section class="plans" id="plans"></section>
+  </div>
+
+  <script src="./data/monthly-plans/index.js"></script>
+  <script src="./data/monthly-plans/approval-test-helpers.js"></script>
+  <script>
+    const DB = window.MONTHLY_PLANS_TEST_DATA;
+    const monthSelect = document.getElementById('monthSelect');
+    const metaStrip = document.getElementById('metaStrip');
+    const plansEl = document.getElementById('plans');
+    const resetAllBtn = document.getElementById('resetAllBtn');
+    const designatedApproverEmail = DB.meta.designatedApproverEmail;
+
+    function buildMonthOptions() {
+      DB.availableMonths.forEach((item) => {
+        const option = document.createElement('option');
+        option.value = item.key;
+        option.textContent = `${item.label} · ${item.periodLabel}`;
+        if (item.key === DB.meta.defaultMonth) option.selected = true;
+        monthSelect.appendChild(option);
+      });
+    }
+
+    function statusMeta(status) {
+      const map = {
+        draft: { label: 'Draft', cls: 'gray' },
+        pending_cfo_review: { label: 'Pending CFO Review', cls: 'gold' },
+        revision_requested: { label: 'Cần điều chỉnh', cls: 'red' },
+        revision_completed: { label: 'Đã hoàn thành điều chỉnh', cls: 'blue' },
+        approved: { label: 'Đã duyệt', cls: 'green' }
+      };
+      return map[status] || { label: status || 'Draft', cls: 'slate' };
+    }
+
+    function createBadge(text, kind) {
+      return `<span class="badge ${kind}">${text}</span>`;
+    }
+
+    function absoluteApprovalUrl(token) {
+      return `${location.origin}${location.pathname.replace('index-plan-test.html', '')}approval-test.html?token=${encodeURIComponent(token)}`;
+    }
+
+    function renderMeta(monthKey) {
+      const month = DB.months[monthKey];
+      const companyState = window.TreasuryApprovalMock.getWorkflowState({
+        ...month.company,
+        month: monthKey,
+        monthLabel: month.monthLabel,
+        periodLabel: month.periodLabel
+      }, designatedApproverEmail);
+      const personalState = window.TreasuryApprovalMock.getWorkflowState({
+        ...month.personal,
+        month: monthKey,
+        monthLabel: month.monthLabel,
+        periodLabel: month.periodLabel
+      }, designatedApproverEmail);
+
+      metaStrip.innerHTML = `
+        <article class="meta-card">
+          <div class="k">Kỳ đang xem</div>
+          <div class="v">${month.monthLabel}</div>
+          <div class="s">${month.periodLabel}</div>
+        </article>
+        <article class="meta-card">
+          <div class="k">Approver test</div>
+          <div class="v">${designatedApproverEmail}</div>
+          <div class="s">Chỉ email này được review / duyệt trong demo</div>
+        </article>
+        <article class="meta-card">
+          <div class="k">Trạng thái công ty</div>
+          <div class="v">${statusMeta(companyState.status).label}</div>
+          <div class="s">Round hiện tại: ${companyState.currentRound || 0}</div>
+        </article>
+        <article class="meta-card">
+          <div class="k">Trạng thái cá nhân</div>
+          <div class="v">${statusMeta(personalState.status).label}</div>
+          <div class="s">Round hiện tại: ${personalState.currentRound || 0}</div>
+        </article>
+      `;
+    }
+
+    function makerSendLabel(status) {
+      if (status === 'revision_completed') return '📨 Gửi lại cho CFO';
+      if (status === 'pending_cfo_review') return '📨 Gửi lại email CFO';
+      return '📨 Gửi cho CFO';
+    }
+
+    function latestRound(state) {
+      return (state.rounds || []).find((item) => item.round === state.currentRound) || null;
+    }
+
+    function renderTimeline(state) {
+      if (!state.timeline || !state.timeline.length) {
+        return '<div class="panel"><div class="value muted">Chưa có log nào. Khi bắt đầu gửi CFO và review, timeline sẽ hiện ở đây.</div></div>';
+      }
+      return `<div class="timeline">${state.timeline.slice().reverse().map((item) => `
+        <div class="timeline-item">
+          <div class="timeline-time">${item.atLabel}<br/><span class="muted">Round ${item.round || '—'} · ${item.actor}</span></div>
+          <div class="timeline-body"><strong>${statusMeta(item.type === 'approved' ? 'approved' : item.type === 'revision_requested' ? 'revision_requested' : item.type === 'revision_completed' ? 'revision_completed' : item.type === 'sent_to_cfo' ? 'pending_cfo_review' : 'draft').label}</strong><br/>${item.message}</div>
+        </div>
+      `).join('')}</div>`;
+    }
+
+    function renderPlanCard(monthKey, plan) {
+      const month = DB.months[monthKey];
+      const state = window.TreasuryApprovalMock.getWorkflowState({
+        ...plan,
+        month: monthKey,
+        monthLabel: month.monthLabel,
+        periodLabel: month.periodLabel
+      }, designatedApproverEmail);
+      const currentStatus = statusMeta(state.status);
+      const round = latestRound(state);
+      const latestLink = state.latestToken ? absoluteApprovalUrl(state.latestToken) : null;
+      const card = document.createElement('article');
+      card.className = 'plan-card';
+      card.innerHTML = `
+        <div class="plan-head">
+          <div class="plan-title-row">
+            <div>
+              <h2 class="plan-title">${plan.type === 'company' ? '🏢' : '👤'} ${plan.title}</h2>
+              <div class="badges">
+                ${createBadge(month.monthLabel, 'blue')}
+                ${createBadge('Version ' + plan.version, 'gray')}
+                ${createBadge(currentStatus.label, currentStatus.cls)}
+                ${createBadge('Round ' + (state.currentRound || 0), 'slate')}
+              </div>
+            </div>
+            <div class="section-note">Prepared: ${plan.preparedAt}<br/>Owner: ${plan.owner} · Approver: ${plan.approver}</div>
+          </div>
+          <div class="highlights">
+            ${plan.highlights.map((item) => `
+              <div class="highlight">
+                <div class="label">${item.label}</div>
+                <div class="value">${item.value}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        <div class="iframe-wrap">
+          <iframe src="${plan.sourceHtml}" title="${plan.title}"></iframe>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <h3>📌 Trạng thái workflow</h3>
+            <div class="section-note">Flow test theo vòng review của CFO</div>
+          </div>
+          <div class="status-grid">
+            <div class="panel">
+              <div class="label">Trạng thái hiện tại</div>
+              <div class="value"><strong>${currentStatus.label}</strong><br/>Approver chỉ định: ${designatedApproverEmail}</div>
+            </div>
+            <div class="panel">
+              <div class="label">Round đang theo dõi</div>
+              <div class="value">${round ? `Round ${round.round}<br/>Gửi lúc: ${round.sentAtLabel}` : 'Chưa gửi CFO lần nào.'}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <h3>🛠 Box người lập kế hoạch</h3>
+            <div class="section-note">Người lập đọc note CFO, hoàn thành điều chỉnh, rồi gửi lại CFO</div>
+          </div>
+          <div class="action-grid">
+            <div class="panel">
+              <div class="label">Phản hồi / xác nhận đã xử lý</div>
+              <textarea data-role="maker-response" data-plan-id="${plan.id}" placeholder="Ví dụ: Đã giảm giả định thu DOPA, cập nhật buffer tối thiểu 2 tỷ, rà lại mốc tái đầu tư...">${round && round.makerResponse ? round.makerResponse : ''}</textarea>
+              <div class="actions">
+                <button class="btn ok" data-role="complete-revision" data-plan-id="${plan.id}">✅ Đã hoàn thành điều chỉnh</button>
+                <button class="btn primary" data-role="send-approval" data-plan-id="${plan.id}">${makerSendLabel(state.status)}</button>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="label">Gợi ý thao tác</div>
+              <div class="value">
+                1. Hoàn thành draft<br/>
+                2. Bấm gửi cho CFO<br/>
+                3. Nếu CFO yêu cầu điều chỉnh, người lập cập nhật kế hoạch<br/>
+                4. Bấm <strong>Đã hoàn thành điều chỉnh</strong><br/>
+                5. Bấm <strong>Gửi lại cho CFO</strong>
+              </div>
+              <div class="actions">
+                <button class="btn ghost" data-role="clear-workflow" data-plan-id="${plan.id}">Reset workflow plan này</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <h3>✉️ Box gửi CFO</h3>
+            <div class="section-note">Mail mock + link review dành riêng cho ${designatedApproverEmail}</div>
+          </div>
+          <div class="approval-grid">
+            <div class="panel">
+              <div class="label">Approval link hiện tại</div>
+              <div class="value">${latestLink ? `<a class="link-btn" href="${latestLink}" target="_blank" rel="noreferrer">🔗 Mở link review / duyệt của CFO</a>` : '<span class="muted">Chưa có link. Hãy bấm gửi cho CFO trước.</span>'}</div>
+              <div class="label" style="margin-top:12px">Tình trạng vòng hiện tại</div>
+              <div class="value">${round ? `Round ${round.round} · ${statusMeta(state.status).label}` : 'Chưa có review round nào.'}</div>
+            </div>
+            <div class="panel">
+              <div class="label">Email preview</div>
+              <div class="email-preview">
+                <pre>${latestLink ? `To: ${designatedApproverEmail}\nSubject: [Test] CFO review request — ${plan.title}\n\nAnh vui lòng mở kế hoạch tại link dưới đây.\nTrong box CFO sẽ có ô ghi chú và 2 nút: Cần điều chỉnh / Duyệt kế hoạch.\n\n${latestLink}` : 'Chưa tạo email preview vì chưa có approval link.'}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <h3>🕒 Timeline điều chỉnh / gửi lại / duyệt</h3>
+            <div class="section-note">Log nhỏ để anh theo dõi lịch sử xử lý của từng kế hoạch</div>
+          </div>
+          ${renderTimeline(state)}
+        </div>
+      `;
+
+      const makerResponse = card.querySelector('[data-role="maker-response"]');
+      const completeBtn = card.querySelector('[data-role="complete-revision"]');
+      const sendBtn = card.querySelector('[data-role="send-approval"]');
+      const clearBtn = card.querySelector('[data-role="clear-workflow"]');
+
+      completeBtn.addEventListener('click', () => {
+        const result = window.TreasuryApprovalMock.makerCompleteRevision(plan.id, makerResponse.value);
+        if (!result.ok) {
+          alert(result.message || 'Chưa thể xác nhận hoàn thành điều chỉnh.');
+          return;
+        }
+        renderAll();
+      });
+
+      sendBtn.addEventListener('click', () => {
+        window.TreasuryApprovalMock.createOrRefreshRequest({
+          ...plan,
+          month: monthKey,
+          monthLabel: month.monthLabel,
+          periodLabel: month.periodLabel
+        }, designatedApproverEmail);
+        renderAll();
+      });
+
+      clearBtn.addEventListener('click', () => {
+        window.TreasuryApprovalMock.clearWorkflow(plan.id);
+        renderAll();
+      });
+
+      return card;
+    }
+
+    function renderPlans() {
+      const monthKey = monthSelect.value;
+      const month = DB.months[monthKey];
+      plansEl.innerHTML = '';
+      [month.company, month.personal].forEach((plan) => plansEl.appendChild(renderPlanCard(monthKey, plan)));
+    }
+
+    function renderAll() {
+      const monthKey = monthSelect.value;
+      renderMeta(monthKey);
+      renderPlans();
+    }
+
+    monthSelect.addEventListener('change', renderAll);
+    resetAllBtn.addEventListener('click', () => {
+      const monthKey = monthSelect.value;
+      const month = DB.months[monthKey];
+      [month.company, month.personal].forEach((plan) => window.TreasuryApprovalMock.clearWorkflow(plan.id));
+      renderAll();
+    });
+
+    buildMonthOptions();
+    renderAll();
+    window.addEventListener('focus', renderAll);
+  </script>
+</body>
+</html>

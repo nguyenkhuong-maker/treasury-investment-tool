@@ -2,7 +2,7 @@ const CONFIG = (() => {
   const props = PropertiesService.getScriptProperties();
   return {
     makerEmail: props.getProperty('MAKER_EMAIL') || 'nguyen.khuong@atherlabs.com',
-    cfoEmail: props.getProperty('CFO_EMAIL') || 'kdhn1911@gmail.com',
+    cfoEmail: props.getProperty('CFO_EMAIL') || 'duc.ho@atherlabs.com',
     dashboardBaseUrl: props.getProperty('DASHBOARD_BASE_URL') || 'https://nguyenkhuong-maker.github.io/treasury-investment-tool/',
     githubOwner: props.getProperty('GITHUB_OWNER') || 'nguyenkhuong-maker',
     githubRepo: props.getProperty('GITHUB_REPO') || 'treasury-investment-tool',

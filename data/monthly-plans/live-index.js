@@ -1,9 +1,9 @@
 window.MONTHLY_PLANS_LIVE_DATA = {
   meta: {
     name: "Treasury Monthly Plans Live Index",
-    updatedAt: "2026-04-23T18:05:00+07:00",
+    updatedAt: "2026-04-23T18:06:00+07:00",
     defaultMonth: "2026-05",
-    reviewTestEmail: "kdhn1911@gmail.com",
+    reviewTestEmail: "duc.ho@atherlabs.com",
     note: "Chọn tháng kế hoạch để xem, in báo cáo hoặc trình CFO."
   },
   availableMonths: [

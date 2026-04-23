@@ -6,7 +6,7 @@ window.MONTHLY_PLANS_TEST_DATA = {
     defaultMonth: "2026-05",
     storageMode: "browser-local-storage-for-test",
     makerEmail: "nguyen.khuong@atherlabs.com",
-    designatedApproverEmail: "kdhn1911@gmail.com",
+    designatedApproverEmail: "duc.ho@atherlabs.com",
     note: "Bản test để anh Nguyên xem concept kế hoạch tháng trên Index trước khi nhập vào dashboard chính."
   },
   availableMonths: [

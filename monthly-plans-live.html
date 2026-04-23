@@ -8,121 +8,302 @@
     :root {
       --navy:#0b1f4b;
       --navy-2:#1e3a8a;
-      --bg:#f8fafc;
+      --navy-3:#2d4faa;
+      --bg:#f1f5f9;
       --card:#ffffff;
       --text:#0f172a;
       --muted:#64748b;
       --line:#e2e8f0;
+      --line-2:#cbd5e1;
       --ok:#15803d;
       --warn:#a16207;
       --soft-blue:#eff6ff;
-      --soft-gold:#fff7e6;
-      --soft-green:#ecfdf5;
+      --soft-gold:#fffbeb;
+      --soft-green:#f0fdf4;
+      --soft-red:#fef2f2;
       --soft-slate:#f8fafc;
+      --accent:#3b82f6;
+      --accent-hover:#2563eb;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 180px);
+      background: var(--bg);
       color: var(--text);
     }
-    .wrap { max-width: 1480px; margin: 0 auto; padding: 22px; }
+    .wrap { max-width: 1520px; margin: 0 auto; padding: 24px; }
+
+    /* ── HERO ── */
     .hero {
-      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      background: linear-gradient(135deg, #0b1f4b 0%, #1e3a8a 55%, #2563eb 100%);
       color: #fff;
       border-radius: 20px;
-      padding: 20px 22px;
-      box-shadow: 0 18px 60px rgba(15,23,42,.14);
+      padding: 24px 28px;
+      box-shadow: 0 20px 60px rgba(11,31,75,.22);
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
-    .hero h1 { margin: 0; font-size: 26px; }
-    .hero p { margin: 8px 0 0; color: rgba(255,255,255,.88); line-height: 1.6; }
+    .hero-icon {
+      width: 52px; height: 52px; flex-shrink: 0;
+      background: rgba(255,255,255,.13);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+    }
+    .hero-text h1 { margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -.3px; }
+    .hero-text p  { margin: 6px 0 0; color: rgba(255,255,255,.78); font-size: 13.5px; line-height: 1.6; }
+
+    /* ── TOOLBAR ── */
     .toolbar {
-      margin-top: 18px; display: grid; grid-template-columns: 280px 1fr; gap: 14px;
-      background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px;
-      box-shadow: 0 8px 24px rgba(15,23,42,.04);
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 14px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 12px rgba(15,23,42,.05);
+      align-items: center;
     }
-    .field label { display:block; margin-bottom:8px; font-size:12px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+    .field label {
+      display: block; margin-bottom: 8px;
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .07em;
+    }
     select {
-      width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:#fff; font:inherit;
+      width: 100%; padding: 11px 14px;
+      border: 1.5px solid var(--line-2); border-radius: 12px;
+      background: #f8fafc; font: inherit; font-size: 14px; color: var(--text);
+      cursor: pointer;
+      transition: border-color .15s;
     }
+    select:focus { outline: none; border-color: var(--accent); }
     .toolbar-note {
-      display:flex; align-items:center; padding:12px 14px; border-radius:12px; background:#f8fafc; border:1px solid #e2e8f0; color:var(--muted); line-height:1.6; font-size:13px;
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px; border-radius: 12px;
+      background: var(--soft-blue); border: 1px solid #bfdbfe;
+      color: #1e40af; font-size: 13px; line-height: 1.6;
     }
+    .toolbar-note-icon { font-size: 18px; flex-shrink: 0; }
+
+    /* ── PLAN GRID ── */
     .plans {
-      margin-top: 18px; display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items:start;
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: start;
     }
     .plan-card {
-      background: var(--card); border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
-      box-shadow: 0 12px 28px rgba(15,23,42,.06);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(15,23,42,.07);
+      transition: box-shadow .2s;
     }
-    .plan-head { padding: 18px; border-bottom: 1px solid var(--line); }
-    .plan-title-row { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
-    .plan-title { margin:0; font-size:22px; color:var(--navy); }
-    .plan-meta { margin-top: 6px; font-size:13px; color:var(--muted); }
-    .badges, .actions { display:flex; flex-wrap:wrap; gap:8px; }
-    .badges { margin-top:10px; }
-    .badge { display:inline-flex; align-items:center; padding:7px 10px; border-radius:999px; font-size:12px; font-weight:700; }
-    .badge.blue { background:var(--soft-blue); color:#1d4ed8; }
-    .badge.gold { background:var(--soft-gold); color:var(--warn); }
-    .badge.green { background:var(--soft-green); color:var(--ok); }
-    .badge.red { background:#fef2f2; color:#b91c1c; }
-    .badge.gray { background:#f1f5f9; color:#475569; }
-    .highlights { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; margin-top:14px; }
-    .highlight { background:#f8fafc; border:1px solid var(--line); border-radius:14px; padding:12px; }
-    .highlight .label { font-size:12px; color:var(--muted); }
-    .highlight .value { margin-top:6px; font-weight:800; }
-    .metric-list { margin-top:8px; display:grid; gap:8px; }
-    .metric-row { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
-    .metric-row .metric-label { font-size:12px; color:var(--muted); }
-    .metric-row .metric-value { font-size:15px; font-weight:800; text-align:right; }
-    .metric-row .metric-value.green { color:#15803d; }
-    .metric-row .metric-value.red { color:#b91c1c; }
-    .head-actions { margin-top: 14px; }
-    .section { padding:18px; border-top:1px solid var(--line); background:linear-gradient(180deg,#fff,#fafcff); }
-    .section h3 { margin:0 0 12px; font-size:18px; color:var(--navy); }
-    .section.compact { padding-top: 14px; padding-bottom: 14px; }
-    .status-box { display:grid; gap:10px; }
-    .status-card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px 14px; }
-    .status-card .title { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
-    .status-card .body { margin-top:6px; font-size:14px; line-height:1.6; }
-    .iframe-wrap { background:#f8fafc; padding:14px; }
-    iframe { width:100%; min-height:920px; border:1px solid var(--line); border-radius:14px; background:#fff; }
-    .timeline { display:grid; gap:10px; }
-    .timeline-item {
-      border:1px solid var(--line); border-radius:14px; padding:12px 14px; background:#fff;
-      display:grid; grid-template-columns:170px 1fr; gap:12px;
+    .plan-card:hover { box-shadow: 0 8px 36px rgba(15,23,42,.11); }
+
+    /* ── PLAN HEADER ── */
+    .plan-head {
+      padding: 22px 22px 18px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #fafcff 0%, #fff 100%);
     }
-    .timeline-time { font-size:12px; color:var(--muted); }
-    .timeline-body { font-size:14px; line-height:1.55; }
+    .plan-title-row { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    .plan-title {
+      margin: 0; font-size: 20px; font-weight: 800;
+      color: var(--navy); letter-spacing: -.2px;
+    }
+    .plan-meta { margin-top: 5px; font-size: 13px; color: var(--muted); }
+    .badges, .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .badges { margin-top: 10px; }
+
+    /* ── BADGES ── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 11px; border-radius: 999px;
+      font-size: 12px; font-weight: 700; line-height: 1;
+    }
+    .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .badge.blue   { background: var(--soft-blue);  color: #1d4ed8; }
+    .badge.blue::before   { background: #3b82f6; }
+    .badge.gold   { background: var(--soft-gold);  color: #92400e; }
+    .badge.gold::before   { background: #f59e0b; }
+    .badge.green  { background: var(--soft-green); color: #166534; }
+    .badge.green::before  { background: #22c55e; }
+    .badge.red    { background: var(--soft-red);   color: #991b1b; }
+    .badge.red::before    { background: #ef4444; }
+    .badge.gray   { background: #f1f5f9; color: #475569; }
+    .badge.gray::before   { background: #94a3b8; }
+
+    /* ── HIGHLIGHTS ── */
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .highlight {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 13px 14px;
+    }
+    .highlight .label { font-size: 11.5px; color: var(--muted); font-weight: 500; }
+    .highlight .value { margin-top: 6px; font-weight: 800; font-size: 15px; color: var(--navy); }
+    .metric-list { margin-top: 8px; display: grid; gap: 7px; }
+    .metric-row {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 12px;
+    }
+    .metric-row .metric-label { font-size: 12px; color: var(--muted); }
+    .metric-row .metric-value { font-size: 14px; font-weight: 800; text-align: right; color: var(--navy); }
+    .metric-row .metric-value.green { color: #15803d; }
+    .metric-row .metric-value.red   { color: #b91c1c; }
+
+    /* ── HEAD ACTIONS ── */
+    .head-actions { margin-top: 16px; }
+    .helper-note  { margin-top: 8px; font-size: 12px; color: var(--muted); }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 20px 22px;
+      border-top: 1px solid var(--line);
+    }
+    .section-title {
+      display: flex; align-items: center; gap: 8px;
+      margin: 0 0 14px;
+      font-size: 13.5px; font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    .section-title .icon {
+      width: 28px; height: 28px;
+      background: var(--soft-blue);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+
+    /* ── CFO PANEL (merged status + log) ── */
+    .cfo-panel {
+      background: linear-gradient(135deg, #f0f7ff 0%, #fafcff 100%);
+      border: 1.5px solid #bfdbfe;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .cfo-panel-top {
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      border-bottom: 1px dashed #bfdbfe;
+    }
+    .cfo-stat { }
+    .cfo-stat-label {
+      font-size: 10.5px; font-weight: 700; color: #93c5fd;
+      text-transform: uppercase; letter-spacing: .07em;
+      margin-bottom: 6px;
+    }
+    .cfo-stat-body { font-size: 13.5px; line-height: 1.5; color: var(--text); }
+    .cfo-stat-body strong { color: var(--navy); }
+    .cfo-divider { width: 1px; background: #bfdbfe; margin: 0; }
+
+    /* CFO Timeline inside panel */
+    .cfo-log { padding: 14px 16px; }
+    .cfo-log-label {
+      font-size: 10.5px; font-weight: 700; color: #64748b;
+      text-transform: uppercase; letter-spacing: .07em;
+      margin-bottom: 10px;
+    }
+    .cfo-timeline { display: grid; gap: 8px; }
+    .cfo-timeline-item {
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .cfo-timeline-dot-col {
+      display: flex; flex-direction: column; align-items: center; padding-top: 3px;
+    }
+    .cfo-timeline-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+      box-shadow: 0 0 0 3px #dbeafe;
+    }
+    .cfo-timeline-line {
+      width: 1px; flex: 1; min-height: 16px;
+      background: #bfdbfe; margin-top: 4px;
+    }
+    .cfo-timeline-content { flex: 1; padding-bottom: 6px; }
+    .cfo-timeline-label {
+      font-size: 13px; font-weight: 700; color: var(--navy);
+    }
+    .cfo-timeline-time {
+      font-size: 11px; color: var(--muted); margin-top: 2px;
+    }
+    .cfo-timeline-note {
+      font-size: 12.5px; color: var(--text); margin-top: 4px;
+      line-height: 1.5;
+    }
+    .cfo-log-empty {
+      font-size: 13px; color: var(--muted);
+      font-style: italic; padding: 4px 0;
+    }
+
+    /* ── IFRAME ── */
+    .iframe-wrap { background: #f1f5f9; padding: 16px; }
+    iframe {
+      width: 100%; min-height: 920px;
+      border: 1px solid var(--line); border-radius: 16px;
+      background: #fff;
+    }
+
+    /* ── BUTTONS ── */
     .btn, button.btn {
-      display:inline-flex; align-items:center; justify-content:center; gap:8px; text-decoration:none;
-      padding:11px 14px; border-radius:12px; border:1px solid var(--line); background:#fff; color:var(--navy); font-weight:700; cursor:pointer; font:inherit;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      text-decoration: none; padding: 10px 18px; border-radius: 12px;
+      border: 1.5px solid var(--line-2); background: #fff; color: var(--navy);
+      font-weight: 700; cursor: pointer; font: inherit; font-size: 13.5px;
+      transition: all .15s;
     }
+    .btn:hover, button.btn:hover { background: #f1f5f9; border-color: #94a3b8; }
     .btn.primary, button.btn.primary {
-      background: var(--navy); color:#fff; border-color: var(--navy);
+      background: var(--navy); color: #fff; border-color: var(--navy);
     }
-    .btn.print, button.btn.print {
-      background: #fff; color: var(--navy);
+    .btn.primary:hover, button.btn.primary:hover { background: var(--navy-3); }
+    .btn.primary:disabled, button.btn.primary:disabled {
+      opacity: .55; cursor: not-allowed;
     }
-    .helper-note { margin-top: 10px; font-size: 12px; color: var(--muted); }
+
+    /* ── DOCS SECTION ── */
+    .doc-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    /* ── RESPONSIVE ── */
     @media (max-width: 1180px) {
-      .toolbar, .plans, .highlights { grid-template-columns: 1fr; }
-      .timeline-item { grid-template-columns:1fr; }
+      .toolbar { grid-template-columns: 1fr; }
+      .plans   { grid-template-columns: 1fr; }
+      .highlights { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
-      .wrap { padding:14px; }
-      .hero h1 { font-size:22px; }
-      .plan-title-row { flex-direction:column; }
-      iframe { min-height:760px; }
+      .wrap  { padding: 14px; }
+      .hero  { padding: 18px; }
+      .hero-text h1 { font-size: 20px; }
+      .plan-title-row { flex-direction: column; }
+      .cfo-panel-top  { grid-template-columns: 1fr; }
+      iframe { min-height: 760px; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <section class="hero" id="heroBlock">
-      <h1>Kế hoạch ngân quỹ theo tháng</h1>
-      <p>Xem kế hoạch ngân quỹ VIHALI và CÁ NHÂN theo từng tháng, ưu tiên thao tác gọn để đọc nhanh, in báo cáo và trình CFO khi cần.</p>
+      <div class="hero-icon">📅</div>
+      <div class="hero-text">
+        <h1>Kế hoạch ngân quỹ theo tháng</h1>
+        <p>Xem kế hoạch ngân quỹ VIHALI và CÁ NHÂN theo từng tháng, ưu tiên thao tác gọn để đọc nhanh, in báo cáo và trình CFO khi cần.</p>
+      </div>
     </section>
 
     <section class="toolbar">
@@ -130,7 +311,10 @@
         <label>Tháng kế hoạch</label>
         <select id="monthSelect"></select>
       </div>
-      <div class="toolbar-note" id="toolbarNote"></div>
+      <div class="toolbar-note" id="toolbarNote">
+        <span class="toolbar-note-icon">📋</span>
+        <span></span>
+      </div>
     </section>
 
     <section class="plans" id="plans"></section>
@@ -144,9 +328,10 @@
     const plansEl = document.getElementById('plans');
     const heroBlock = document.getElementById('heroBlock');
     const CFO_APPROVAL_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyMyXnoXOj4PJ7f5w4fPaXzbt4DpsRfA6mxIWEFV3LeYCKUO0aWle-W20CZxzEjvMhWyA/exec';
-    const REVIEW_TEST_EMAIL = DB.meta.reviewTestEmail || 'kdhn1911@gmail.com';
-    const APPROVAL_CACHE_BUST = '20260423-1805';
-    const PLAN_ASSET_BUST = '20260423-1805';
+    const REVIEW_TEST_EMAIL = DB.meta.reviewTestEmail || 'duc.ho@atherlabs.com';
+    const APPROVAL_CACHE_BUST = '20260423-1806';
+    const PLAN_ASSET_BUST = '20260423-1806';
+    const SEND_STATE_VERSION = '20260423-1806';
     const APPROVAL_PATHS = [
       './data/monthly-plans/approvals',
       './treasury-master-dashboard/data/monthly-plans/approvals'
@@ -154,7 +339,7 @@
     const approvalCache = new Map();
 
     function sendStateKey(planId) {
-      return `treasury-send-state::${planId}`;
+      return `treasury-send-state::${SEND_STATE_VERSION}::${planId}`;
     }
 
     function getSendState(planId) {
@@ -185,7 +370,7 @@
           hidden: true,
           disabled: true,
           label: '',
-          helper: `Mail test hiện tại: ${REVIEW_TEST_EMAIL}`
+          helper: `Mail phê duyệt hiện tại: ${REVIEW_TEST_EMAIL}`
         };
       }
 
@@ -231,7 +416,7 @@
         hidden: false,
         disabled: false,
         label: '📨 Gửi CFO',
-        helper: `Mail test hiện tại: ${REVIEW_TEST_EMAIL}`
+        helper: `Mail phê duyệt hiện tại: ${REVIEW_TEST_EMAIL}`
       };
     }
 
@@ -268,10 +453,10 @@
 
     function approvalStatusMeta(plan, approval) {
       const status = approval?.status || plan.status;
-      if (status === 'approved') return { label: 'Đã được CFO duyệt', cls: 'green' };
-      if (status === 'revision_requested') return { label: 'Cần điều chỉnh', cls: 'red' };
-      if (status === 'pending_cfo_review') return { label: 'Đang chờ CFO duyệt', cls: 'gold' };
-      if (status === 'ready_for_cfo') return { label: 'Sẵn sàng trình CFO', cls: 'gold' };
+      if (status === 'approved')            return { label: 'Đã được CFO duyệt', cls: 'green' };
+      if (status === 'revision_requested')  return { label: 'Cần điều chỉnh',    cls: 'red'   };
+      if (status === 'pending_cfo_review')  return { label: 'Đang chờ CFO duyệt', cls: 'gold' };
+      if (status === 'ready_for_cfo')       return { label: 'Sẵn sàng trình CFO', cls: 'gold' };
       return { label: 'Bản kế hoạch', cls: 'gray' };
     }
 
@@ -280,7 +465,7 @@
         const items = [];
         items.push({
           at: formatApprovalTime(approval.submittedAt || approval.reviewedAt || approval.approvedAt),
-          label: approval.status === 'pending_cfo_review' ? 'Đã trình CFO' : 'Đã trình CFO',
+          label: 'Đã trình CFO',
           note: `Đã gửi mail review tới ${approval.approverEmail || REVIEW_TEST_EMAIL}.`
         });
         if (approval.status === 'revision_requested') {
@@ -302,37 +487,158 @@
       return (plan.timeline || []).filter((item) => ['cfo_reviewed', 'approved', 'published'].includes(item.type));
     }
 
-    function renderTimeline(plan, approval) {
-      const items = buildTimeline(plan, approval);
-      if (!items.length) return '';
+    /* ── MERGED CFO PANEL (status + log) ── */
+    function renderCfoPanel(plan, approval) {
+      if (!approval && !plan.allowSendToCfo) return '';
+
+      const status = approvalStatusMeta(plan, approval);
+      const timeText = approval?.approvedAt || approval?.reviewedAt || approval?.submittedAt;
+      const latestText = timeText ? formatApprovalTime(timeText) : '—';
+      const actorText = approval?.approvedBy || approval?.approverEmail || REVIEW_TEST_EMAIL;
+
+      const timelineItems = buildTimeline(plan, approval);
+      const timelineHtml = timelineItems.length
+        ? timelineItems.map((item, idx) => `
+            <div class="cfo-timeline-item">
+              <div class="cfo-timeline-dot-col">
+                <div class="cfo-timeline-dot"></div>
+                ${idx < timelineItems.length - 1 ? '<div class="cfo-timeline-line"></div>' : ''}
+              </div>
+              <div class="cfo-timeline-content">
+                <div class="cfo-timeline-label">${item.label}</div>
+                <div class="cfo-timeline-time">${item.at}</div>
+                <div class="cfo-timeline-note">${item.note}</div>
+              </div>
+            </div>
+          `).join('')
+        : `<div class="cfo-log-empty">Chưa có lịch sử hoạt động CFO.</div>`;
+
       return `
         <div class="section">
-          <h3>🕒 Log CFO</h3>
-          <div class="timeline">${items.map((item) => `
-            <div class="timeline-item">
-              <div class="timeline-time">${item.at}<br/><span>${item.label}</span></div>
-              <div class="timeline-body">${item.note}</div>
+          <div class="section-title">
+            <span class="icon">🛡️</span>
+            Phê duyệt CFO
+          </div>
+          <div class="cfo-panel">
+            <div class="cfo-panel-top">
+              <div class="cfo-stat">
+                <div class="cfo-stat-label">Trạng thái hiện tại</div>
+                <div class="cfo-stat-body">${badge(status.label, status.cls)}</div>
+              </div>
+              <div class="cfo-stat">
+                <div class="cfo-stat-label">Cập nhật gần nhất</div>
+                <div class="cfo-stat-body">
+                  ${latestText}
+                  ${approval?.status === 'approved' ? `<br/><strong>${actorText}</strong>` : ''}
+                </div>
+              </div>
             </div>
-          `).join('')}</div>
+            <div class="cfo-log">
+              <div class="cfo-log-label">Lịch sử hoạt động</div>
+              <div class="cfo-timeline">${timelineHtml}</div>
+            </div>
+          </div>
         </div>
       `;
     }
 
-    async function loadApproval(plan) {
-      if (approvalCache.has(plan.id)) return approvalCache.get(plan.id);
-      for (const basePath of APPROVAL_PATHS) {
-        try {
-          const res = await fetch(`${basePath}/${plan.id}.json?v=${APPROVAL_CACHE_BUST}`, { cache: 'no-store' });
-          if (!res.ok) continue;
-          const data = await res.json();
-          approvalCache.set(plan.id, data);
-          return data;
-        } catch (error) {
-          console.error('load approval failed', plan.id, basePath, error);
-        }
+    function renderHighlight(item) {
+      if (item.rows && item.rows.length) {
+        return `
+          <div class="highlight">
+            <div class="label">${item.label}</div>
+            <div class="metric-list">
+              ${item.rows.map((row) => `
+                <div class="metric-row">
+                  <div class="metric-label">${row.label}</div>
+                  <div class="metric-value ${row.tone || ''}">${row.value}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
       }
-      approvalCache.set(plan.id, null);
-      return null;
+      return `
+        <div class="highlight">
+          <div class="label">${item.label}</div>
+          <div class="value">${item.value}</div>
+        </div>
+      `;
+    }
+
+    function renderPlan(plan, monthKey, month, approval) {
+      const status = approvalStatusMeta(plan, approval);
+      const sendMeta = sendButtonMeta(plan, approval);
+      return `
+        <article class="plan-card">
+          <div class="plan-head">
+            <div class="plan-title-row">
+              <div>
+                <h2 class="plan-title">${plan.type === 'company' ? '🏢' : '👤'} ${plan.title}</h2>
+                <div class="plan-meta">${month.monthLabel} · ${month.periodLabel}</div>
+                <div class="badges">
+                  ${badge('Version ' + plan.version, 'gray')}
+                  ${badge(status.label, status.cls)}
+                </div>
+              </div>
+            </div>
+            <div class="highlights">
+              ${plan.highlights.map((item) => renderHighlight(item)).join('')}
+            </div>
+            ${plan.allowSendToCfo && !sendMeta.hidden ? `
+              <div class="head-actions actions">
+                <button class="btn primary" data-action="send-cfo" data-plan-id="${plan.id}" ${sendMeta.disabled ? 'disabled' : ''}>${sendMeta.label}</button>
+              </div>
+              <div class="helper-note">${sendMeta.helper}</div>
+            ` : ''}
+          </div>
+
+          ${renderCfoPanel(plan, approval)}
+
+          <div class="iframe-wrap">
+            <iframe src="${plan.sourceHtml}?v=${PLAN_ASSET_BUST}" title="${plan.title}"></iframe>
+          </div>
+
+          <div class="section">
+            <div class="section-title">
+              <span class="icon">📄</span>
+              Tài liệu liên quan
+            </div>
+            <div class="doc-actions">
+              <a class="btn" href="${plan.sourcePdf}?v=${PLAN_ASSET_BUST}" target="_blank" rel="noreferrer">📥 Mở bản PDF</a>
+              <button class="btn" data-action="print-report" data-plan-id="${plan.id}">🖨️ In báo cáo</button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function currentMonth() {
+      return DB.months[monthSelect.value];
+    }
+
+    function currentPlans() {
+      const month = currentMonth();
+      return [month.company, month.personal];
+    }
+
+    function bindActions() {
+      const monthKey = monthSelect.value;
+      const planMap = new Map(currentPlans().map((plan) => [plan.id, plan]));
+
+      document.querySelectorAll('[data-action="print-report"]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const plan = planMap.get(btn.dataset.planId);
+          if (plan) printPlanReport(plan);
+        });
+      });
+
+      document.querySelectorAll('[data-action="send-cfo"]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const plan = planMap.get(btn.dataset.planId);
+          if (plan) await sendPlanToCfo(monthKey, plan);
+        });
+      });
     }
 
     function printPlanReport(plan) {
@@ -394,131 +700,28 @@
       }
     }
 
-    function renderHighlight(item) {
-      if (item.rows && item.rows.length) {
-        return `
-          <div class="highlight">
-            <div class="label">${item.label}</div>
-            <div class="metric-list">
-              ${item.rows.map((row) => `
-                <div class="metric-row">
-                  <div class="metric-label">${row.label}</div>
-                  <div class="metric-value ${row.tone || ''}">${row.value}</div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `;
+    async function loadApproval(plan) {
+      if (approvalCache.has(plan.id)) return approvalCache.get(plan.id);
+      for (const basePath of APPROVAL_PATHS) {
+        try {
+          const res = await fetch(`${basePath}/${plan.id}.json?v=${APPROVAL_CACHE_BUST}`, { cache: 'no-store' });
+          if (!res.ok) continue;
+          const data = await res.json();
+          approvalCache.set(plan.id, data);
+          return data;
+        } catch (error) {
+          console.error('load approval failed', plan.id, basePath, error);
+        }
       }
-      return `
-        <div class="highlight">
-          <div class="label">${item.label}</div>
-          <div class="value">${item.value}</div>
-        </div>
-      `;
-    }
-
-    function renderApprovalStatus(plan, approval) {
-      if (!approval && !plan.allowSendToCfo) return '';
-      const status = approvalStatusMeta(plan, approval);
-      const timeText = approval?.approvedAt || approval?.reviewedAt || approval?.submittedAt;
-      const latestText = timeText ? formatApprovalTime(timeText) : 'Chưa có cập nhật mới';
-      const actorText = approval?.approvedBy || approval?.approverEmail || REVIEW_TEST_EMAIL;
-      return `
-        <div class="section compact">
-          <h3>📌 Trạng thái CFO</h3>
-          <div class="status-box">
-            <div class="status-card">
-              <div class="title">Trạng thái hiện tại</div>
-              <div class="body">${badge(status.label, status.cls)}</div>
-            </div>
-            <div class="status-card">
-              <div class="title">Cập nhật gần nhất</div>
-              <div class="body">${latestText}${approval?.status === 'approved' ? `<br/>Người duyệt: <strong>${actorText}</strong>` : ''}</div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderPlan(plan, monthKey, month, approval) {
-      const status = approvalStatusMeta(plan, approval);
-      const sendMeta = sendButtonMeta(plan, approval);
-      return `
-        <article class="plan-card">
-          <div class="plan-head">
-            <div class="plan-title-row">
-              <div>
-                <h2 class="plan-title">${plan.type === 'company' ? '🏢' : '👤'} ${plan.title}</h2>
-                <div class="plan-meta">${month.monthLabel} · ${month.periodLabel}</div>
-                <div class="badges">
-                  ${badge('Version ' + plan.version, 'gray')}
-                  ${badge(status.label, status.cls)}
-                </div>
-              </div>
-            </div>
-            <div class="highlights">
-              ${plan.highlights.map((item) => renderHighlight(item)).join('')}
-            </div>
-            ${plan.allowSendToCfo && !sendMeta.hidden ? `
-              <div class="head-actions actions">
-                <button class="btn primary" data-action="send-cfo" data-plan-id="${plan.id}" ${sendMeta.disabled ? 'disabled' : ''}>${sendMeta.label}</button>
-              </div>
-              <div class="helper-note">${sendMeta.helper}</div>
-            ` : ''}
-          </div>
-
-          ${renderApprovalStatus(plan, approval)}
-
-          <div class="iframe-wrap">
-            <iframe src="${plan.sourceHtml}?v=${PLAN_ASSET_BUST}" title="${plan.title}"></iframe>
-          </div>
-
-          ${renderTimeline(plan, approval)}
-
-          <div class="section compact">
-            <h3>📄 Tài liệu liên quan</h3>
-            <div class="actions">
-              <a class="btn" href="${plan.sourcePdf}?v=${PLAN_ASSET_BUST}" target="_blank" rel="noreferrer">Mở bản PDF</a>
-              <button class="btn print" data-action="print-report" data-plan-id="${plan.id}">In báo cáo</button>
-            </div>
-          </div>
-        </article>
-      `;
-    }
-
-    function currentMonth() {
-      return DB.months[monthSelect.value];
-    }
-
-    function currentPlans() {
-      const month = currentMonth();
-      return [month.company, month.personal];
-    }
-
-    function bindActions() {
-      const monthKey = monthSelect.value;
-      const planMap = new Map(currentPlans().map((plan) => [plan.id, plan]));
-
-      document.querySelectorAll('[data-action="print-report"]').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const plan = planMap.get(btn.dataset.planId);
-          if (plan) printPlanReport(plan);
-        });
-      });
-
-      document.querySelectorAll('[data-action="send-cfo"]').forEach((btn) => {
-        btn.addEventListener('click', async () => {
-          const plan = planMap.get(btn.dataset.planId);
-          if (plan) await sendPlanToCfo(monthKey, plan);
-        });
-      });
+      approvalCache.set(plan.id, null);
+      return null;
     }
 
     async function render() {
       const monthKey = monthSelect.value;
       const month = DB.months[monthKey];
-      toolbarNote.innerHTML = `<strong>${month.monthLabel}</strong> · ${month.periodLabel}<br/>${DB.meta.note}`;
+      const noteEl = toolbarNote.querySelector('span:last-child');
+      noteEl.innerHTML = `<strong>${month.monthLabel}</strong> · ${month.periodLabel}<br/>${DB.meta.note}`;
       const plans = [month.company, month.personal];
       approvalCache.clear();
       const approvals = await Promise.all(plans.map((plan) => loadApproval(plan)));

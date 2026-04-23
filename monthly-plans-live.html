@@ -136,7 +136,7 @@
     <section class="plans" id="plans"></section>
   </div>
 
-  <script src="./data/monthly-plans/live-index.js?v=20260423-1758"></script>
+  <script src="./data/monthly-plans/live-index.js?v=20260423-1805"></script>
   <script>
     const DB = window.MONTHLY_PLANS_LIVE_DATA;
     const monthSelect = document.getElementById('monthSelect');
@@ -145,7 +145,8 @@
     const heroBlock = document.getElementById('heroBlock');
     const CFO_APPROVAL_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyMyXnoXOj4PJ7f5w4fPaXzbt4DpsRfA6mxIWEFV3LeYCKUO0aWle-W20CZxzEjvMhWyA/exec';
     const REVIEW_TEST_EMAIL = DB.meta.reviewTestEmail || 'kdhn1911@gmail.com';
-    const APPROVAL_CACHE_BUST = '20260423-1758';
+    const APPROVAL_CACHE_BUST = '20260423-1805';
+    const PLAN_ASSET_BUST = '20260423-1805';
     const APPROVAL_PATHS = [
       './data/monthly-plans/approvals',
       './treasury-master-dashboard/data/monthly-plans/approvals'
@@ -335,7 +336,7 @@
     }
 
     function printPlanReport(plan) {
-      const printWindow = window.open(plan.sourceHtml, '_blank');
+      const printWindow = window.open(`${plan.sourceHtml}?v=${PLAN_ASSET_BUST}`, '_blank');
       if (!printWindow) {
         alert('Trình duyệt đang chặn popup. Anh cho phép mở tab mới rồi thử lại giúp em nhé.');
         return;
@@ -470,7 +471,7 @@
           ${renderApprovalStatus(plan, approval)}
 
           <div class="iframe-wrap">
-            <iframe src="${plan.sourceHtml}" title="${plan.title}"></iframe>
+            <iframe src="${plan.sourceHtml}?v=${PLAN_ASSET_BUST}" title="${plan.title}"></iframe>
           </div>
 
           ${renderTimeline(plan, approval)}
@@ -478,7 +479,7 @@
           <div class="section compact">
             <h3>📄 Tài liệu liên quan</h3>
             <div class="actions">
-              <a class="btn" href="${plan.sourcePdf}" target="_blank" rel="noreferrer">Mở bản PDF</a>
+              <a class="btn" href="${plan.sourcePdf}?v=${PLAN_ASSET_BUST}" target="_blank" rel="noreferrer">Mở bản PDF</a>
               <button class="btn print" data-action="print-report" data-plan-id="${plan.id}">In báo cáo</button>
             </div>
           </div>

@@ -112,7 +112,6 @@
 
     /* ── PLAN HEADER ── */
     .plan-head {
-      min-height: 300px;
       padding: 22px 22px 18px;
       border-bottom: 1px solid var(--line);
       background: linear-gradient(180deg, #fafcff 0%, #fff 100%);
@@ -147,17 +146,21 @@
     /* ── HIGHLIGHTS ── */
     .highlights {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 10px;
       margin-top: 16px;
-      align-items: start;
+      align-items: stretch;
     }
     .highlight {
-      align-self: start;
+      align-self: stretch;
+      min-height: 88px;
       background: #f8fafc;
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 13px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
     .highlight .label { font-size: 11.5px; color: var(--muted); font-weight: 500; }
     .highlight .value { margin-top: 6px; font-weight: 800; font-size: 15px; color: var(--navy); }
@@ -732,6 +735,46 @@
       }
     }
 
+    /* ── EQUALIZE plan-head heights so both cards are visually aligned ── */
+    let _eqObserver = null;
+
+    function equalizeHeads() {
+      const heads = [...document.querySelectorAll('.plan-head')];
+      if (heads.length < 2) return;
+      /* reset trước để đo natural height */
+      heads.forEach((el) => { el.style.height = ''; });
+      /* force reflow rồi đo */
+      const maxH = Math.max(...heads.map((el) => el.getBoundingClientRect().height));
+      if (maxH > 0) heads.forEach((el) => { el.style.height = maxH + 'px'; });
+    }
+
+    function scheduleEqualize() {
+      /* huỷ observer cũ nếu có */
+      if (_eqObserver) { _eqObserver.disconnect(); _eqObserver = null; }
+
+      /* chạy ngay + sau các mốc timing */
+      requestAnimationFrame(equalizeHeads);
+      setTimeout(equalizeHeads, 150);
+      setTimeout(equalizeHeads, 600);
+      setTimeout(equalizeHeads, 1200);
+
+      /* đảm bảo font tải xong vẫn re-equalize */
+      if (document.fonts?.ready) {
+        document.fonts.ready.then(() => equalizeHeads()).catch(() => {});
+      }
+
+      /* dùng ResizeObserver để tự re-equalize khi content thay đổi kích thước */
+      if (typeof ResizeObserver !== 'undefined') {
+        _eqObserver = new ResizeObserver(() => equalizeHeads());
+        document.querySelectorAll('.plan-head, .highlights, .helper-note').forEach((el) => {
+          if (el) _eqObserver.observe(el);
+        });
+      }
+    }
+
+    window.addEventListener('load', equalizeHeads);
+    window.addEventListener('resize', equalizeHeads);
+
     async function loadApproval(plan) {
       if (approvalCache.has(plan.id)) return approvalCache.get(plan.id);
       for (const basePath of APPROVAL_PATHS) {
@@ -759,6 +802,7 @@
       const approvals = await Promise.all(plans.map((plan) => loadApproval(plan)));
       plansEl.innerHTML = plans.map((plan, index) => renderPlan(plan, monthKey, month, approvals[index])).join('');
       bindActions();
+      scheduleEqualize();
     }
 
     monthSelect.addEventListener('change', render);

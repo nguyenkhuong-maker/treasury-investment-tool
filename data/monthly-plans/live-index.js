@@ -32,20 +32,9 @@ window.MONTHLY_PLANS_LIVE_DATA = {
         allowSendToCfo: true,
         highlights: [
           { label: "Hạn mức khả dụng đầu kỳ", value: "13.938 tỷ VND" },
-          {
-            label: "Dòng tiền trong kỳ",
-            rows: [
-              { label: "Thu", value: "3.790 tỷ VND", tone: "green" },
-              { label: "Chi", value: "14.847 tỷ VND", tone: "red" }
-            ]
-          },
-          {
-            label: "Cuối kỳ & thanh khoản",
-            rows: [
-              { label: "HM khả dụng cuối kỳ", value: "2.881 tỷ VND" },
-              { label: "Thanh khoản", value: "Mỏng nhất 223 triệu ngày 29/05" }
-            ]
-          }
+          { label: "Dòng tiền trong kỳ", value: "Thu 3.790 tỷ · Chi 14.847 tỷ" },
+          { label: "Hạn mức khả dụng cuối kỳ", value: "2.881 tỷ VND" },
+          { label: "Thanh khoản", value: "Mỏng nhất 223 triệu ngày 29/05" }
         ],
         sourceHtml: "./plans/2026-05/company.html",
         sourcePdf: "./plans/2026-05/company.pdf",
@@ -60,29 +49,10 @@ window.MONTHLY_PLANS_LIVE_DATA = {
         status: "ready_for_cfo",
         allowSendToCfo: true,
         highlights: [
-          {
-            label: "Tiền gửi",
-            rows: [
-              { label: "Đầu kỳ", value: "122.249 tỷ VND" },
-              { label: "Tăng / giảm", value: "+20.920 tỷ cơ cấu lại" },
-              { label: "Cuối kỳ", value: "122.249 tỷ VND" }
-            ]
-          },
-          {
-            label: "Dư nợ vay",
-            rows: [
-              { label: "Đầu kỳ", value: "27.250 tỷ VND" },
-              { label: "Tăng / giảm", value: "Không đổi" },
-              { label: "Cuối kỳ", value: "27.250 tỷ VND" }
-            ]
-          },
-          {
-            label: "Thanh khoản",
-            rows: [
-              { label: "VPBank chị Thảo", value: "1.031 tỷ VND" },
-              { label: "VPBank anh Tín", value: "0 VND" }
-            ]
-          }
+          { label: "Tiền gửi đầu kỳ", value: "122.249 tỷ VND" },
+          { label: "Tăng / giảm", value: "+20.920 tỷ cơ cấu lại" },
+          { label: "Dư nợ vay cuối kỳ", value: "27.250 tỷ VND" },
+          { label: "Thanh khoản VPBank", value: "1.031 tỷ VND" }
         ],
         sourceHtml: "./plans/2026-05/personal.html",
         sourcePdf: "./plans/2026-05/personal.pdf",

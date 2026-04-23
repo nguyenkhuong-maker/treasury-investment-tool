@@ -85,7 +85,7 @@ window.MONTHLY_PLANS_TEST_DATA = {
         highlights: [
           { label: "Dòng tiền vào kế hoạch", value: "16.8 tỷ VND" },
           { label: "Tổng chi kế hoạch", value: "20.497 tỷ VND" },
-          { label: "Số dư cuối kỳ", value: "2.232 tỷ VND" },
+          { label: "Số dư cuối kỳ", value: "2.457 tỷ VND" },
           { label: "Thanh khoản", value: "An toàn có kiểm soát" }
         ],
         contentHash: "sha256:test-company-2026-04-v1-5",

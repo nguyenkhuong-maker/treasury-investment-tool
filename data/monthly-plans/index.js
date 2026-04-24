@@ -7,6 +7,11 @@ window.MONTHLY_PLANS_TEST_DATA = {
     storageMode: "browser-local-storage-for-test",
     makerEmail: "nguyen.khuong@atherlabs.com",
     designatedApproverEmail: "duc.ho@atherlabs.com",
+    slackApprovalTarget: {
+      channelName: "#treasury-management",
+      channelId: "C0AT2E4CBDX",
+      botUsername: "vesper_treasury"
+    },
     note: "Bản test để anh Nguyên xem concept kế hoạch tháng trên Index trước khi nhập vào dashboard chính.",
     personalHighlightRules: {
       totalDepositAndPapersOpening: "Luôn lấy Mục 1. Tiền gửi đầu kỳ cộng Mục 3. Thanh khoản đầu kỳ.",

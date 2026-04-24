@@ -282,7 +282,13 @@
       background: var(--navy); color: #fff; border-color: var(--navy);
     }
     .btn.primary:hover, button.btn.primary:hover { background: var(--navy-3); }
-    .btn.primary:disabled, button.btn.primary:disabled {
+    .btn.slack, button.btn.slack {
+      background: #4a154b; color: #fff; border-color: #4a154b;
+    }
+    .btn.slack:hover, button.btn.slack:hover { background: #611f69; border-color: #611f69; }
+    .btn.primary:disabled, button.btn.primary:disabled,
+    .btn.slack:disabled, button.btn.slack:disabled,
+    .btn:disabled, button.btn:disabled {
       opacity: .55; cursor: not-allowed;
     }
 
@@ -363,6 +369,11 @@
     const heroBlock = document.getElementById('heroBlock');
     const CFO_APPROVAL_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyMyXnoXOj4PJ7f5w4fPaXzbt4DpsRfA6mxIWEFV3LeYCKUO0aWle-W20CZxzEjvMhWyA/exec';
     const REVIEW_TEST_EMAIL = DB.meta.reviewTestEmail || 'duc.ho@atherlabs.com';
+    const REVIEW_SLACK_TARGET = DB.meta.slackApprovalTarget || {
+      channelName: '#treasury-management',
+      channelId: 'C0AT2E4CBDX',
+      botUsername: 'vesper_treasury'
+    };
     const APPROVAL_CACHE_BUST = siteVersion;
     const PLAN_ASSET_BUST = siteVersion;
     const SEND_STATE_VERSION = siteVersion;
@@ -373,59 +384,86 @@
     ];
     const approvalCache = new Map();
 
-    function sendStateKey(planId) {
-      return `treasury-send-state::${SEND_STATE_VERSION}::${planId}`;
+    function sendStateKey(planId, delivery) {
+      return `treasury-send-state::${SEND_STATE_VERSION}::${delivery}::${planId}`;
     }
 
-    function getSendState(planId) {
+    function getSendState(planId, delivery) {
       try {
-        const raw = localStorage.getItem(sendStateKey(planId));
+        const raw = localStorage.getItem(sendStateKey(planId, delivery));
         return raw ? JSON.parse(raw) : null;
       } catch (error) {
-        console.error('getSendState failed', planId, error);
+        console.error('getSendState failed', planId, delivery, error);
         return null;
       }
     }
 
-    function setSendState(planId, state) {
+    function setSendState(planId, delivery, state) {
       try {
-        localStorage.setItem(sendStateKey(planId), JSON.stringify(state));
+        localStorage.setItem(sendStateKey(planId, delivery), JSON.stringify(state));
       } catch (error) {
-        console.error('setSendState failed', planId, error);
+        console.error('setSendState failed', planId, delivery, error);
       }
     }
 
-    function sendButtonMeta(plan, approval) {
-      const state = getSendState(plan.id);
+    function approvalActorLabel(approval) {
+      return approval?.approvedByLabel || approval?.approvedBy || approval?.approverEmail || REVIEW_TEST_EMAIL;
+    }
+
+    function approvalDeliveryLabel(approval) {
+      if (approval?.channel === 'slack_interactive') {
+        return approval?.slackChannelName || REVIEW_SLACK_TARGET.channelName;
+      }
+      return approval?.approverEmail || REVIEW_TEST_EMAIL;
+    }
+
+    function approvalSubmittedHelper(approval) {
+      if (approval?.channel === 'slack_interactive') {
+        return `Đã gửi Slack review tới ${approvalDeliveryLabel(approval)}, chờ hành động tiếp theo từ CFO.`;
+      }
+      return `Đã gửi mail review tới ${approvalDeliveryLabel(approval)}, chờ hành động tiếp theo từ CFO.`;
+    }
+
+    function sendButtonMeta(plan, approval, delivery) {
+      const state = getSendState(plan.id, delivery);
       const approvalStatus = approval?.status || null;
+      const isSlack = delivery === 'slack';
+      const idleLabel = isSlack ? '💬 Gửi CFO qua Slack' : '📨 Gửi CFO qua mail';
+      const sendingLabel = isSlack ? 'Đang gửi Slack...' : 'Đang gửi mail...';
+      const defaultHelper = isSlack
+        ? `Bot ${REVIEW_SLACK_TARGET.botUsername} sẽ gửi vào ${REVIEW_SLACK_TARGET.channelName}.`
+        : `Mail phê duyệt hiện tại: ${REVIEW_TEST_EMAIL}`;
+      const revisionHelper = isSlack
+        ? `CFO đã yêu cầu điều chỉnh. Anh có thể gửi lại qua Slack vào ${REVIEW_SLACK_TARGET.channelName}.`
+        : `CFO đã yêu cầu điều chỉnh. Anh có thể gửi lại tới ${REVIEW_TEST_EMAIL}.`;
 
       if (approvalStatus === 'approved') {
-        setSendState(plan.id, { status: 'approved', updatedAt: Date.now() });
+        setSendState(plan.id, delivery, { status: 'approved', updatedAt: Date.now() });
         return {
           hidden: true,
           disabled: true,
           label: '',
-          helper: `Mail phê duyệt hiện tại: ${REVIEW_TEST_EMAIL}`
+          helper: defaultHelper
         };
       }
 
       if (approvalStatus === 'revision_requested') {
-        setSendState(plan.id, { status: 'idle', updatedAt: Date.now() });
+        setSendState(plan.id, delivery, { status: 'idle', updatedAt: Date.now() });
         return {
           hidden: false,
           disabled: false,
-          label: '📨 Gửi CFO',
-          helper: `CFO đã yêu cầu điều chỉnh. Anh có thể gửi lại tới ${REVIEW_TEST_EMAIL}.`
+          label: idleLabel,
+          helper: revisionHelper
         };
       }
 
       if (approvalStatus === 'pending_cfo_review') {
-        setSendState(plan.id, { status: 'sent', updatedAt: Date.now() });
+        setSendState(plan.id, delivery, { status: 'sent', updatedAt: Date.now() });
         return {
           hidden: false,
           disabled: true,
           label: 'Đã gửi',
-          helper: `Đã gửi mail review tới ${approval.approverEmail || REVIEW_TEST_EMAIL}, chờ hành động tiếp theo từ CFO.`
+          helper: approvalSubmittedHelper(approval)
         };
       }
 
@@ -433,8 +471,10 @@
         return {
           hidden: false,
           disabled: true,
-          label: 'Đang gửi...',
-          helper: `Đang gửi mail review tới ${REVIEW_TEST_EMAIL}...`
+          label: sendingLabel,
+          helper: isSlack
+            ? `Đang gửi Slack review tới ${REVIEW_SLACK_TARGET.channelName}...`
+            : `Đang gửi mail review tới ${REVIEW_TEST_EMAIL}...`
         };
       }
 
@@ -443,15 +483,17 @@
           hidden: false,
           disabled: true,
           label: 'Đã gửi',
-          helper: `Đã gửi mail review tới ${REVIEW_TEST_EMAIL}, chờ hành động tiếp theo từ CFO.`
+          helper: isSlack
+            ? `Đã gửi Slack review tới ${REVIEW_SLACK_TARGET.channelName}, chờ hành động tiếp theo từ CFO.`
+            : `Đã gửi mail review tới ${REVIEW_TEST_EMAIL}, chờ hành động tiếp theo từ CFO.`
         };
       }
 
       return {
         hidden: false,
         disabled: false,
-        label: '📨 Gửi CFO',
-        helper: `Mail phê duyệt hiện tại: ${REVIEW_TEST_EMAIL}`
+        label: idleLabel,
+        helper: defaultHelper
       };
     }
 
@@ -501,20 +543,22 @@
         items.push({
           at: formatApprovalTime(approval.submittedAt || approval.reviewedAt || approval.approvedAt),
           label: 'Đã trình CFO',
-          note: `Đã gửi mail review tới ${approval.approverEmail || REVIEW_TEST_EMAIL}.`
+          note: approval?.channel === 'slack_interactive'
+            ? `Đã gửi Slack review tới ${approvalDeliveryLabel(approval)}.`
+            : `Đã gửi mail review tới ${approvalDeliveryLabel(approval)}.`
         });
         if (approval.status === 'revision_requested') {
           items.push({
             at: formatApprovalTime(approval.reviewedAt),
             label: 'CFO yêu cầu điều chỉnh',
-            note: 'CFO đã phản hồi cần điều chỉnh kế hoạch.'
+            note: `CFO đã phản hồi cần điều chỉnh kế hoạch${approval?.reviewedBySlackUserId ? ' trên Slack' : ''}.`
           });
         }
         if (approval.status === 'approved') {
           items.push({
             at: formatApprovalTime(approval.approvedAt || approval.reviewedAt),
             label: 'CFO duyệt',
-            note: `Kế hoạch đã được ${approval.approvedBy || approval.approverEmail || 'CFO'} duyệt.`
+            note: `Kế hoạch đã được ${approvalActorLabel(approval)} duyệt.`
           });
         }
         return items;
@@ -529,7 +573,7 @@
       const status = approvalStatusMeta(plan, approval);
       const timeText = approval?.approvedAt || approval?.reviewedAt || approval?.submittedAt;
       const latestText = timeText ? formatApprovalTime(timeText) : '—';
-      const actorText = approval?.approvedBy || approval?.approverEmail || REVIEW_TEST_EMAIL;
+      const actorText = approvalActorLabel(approval);
 
       const timelineItems = buildTimeline(plan, approval);
       const timelineHtml = timelineItems.length
@@ -603,7 +647,8 @@
 
     function renderPlan(plan, monthKey, month, approval) {
       const status = approvalStatusMeta(plan, approval);
-      const sendMeta = sendButtonMeta(plan, approval);
+      const sendMetaMail = sendButtonMeta(plan, approval, 'mail');
+      const sendMetaSlack = sendButtonMeta(plan, approval, 'slack');
       return `
         <article class="plan-card">
           <div class="plan-head">
@@ -620,11 +665,12 @@
             <div class="highlights">
               ${plan.highlights.map((item) => renderHighlight(item)).join('')}
             </div>
-            ${plan.allowSendToCfo && !sendMeta.hidden ? `
+            ${plan.allowSendToCfo && (!sendMetaMail.hidden || !sendMetaSlack.hidden) ? `
               <div class="head-actions actions">
-                <button class="btn primary" data-action="send-cfo" data-plan-id="${plan.id}" ${sendMeta.disabled ? 'disabled' : ''}>${sendMeta.label}</button>
+                ${!sendMetaMail.hidden ? `<button class="btn primary" data-action="send-cfo-mail" data-plan-id="${plan.id}" ${sendMetaMail.disabled ? 'disabled' : ''}>${sendMetaMail.label}</button>` : ''}
+                ${!sendMetaSlack.hidden ? `<button class="btn slack" data-action="send-cfo-slack" data-plan-id="${plan.id}" ${sendMetaSlack.disabled ? 'disabled' : ''}>${sendMetaSlack.label}</button>` : ''}
               </div>
-              <div class="helper-note">${sendMeta.helper}</div>
+              <div class="helper-note">${!sendMetaMail.hidden ? `Mail: ${sendMetaMail.helper}` : ''}${(!sendMetaMail.hidden && !sendMetaSlack.hidden) ? '<br/>' : ''}${!sendMetaSlack.hidden ? `Slack: ${sendMetaSlack.helper}` : ''}</div>
             ` : ''}
           </div>
 
@@ -668,10 +714,17 @@
         });
       });
 
-      document.querySelectorAll('[data-action="send-cfo"]').forEach((btn) => {
+      document.querySelectorAll('[data-action="send-cfo-mail"]').forEach((btn) => {
         btn.addEventListener('click', async () => {
           const plan = planMap.get(btn.dataset.planId);
-          if (plan) await sendPlanToCfo(monthKey, plan);
+          if (plan) await sendPlanApproval(monthKey, plan, 'mail');
+        });
+      });
+
+      document.querySelectorAll('[data-action="send-cfo-slack"]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const plan = planMap.get(btn.dataset.planId);
+          if (plan) await sendPlanApproval(monthKey, plan, 'slack');
         });
       });
     }
@@ -687,7 +740,8 @@
       }, { once: true });
     }
 
-    async function sendPlanToCfo(monthKey, plan) {
+    async function sendPlanApproval(monthKey, plan, delivery) {
+      const isSlack = delivery === 'slack';
       const payload = {
         planId: plan.id,
         month: monthKey,
@@ -695,10 +749,14 @@
         title: plan.title,
         version: plan.version,
         contentHash: `${plan.id}:${plan.version}`,
-        planUrl: new URL(plan.sourceHtml.replace(/^\.\//, ''), window.location.href).href
+        planUrl: new URL(plan.sourceHtml.replace(/^\.\//, ''), window.location.href).href,
+        indexUrl: window.location.href,
+        reviewChannel: delivery,
+        slackChannelId: REVIEW_SLACK_TARGET.channelId,
+        slackChannelName: REVIEW_SLACK_TARGET.channelName
       };
 
-      setSendState(plan.id, {
+      setSendState(plan.id, delivery, {
         status: 'sending',
         updatedAt: Date.now()
       });
@@ -716,22 +774,29 @@
           planId: plan.id,
           approverEmail: REVIEW_TEST_EMAIL,
           status: 'pending_cfo_review',
-          submittedAt
+          submittedAt,
+          channel: isSlack ? 'slack_interactive' : 'google_apps_script_mail',
+          slackChannelId: isSlack ? REVIEW_SLACK_TARGET.channelId : undefined,
+          slackChannelName: isSlack ? REVIEW_SLACK_TARGET.channelName : undefined
         });
-        setSendState(plan.id, {
+        setSendState(plan.id, delivery, {
           status: 'sent',
           updatedAt: Date.now()
         });
         render();
-        alert(`Đã gửi yêu cầu trình CFO cho ${plan.title}. Anh kiểm tra inbox ${REVIEW_TEST_EMAIL} giúp em nhé.`);
+        alert(isSlack
+          ? `Đã gửi yêu cầu duyệt qua Slack vào ${REVIEW_SLACK_TARGET.channelName} cho ${plan.title}.`
+          : `Đã gửi yêu cầu trình CFO cho ${plan.title}. Anh kiểm tra inbox ${REVIEW_TEST_EMAIL} giúp em nhé.`);
       } catch (error) {
         console.error(error);
-        setSendState(plan.id, {
+        setSendState(plan.id, delivery, {
           status: 'idle',
           updatedAt: Date.now()
         });
         render();
-        alert('Không gọi được Apps Script Web App. Anh thử lại giúp em nhé.');
+        alert(isSlack
+          ? 'Không gọi được Apps Script Web App để gửi duyệt qua Slack. Anh thử lại giúp em nhé.'
+          : 'Không gọi được Apps Script Web App. Anh thử lại giúp em nhé.');
       }
     }
 

@@ -4,6 +4,11 @@ window.MONTHLY_PLANS_LIVE_DATA = {
     updatedAt: "2026-04-24T10:13:00+07:00",
     defaultMonth: "2026-05",
     reviewTestEmail: "duc.ho@atherlabs.com",
+    slackApprovalTarget: {
+      channelName: "#treasury-management",
+      channelId: "C0AT2E4CBDX",
+      botUsername: "vesper_treasury"
+    },
     note: "Chọn tháng kế hoạch để xem, in báo cáo hoặc trình CFO.",
     personalHighlightRules: {
       totalDepositAndPapersOpening: "Luôn lấy Mục 1. Tiền gửi đầu kỳ cộng Mục 3. Thanh khoản đầu kỳ.",

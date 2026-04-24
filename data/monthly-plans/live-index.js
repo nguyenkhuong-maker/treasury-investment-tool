@@ -38,7 +38,7 @@ window.MONTHLY_PLANS_LIVE_DATA = {
           { label: "Hạn mức khả dụng đầu kỳ", value: "13.938 tỷ VND" },
           { label: "Dòng tiền trong kỳ", value: "Thu 3.790 tỷ · Chi 14.847 tỷ" },
           { label: "Hạn mức khả dụng cuối kỳ", value: "2.881 tỷ VND" },
-          { label: "Thanh khoản", value: "Mỏng nhất 223 triệu ngày 29/05" }
+          { label: "Thanh khoản", value: "Mỏng nhất 2.158 tỷ ngày 19/05" }
         ],
         sourceHtml: "./plans/2026-05/company.html",
         sourcePdf: "./plans/2026-05/company.pdf",

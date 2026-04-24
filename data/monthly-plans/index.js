@@ -42,9 +42,9 @@ window.MONTHLY_PLANS_TEST_DATA = {
         preparedAt: "23/04/2026 12:20 GMT+7",
         highlights: [
           { label: "HM khả dụng đầu kỳ", value: "13.938 tỷ VND" },
-          { label: "Thu DOPA 01/06", value: "3.790 tỷ VND" },
+          { label: "Thu DOPA 26/05", value: "3.790 tỷ VND" },
           { label: "Số dư cuối kỳ", value: "2.881 tỷ VND" },
-          { label: "Thanh khoản", value: "Dương, buffer mỏng cuối T5" }
+          { label: "Thanh khoản", value: "Mỏng nhất 2.158 tỷ ngày 19/05" }
         ],
         contentHash: "sha256:test-company-2026-05-draft2",
         sourceHtml: "./plans/2026-05/company.html",

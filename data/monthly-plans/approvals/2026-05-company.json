@@ -7,9 +7,11 @@
   "approverEmail": "kdhn1911@gmail.com",
   "version": "Draft 2",
   "contentHash": "2026-05-company:Draft 2",
-  "status": "pending_cfo_review",
-  "submittedAt": "2026-04-24T02:05:49.455Z",
+  "status": "approved",
   "channel": "google_apps_script_mail",
+  "reviewedAt": "2026-04-24T02:06:25.923Z",
+  "title": "K? ho?ch ng?n qu? VIHALI",
   "planUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/plans/2026-05/company.html",
-  "title": "K? ho?ch ng?n qu? VIHALI"
+  "approvedBy": "kdhn1911@gmail.com",
+  "approvedAt": "2026-04-24T02:06:25.923Z"
 }

@@ -206,3 +206,23 @@ Dùng cho **snapshot hiện tại** của dư nợ vay công ty, **không lưu h
 - **Lãi suất**: cập nhật vào `rates-history.json`
 - **Dư nợ vay công ty**: cập nhật snapshot mới nhất vào `company-loans-current.json`
 - **Không lưu lịch sử** cho phần dư nợ vay công ty
+
+---
+
+## 4) Quy ước highlight cho Monthly Plans
+Áp dụng cho phần card tóm tắt trên index/live page của kế hoạch tháng.
+
+### Cá nhân — kế hoạch tháng
+- **`Tổng tiền gửi/giấy tờ có giá`**
+  - công thức: **Mục 1. Tiền gửi đầu kỳ + Mục 3. Thanh khoản đầu kỳ**
+- **`Dư nợ vay đầu kỳ`**
+  - lấy theo **Mục 2. Dư nợ vay đầu kỳ**
+  - không được ghi nhãn **`Dư nợ vay cuối kỳ`** nếu chưa có chỉ tiêu cuối kỳ riêng
+- **`Tăng / giảm`**
+  - chỉ phản ánh tăng/giảm thực
+  - **không tính cơ cấu lại nội bộ** là tăng/giảm
+
+### Nguyên tắc đặt nhãn
+- Tên highlight trên card phải bám đúng tên chỉ tiêu gốc trong kế hoạch.
+- Nếu là chỉ tiêu opening balance thì ưu tiên dùng nhãn **`đầu kỳ`**.
+- Chỉ dùng nhãn **`cuối kỳ`** khi dữ liệu thực sự là closing balance của chỉ tiêu đó.

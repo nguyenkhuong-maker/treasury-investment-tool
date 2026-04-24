@@ -1,10 +1,14 @@
 window.MONTHLY_PLANS_LIVE_DATA = {
   meta: {
     name: "Treasury Monthly Plans Live Index",
-    updatedAt: "2026-04-23T19:02:00+07:00",
+    updatedAt: "2026-04-24T10:13:00+07:00",
     defaultMonth: "2026-05",
     reviewTestEmail: "duc.ho@atherlabs.com",
-    note: "Chọn tháng kế hoạch để xem, in báo cáo hoặc trình CFO."
+    note: "Chọn tháng kế hoạch để xem, in báo cáo hoặc trình CFO.",
+    personalHighlightRules: {
+      totalDepositAndPapersOpening: "Luôn lấy Mục 1. Tiền gửi đầu kỳ cộng Mục 3. Thanh khoản đầu kỳ.",
+      openingDebtLabel: "Luôn dùng nhãn 'Dư nợ vay đầu kỳ' theo Mục 2, không ghi 'cuối kỳ' nếu chưa có chỉ tiêu cuối kỳ riêng."
+    }
   },
   availableMonths: [
     {
@@ -49,9 +53,9 @@ window.MONTHLY_PLANS_LIVE_DATA = {
         status: "ready_for_cfo",
         allowSendToCfo: true,
         highlights: [
-          { label: "Tiền gửi đầu kỳ", value: "122.249 tỷ VND" },
+          { label: "Tổng tiền gửi/giấy tờ có giá", value: "127.896 tỷ VND" },
           { label: "Tăng / giảm", value: "0 VND" },
-          { label: "Dư nợ vay cuối kỳ", value: "27.250 tỷ VND" },
+          { label: "Dư nợ vay đầu kỳ", value: "27.250 tỷ VND" },
           { label: "Thanh khoản VPBank", value: "1.031 tỷ VND" }
         ],
         sourceHtml: "./plans/2026-05/personal.html",

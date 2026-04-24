@@ -1,13 +1,17 @@
 window.MONTHLY_PLANS_TEST_DATA = {
   meta: {
     name: "Treasury Monthly Plans Test Index",
-    updatedAt: "2026-04-23T12:12:00+07:00",
+    updatedAt: "2026-04-24T10:13:00+07:00",
     generatedBy: "Vesper",
     defaultMonth: "2026-05",
     storageMode: "browser-local-storage-for-test",
     makerEmail: "nguyen.khuong@atherlabs.com",
     designatedApproverEmail: "duc.ho@atherlabs.com",
-    note: "Bản test để anh Nguyên xem concept kế hoạch tháng trên Index trước khi nhập vào dashboard chính."
+    note: "Bản test để anh Nguyên xem concept kế hoạch tháng trên Index trước khi nhập vào dashboard chính.",
+    personalHighlightRules: {
+      totalDepositAndPapersOpening: "Luôn lấy Mục 1. Tiền gửi đầu kỳ cộng Mục 3. Thanh khoản đầu kỳ.",
+      openingDebtLabel: "Luôn dùng nhãn 'Dư nợ vay đầu kỳ' theo Mục 2, không ghi 'cuối kỳ' nếu chưa có chỉ tiêu cuối kỳ riêng."
+    }
   },
   availableMonths: [
     {
@@ -56,10 +60,10 @@ window.MONTHLY_PLANS_TEST_DATA = {
         approver: "CFO",
         preparedAt: "23/04/2026 13:56 GMT+7",
         highlights: [
-          { label: "Tổng tiền gửi", value: "122.249 tỷ VND" },
-          { label: "Lãi dự thu", value: "6.835 tỷ VND" },
-          { label: "Gửi mới VPBank 12m", value: "20.920 tỷ VND" },
-          { label: "VPB cuối kỳ", value: "1.031 tỷ VND" }
+          { label: "Tổng tiền gửi/giấy tờ có giá", value: "127.896 tỷ VND" },
+          { label: "Tăng / giảm", value: "0 VND" },
+          { label: "Dư nợ vay đầu kỳ", value: "27.250 tỷ VND" },
+          { label: "Thanh khoản VPBank", value: "1.031 tỷ VND" }
         ],
         contentHash: "sha256:test-personal-2026-05-draft1",
         sourceHtml: "./plans/2026-05/personal.html",

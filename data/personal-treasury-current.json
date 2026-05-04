@@ -1,16 +1,16 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-05-04T14:19:30+07:00",
+    "updatedAt": "2026-05-04T16:22:12+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet"
   },
   "summary": {
-    "totalPersonalDeposits": 128280684912,
+    "totalPersonalDeposits": 128281857025,
     "totalPersonalLoans": 27250000000,
-    "netPersonalTreasury": 101030684912
+    "netPersonalTreasury": 101031857025
   },
   "personalDeposits": [
     {
@@ -20,17 +20,17 @@
       "depositCode": "VIP0036804",
       "depositType": "Tiết kiệm VND",
       "certificateNumber": "810004228033",
-      "principal": 8657491176,
+      "principal": 8658663289,
       "amountOnCertificate": 7858000000,
-      "interestRate": 8.2,
-      "openDate": "2026-04-27",
-      "maturityDate": "2027-04-27",
+      "interestRate": 8,
+      "openDate": "2026-04-28",
+      "maturityDate": "2027-04-28",
       "interestPayoutType": "Cuối kỳ",
       "pledged": true,
       "pledgedAmount": 7858000000,
-      "unpledgedAmount": 799491176,
-      "accruedInterest": 709914276,
-      "projectedSettlement": 9367405452,
+      "unpledgedAmount": 800663289,
+      "accruedInterest": 692693063,
+      "projectedSettlement": 9351356352,
       "linkedLoanCodes": [
         "407004096429",
         "405004152702",
@@ -106,15 +106,15 @@
       "certificateNumber": "816010497431",
       "principal": 6350713600,
       "amountOnCertificate": 6036800000,
-      "interestRate": 8.2,
+      "interestRate": 8,
       "openDate": "2026-04-28",
       "maturityDate": "2027-04-28",
       "interestPayoutType": "Cuối kỳ",
       "pledged": false,
       "pledgedAmount": 0,
       "unpledgedAmount": 6350713600,
-      "accruedInterest": 520758515,
-      "projectedSettlement": 6871472115
+      "accruedInterest": 508057088,
+      "projectedSettlement": 6858770688
     },
     {
       "owner": "Hồ Thị Yến Nhi",

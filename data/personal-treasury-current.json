@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-05-04T13:50:19+07:00",
+    "updatedAt": "2026-05-04T14:19:30+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
@@ -386,8 +386,6 @@
       "accruedInterest": 1015047053,
       "projectedSettlement": 13703135213,
       "linkedLoanCodes": [
-        "007116272",
-        "007124748",
         "007142807",
         "007157673",
         "007170054",
@@ -429,8 +427,6 @@
       "accruedInterest": 544036500,
       "projectedSettlement": 10088536500,
       "linkedLoanCodes": [
-        "007116272",
-        "007124748",
         "007142807",
         "007157673",
         "007170054",
@@ -572,7 +568,16 @@
         "813005446875"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Đảm bảo bằng 6 sổ cá nhân 813005446854 + 817005446883 + 817005446887 + 816005446824 + 814005446865 + 813005446875."
+      "mappingNote": "Đảm bảo bằng 6 sổ cá nhân 813005446854 + 817005446883 + 817005446887 + 816005446824 + 814005446865 + 813005446875.",
+      "collateralDepositCodes": [
+        "813005446854",
+        "817005446883",
+        "817005446887",
+        "816005446824",
+        "814005446865",
+        "813005446875"
+      ],
+      "notes": "Refinance"
     }
   ]
 }

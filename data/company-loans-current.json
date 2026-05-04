@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-04-23T13:47:39+07:00",
+    "updatedAt": "2026-05-04T13:30:00+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -17,48 +17,21 @@
     }
   },
   "summary": {
-    "totalOutstanding": 42088300488,
-    "availableLimit": 35460414812,
-    "bidvAvailableLimit": 34535011487,
-    "scAvailableLimit": 2960898413,
-    "bidvOverdraftAvailableLimit": 21986442264,
+    "totalOutstanding": 42257321817,
+    "availableLimit": 35291393483,
+    "bidvAvailableLimit": 32100679986,
+    "scAvailableLimit": 3190713497,
+    "bidvOverdraftAvailableLimit": 19552110763,
     "bidvWorkingCapitalAvailableLimit": 12548569223
   },
   "maturityFocus": [
-    {
-      "bank": "Standard Chartered",
-      "loanCode": "007116272",
-      "maturityDate": "2026-04-24",
-      "interestRate": 4.8,
-      "principalOutstanding": 1852526894,
-      "projectedSettlement": 1895891250,
-      "notes": "Khế ước gần hạn lớn."
-    },
-    {
-      "bank": "BIDV",
-      "loanCode": "1440328001",
-      "maturityDate": "2026-04-29",
-      "interestRate": 5.2,
-      "principalOutstanding": 6034668499,
-      "projectedSettlement": 6034668499,
-      "notes": "Khoản BIDV gần hạn nhất."
-    },
-    {
-      "bank": "Standard Chartered",
-      "loanCode": "007124748",
-      "maturityDate": "2026-05-04",
-      "interestRate": 4.8,
-      "principalOutstanding": 412783278,
-      "projectedSettlement": 422608651,
-      "notes": "Khế ước gần hạn đầu tháng 5."
-    },
     {
       "bank": "BIDV",
       "loanCode": "1440280147",
       "maturityDate": "2026-05-07",
       "interestRate": 5.2,
       "principalOutstanding": 10750152548,
-      "projectedSettlement": 10794566877,
+      "projectedSettlement": 10811413691,
       "notes": "Khoản thấu chi hạn mức, ngày đến hạn chung."
     },
     {
@@ -68,6 +41,33 @@
       "interestRate": 4.84,
       "principalOutstanding": 469012053,
       "projectedSettlement": 480144472,
+      "notes": "Khế ước active."
+    },
+    {
+      "bank": "BIDV",
+      "loanCode": "407004096429",
+      "maturityDate": "2026-05-19",
+      "interestRate": 6.2,
+      "principalOutstanding": 84426000,
+      "projectedSettlement": 84999634,
+      "notes": "Khế ước active."
+    },
+    {
+      "bank": "Standard Chartered",
+      "loanCode": "007157673",
+      "maturityDate": "2026-05-26",
+      "interestRate": 4.85,
+      "principalOutstanding": 1760394060,
+      "projectedSettlement": 1802498828,
+      "notes": "Khế ước active."
+    },
+    {
+      "bank": "BIDV",
+      "loanCode": "405004152702",
+      "maturityDate": "2026-05-29",
+      "interestRate": 7.3,
+      "principalOutstanding": 131688024,
+      "projectedSettlement": 132741528,
       "notes": "Khế ước active."
     }
   ],
@@ -83,8 +83,8 @@
       "interestRate": 5.2,
       "pledgedAccount": "AAC7305098",
       "principalOutstanding": 10750152548,
-      "interestPayable": 44414329,
-      "projectedSettlement": 10794566877,
+      "interestPayable": 61261143,
+      "projectedSettlement": 10811413691,
       "availableLimit": 2432752,
       "notes": "Khoản thấu chi hạn mức, ngày đến hạn chung.",
       "collateralGroupName": "Cụm 2 sổ cá nhân BIDV của Hồ Thị Yến Nhi",
@@ -109,17 +109,15 @@
       "maturityDate": "2026-04-29",
       "interestRate": 5.2,
       "pledgedAccount": "-",
-      "principalOutstanding": 6034668499,
+      "principalOutstanding": 0,
       "interestPayable": 0,
-      "projectedSettlement": 6034668499,
-      "availableLimit": 2131501,
-      "notes": "Khoản BIDV gần hạn nhất.",
-      "collateralGroupName": "Sổ cá nhân BIDV của Hồ Thị Yến Nhi",
-      "depositCodes": [
-        "816010497431"
-      ],
-      "mappingStatus": "confirmed",
-      "mappingNote": "Đảm bảo bằng 1 sổ cá nhân BIDV 816010497431.",
+      "projectedSettlement": 0,
+      "availableLimit": 6036800000,
+      "notes": "Khoản thấu chi đã tất toán dư nợ, còn toàn bộ hạn mức chưa giải ngân.",
+      "collateralGroupName": null,
+      "depositCodes": [],
+      "mappingStatus": "cleared",
+      "mappingNote": "Dashboard-fix hiện ghi toàn bộ số này ở cột không thế chấp; giữ khoản vay để theo dõi hạn mức còn lại.",
       "branchCode": "TN",
       "branchName": "BIDV chi nhánh Thống Nhất",
       "reportingGroupCode": "bidv-overdraft-tn",
@@ -135,17 +133,17 @@
       "maturityDate": "2026-10-12",
       "interestRate": 7.9,
       "pledgedAccount": "-",
-      "principalOutstanding": 0,
-      "interestPayable": 0,
-      "projectedSettlement": 0,
-      "availableLimit": 16800000000,
-      "notes": "Hạn mức thấu chi mới trên sheet BIDV, chưa giải ngân; map với sổ 818016673105.",
-      "mappingStatus": "confirmed",
-      "mappingNote": "Đảm bảo bằng 1 sổ cá nhân BIDV 818016673105 theo xác nhận của anh Nguyên; hạn mức còn lại lấy theo cột C sheet Loan-BIDV.",
+      "principalOutstanding": 6035000000,
+      "interestPayable": 52248219,
+      "projectedSettlement": 6087248219,
+      "availableLimit": 10765000000,
+      "notes": "Khoản thấu chi mới tại BIDV TN; đang còn dư nợ và còn hạn mức chưa giải ngân.",
+      "collateralGroupName": "Sổ cá nhân BIDV của Hồ Thị Yến Nhi",
       "depositCodes": [
         "818016673105"
       ],
-      "collateralGroupName": "Sổ cá nhân BIDV của Hồ Thị Yến Nhi",
+      "mappingStatus": "confirmed",
+      "mappingNote": "Đảm bảo bằng 1 sổ cá nhân BIDV 818016673105 theo xác nhận của anh Nguyên; hạn mức còn lại lấy theo cột C sheet Loan-BIDV.",
       "branchCode": "TN",
       "branchName": "BIDV chi nhánh Thống Nhất",
       "reportingGroupCode": "bidv-overdraft-tn",
@@ -161,10 +159,10 @@
       "maturityDate": "2027-03-03",
       "interestRate": 7.06,
       "pledgedAccount": "HĐ TGCKH 04-2024/HĐTG",
-      "principalOutstanding": 4368121989,
-      "interestPayable": 111526080,
-      "projectedSettlement": 4479648069,
-      "availableLimit": 581878011,
+      "principalOutstanding": 4788121989,
+      "interestPayable": 157078611,
+      "projectedSettlement": 4945200600,
+      "availableLimit": 161878011,
       "notes": "Khoản thấu chi TS hiện hữu; hạn mức còn lại lấy theo cột C Hạn mức của sheet Loan-BIDV.",
       "collateralGroupName": "Sổ công ty VIHALI BIDV",
       "depositCodes": [
@@ -185,13 +183,13 @@
       "loanName": "BIDV TS — Thấu chi",
       "disbursementDate": "2026-03-26",
       "maturityDate": "2027-03-26",
-      "interestRate": 5.2,
+      "interestRate": 7.1,
       "pledgedAccount": "HĐ TGCKH 05-2024/HĐTG",
-      "principalOutstanding": 0,
-      "interestPayable": 32559773,
-      "projectedSettlement": 3540297875,
-      "availableLimit": 4600000000,
-      "notes": "Hạn mức chưa giải ngân, vẫn hiển thị trong BIDV thấu chi nhưng không tính vào dư nợ active; hạn mức còn lại lấy theo cột C Hạn mức của sheet Loan-BIDV.",
+      "principalOutstanding": 2014000000,
+      "interestPayable": 60580607,
+      "projectedSettlement": 5582318709,
+      "availableLimit": 2586000000,
+      "notes": "Khoản thấu chi TS có dư nợ; hạn mức còn lại lấy theo cột C Hạn mức của sheet Loan-BIDV.",
       "collateralGroupName": "Sổ công ty VIHALI BIDV",
       "depositCodes": [
         "818003661334"
@@ -215,8 +213,8 @@
       "maturityDate": "2026-05-19",
       "interestRate": 6.2,
       "principalOutstanding": 84426000,
-      "interestPayable": 415885,
-      "projectedSettlement": 84841885,
+      "interestPayable": 573634,
+      "projectedSettlement": 84999634,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 810004228033 + tín chấp",
       "depositCodes": [
@@ -235,8 +233,8 @@
       "maturityDate": "2026-05-29",
       "interestRate": 7.3,
       "principalOutstanding": 131688024,
-      "interestPayable": 763791,
-      "projectedSettlement": 132451815,
+      "interestPayable": 1053504,
+      "projectedSettlement": 132741528,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 810004228033 + tín chấp",
       "depositCodes": [
@@ -255,8 +253,8 @@
       "maturityDate": "2026-06-08",
       "interestRate": 7.3,
       "principalOutstanding": 286819973,
-      "interestPayable": 1663556,
-      "projectedSettlement": 288483529,
+      "interestPayable": 2294560,
+      "projectedSettlement": 289114533,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 810004228033 + tín chấp",
       "depositCodes": [
@@ -275,8 +273,8 @@
       "maturityDate": "2026-06-19",
       "interestRate": 7.3,
       "principalOutstanding": 122412650,
-      "interestPayable": 709993,
-      "projectedSettlement": 123122643,
+      "interestPayable": 979301,
+      "projectedSettlement": 123391951,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 810004228033 + tín chấp",
       "depositCodes": [
@@ -295,8 +293,8 @@
       "maturityDate": "2026-06-26",
       "interestRate": 7.3,
       "principalOutstanding": 42689574,
-      "interestPayable": 247600,
-      "projectedSettlement": 42937174,
+      "interestPayable": 341517,
+      "projectedSettlement": 43031091,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 810004228033 + tín chấp",
       "depositCodes": [
@@ -315,8 +313,8 @@
       "maturityDate": "2026-07-24",
       "interestRate": 7.3,
       "principalOutstanding": 59906663,
-      "interestPayable": 347459,
-      "projectedSettlement": 60254122,
+      "interestPayable": 479253,
+      "projectedSettlement": 60385916,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 810004228033 + tín chấp",
       "depositCodes": [
@@ -335,8 +333,8 @@
       "maturityDate": "2026-07-31",
       "interestRate": 7.3,
       "principalOutstanding": 109334705,
-      "interestPayable": 634141,
-      "projectedSettlement": 109968846,
+      "interestPayable": 874678,
+      "projectedSettlement": 110209383,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 810004228033 + tín chấp",
       "depositCodes": [
@@ -355,8 +353,8 @@
       "maturityDate": "2026-08-21",
       "interestRate": 7.3,
       "principalOutstanding": 103618200,
-      "interestPayable": 600986,
-      "projectedSettlement": 104219186,
+      "interestPayable": 828946,
+      "projectedSettlement": 104447146,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 810004228033 + tín chấp",
       "depositCodes": [
@@ -375,8 +373,8 @@
       "maturityDate": "2026-09-14",
       "interestRate": 7.3,
       "principalOutstanding": 120665554,
-      "interestPayable": 699860,
-      "projectedSettlement": 121365414,
+      "interestPayable": 965324,
+      "projectedSettlement": 121630878,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 810004228033 + tín chấp",
       "depositCodes": [
@@ -395,8 +393,8 @@
       "maturityDate": "2026-09-29",
       "interestRate": 7.5,
       "principalOutstanding": 102079434,
-      "interestPayable": 608282,
-      "projectedSettlement": 102687716,
+      "interestPayable": 839009,
+      "projectedSettlement": 102918443,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 810004228033 + tín chấp",
       "depositCodes": [
@@ -407,48 +405,6 @@
     }
   ],
   "scWorkingCapital": [
-    {
-      "bank": "Standard Chartered",
-      "group": "working-capital",
-      "company": "VIHALI",
-      "loanCode": "007116272",
-      "loanName": "SC VLĐ",
-      "disbursementDate": "2025-10-28",
-      "maturityDate": "2026-04-24",
-      "interestRate": 4.8,
-      "principalOutstanding": 1852526894,
-      "interestPayable": 43364356,
-      "projectedSettlement": 1895891250,
-      "notes": "Khế ước gần hạn lớn.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
-      "depositCodes": [
-        "44-1470100-04",
-        "44-1470100-06"
-      ],
-      "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
-    },
-    {
-      "bank": "Standard Chartered",
-      "group": "working-capital",
-      "company": "VIHALI",
-      "loanCode": "007124748",
-      "loanName": "SC VLĐ",
-      "disbursementDate": "2025-11-04",
-      "maturityDate": "2026-05-04",
-      "interestRate": 4.8,
-      "principalOutstanding": 412783278,
-      "interestPayable": 9825373,
-      "projectedSettlement": 422608651,
-      "notes": "Khế ước gần hạn đầu tháng 5.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
-      "depositCodes": [
-        "44-1470100-04",
-        "44-1470100-06"
-      ],
-      "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
-    },
     {
       "bank": "Standard Chartered",
       "group": "working-capital",
@@ -776,7 +732,7 @@
       "principalOutstanding": 723221694,
       "interestPayable": 20393861,
       "projectedSettlement": 743615555,
-      "notes": "Khoản giải ngân mới từ Drive data ngày 15/04/2026.",
+      "notes": "Khế ước active.",
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [
         "44-1470100-04",
@@ -797,7 +753,7 @@
       "principalOutstanding": 2035495088,
       "interestPayable": 57718833,
       "projectedSettlement": 2093213921,
-      "notes": "Khoản giải ngân mới từ source online ngày 23/04/2026.",
+      "notes": "Khế ước active.",
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [
         "44-1470100-04",
@@ -864,8 +820,8 @@
         "1440328001",
         "8610037624"
       ],
-      "totalOutstanding": 16784821047,
-      "totalAvailableLimit": 16804564253
+      "totalOutstanding": 16785152548,
+      "totalAvailableLimit": 16804232752
     },
     {
       "groupCode": "bidv-overdraft-ts",
@@ -876,8 +832,8 @@
         "8670018067",
         "8690020465"
       ],
-      "totalOutstanding": 4368121989,
-      "totalAvailableLimit": 5181878011
+      "totalOutstanding": 6802121989,
+      "totalAvailableLimit": 2747878011
     }
   ]
 }

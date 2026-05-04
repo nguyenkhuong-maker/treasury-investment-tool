@@ -758,8 +758,8 @@
             <select id="week-select"></select>
           </div>
           <div>
-            <label for="compare-week-select">So sánh biến động với tuần</label>
-            <select id="compare-week-select"></select>
+            <label for="compare-period-select">So sánh với kỳ dữ liệu</label>
+            <select id="compare-period-select"></select>
           </div>
         </div>
         <div class="ui-actions">
@@ -1806,11 +1806,54 @@
     const w = document.getElementById('week-select').value;
     return HISTORY.months?.[m]?.weeks?.[w] || null;
   }
+  function parsePeriodValue(value) {
+    if (!value) return null;
+    const [monthKey, weekKey] = String(value).split('|');
+    if (!monthKey || !weekKey) return null;
+    return { monthKey, weekKey };
+  }
+  function comparePeriodOrder(monthA, weekA, monthB, weekB) {
+    if (monthA < monthB) return -1;
+    if (monthA > monthB) return 1;
+    return Number(weekA) - Number(weekB);
+  }
+  function getPeriodLabel(monthKey, weekKey) {
+    const month = HISTORY.months?.[monthKey];
+    const week = month?.weeks?.[weekKey];
+    const monthLabel = month?.label || monthKey;
+    const weekLabel = week?.label || `Tuần ${weekKey}`;
+    return `${monthLabel} · ${weekLabel}`;
+  }
+  function getAvailablePeriods() {
+    return Object.keys(HISTORY.months || {})
+      .sort()
+      .flatMap(monthKey => ['1','2','3','4'].map(weekKey => {
+        const week = HISTORY.months?.[monthKey]?.weeks?.[weekKey];
+        if (!week?.available) return null;
+        return {
+          monthKey,
+          weekKey,
+          value: `${monthKey}|${weekKey}`,
+          label: getPeriodLabel(monthKey, weekKey)
+        };
+      }).filter(Boolean));
+  }
+  function getSuggestedComparisonValue(currentMonthKey, currentWeekKey) {
+    const periods = getAvailablePeriods();
+    const earlier = periods.filter(period => comparePeriodOrder(period.monthKey, period.weekKey, currentMonthKey, currentWeekKey) < 0);
+    if (earlier.length) return earlier[earlier.length - 1].value;
+    const fallback = periods.find(period => !(period.monthKey === currentMonthKey && period.weekKey === currentWeekKey));
+    return fallback?.value || '';
+  }
   function getComparisonWeekData() {
-    const m = document.getElementById('month-select').value;
-    const cw = document.getElementById('compare-week-select').value;
-    if (!cw) return null;
-    return HISTORY.months?.[m]?.weeks?.[cw] || null;
+    const selection = parsePeriodValue(document.getElementById('compare-period-select').value);
+    if (!selection) return null;
+    return HISTORY.months?.[selection.monthKey]?.weeks?.[selection.weekKey] || null;
+  }
+  function getComparisonPeriodLabel() {
+    const selection = parsePeriodValue(document.getElementById('compare-period-select').value);
+    if (!selection) return '';
+    return getPeriodLabel(selection.monthKey, selection.weekKey);
   }
   function deltaValue(cur, prev) {
     if (cur == null || prev == null) return null;
@@ -1830,7 +1873,7 @@
     ms.value = HISTORY.meta.defaultMonth || monthKeys[0] || '';
     refreshWeekSelector();
     ws.value = HISTORY.meta.defaultWeek || ws.value;
-    refreshCompareWeekSelector();
+    refreshComparePeriodSelector();
   }
   function refreshWeekSelector() {
     const ms = document.getElementById('month-select');
@@ -1844,26 +1887,27 @@
     }).join('');
     ws.value = wk.includes(cv) ? cv : (HISTORY.meta.defaultWeek || '1');
   }
-  function refreshCompareWeekSelector() {
+  function refreshComparePeriodSelector() {
     const ms = document.getElementById('month-select');
     const ws = document.getElementById('week-select');
-    const cs = document.getElementById('compare-week-select');
+    const cs = document.getElementById('compare-period-select');
     const pv = cs.value;
-    const weeks = HISTORY.months?.[ms.value]?.weeks || {};
-    const cw = ws.value;
-    const wk = ['1','2','3','4'];
+    const currentMonthKey = ms.value;
+    const currentWeekKey = ws.value;
+    const currentValue = `${currentMonthKey}|${currentWeekKey}`;
+    const periods = getAvailablePeriods().filter(period => period.value !== currentValue);
     cs.innerHTML = ['<option value="">Không so sánh</option>'].concat(
-      wk.filter(k => k !== cw).map(k => {
-        const w = weeks[k] || { label: `Tuần ${k}`, available: false };
-        return `<option value="${k}">${w.label || `Tuần ${k}`}${w.available ? '' : ' (chưa có dữ liệu)'}</option>`;
-      })
+      periods.map(period => `<option value="${period.value}">${period.label}</option>`)
     ).join('');
-    cs.value = Array.from(cs.options).some(o => o.value === pv) ? pv : '';
+    const nextValue = (pv && Array.from(cs.options).some(o => o.value === pv))
+      ? pv
+      : getSuggestedComparisonValue(currentMonthKey, currentWeekKey);
+    cs.value = Array.from(cs.options).some(o => o.value === nextValue) ? nextValue : '';
     updateComparisonHeaders();
   }
   function updateComparisonHeaders() {
-    const cw = document.getElementById('compare-week-select').value;
-    const label = cw ? `Biến động vs Tuần ${cw}` : 'Biến động';
+    const compareLabel = getComparisonPeriodLabel();
+    const label = compareLabel ? `Biến động vs ${compareLabel}` : 'Biến động';
     ['medium-compare-header','short-compare-header','under-compare-header'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.textContent = label;
@@ -1872,14 +1916,14 @@
   function renderPeriodHeader(weekData) {
     const mk = document.getElementById('month-select').value;
     const wk = document.getElementById('week-select').value;
-    const cwk = document.getElementById('compare-week-select').value;
-    const ml = HISTORY.months?.[mk]?.label || mk;
-    document.getElementById('current-period').textContent     = `${ml} · Tuần ${wk}`;
+    const currentLabel = getPeriodLabel(mk, wk);
+    const compareLabel = getComparisonPeriodLabel();
+    document.getElementById('current-period').textContent     = currentLabel;
     document.getElementById('current-updated-at').textContent = fmtDateTime(weekData?.updatedAt);
     document.getElementById('current-availability').innerHTML = weekData?.available
       ? '<span class="good">✓ Đã có dữ liệu</span>'
       : '<span class="bad">✗ Chưa có dữ liệu</span>';
-    document.getElementById('current-comparison').textContent = cwk ? `Tuần ${cwk}` : 'Không so sánh';
+    document.getElementById('current-comparison').textContent = compareLabel || 'Không so sánh';
     document.getElementById('period-note').innerHTML = `<strong>Ghi chú:</strong> ${weekData?.summary?.note || 'Không có ghi chú.'}`;
   }
   function renderRateOverview(weekData) {
@@ -1920,7 +1964,7 @@
     }));
     const bestUltra = ultraProducts.sort((a,b) => b.rate - a.rate)[0] || null;
 
-    let compareNote = 'Không so sánh tuần nào nên em đang hiển thị snapshot độc lập.';
+    let compareNote = 'Không so sánh kỳ nào nên em đang hiển thị snapshot độc lập.';
     if (compare) {
       const curCount = medium.length + short.length + ultra.length;
       const prevCount = (compare.mediumTerm?.items || []).length + (compare.shortTerm?.items || []).length + (compare.underOneMonth?.items || []).length;
@@ -2174,7 +2218,7 @@
     document.getElementById('month-select').value = HISTORY.meta.defaultMonth;
     refreshWeekSelector();
     document.getElementById('week-select').value = HISTORY.meta.defaultWeek;
-    refreshCompareWeekSelector();
+    refreshComparePeriodSelector();
     renderSelectedPeriod();
   }
   const DASHBOARD_CACHE_BUST = new URLSearchParams(window.location.search).get('v') || String(Date.now());
@@ -2215,9 +2259,9 @@
     document.getElementById('local-json-file').addEventListener('change', loadLocalJsonFile);
     document.getElementById('loan-json-file').addEventListener('change', loadLoanJsonFile);
     document.getElementById('personal-json-file').addEventListener('change', loadPersonalJsonFile);
-    document.getElementById('month-select').addEventListener('change', () => { refreshWeekSelector(); refreshCompareWeekSelector(); renderSelectedPeriod(); });
-    document.getElementById('week-select').addEventListener('change', () => { refreshCompareWeekSelector(); renderSelectedPeriod(); });
-    document.getElementById('compare-week-select').addEventListener('change', renderSelectedPeriod);
+    document.getElementById('month-select').addEventListener('change', () => { refreshWeekSelector(); refreshComparePeriodSelector(); renderSelectedPeriod(); });
+    document.getElementById('week-select').addEventListener('change', () => { refreshComparePeriodSelector(); renderSelectedPeriod(); });
+    document.getElementById('compare-period-select').addEventListener('change', renderSelectedPeriod);
     try { await tryLoadDefaultJson(); } catch (e) { console.warn('Default JSON load failed:', e); }
     try { await tryLoadDefaultLoansJson(); } catch (e) { console.warn('Default company loans JSON load failed:', e); }
     try { await tryLoadDefaultPersonalJson(); } catch (e) { console.warn('Default personal treasury JSON load failed:', e); }

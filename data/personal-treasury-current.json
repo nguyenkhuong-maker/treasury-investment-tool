@@ -1,16 +1,16 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-05-04T16:22:12+07:00",
+    "updatedAt": "2026-05-06T15:05:18+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet"
   },
   "summary": {
-    "totalPersonalDeposits": 128281857025,
+    "totalPersonalDeposits": 128456077825,
     "totalPersonalLoans": 27250000000,
-    "netPersonalTreasury": 101031857025
+    "netPersonalTreasury": 101206077825
   },
   "personalDeposits": [
     {
@@ -79,17 +79,17 @@
       "depositCode": "VIP0036806",
       "depositType": "Tiết kiệm VND",
       "certificateNumber": "811004405940",
-      "principal": 3350400000,
+      "principal": 3524620800,
       "amountOnCertificate": 3200000000,
-      "interestRate": 4.7,
-      "openDate": "2025-05-06",
-      "maturityDate": "2026-05-06",
+      "interestRate": 8,
+      "openDate": "2026-05-06",
+      "maturityDate": "2027-05-06",
       "interestPayoutType": "Cuối kỳ",
       "pledged": true,
       "pledgedAmount": 3350400000,
-      "unpledgedAmount": 0,
-      "accruedInterest": 157468800,
-      "projectedSettlement": 3507868800,
+      "unpledgedAmount": 174220800,
+      "accruedInterest": 281969664,
+      "projectedSettlement": 3806590464,
       "linkedLoanCodes": [
         "1440280147"
       ],

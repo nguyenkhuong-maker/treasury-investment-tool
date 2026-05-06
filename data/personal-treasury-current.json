@@ -1,16 +1,16 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-05-06T15:05:18+07:00",
+    "updatedAt": "2026-05-06T15:09:50+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet"
   },
   "summary": {
-    "totalPersonalDeposits": 128456077825,
+    "totalPersonalDeposits": 127822991625,
     "totalPersonalLoans": 27250000000,
-    "netPersonalTreasury": 101206077825
+    "netPersonalTreasury": 100572991625
   },
   "personalDeposits": [
     {
@@ -60,9 +60,9 @@
       "openDate": "2026-05-03",
       "maturityDate": "2027-05-03",
       "interestPayoutType": "Cuối kỳ",
-      "pledged": true,
-      "pledgedAmount": 7402185300,
-      "unpledgedAmount": 384913636,
+      "pledged": false,
+      "pledgedAmount": 0,
+      "unpledgedAmount": 7787098936,
       "accruedInterest": 622967915,
       "projectedSettlement": 8410066851,
       "linkedLoanCodes": [
@@ -85,9 +85,9 @@
       "openDate": "2026-05-06",
       "maturityDate": "2027-05-06",
       "interestPayoutType": "Cuối kỳ",
-      "pledged": true,
-      "pledgedAmount": 3350400000,
-      "unpledgedAmount": 174220800,
+      "pledged": false,
+      "pledgedAmount": 0,
+      "unpledgedAmount": 3524620800,
       "accruedInterest": 281969664,
       "projectedSettlement": 3806590464,
       "linkedLoanCodes": [
@@ -494,17 +494,17 @@
       "depositCode": "VPB-PL-NTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "543033162",
-      "principal": 3274386208,
-      "amountOnCertificate": 3274386208,
+      "principal": 2641300008,
+      "amountOnCertificate": 2641300008,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 3274386208,
+      "unpledgedAmount": 2641300008,
       "accruedInterest": 0,
-      "projectedSettlement": 3274386208
+      "projectedSettlement": 2641300008
     },
     {
       "owner": "Đặng Thu Thảo",

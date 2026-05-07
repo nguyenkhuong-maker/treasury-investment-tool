@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-05-07T14:27:34+07:00",
+    "updatedAt": "2026-05-07T15:24:40+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -21,8 +21,8 @@
     "availableLimit": 18502160731,
     "bidvAvailableLimit": 15311447234,
     "scAvailableLimit": 3190713497,
-    "bidvOverdraftAvailableLimit": 13515463311,
-    "bidvWorkingCapitalAvailableLimit": 1795983923
+    "bidvOverdraftAvailableLimit": 2762878011,
+    "bidvWorkingCapitalAvailableLimit": 12548569223
   },
   "maturityFocus": [
     {
@@ -85,8 +85,8 @@
       "principalOutstanding": 0,
       "interestPayable": 0,
       "projectedSettlement": 0,
-      "availableLimit": 10752585300,
-      "notes": "Khoản thấu chi đã thu hết nợ sáng 07/05/2026; giữ lại như hạn mức còn hiệu lực.",
+      "availableLimit": 0,
+      "notes": "Khoản thấu chi đã thu hết nợ sáng 07/05/2026; cột O Hạn mức còn lại trên source đang bằng 0.",
       "collateralGroupName": "Cụm 2 sổ cá nhân BIDV của Hồ Thị Yến Nhi",
       "depositCodes": [
         "817004356078",
@@ -796,7 +796,7 @@
         "8610037624"
       ],
       "totalOutstanding": 16785000000,
-      "totalAvailableLimit": 10767585300
+      "totalAvailableLimit": 15000000
     },
     {
       "groupCode": "bidv-overdraft-ts",

@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-05-07T13:00:28+07:00",
+    "updatedAt": "2026-05-07T14:00:10+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -17,11 +17,11 @@
     }
   },
   "summary": {
-    "totalOutstanding": 42257169269,
-    "availableLimit": 18502160731,
-    "bidvAvailableLimit": 15311447234,
+    "totalOutstanding": 31507016721,
+    "availableLimit": 29252313279,
+    "bidvAvailableLimit": 26061599782,
     "scAvailableLimit": 3190713497,
-    "bidvOverdraftAvailableLimit": 2762878011,
+    "bidvOverdraftAvailableLimit": 13513030559,
     "bidvWorkingCapitalAvailableLimit": 12548569223
   },
   "maturityFocus": [
@@ -30,9 +30,9 @@
       "loanCode": "1440280147",
       "maturityDate": "2026-05-07",
       "interestRate": 5.2,
-      "principalOutstanding": 10750152548,
-      "projectedSettlement": 10811413691,
-      "notes": "Khoản thấu chi hạn mức, ngày đến hạn chung."
+      "principalOutstanding": 0,
+      "projectedSettlement": 0,
+      "notes": "Khoản thấu chi đã thu hết nợ sáng 07/05/2026; giữ lại như hạn mức còn hiệu lực."
     },
     {
       "bank": "Standard Chartered",
@@ -82,11 +82,11 @@
       "maturityDate": "2026-05-07",
       "interestRate": 5.2,
       "pledgedAccount": "AAC7305098",
-      "principalOutstanding": 10750152548,
-      "interestPayable": 61261143,
-      "projectedSettlement": 10811413691,
-      "availableLimit": 2432752,
-      "notes": "Khoản thấu chi hạn mức, ngày đến hạn chung.",
+      "principalOutstanding": 0,
+      "interestPayable": 0,
+      "projectedSettlement": 0,
+      "availableLimit": 10752585300,
+      "notes": "Khoản thấu chi đã thu hết nợ sáng 07/05/2026; giữ lại như hạn mức còn hiệu lực.",
       "collateralGroupName": "Cụm 2 sổ cá nhân BIDV của Hồ Thị Yến Nhi",
       "depositCodes": [
         "817004356078",

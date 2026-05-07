@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-05-05T14:54:43+07:00",
+    "updatedAt": "2026-05-07T13:00:28+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -17,11 +17,11 @@
     }
   },
   "summary": {
-    "totalOutstanding": 42257321817,
-    "availableLimit": 29254593483,
-    "bidvAvailableLimit": 26063879986,
+    "totalOutstanding": 42257169269,
+    "availableLimit": 18502160731,
+    "bidvAvailableLimit": 15311447234,
     "scAvailableLimit": 3190713497,
-    "bidvOverdraftAvailableLimit": 13515310763,
+    "bidvOverdraftAvailableLimit": 2762878011,
     "bidvWorkingCapitalAvailableLimit": 12548569223
   },
   "maturityFocus": [

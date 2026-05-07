@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-05-07T15:24:40+07:00",
+    "updatedAt": "2026-05-07T16:18:17+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -72,33 +72,6 @@
     }
   ],
   "bidvOverdraft": [
-    {
-      "bank": "BIDV",
-      "group": "overdraft",
-      "company": "VIHALI",
-      "loanCode": "1440280147",
-      "loanName": "BIDV TN — Thấu chi",
-      "disbursementDate": "2025-05-07",
-      "maturityDate": "2026-05-07",
-      "interestRate": 5.2,
-      "pledgedAccount": "AAC7305098",
-      "principalOutstanding": 0,
-      "interestPayable": 0,
-      "projectedSettlement": 0,
-      "availableLimit": 0,
-      "notes": "Khoản thấu chi đã thu hết nợ sáng 07/05/2026; cột O Hạn mức còn lại trên source đang bằng 0.",
-      "collateralGroupName": "Cụm 2 sổ cá nhân BIDV của Hồ Thị Yến Nhi",
-      "depositCodes": [
-        "817004356078",
-        "811004405940"
-      ],
-      "mappingStatus": "confirmed",
-      "mappingNote": "Đảm bảo bằng 2 sổ cá nhân BIDV 817004356078 và 811004405940.",
-      "branchCode": "TN",
-      "branchName": "BIDV chi nhánh Thống Nhất",
-      "reportingGroupCode": "bidv-overdraft-tn",
-      "reportingGroupLabel": "Ngân hàng BIDV — chi nhánh Thống Nhất (nhóm thấu chi)"
-    },
     {
       "bank": "BIDV",
       "group": "overdraft",
@@ -792,7 +765,6 @@
       "branchName": "BIDV chi nhánh Thống Nhất",
       "displayLabel": "Ngân hàng BIDV — chi nhánh Thống Nhất (nhóm thấu chi)",
       "loanCodes": [
-        "1440280147",
         "8610037624"
       ],
       "totalOutstanding": 16785000000,

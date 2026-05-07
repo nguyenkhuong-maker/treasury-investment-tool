@@ -635,6 +635,7 @@
                     <th class="right">Dư nợ gốc</th>
                     <th class="right">Lãi còn phải trả</th>
                     <th class="right">Dự trả gốc+lãi</th>
+                    <th class="right">Hạn mức còn lại</th>
                   </tr>
                 </thead>
                 <tbody id="loan-bidv-wc-body"></tbody>
@@ -666,6 +667,7 @@
                   <th class="right">Dư nợ gốc</th>
                   <th class="right">Lãi còn phải trả</th>
                   <th class="right">Dự trả gốc+lãi</th>
+                  <th class="right">Hạn mức còn lại</th>
                 </tr>
               </thead>
               <tbody id="loan-sc-wc-body"></tbody>
@@ -1420,12 +1422,12 @@
     if (!vals.length) return null;
     return vals.reduce((s, v) => s + v, 0) / vals.length;
   }
-  function renderLoanGroupSummary(bodyId, items, label) {
+  function renderLoanGroupSummary(bodyId, items, label, availableLimit = null) {
     const body = document.getElementById(bodyId);
     const visibleItems = (items || []).filter(isLoanVisible);
     if (!body) return;
     if (!visibleItems.length) {
-      body.innerHTML = '<tr><td colspan="8" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>';
+      body.innerHTML = '<tr><td colspan="9" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>';
       return;
     }
     const sorted = visibleItems.slice().sort((a,b) => new Date(a.maturityDate) - new Date(b.maturityDate));
@@ -1435,6 +1437,7 @@
     const totalInterest = aggregateLoanValues(visibleItems, 'interestPayable');
     const totalProjected = aggregateLoanValues(visibleItems, 'projectedSettlement');
     const avgRate = averageRate(visibleItems);
+    const availableCell = availableLimit == null ? '<span class="muted">—</span>' : fmtMoney(availableLimit);
     const detailRows = visibleItems.map(item => `<tr>
       <td><strong>${item.loanCode || ''}</strong></td>
       <td>${fmtDateVN(item.disbursementDate)}</td>
@@ -1444,6 +1447,7 @@
       <td class="right">${fmtMoney(item.principalOutstanding || 0)}</td>
       <td class="right">${fmtMoney(item.interestPayable || 0)}</td>
       <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
+      <td class="right"><span class="muted">—</span></td>
     </tr>`).join('');
     body.innerHTML = `<tr class="vld-toggle-row" onclick="toggleVLD(this)">
       <td><span class="vld-arrow">▶</span><strong>${label}</strong></td>
@@ -1454,9 +1458,10 @@
       <td class="right">${fmtMoney(totalPrincipal)}</td>
       <td class="right">${fmtMoney(totalInterest)}</td>
       <td class="right">${fmtMoney(totalProjected)}</td>
+      <td class="right">${availableCell}</td>
     </tr>
     <tr style="display:none">
-      <td colspan="8" style="padding:0;background:#fbfcfe">
+      <td colspan="9" style="padding:0;background:#fbfcfe">
         <div class="detail-content">
           <div class="table-wrap" style="margin-top:0">
             <table>
@@ -1470,6 +1475,7 @@
                   <th class="right">Dư nợ gốc</th>
                   <th class="right">Lãi còn phải trả</th>
                   <th class="right">Dự trả gốc+lãi</th>
+                  <th class="right">Hạn mức còn lại</th>
                 </tr>
               </thead>
               <tbody>${detailRows}</tbody>
@@ -1505,9 +1511,9 @@
     renderLoanKpis();
     renderLoanMaturity();
     renderLoanTable('loan-bidv-overdraft-body', LOANS.bidvOverdraft || [], true);
-    renderLoanGroupSummary('loan-bidv-wc-body', LOANS.bidvWorkingCapital || [], 'BIDV - Vốn lưu động');
+    renderLoanGroupSummary('loan-bidv-wc-body', LOANS.bidvWorkingCapital || [], 'BIDV - Vốn lưu động', Number(LOANS?.summary?.bidvWorkingCapitalAvailableLimit || 0));
     renderCompanyDepositTable();
-    renderLoanGroupSummary('loan-sc-wc-body', LOANS.scWorkingCapital || [], 'SC - Vốn lưu động');
+    renderLoanGroupSummary('loan-sc-wc-body', LOANS.scWorkingCapital || [], 'SC - Vốn lưu động', Number(LOANS?.summary?.scAvailableLimit || 0));
   }
   function applyLoanData(data, sourceLabel) {
     LOANS = data;

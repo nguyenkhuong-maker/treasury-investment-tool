@@ -2,7 +2,7 @@
   "meta": {
     "name": "Treasury Rate Dashboard Data",
     "timezone": "Asia/Ho_Chi_Minh",
-    "updatedAt": "2026-05-04T11:57:00+07:00",
+    "updatedAt": "2026-05-07T10:18:00+07:00",
     "defaultMonth": "2026-05",
     "defaultWeek": "1",
     "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4. Có thể cập nhật dần theo thời gian."
@@ -594,9 +594,9 @@
         "1": {
           "label": "Tuần 1",
           "available": true,
-          "updatedAt": "2026-05-04T11:57:00+07:00",
+          "updatedAt": "2026-05-07T10:18:00+07:00",
           "summary": {
-            "note": "Cập nhật lãi suất tuần 1 tháng 05/2026 theo thông tin anh Nguyên cung cấp. Standard Chartered không còn kinh doanh kỳ hạn 12 tháng. Trái phiếu VNDirect không còn kinh doanh từ tuần 1 tháng 05/2026. Phần còn lại giữ nguyên so với tuần 3 tháng 04/2026."
+            "note": "Cập nhật lãi suất tuần 1 tháng 05/2026 theo thông tin anh Nguyên cung cấp. Standard Chartered không còn kinh doanh kỳ hạn 12 tháng. Trái phiếu VNDirect không còn kinh doanh từ tuần 1 tháng 05/2026. Đã bổ sung thông tin cầm cố sổ cá nhân cho VPBank, Eximbank, NCB. Phần còn lại giữ nguyên so với tuần 3 tháng 04/2026."
           },
           "mediumTerm": {
             "items": [
@@ -630,8 +630,21 @@
                   "12m": 8.7
                 },
                 "corpBorrowRate": null,
-                "strategy": "Ưu tiên lợi suất",
-                "comment": "Lãi tốt, phù hợp giữ tiền trung hạn."
+                "strategy": "Ưu tiên lợi suất + hỗ trợ vay cá nhân",
+                "comment": "Cầm cố sổ cá nhân, cá nhân vay lại với lãi vay = lãi gửi + 0.5%/năm; tỷ lệ vay tối đa 90% giá trị sổ.",
+                "personalPledgeLoan": {
+                  "type": "personal_deposit_pledge",
+                  "borrower": "Cá nhân vay lại",
+                  "securedBy": "Cầm cố sổ cá nhân",
+                  "loanRateFormula": "Lãi vay = lãi gửi + 0.5%/năm",
+                  "loanRateSpread": 0.5,
+                  "loanToValueRatio": 0.9,
+                  "loanRates": {
+                    "6m": 9.2,
+                    "9m": null,
+                    "12m": 9.2
+                  }
+                }
               },
               {
                 "name": "Standard Chartered",
@@ -652,8 +665,21 @@
                   "12m": 8.8
                 },
                 "corpBorrowRate": null,
-                "strategy": "Ưu tiên lợi suất",
-                "comment": "Lãi cao, hợp cho tiền chưa cần cầm cố."
+                "strategy": "Ưu tiên lợi suất, có thể cầm cố 100% cho vay cá nhân",
+                "comment": "Cầm cố sổ cá nhân, cá nhân vay lại với lãi vay = lãi gửi + 2.99%/năm; tỷ lệ vay tối đa 100% giá trị sổ.",
+                "personalPledgeLoan": {
+                  "type": "personal_deposit_pledge",
+                  "borrower": "Cá nhân vay lại",
+                  "securedBy": "Cầm cố sổ cá nhân",
+                  "loanRateFormula": "Lãi vay = lãi gửi + 2.99%/năm",
+                  "loanRateSpread": 2.99,
+                  "loanToValueRatio": 1,
+                  "loanRates": {
+                    "6m": 11.74,
+                    "9m": null,
+                    "12m": 11.79
+                  }
+                }
               },
               {
                 "name": "Eximbank",
@@ -663,8 +689,21 @@
                   "12m": 8.2
                 },
                 "corpBorrowRate": null,
-                "strategy": "Ưu tiên lợi suất",
-                "comment": "Phù hợp khi cần mức lãi khá và ổn định."
+                "strategy": "Ưu tiên cầm cố 100% nếu cần vay cá nhân",
+                "comment": "Cầm cố sổ cá nhân, cá nhân vay lại với lãi vay = lãi gửi + 2.0%/năm; tỷ lệ vay tối đa 100% giá trị sổ.",
+                "personalPledgeLoan": {
+                  "type": "personal_deposit_pledge",
+                  "borrower": "Cá nhân vay lại",
+                  "securedBy": "Cầm cố sổ cá nhân",
+                  "loanRateFormula": "Lãi vay = lãi gửi + 2.0%/năm",
+                  "loanRateSpread": 2,
+                  "loanToValueRatio": 1,
+                  "loanRates": {
+                    "6m": 10.3,
+                    "9m": null,
+                    "12m": 10.2
+                  }
+                }
               },
               {
                 "name": "OCB",

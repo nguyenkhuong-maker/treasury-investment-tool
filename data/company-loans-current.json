@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-05-07T16:18:17+07:00",
+    "updatedAt": "2026-05-08T14:01:34+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -17,10 +17,10 @@
     }
   },
   "summary": {
-    "totalOutstanding": 42257169269,
-    "availableLimit": 18502160731,
+    "totalOutstanding": 42609221846,
+    "availableLimit": 18150108154,
     "bidvAvailableLimit": 15311447234,
-    "scAvailableLimit": 3190713497,
+    "scAvailableLimit": 2838660920,
     "bidvOverdraftAvailableLimit": 2762878011,
     "bidvWorkingCapitalAvailableLimit": 12548569223
   },
@@ -83,8 +83,8 @@
       "interestRate": 7.9,
       "pledgedAccount": "-",
       "principalOutstanding": 16785000000,
-      "interestPayable": 43595014,
-      "projectedSettlement": 16828595014,
+      "interestPayable": 47227932,
+      "projectedSettlement": 16832227932,
       "availableLimit": 15000000,
       "notes": "Khoản thấu chi mới tại BIDV TN; đang còn dư nợ và còn hạn mức chưa giải ngân.",
       "collateralGroupName": "Sổ cá nhân BIDV của Hồ Thị Yến Nhi",
@@ -109,8 +109,8 @@
       "interestRate": 7.06,
       "pledgedAccount": "HĐ TGCKH 04-2024/HĐTG",
       "principalOutstanding": 4788121989,
-      "interestPayable": 47123583,
-      "projectedSettlement": 4835245572,
+      "interestPayable": 51050549,
+      "projectedSettlement": 4839172538,
       "availableLimit": 161878011,
       "notes": "Khoản thấu chi TS hiện hữu; hạn mức còn lại lấy theo cột C Hạn mức của sheet Loan-BIDV.",
       "collateralGroupName": "Sổ công ty VIHALI BIDV",
@@ -135,8 +135,8 @@
       "interestRate": 7.1,
       "pledgedAccount": "HĐ TGCKH 05-2024/HĐTG",
       "principalOutstanding": 2014000000,
-      "interestPayable": 18174182,
-      "projectedSettlement": 5539912284,
+      "interestPayable": 19688697,
+      "projectedSettlement": 5541426799,
       "availableLimit": 2586000000,
       "notes": "Khoản thấu chi TS có dư nợ; hạn mức còn lại lấy theo cột C Hạn mức của sheet Loan-BIDV.",
       "collateralGroupName": "Sổ công ty VIHALI BIDV",
@@ -702,6 +702,27 @@
       "principalOutstanding": 2035495088,
       "interestPayable": 57718833,
       "projectedSettlement": 2093213921,
+      "notes": "Khế ước active.",
+      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "depositCodes": [
+        "44-1470100-04",
+        "44-1470100-06"
+      ],
+      "mappingStatus": "confirmed",
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
+    },
+    {
+      "bank": "Standard Chartered",
+      "group": "working-capital",
+      "company": "VIHALI",
+      "loanCode": "007385614",
+      "loanName": "SC VLĐ",
+      "disbursementDate": "2026-05-07",
+      "maturityDate": "2026-11-02",
+      "interestRate": 5.75,
+      "principalOutstanding": 352052577,
+      "interestPayable": 9927400,
+      "projectedSettlement": 361979977,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [

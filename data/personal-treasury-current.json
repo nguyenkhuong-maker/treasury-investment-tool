@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-05-06T15:09:50+07:00",
+    "updatedAt": "2026-05-08T14:01:34+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
@@ -402,7 +402,8 @@
         "007305767",
         "007332686",
         "007349292",
-        "007365017"
+        "007365017",
+        "007385614"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -443,7 +444,8 @@
         "007305767",
         "007332686",
         "007349292",
-        "007365017"
+        "007365017",
+        "007385614"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",

@@ -2,7 +2,7 @@
   "meta": {
     "name": "Treasury Rate Dashboard Data",
     "timezone": "Asia/Ho_Chi_Minh",
-    "updatedAt": "2026-05-11T09:35:00+07:00",
+    "updatedAt": "2026-05-11T11:21:00+07:00",
     "defaultMonth": "2026-05",
     "defaultWeek": "2",
     "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4. Có thể cập nhật dần theo thời gian."
@@ -809,9 +809,9 @@
         "2": {
           "label": "Tuần 2",
           "available": true,
-          "updatedAt": "2026-05-11T09:35:00+07:00",
+          "updatedAt": "2026-05-11T11:21:00+07:00",
           "summary": {
-            "note": "Cập nhật lãi suất tuần 2 tháng 05/2026 theo thông tin anh Nguyên cung cấp. BIDV và Standard Chartered giữ nguyên tuần 1. VNDirect kỳ hạn 1-3 tháng và 1-3 tuần giữ theo mức anh gửi."
+            "note": "Cập nhật lãi suất tuần 2 tháng 05/2026 theo thông tin anh Nguyên cung cấp. BIDV và Standard Chartered giữ nguyên tuần 1. VNDirect kỳ hạn 1-3 tháng và 1-3 tuần giữ theo mức anh gửi. Đã cập nhật thêm chứng chỉ tiền gửi VPBank cho các kỳ hạn 1 tuần đến 3 tháng."
           },
           "mediumTerm": {
             "items": [
@@ -949,9 +949,9 @@
               {
                 "name": "Chứng chỉ tiền gửi VPBank",
                 "rates": {
-                  "1m": 7.1,
-                  "2m": 7.1,
-                  "3m": 7.3
+                  "1m": 7.4,
+                  "2m": 7.4,
+                  "3m": 7.6
                 },
                 "minAmount": 0,
                 "strategy": "Ưu tiên cho vốn nhàn rỗi kỳ hạn 1-3 tháng."
@@ -998,9 +998,9 @@
                 "name": "Chứng chỉ tiền gửi VPBank",
                 "rates": {
                   "1d": null,
-                  "1w": 1.5,
-                  "2w": 2,
-                  "3w": 2.5
+                  "1w": 1.8,
+                  "2w": 2.3,
+                  "3w": 2.8
                 },
                 "minAmount": 0,
                 "strategy": "Chỉ cân nhắc khi cần khóa tiền rất ngắn hạn tại VPBank.",

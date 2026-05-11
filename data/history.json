@@ -2,9 +2,9 @@
   "meta": {
     "name": "Treasury Rate Dashboard Data",
     "timezone": "Asia/Ho_Chi_Minh",
-    "updatedAt": "2026-05-07T10:18:00+07:00",
+    "updatedAt": "2026-05-11T09:25:00+07:00",
     "defaultMonth": "2026-05",
-    "defaultWeek": "1",
+    "defaultWeek": "2",
     "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4. Có thể cập nhật dần theo thời gian."
   },
   "months": {
@@ -808,19 +808,217 @@
         },
         "2": {
           "label": "Tuần 2",
-          "available": false,
-          "updatedAt": null,
+          "available": true,
+          "updatedAt": "2026-05-11T09:25:00+07:00",
           "summary": {
-            "note": "Chưa có dữ liệu."
+            "note": "Cập nhật lãi suất tuần 2 tháng 05/2026. Tạm giữ nguyên toàn bộ mặt bằng lãi suất, đầu tư ngắn hạn 1-3 tháng và dưới 1 tháng theo tuần 1 do chưa có thay đổi bổ sung trong yêu cầu hiện tại."
           },
           "mediumTerm": {
-            "items": []
+            "items": [
+              {
+                "name": "BIDV",
+                "rates": {
+                  "6m": 8,
+                  "9m": null,
+                  "12m": 8
+                },
+                "corpBorrowRate": 7.2,
+                "strategy": "Ưu tiên cân bằng",
+                "comment": "Cân bằng giữa gửi tiền và hỗ trợ vay."
+              },
+              {
+                "name": "ACB",
+                "rates": {
+                  "6m": 7.75,
+                  "9m": null,
+                  "12m": 7.85
+                },
+                "corpBorrowRate": null,
+                "strategy": "Ưu tiên lợi suất",
+                "comment": "Ổn định, dễ dùng cho phần vốn nhàn rỗi."
+              },
+              {
+                "name": "VPBank",
+                "rates": {
+                  "6m": 8.7,
+                  "9m": null,
+                  "12m": 8.7
+                },
+                "corpBorrowRate": null,
+                "strategy": "Ưu tiên lợi suất + hỗ trợ vay cá nhân",
+                "comment": "Cầm cố sổ cá nhân, cá nhân vay lại với lãi vay = lãi gửi + 0.5%/năm; tỷ lệ vay tối đa 90% giá trị sổ.",
+                "personalPledgeLoan": {
+                  "type": "personal_deposit_pledge",
+                  "borrower": "Cá nhân vay lại",
+                  "securedBy": "Cầm cố sổ cá nhân",
+                  "loanRateFormula": "Lãi vay = lãi gửi + 0.5%/năm",
+                  "loanRateSpread": 0.5,
+                  "loanToValueRatio": 0.9,
+                  "loanRates": {
+                    "6m": 9.2,
+                    "9m": null,
+                    "12m": 9.2
+                  }
+                }
+              },
+              {
+                "name": "Standard Chartered",
+                "rates": {
+                  "6m": 8,
+                  "9m": null,
+                  "12m": null
+                },
+                "corpBorrowRate": 5.75,
+                "strategy": "Ưu tiên hỗ trợ vay rẻ",
+                "comment": "Tốt nhất nếu ưu tiên doanh nghiệp vay rẻ."
+              },
+              {
+                "name": "NCB",
+                "rates": {
+                  "6m": 8.75,
+                  "9m": null,
+                  "12m": 8.8
+                },
+                "corpBorrowRate": null,
+                "strategy": "Ưu tiên lợi suất, có thể cầm cố 100% cho vay cá nhân",
+                "comment": "Cầm cố sổ cá nhân, cá nhân vay lại với lãi vay = lãi gửi + 2.99%/năm; tỷ lệ vay tối đa 100% giá trị sổ.",
+                "personalPledgeLoan": {
+                  "type": "personal_deposit_pledge",
+                  "borrower": "Cá nhân vay lại",
+                  "securedBy": "Cầm cố sổ cá nhân",
+                  "loanRateFormula": "Lãi vay = lãi gửi + 2.99%/năm",
+                  "loanRateSpread": 2.99,
+                  "loanToValueRatio": 1,
+                  "loanRates": {
+                    "6m": 11.74,
+                    "9m": null,
+                    "12m": 11.79
+                  }
+                }
+              },
+              {
+                "name": "Eximbank",
+                "rates": {
+                  "6m": 8.3,
+                  "9m": null,
+                  "12m": 8.2
+                },
+                "corpBorrowRate": null,
+                "strategy": "Ưu tiên cầm cố 100% nếu cần vay cá nhân",
+                "comment": "Cầm cố sổ cá nhân, cá nhân vay lại với lãi vay = lãi gửi + 2.0%/năm; tỷ lệ vay tối đa 100% giá trị sổ.",
+                "personalPledgeLoan": {
+                  "type": "personal_deposit_pledge",
+                  "borrower": "Cá nhân vay lại",
+                  "securedBy": "Cầm cố sổ cá nhân",
+                  "loanRateFormula": "Lãi vay = lãi gửi + 2.0%/năm",
+                  "loanRateSpread": 2,
+                  "loanToValueRatio": 1,
+                  "loanRates": {
+                    "6m": 10.3,
+                    "9m": null,
+                    "12m": 10.2
+                  }
+                }
+              },
+              {
+                "name": "OCB",
+                "rates": {
+                  "6m": 8.4,
+                  "9m": null,
+                  "12m": 8.1
+                },
+                "corpBorrowRate": null,
+                "strategy": "Ưu tiên lợi suất",
+                "comment": "Hợp hơn ở kỳ hạn 6 tháng."
+              },
+              {
+                "name": "VNDirect",
+                "rates": {
+                  "6m": 9.2,
+                  "9m": 9.3,
+                  "12m": 9.4
+                },
+                "corpBorrowRate": null,
+                "strategy": "Ưu tiên lợi suất",
+                "comment": "Lãi rất cao ở 6-12 tháng, hợp cho tiền chưa cần cầm cố."
+              }
+            ]
           },
           "shortTerm": {
-            "items": []
+            "items": [
+              {
+                "name": "Chứng chỉ tiền gửi VPBank",
+                "rates": {
+                  "1m": 7.1,
+                  "2m": 7.1,
+                  "3m": 7.3
+                },
+                "minAmount": 0,
+                "strategy": "Ưu tiên cho vốn nhàn rỗi kỳ hạn 1-3 tháng."
+              },
+              {
+                "name": "Trái phiếu IPA",
+                "rates": {
+                  "1m": 7.4,
+                  "2m": 8.3,
+                  "3m": 8.5
+                },
+                "minAmount": 0,
+                "strategy": "Ưu tiên cho vốn nhàn rỗi kỳ hạn 2-3 tháng."
+              }
+            ]
           },
           "underOneMonth": {
-            "items": []
+            "items": [
+              {
+                "name": "Sinh lợi qua đêm VPBank",
+                "rates": {
+                  "1d": 5.5,
+                  "1w": null,
+                  "2w": null,
+                  "3w": null
+                },
+                "minAmount": 0,
+                "strategy": "Ưu tiên cho tiền chỉ nằm qua đêm và cần rút ngay hôm sau.",
+                "rollable": true
+              },
+              {
+                "name": "Dcash Growth (VNDirect)",
+                "rates": {
+                  "1d": 5,
+                  "1w": null,
+                  "2w": null,
+                  "3w": null
+                },
+                "minAmount": 0,
+                "strategy": "Dùng làm phương án dự phòng qua đêm tại VNDirect.",
+                "rollable": true
+              },
+              {
+                "name": "Chứng chỉ tiền gửi VPBank",
+                "rates": {
+                  "1d": null,
+                  "1w": 1.5,
+                  "2w": 2,
+                  "3w": 2.5
+                },
+                "minAmount": 0,
+                "strategy": "Chỉ cân nhắc khi cần khóa tiền rất ngắn hạn tại VPBank.",
+                "rollable": false
+              },
+              {
+                "name": "Hợp đồng Dplus (VNDirect)",
+                "rates": {
+                  "1d": null,
+                  "1w": 5.2,
+                  "2w": 5.3,
+                  "3w": 5.4
+                },
+                "minAmount": 0,
+                "strategy": "Ưu tiên cho tiền chờ 1-3 tuần.",
+                "rollable": false
+              }
+            ]
           }
         },
         "3": {

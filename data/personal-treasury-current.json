@@ -1,16 +1,16 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-05-08T14:01:34+07:00",
+    "updatedAt": "2026-05-11T13:50:13+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet"
   },
   "summary": {
-    "totalPersonalDeposits": 127822991625,
+    "totalPersonalDeposits": 126552477291,
     "totalPersonalLoans": 27250000000,
-    "netPersonalTreasury": 100572991625
+    "netPersonalTreasury": 99302477291
   },
   "personalDeposits": [
     {
@@ -46,75 +46,6 @@
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 810004228033 + tín chấp",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động BIDV; phần đảm bảo bằng sổ chiếm 60% hạn mức.",
       "mappingStatus": "confirmed"
-    },
-    {
-      "owner": "Hồ Thị Yến Nhi",
-      "sourceGroup": "HOAN_DOI_USD_STABLES_SANG_VND",
-      "bank": "BIDV-TN",
-      "depositCode": "VIP0036805",
-      "depositType": "Tiết kiệm VND",
-      "certificateNumber": "817004356078",
-      "principal": 7787098936,
-      "amountOnCertificate": 7069900000,
-      "interestRate": 8,
-      "openDate": "2026-05-03",
-      "maturityDate": "2027-05-03",
-      "interestPayoutType": "Cuối kỳ",
-      "pledged": false,
-      "pledgedAmount": 0,
-      "unpledgedAmount": 7787098936,
-      "accruedInterest": 622967915,
-      "projectedSettlement": 8410066851,
-      "linkedLoanCodes": [
-        "1440280147"
-      ],
-      "collateralGroupName": "Cụm 2 sổ cá nhân BIDV của Hồ Thị Yến Nhi",
-      "mappingNote": "Đang đảm bảo cho khoản vay 1440280147.",
-      "mappingStatus": "confirmed"
-    },
-    {
-      "owner": "Hồ Thị Yến Nhi",
-      "sourceGroup": "HOAN_DOI_USD_STABLES_SANG_VND",
-      "bank": "BIDV-TN",
-      "depositCode": "VIP0036806",
-      "depositType": "Tiết kiệm VND",
-      "certificateNumber": "811004405940",
-      "principal": 3524620800,
-      "amountOnCertificate": 3200000000,
-      "interestRate": 8,
-      "openDate": "2026-05-06",
-      "maturityDate": "2027-05-06",
-      "interestPayoutType": "Cuối kỳ",
-      "pledged": false,
-      "pledgedAmount": 0,
-      "unpledgedAmount": 3524620800,
-      "accruedInterest": 281969664,
-      "projectedSettlement": 3806590464,
-      "linkedLoanCodes": [
-        "1440280147"
-      ],
-      "collateralGroupName": "Cụm 2 sổ cá nhân BIDV của Hồ Thị Yến Nhi",
-      "mappingNote": "Đang đảm bảo cho khoản vay 1440280147.",
-      "mappingStatus": "confirmed"
-    },
-    {
-      "owner": "Hồ Thị Yến Nhi",
-      "sourceGroup": "HOAN_DOI_USD_STABLES_SANG_VND",
-      "bank": "BIDV-TN",
-      "depositCode": "VIP0101785",
-      "depositType": "Tiết kiệm VND",
-      "certificateNumber": "816010497431",
-      "principal": 6350713600,
-      "amountOnCertificate": 6036800000,
-      "interestRate": 8,
-      "openDate": "2026-04-28",
-      "maturityDate": "2027-04-28",
-      "interestPayoutType": "Cuối kỳ",
-      "pledged": false,
-      "pledgedAmount": 0,
-      "unpledgedAmount": 6350713600,
-      "accruedInterest": 508057088,
-      "projectedSettlement": 6858770688
     },
     {
       "owner": "Hồ Thị Yến Nhi",
@@ -355,17 +286,17 @@
       "depositCode": "26012026.04/HĐMB/IPA12501/VNDS-ĐTT",
       "depositType": "Đầu tư VDR / IPA",
       "certificateNumber": "26012026.04/HĐMB/IPA12501/VNDS-ĐTT",
-      "principal": 16123673527,
-      "amountOnCertificate": 16123673527,
-      "interestRate": 8,
-      "openDate": "2026-02-09",
-      "maturityDate": "2026-05-11",
+      "principal": 15599994227,
+      "amountOnCertificate": 15599994227,
+      "interestRate": 8.5,
+      "openDate": "2026-05-11",
+      "maturityDate": "2026-08-11",
       "interestPayoutType": "Cuối kỳ",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 16123673527,
-      "accruedInterest": 321589982,
-      "projectedSettlement": 16445263509
+      "unpledgedAmount": 15599994227,
+      "accruedInterest": 334224534,
+      "projectedSettlement": 15934218761
     },
     {
       "owner": "Hồ Thị Yến Nhi",
@@ -477,17 +408,17 @@
       "depositCode": "VPB-PL-DTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "09388885678",
-      "principal": 2258133460,
-      "amountOnCertificate": 2258133460,
+      "principal": 2348995154,
+      "amountOnCertificate": 2348995154,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 2258133460,
+      "unpledgedAmount": 2348995154,
       "accruedInterest": 0,
-      "projectedSettlement": 2258133460
+      "projectedSettlement": 2348995154
     },
     {
       "owner": "Nguyễn Trung Tín",
@@ -496,17 +427,17 @@
       "depositCode": "VPB-PL-NTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "543033162",
-      "principal": 2641300008,
-      "amountOnCertificate": 2641300008,
+      "principal": 19466036616,
+      "amountOnCertificate": 19466036616,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 2641300008,
+      "unpledgedAmount": 19466036616,
       "accruedInterest": 0,
-      "projectedSettlement": 2641300008
+      "projectedSettlement": 19466036616
     },
     {
       "owner": "Đặng Thu Thảo",

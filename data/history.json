@@ -2,7 +2,7 @@
   "meta": {
     "name": "Treasury Rate Dashboard Data",
     "timezone": "Asia/Ho_Chi_Minh",
-    "updatedAt": "2026-05-11T11:21:00+07:00",
+    "updatedAt": "2026-05-11T13:40:00+07:00",
     "defaultMonth": "2026-05",
     "defaultWeek": "2",
     "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4. Có thể cập nhật dần theo thời gian."
@@ -809,9 +809,9 @@
         "2": {
           "label": "Tuần 2",
           "available": true,
-          "updatedAt": "2026-05-11T11:21:00+07:00",
+          "updatedAt": "2026-05-11T13:40:00+07:00",
           "summary": {
-            "note": "Cập nhật lãi suất tuần 2 tháng 05/2026 theo thông tin anh Nguyên cung cấp. BIDV và Standard Chartered giữ nguyên tuần 1. VNDirect kỳ hạn 1-3 tháng và 1-3 tuần giữ theo mức anh gửi. Đã cập nhật thêm chứng chỉ tiền gửi VPBank cho các kỳ hạn 1 tuần đến 3 tháng."
+            "note": "Cập nhật lãi suất tuần 2 tháng 05/2026 theo thông tin anh Nguyên cung cấp. BIDV và Standard Chartered giữ nguyên tuần 1. VNDirect kỳ hạn 1-3 tháng và 1-3 tuần giữ theo mức anh gửi. Đã cập nhật thêm chứng chỉ tiền gửi VPBank cho các kỳ hạn 1 tuần đến 3 tháng. VPBank điều chỉnh lại lãi suất 12 tháng lên 8.70% và tỷ lệ cho vay cầm cố sổ cá nhân lên 95%."
           },
           "mediumTerm": {
             "items": [
@@ -842,22 +842,22 @@
                 "rates": {
                   "6m": 8.7,
                   "9m": null,
-                  "12m": 8.6
+                  "12m": 8.7
                 },
                 "corpBorrowRate": null,
                 "strategy": "Ưu tiên lợi suất + hỗ trợ vay cá nhân",
-                "comment": "Cầm cố sổ cá nhân, cá nhân vay lại với lãi vay = lãi gửi + 0.5%/năm; tỷ lệ vay tối đa 90% giá trị sổ.",
+                "comment": "Cầm cố sổ cá nhân, cá nhân vay lại với lãi vay = lãi gửi + 0.5%/năm; tỷ lệ vay tối đa 95% giá trị sổ.",
                 "personalPledgeLoan": {
                   "type": "personal_deposit_pledge",
                   "borrower": "Cá nhân vay lại",
                   "securedBy": "Cầm cố sổ cá nhân",
                   "loanRateFormula": "Lãi vay = lãi gửi + 0.5%/năm",
                   "loanRateSpread": 0.5,
-                  "loanToValueRatio": 0.9,
+                  "loanToValueRatio": 0.95,
                   "loanRates": {
                     "6m": 9.2,
                     "9m": null,
-                    "12m": 9.1
+                    "12m": 9.2
                   }
                 }
               },

@@ -2,7 +2,7 @@
   "meta": {
     "name": "Treasury Rate Dashboard Data",
     "timezone": "Asia/Ho_Chi_Minh",
-    "updatedAt": "2026-05-11T09:25:00+07:00",
+    "updatedAt": "2026-05-11T09:35:00+07:00",
     "defaultMonth": "2026-05",
     "defaultWeek": "2",
     "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4. Có thể cập nhật dần theo thời gian."
@@ -809,9 +809,9 @@
         "2": {
           "label": "Tuần 2",
           "available": true,
-          "updatedAt": "2026-05-11T09:25:00+07:00",
+          "updatedAt": "2026-05-11T09:35:00+07:00",
           "summary": {
-            "note": "Cập nhật lãi suất tuần 2 tháng 05/2026. Tạm giữ nguyên toàn bộ mặt bằng lãi suất, đầu tư ngắn hạn 1-3 tháng và dưới 1 tháng theo tuần 1 do chưa có thay đổi bổ sung trong yêu cầu hiện tại."
+            "note": "Cập nhật lãi suất tuần 2 tháng 05/2026 theo thông tin anh Nguyên cung cấp. BIDV và Standard Chartered giữ nguyên tuần 1. VNDirect kỳ hạn 1-3 tháng và 1-3 tuần giữ theo mức anh gửi."
           },
           "mediumTerm": {
             "items": [
@@ -829,9 +829,9 @@
               {
                 "name": "ACB",
                 "rates": {
-                  "6m": 7.75,
+                  "6m": 8,
                   "9m": null,
-                  "12m": 7.85
+                  "12m": 8.1
                 },
                 "corpBorrowRate": null,
                 "strategy": "Ưu tiên lợi suất",
@@ -842,7 +842,7 @@
                 "rates": {
                   "6m": 8.7,
                   "9m": null,
-                  "12m": 8.7
+                  "12m": 8.6
                 },
                 "corpBorrowRate": null,
                 "strategy": "Ưu tiên lợi suất + hỗ trợ vay cá nhân",
@@ -857,7 +857,7 @@
                   "loanRates": {
                     "6m": 9.2,
                     "9m": null,
-                    "12m": 9.2
+                    "12m": 9.1
                   }
                 }
               },
@@ -875,9 +875,9 @@
               {
                 "name": "NCB",
                 "rates": {
-                  "6m": 8.75,
+                  "6m": 8.85,
                   "9m": null,
-                  "12m": 8.8
+                  "12m": 8.95
                 },
                 "corpBorrowRate": null,
                 "strategy": "Ưu tiên lợi suất, có thể cầm cố 100% cho vay cá nhân",
@@ -890,18 +890,18 @@
                   "loanRateSpread": 2.99,
                   "loanToValueRatio": 1,
                   "loanRates": {
-                    "6m": 11.74,
+                    "6m": 11.84,
                     "9m": null,
-                    "12m": 11.79
+                    "12m": 11.94
                   }
                 }
               },
               {
                 "name": "Eximbank",
                 "rates": {
-                  "6m": 8.3,
+                  "6m": 8.5,
                   "9m": null,
-                  "12m": 8.2
+                  "12m": 8.5
                 },
                 "corpBorrowRate": null,
                 "strategy": "Ưu tiên cầm cố 100% nếu cần vay cá nhân",
@@ -914,9 +914,9 @@
                   "loanRateSpread": 2,
                   "loanToValueRatio": 1,
                   "loanRates": {
-                    "6m": 10.3,
+                    "6m": 10.5,
                     "9m": null,
-                    "12m": 10.2
+                    "12m": 10.5
                   }
                 }
               },

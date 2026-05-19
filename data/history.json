@@ -2,7 +2,7 @@
   "meta": {
     "name": "Treasury Rate Dashboard Data",
     "timezone": "Asia/Ho_Chi_Minh",
-    "updatedAt": "2026-05-18T11:28:00+07:00",
+    "updatedAt": "2026-05-19T09:04:00+07:00",
     "defaultMonth": "2026-05",
     "defaultWeek": "3",
     "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4. Có thể cập nhật dần theo thời gian."
@@ -1024,9 +1024,9 @@
         "3": {
           "label": "Tuần 3",
           "available": true,
-          "updatedAt": "2026-05-18T11:28:00+07:00",
+          "updatedAt": "2026-05-19T09:04:00+07:00",
           "summary": {
-            "note": "Cập nhật lãi suất tuần 3 tháng 05/2026 theo thông tin anh Nguyên cung cấp. Các thông tin không được nhắc tới giữ nguyên theo tuần 2 tháng 05/2026. Standard Chartered tiếp tục không còn chạy kỳ hạn 12 tháng."
+            "note": "Cập nhật lãi suất tuần 3 tháng 05/2026 theo thông tin anh Nguyên cung cấp. Các thông tin không được nhắc tới giữ nguyên theo tuần 2 tháng 05/2026. Standard Chartered tiếp tục không còn chạy kỳ hạn 12 tháng. NCB điều chỉnh lại 6 tháng lên 8.90%/năm và 12 tháng lên 9.00%/năm."
           },
           "mediumTerm": {
             "items": [
@@ -1090,9 +1090,9 @@
               {
                 "name": "NCB",
                 "rates": {
-                  "6m": 8.85,
+                  "6m": 8.9,
                   "9m": null,
-                  "12m": 8.95
+                  "12m": 9
                 },
                 "corpBorrowRate": null,
                 "strategy": "Ưu tiên lợi suất, có thể cầm cố 100% cho vay cá nhân",
@@ -1105,9 +1105,9 @@
                   "loanRateSpread": 2.99,
                   "loanToValueRatio": 1,
                   "loanRates": {
-                    "6m": 11.84,
+                    "6m": 11.89,
                     "9m": null,
-                    "12m": 11.94
+                    "12m": 11.99
                   }
                 }
               },

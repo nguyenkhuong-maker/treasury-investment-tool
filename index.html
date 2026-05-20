@@ -541,19 +541,6 @@
         </div>
       </section>
 
-      <section class="ui-toolbar">
-        <div class="ui-toolbar-head">
-          <div>
-            <div class="ui-toolbar-title">Nguồn dữ liệu dư nợ công ty</div>
-          </div>
-        </div>
-        <div class="ui-actions">
-          <button class="btn-gold" onclick="chooseLoanJson()">📁 Chọn company-loans-current.json từ máy</button>
-          <button class="btn-secondary" onclick="tryLoadDefaultLoansJson()">↻ Đọc file mặc định</button>
-        </div>
-        <input id="loan-json-file" class="hidden-file" type="file" accept=".json,application/json" />
-      </section>
-
       <section class="ui-section" id="loan-overview">
         <div class="ui-section-head">
           <span class="label">01 — Tổng quan điều hành</span>
@@ -999,19 +986,6 @@
         </div>
       </section>
 
-      <section class="ui-toolbar">
-        <div class="ui-toolbar-head">
-          <div>
-            <div class="ui-toolbar-title">Nguồn dữ liệu treasury cá nhân</div>
-          </div>
-        </div>
-        <div class="ui-actions">
-          <button class="btn-gold" onclick="choosePersonalJson()">📁 Chọn personal-treasury-current.json từ máy</button>
-          <button class="btn-secondary" onclick="tryLoadDefaultPersonalJson()">↻ Đọc file mặc định</button>
-        </div>
-        <input id="personal-json-file" class="hidden-file" type="file" accept=".json,application/json" />
-      </section>
-
       <section class="ui-section" id="personal-overview">
         <div class="ui-section-head">
           <span class="label">01 — Tổng quan treasury cá nhân</span>
@@ -1220,10 +1194,6 @@
   let LOANS = null;
   let SITE_META = null;
 
-  function setLoanLoadStatus(html) {
-    const box = document.getElementById('loan-load-status');
-    if (box) box.innerHTML = html;
-  }
   function fmtDateVN(value) {
     if (!value) return '<span class="muted">—</span>';
     const d = new Date(value + 'T00:00:00');
@@ -1520,48 +1490,26 @@
     renderCompanyDepositTable();
     renderLoanGroupSummary('loan-sc-wc-body', LOANS.scWorkingCapital || [], 'SC - Vốn lưu động', Number(LOANS?.summary?.scAvailableLimit || 0));
   }
-  function applyLoanData(data, sourceLabel) {
+  function applyLoanData(data) {
     LOANS = data;
     renderLoanSnapshot();
-    setLoanLoadStatus(`<strong class="good">✓ Đã đọc dữ liệu dư nợ:</strong> ${sourceLabel}`);
   }
   async function tryLoadDefaultLoansJson() {
-    try {
-      const res = await fetch(withCacheBust('data/company-loans-current.json'));
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const data = await res.json();
-      applyLoanData(data, 'data/company-loans-current.json');
-    } catch (err) {
-      setLoanLoadStatus('<strong class="bad">✗ Không đọc được data/company-loans-current.json.</strong> Hãy bấm <strong>Chọn company-loans-current.json từ máy</strong> để test local.');
-      throw err;
-    }
-  }
-  function chooseLoanJson() {
-    document.getElementById('loan-json-file').click();
-  }
-  async function loadLoanJsonFile(event) {
-    const file = event.target.files && event.target.files[0];
-    if (!file) return;
-    try {
-      const data = JSON.parse(await file.text());
-      applyLoanData(data, 'Local: ' + file.name);
-    } catch (err) {
-      setLoanLoadStatus('<strong class="bad">✗ File JSON dư nợ không hợp lệ.</strong> ' + String(err));
-    }
+    const res = await fetch(withCacheBust('data/company-loans-current.json'));
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    applyLoanData(data);
   }
 
   /* ══════════════════════════════════════════════════════
      PERSONAL TREASURY SNAPSHOT — Core Logic
   ══════════════════════════════════════════════════════ */
   let PERSONAL = null;
+  let PERSONAL = null;
 
   function setPersonalDataSourceLabel(text) {
     const el = document.getElementById('personal-data-source-label');
     if (el) el.textContent = text;
-  }
-  function setPersonalLoadStatus(html) {
-    const box = document.getElementById('personal-load-status');
-    if (box) box.innerHTML = html;
   }
   function renderPersonalSummary() {
     const summary = PERSONAL?.summary || {};
@@ -1733,40 +1681,22 @@
     renderPersonalDeposits();
     renderPersonalLoans();
   }
-  function applyPersonalData(data, sourceLabel) {
+  function applyPersonalData(data) {
     PERSONAL = data;
-    setPersonalDataSourceLabel(sourceLabel);
+    setPersonalDataSourceLabel('data/personal-treasury-current.json');
     renderPersonalSnapshot();
-    setPersonalLoadStatus(`<strong class="good">✓ Đã đọc dữ liệu cá nhân:</strong> ${sourceLabel}`);
   }
   async function tryLoadDefaultPersonalJson() {
-    try {
-      const res = await fetch(withCacheBust('data/personal-treasury-current.json'));
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const data = await res.json();
-      applyPersonalData(data, 'data/personal-treasury-current.json');
-    } catch (err) {
-      setPersonalLoadStatus('<strong class="bad">✗ Không đọc được data/personal-treasury-current.json.</strong> Hãy bấm <strong>Chọn personal-treasury-current.json từ máy</strong> để test local.');
-      throw err;
-    }
-  }
-  function choosePersonalJson() {
-    document.getElementById('personal-json-file').click();
-  }
-  async function loadPersonalJsonFile(event) {
-    const file = event.target.files && event.target.files[0];
-    if (!file) return;
-    try {
-      const data = JSON.parse(await file.text());
-      applyPersonalData(data, 'Local: ' + file.name);
-    } catch (err) {
-      setPersonalLoadStatus('<strong class="bad">✗ File JSON cá nhân không hợp lệ.</strong> ' + String(err));
-    }
+    const res = await fetch(withCacheBust('data/personal-treasury-current.json'));
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    applyPersonalData(data);
   }
 
   /* ══════════════════════════════════════════════════════
      TREASURY RATE DASHBOARD — Core Logic
   ══════════════════════════════════════════════════════ */
+  const TENORS = {
   const TENORS = {
     '1d':  { label: '1 ngày',   days: 1   },
     '1w':  { label: '1 tuần',   days: 7   },
@@ -2312,8 +2242,6 @@
   }
   async function init() {
     document.getElementById('local-json-file').addEventListener('change', loadLocalJsonFile);
-    document.getElementById('loan-json-file').addEventListener('change', loadLoanJsonFile);
-    document.getElementById('personal-json-file').addEventListener('change', loadPersonalJsonFile);
     document.getElementById('month-select').addEventListener('change', () => { refreshWeekSelector(); refreshComparePeriodSelector(); renderSelectedPeriod(); });
     document.getElementById('week-select').addEventListener('change', () => { refreshComparePeriodSelector(); renderSelectedPeriod(); });
     document.getElementById('compare-period-select').addEventListener('change', renderSelectedPeriod);

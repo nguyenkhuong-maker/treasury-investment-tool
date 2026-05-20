@@ -737,35 +737,21 @@
       <section class="ui-toolbar">
         <div class="ui-toolbar-head">
           <div>
-            <div class="ui-toolbar-title">Điều khiển kỳ dữ liệu</div>
+            <div class="ui-toolbar-title">So sánh tuần dữ liệu</div>
+            <div class="ui-toolbar-note">Mặc định luôn lấy tuần hiện tại trên dashboard và chỉ cho chọn kỳ dùng để so sánh.</div>
           </div>
         </div>
-        <div class="form-grid">
+        <div class="form-grid" style="grid-template-columns:minmax(320px, 520px);">
           <div>
-            <label for="month-select">Tháng</label>
-            <select id="month-select"></select>
-          </div>
-          <div>
-            <label for="week-select">Tuần đang xem</label>
-            <select id="week-select"></select>
-          </div>
-          <div>
-            <label for="compare-period-select">So sánh với kỳ dữ liệu</label>
+            <label for="compare-period-select">So sánh tuần hiện tại với</label>
             <select id="compare-period-select"></select>
           </div>
         </div>
-        <div class="ui-actions">
-          <button class="btn-primary" onclick="renderSelectedPeriod()">▶ Xem dữ liệu</button>
-          <button class="btn-secondary" onclick="resetToDefaultPeriod()">↻ Về kỳ mặc định</button>
-          <button class="btn-gold" onclick="chooseLocalJson()">📁 Chọn history.json từ máy</button>
-          <button class="btn-secondary" onclick="tryLoadDefaultJson()">↻ Đọc file mặc định</button>
+        <div style="display:none">
+          <select id="month-select"></select>
+          <select id="week-select"></select>
+          <input id="local-json-file" class="hidden-file" type="file" accept=".json,application/json" />
         </div>
-        <input id="local-json-file" class="hidden-file" type="file" accept=".json,application/json" />
-        <div class="ui-micro-grid" style="margin-top:14px">
-          <div class="ui-micro-card"><div class="ui-micro-label">Trạng thái dữ liệu</div><div class="ui-micro-value" id="current-availability">-</div></div>
-          <div class="ui-micro-card"><div class="ui-micro-label">So sánh với</div><div class="ui-micro-value" id="current-comparison">Không so sánh</div></div>
-        </div>
-        <div id="period-note" class="ui-toolbar-note" style="margin-top:14px">Chưa có ghi chú.</div>
       </section>
 
       <section class="ui-section" id="rate-overview-section">
@@ -1889,14 +1875,8 @@
     const mk = document.getElementById('month-select').value;
     const wk = document.getElementById('week-select').value;
     const currentLabel = getPeriodLabel(mk, wk);
-    const compareLabel = getComparisonPeriodLabel();
-    document.getElementById('current-period').textContent     = currentLabel;
+    document.getElementById('current-period').textContent = currentLabel;
     document.getElementById('current-updated-at').textContent = fmtDateTime(weekData?.updatedAt);
-    document.getElementById('current-availability').innerHTML = weekData?.available
-      ? '<span class="good">✓ Đã có dữ liệu</span>'
-      : '<span class="bad">✗ Chưa có dữ liệu</span>';
-    document.getElementById('current-comparison').textContent = compareLabel || 'Không so sánh';
-    document.getElementById('period-note').innerHTML = `<strong>Ghi chú:</strong> ${weekData?.summary?.note || 'Không có ghi chú.'}`;
   }
   function renderRateOverview(weekData) {
     const wrap = document.getElementById('rate-overview-grid');
@@ -1905,7 +1885,7 @@
     const short = weekData?.shortTerm?.items || [];
     const ultra = weekData?.underOneMonth?.items || [];
     const compare = getComparisonWeekData();
-    const compareLabel = document.getElementById('current-comparison')?.textContent || 'Không so sánh';
+    const compareLabel = getComparisonPeriodLabel() || 'Không so sánh';
 
     const mediumProducts = [];
     medium.forEach(item => ['6m','9m','12m'].forEach(k => {
@@ -1984,10 +1964,10 @@
           </div>
           <div class="rate-insight-item">
             <div>
-              <strong>Dùng toolbar để đổi kỳ dữ liệu</strong>
-              <div class="meta">Tháng, tuần, tuần so sánh, nút nạp JSON và trạng thái dữ liệu được gom về cùng một khu cho dễ thao tác.</div>
+              <strong>Chỉ cần chọn kỳ dùng để so sánh</strong>
+              <div class="meta">Dashboard mặc định giữ tuần hiện tại làm mốc và chỉ đổi kỳ đối chiếu để anh nhìn biến động nhanh.</div>
             </div>
-            <span class="rate-badge">Control</span>
+            <span class="rate-badge">Compare</span>
           </div>
           <div class="rate-insight-item">
             <div>

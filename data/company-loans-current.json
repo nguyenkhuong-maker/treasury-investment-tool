@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-05-20T15:57:10+07:00",
+    "updatedAt": "2026-05-20T17:58:42+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -17,10 +17,10 @@
     }
   },
   "summary": {
-    "totalOutstanding": 39115787166,
-    "availableLimit": 21643542834,
+    "totalOutstanding": 39505076412,
+    "availableLimit": 21254253588,
     "bidvAvailableLimit": 18335869861,
-    "scAvailableLimit": 3307672973,
+    "scAvailableLimit": 2918383727,
     "bidvOverdraftAvailableLimit": 5989826887,
     "bidvWorkingCapitalAvailableLimit": 12346042974
   },
@@ -702,6 +702,27 @@
       "principalOutstanding": 352052577,
       "interestPayable": 9927400,
       "projectedSettlement": 361979977,
+      "notes": "Khế ước active.",
+      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "depositCodes": [
+        "44-1470100-04",
+        "44-1470100-06"
+      ],
+      "mappingStatus": "confirmed",
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
+    },
+    {
+      "bank": "Standard Chartered",
+      "group": "working-capital",
+      "company": "VIHALI",
+      "loanCode": "007405487",
+      "loanName": "SC VLĐ",
+      "disbursementDate": "2026-05-20",
+      "maturityDate": "2026-11-16",
+      "interestRate": 5.75,
+      "principalOutstanding": 389289246,
+      "interestPayable": 11038750,
+      "projectedSettlement": 400327996,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [

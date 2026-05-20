@@ -398,6 +398,8 @@
     .ui-badge.blue { background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; }
     .ui-badge.gold { background:#fff8eb; color:#b45309; border:1px solid #fcd34d; }
     .ui-badge.green { background:#f0fdf4; color:#15803d; border:1px solid #bbf7d0; }
+    .ui-meta-note { margin-top:10px; font-size:12px; color:#64748b; }
+    .ui-meta-note strong { color:#0f172a; font-weight:700; }
     .ui-stat-grid { display:grid; grid-template-columns:repeat(2, minmax(180px, 1fr)); gap:12px; min-width:340px; }
     .ui-stat { background:#fff; border:1px solid #e6edf5; border-radius:14px; padding:14px 16px; }
     .ui-stat-label { color:#64748b; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
@@ -522,8 +524,9 @@
             <div class="ui-badges">
               <span class="ui-badge blue">Snapshot hiện tại</span>
               <span class="ui-badge gold">BOD Dashboard</span>
-              <span class="ui-badge green">Cập nhật: <span id="loan-updated-at">--</span></span>
+              <span class="ui-badge green" id="loan-check-badge">Lần check: <span id="loan-last-checked-at">--</span></span>
             </div>
+            <div class="ui-meta-note" id="loan-meta-note">Dữ liệu công ty đổi gần nhất: <strong id="loan-data-updated-at">--</strong></div>
           </div>
           <div class="ui-stat-grid">
             <div class="ui-stat">
@@ -979,8 +982,9 @@
             <div class="ui-badges">
               <span class="ui-badge blue">Personal treasury snapshot</span>
               <span class="ui-badge gold">Dashboard-fix source</span>
-              <span class="ui-badge green">Cập nhật: <span id="personal-updated-at">--</span></span>
+              <span class="ui-badge green" id="personal-check-badge">Lần check: <span id="personal-last-checked-at">--</span></span>
             </div>
+            <div class="ui-meta-note" id="personal-meta-note">Dữ liệu cá nhân đổi gần nhất: <strong id="personal-data-updated-at">--</strong></div>
           </div>
           <div class="ui-stat-grid">
             <div class="ui-stat">
@@ -1214,6 +1218,7 @@
      COMPANY LOANS SNAPSHOT — Core Logic
   ══════════════════════════════════════════════════════ */
   let LOANS = null;
+  let SITE_META = null;
 
   function setLoanLoadStatus(html) {
     const box = document.getElementById('loan-load-status');
@@ -1278,7 +1283,7 @@
     const depositCoveragePct = total ? Math.min((totalCompanyDepositsActive / total) * 100, 100) : 0;
     document.getElementById('loan-total-outstanding').textContent = fmtMoney(total) + ' VNĐ';
     document.getElementById('loan-available-limit').textContent = fmtMoney(availableLimit) + ' VNĐ';
-    document.getElementById('loan-updated-at').textContent = fmtDateTime(LOANS?.meta?.updatedAt);
+    renderLoanRefreshMeta();
     const wrap = document.getElementById('loan-overview-grid');
     const circumference = 2 * Math.PI * 70;
     const bidvArc = (bidvPct / 100) * circumference;
@@ -1586,10 +1591,9 @@
 
     const heroDeposits = document.getElementById('personal-hero-total-deposits');
     const heroNet = document.getElementById('personal-hero-net-treasury');
-    const updatedAt = document.getElementById('personal-updated-at');
     if (heroDeposits) heroDeposits.textContent = fmtMoney(totalDeposits) + ' VNĐ';
     if (heroNet) heroNet.textContent = fmtMoney(net) + ' VNĐ';
-    if (updatedAt) updatedAt.textContent = fmtDateTime(PERSONAL?.meta?.updatedAt);
+    renderPersonalRefreshMeta();
 
     const wrap = document.getElementById('personal-overview-grid');
     if (!wrap) return;
@@ -1787,6 +1791,40 @@
   function fmtDateTime(value) {
     if (!value) return '-';
     return new Date(value).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
+  }
+  function getSiteSectionCheckAt(section) {
+    return SITE_META?.[section]?.lastCheckedAt || SITE_META?.lastCheckedAt || null;
+  }
+  function getSiteSectionUpdatedAt(section, fallbackValue) {
+    return SITE_META?.[section]?.updatedAt || fallbackValue || null;
+  }
+  function renderSectionRefreshMeta(section, config) {
+    const checkValue = fmtDateTime(getSiteSectionCheckAt(section));
+    const updatedValue = fmtDateTime(getSiteSectionUpdatedAt(section, config.fallbackUpdatedAt));
+    const checkEl = document.getElementById(config.checkId);
+    const updatedEl = document.getElementById(config.updatedId);
+    const badgeEl = document.getElementById(config.badgeId);
+    if (checkEl) checkEl.textContent = checkValue;
+    if (updatedEl) updatedEl.textContent = updatedValue;
+    if (badgeEl) badgeEl.title = `Lần check hệ thống: ${checkValue}\n${config.noteLabel}: ${updatedValue}`;
+  }
+  function renderLoanRefreshMeta() {
+    renderSectionRefreshMeta('company', {
+      badgeId: 'loan-check-badge',
+      checkId: 'loan-last-checked-at',
+      updatedId: 'loan-data-updated-at',
+      fallbackUpdatedAt: LOANS?.meta?.updatedAt,
+      noteLabel: 'Dữ liệu công ty đổi gần nhất',
+    });
+  }
+  function renderPersonalRefreshMeta() {
+    renderSectionRefreshMeta('personal', {
+      badgeId: 'personal-check-badge',
+      checkId: 'personal-last-checked-at',
+      updatedId: 'personal-data-updated-at',
+      fallbackUpdatedAt: PERSONAL?.meta?.updatedAt,
+      noteLabel: 'Dữ liệu cá nhân đổi gần nhất',
+    });
   }
   function rateClass(value, max, min) {
     if (value == null) return '';
@@ -2261,6 +2299,17 @@
       setLocalLoadStatus('<strong class="bad">&#10007; File JSON không hợp lệ.</strong> ' + String(err));
     }
   }
+  async function tryLoadSiteVersionMeta() {
+    try {
+      const res = await fetch(withCacheBust('data/site-version.json'));
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      SITE_META = await res.json();
+      renderLoanRefreshMeta();
+      renderPersonalRefreshMeta();
+    } catch (err) {
+      console.warn('Site version metadata load failed:', err);
+    }
+  }
   async function init() {
     document.getElementById('local-json-file').addEventListener('change', loadLocalJsonFile);
     document.getElementById('loan-json-file').addEventListener('change', loadLoanJsonFile);
@@ -2268,6 +2317,7 @@
     document.getElementById('month-select').addEventListener('change', () => { refreshWeekSelector(); refreshComparePeriodSelector(); renderSelectedPeriod(); });
     document.getElementById('week-select').addEventListener('change', () => { refreshComparePeriodSelector(); renderSelectedPeriod(); });
     document.getElementById('compare-period-select').addEventListener('change', renderSelectedPeriod);
+    await tryLoadSiteVersionMeta();
     try { await tryLoadDefaultJson(); } catch (e) { console.warn('Default JSON load failed:', e); }
     try { await tryLoadDefaultLoansJson(); } catch (e) { console.warn('Default company loans JSON load failed:', e); }
     try { await tryLoadDefaultPersonalJson(); } catch (e) { console.warn('Default personal treasury JSON load failed:', e); }

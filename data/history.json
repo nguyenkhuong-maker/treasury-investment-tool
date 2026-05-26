@@ -2,7 +2,7 @@
   "meta": {
     "name": "Treasury Rate Dashboard Data",
     "timezone": "Asia/Ho_Chi_Minh",
-    "updatedAt": "2026-05-26T09:54:00+07:00",
+    "updatedAt": "2026-05-26T10:47:00+07:00",
     "defaultMonth": "2026-05",
     "defaultWeek": "4",
     "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4. Có thể cập nhật dần theo thời gian."
@@ -1249,9 +1249,9 @@
         "4": {
           "label": "Tuần 4",
           "available": true,
-          "updatedAt": "2026-05-26T09:54:00+07:00",
+          "updatedAt": "2026-05-26T10:47:00+07:00",
           "summary": {
-            "note": "Cập nhật lãi suất tuần 4 tháng 05/2026 ngày 26/05/2026 theo thông tin anh Nguyên cung cấp. OCB kỳ hạn 12 tháng tăng lên 8.50%/năm; các lãi suất còn lại giữ nguyên như trước."
+            "note": "Cập nhật lãi suất tuần 4 tháng 05/2026 ngày 26/05/2026 theo thông tin anh Nguyên cung cấp. OCB kỳ hạn 12 tháng lên 8.50%/năm, Standard Chartered kỳ hạn 12 tháng lên 8.00%/năm; các lãi suất còn lại giữ nguyên như trước."
           },
           "mediumTerm": {
             "items": [
@@ -1306,7 +1306,7 @@
                 "rates": {
                   "6m": 7.9,
                   "9m": null,
-                  "12m": null
+                  "12m": 8.0
                 },
                 "corpBorrowRate": 5.75,
                 "strategy": "Ưu tiên hỗ trợ vay rẻ",

@@ -1,7 +1,7 @@
 window.MONTHLY_PLANS_TEST_DATA = {
   meta: {
     name: "Treasury Monthly Plans Test Index",
-    updatedAt: "2026-06-01T14:11:00+07:00",
+    updatedAt: "2026-06-01T15:25:00+07:00",
     generatedBy: "Vesper",
     defaultMonth: "2026-06",
     storageMode: "browser-local-storage-for-test",
@@ -66,23 +66,23 @@ window.MONTHLY_PLANS_TEST_DATA = {
         type: "personal",
         title: "Kế hoạch quản lý Individual Treasury",
         status: "draft",
-        version: "Pending draft",
+        version: "Draft 1",
         owner: "Finance Team",
         approver: "CFO",
-        preparedAt: "01/06/2026 13:29 GMT+7",
+        preparedAt: "01/06/2026 15:25 GMT+7",
         highlights: [
-          { label: "Trạng thái", value: "Chưa dựng" },
-          { label: "Kỳ kế hoạch", value: "01/06 - 15/07" },
-          { label: "Phụ thuộc", value: "Chờ assumption cá nhân" },
-          { label: "Ghi chú", value: "Vòng này chỉ làm plan công ty" }
+          { label: "Tổng tiền gửi/giấy tờ có giá", value: "124.089 tỷ VND" },
+          { label: "Dư nợ vay đầu kỳ", value: "27.000 tỷ VND" },
+          { label: "VPB5678 cuối kỳ", value: "1.394 tỷ VND" },
+          { label: "Tất toán BIDV 11/07", value: "27.049 tỷ VND" }
         ],
-        contentHash: "sha256:test-personal-2026-06-placeholder",
+        contentHash: "sha256:test-personal-2026-06-draft1",
         sourceHtml: "./plans/2026-06/personal.html",
-        sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 6-2026/GHI_CHU_KE_HOACH_CA_NHAN_THANG_06_2026.md"
+        sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 6-2026/KE_HOACH_QUAN_LY_INDIVIDUAL_TREASURY_01-06-2026_15-07-2026.md"
       },
       automationPreview: {
         nextDraftWindow: "25-28 hằng tháng",
-        expectedOutput: "Draft công ty tháng 6 đã dựng theo giả định thu DOPA 10/06; phần cá nhân sẽ bổ sung sau."
+        expectedOutput: "Draft công ty và cá nhân tháng 6 đã dựng để anh Nguyên rà trước khi trình CFO."
       }
     },
     "2026-05": {

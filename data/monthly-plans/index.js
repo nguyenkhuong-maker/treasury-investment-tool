@@ -14,7 +14,7 @@ window.MONTHLY_PLANS_TEST_DATA = {
     },
     note: "Bản test để anh Nguyên xem concept kế hoạch tháng trên Index trước khi nhập vào dashboard chính.",
     personalHighlightRules: {
-      totalDepositAndPapersOpening: "Luôn lấy Mục 1. Tiền gửi đầu kỳ cộng Mục 3. Thanh khoản đầu kỳ.",
+      openingLiquidity: "Nếu card đang thể hiện thanh khoản đầu kỳ thì phải lấy đúng tổng ở Mục 3. Thanh khoản đầu kỳ, không được gán nhầm sang tổng tiền gửi/giấy tờ có giá.",
       openingDebtLabel: "Luôn dùng nhãn 'Dư nợ vay đầu kỳ' theo Mục 2, không ghi 'cuối kỳ' nếu chưa có chỉ tiêu cuối kỳ riêng."
     }
   },
@@ -71,7 +71,7 @@ window.MONTHLY_PLANS_TEST_DATA = {
         approver: "CFO",
         preparedAt: "01/06/2026 15:25 GMT+7",
         highlights: [
-          { label: "Tổng tiền gửi/giấy tờ có giá", value: "124.089 tỷ VND" },
+          { label: "Thanh khoản đầu kỳ", value: "579,251,585 VND" },
           { label: "Dư nợ vay đầu kỳ", value: "27.000 tỷ VND" },
           { label: "VPB5678 cuối kỳ", value: "1.394 tỷ VND" },
           { label: "Tất toán BIDV 11/07", value: "27.049 tỷ VND" }

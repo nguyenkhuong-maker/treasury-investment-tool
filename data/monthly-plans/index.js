@@ -1,7 +1,7 @@
 window.MONTHLY_PLANS_TEST_DATA = {
   meta: {
     name: "Treasury Monthly Plans Test Index",
-    updatedAt: "2026-06-01T16:40:00+07:00",
+    updatedAt: "2026-06-01T16:50:00+07:00",
     generatedBy: "Vesper",
     defaultMonth: "2026-06",
     storageMode: "browser-local-storage-for-test",
@@ -67,17 +67,17 @@ window.MONTHLY_PLANS_TEST_DATA = {
         type: "personal",
         title: "Kế hoạch quản lý Individual Treasury",
         status: "draft",
-        version: "Draft 2",
+        version: "Draft 3",
         owner: "Finance Team",
         approver: "CFO",
-        preparedAt: "01/06/2026 16:40 GMT+7",
+        preparedAt: "01/06/2026 16:50 GMT+7",
         highlights: [
           { label: "Tổng tiền gửi/giấy tờ có giá", value: "124.668 tỷ VND" },
           { label: "Tăng / giảm", value: "0 VND" },
           { label: "Dư nợ vay đầu kỳ", value: "27.000 tỷ VND" },
-          { label: "Thanh khoản VPBank", value: "1.394 tỷ VND" }
+          { label: "Thanh khoản VPBank", value: "(0.206) tỷ VND" }
         ],
-        contentHash: "sha256:test-personal-2026-06-draft2",
+        contentHash: "sha256:test-personal-2026-06-draft3",
         sourceHtml: "./plans/2026-06/personal.html",
         sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 6-2026/KE_HOACH_QUAN_LY_INDIVIDUAL_TREASURY_01-06-2026_15-07-2026.md"
       },

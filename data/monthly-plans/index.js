@@ -1,9 +1,9 @@
 window.MONTHLY_PLANS_TEST_DATA = {
   meta: {
     name: "Treasury Monthly Plans Test Index",
-    updatedAt: "2026-04-24T10:13:00+07:00",
+    updatedAt: "2026-06-01T13:29:00+07:00",
     generatedBy: "Vesper",
-    defaultMonth: "2026-05",
+    defaultMonth: "2026-06",
     storageMode: "browser-local-storage-for-test",
     makerEmail: "nguyen.khuong@atherlabs.com",
     designatedApproverEmail: "duc.ho@atherlabs.com",
@@ -20,6 +20,12 @@ window.MONTHLY_PLANS_TEST_DATA = {
   },
   availableMonths: [
     {
+      key: "2026-06",
+      label: "Tháng 6/2026",
+      periodLabel: "01/06/2026 - 15/07/2026",
+      status: "draft"
+    },
+    {
       key: "2026-05",
       label: "Tháng 5/2026",
       periodLabel: "01/05/2026 - 15/06/2026",
@@ -33,6 +39,52 @@ window.MONTHLY_PLANS_TEST_DATA = {
     }
   ],
   months: {
+    "2026-06": {
+      monthLabel: "Tháng 6/2026",
+      periodLabel: "01/06/2026 - 15/07/2026",
+      company: {
+        id: "2026-06-company",
+        type: "company",
+        title: "Kế hoạch dòng tiền & hạn mức thấu chi khả dụng",
+        status: "draft",
+        version: "Draft 1",
+        owner: "Finance Team",
+        approver: "CFO",
+        preparedAt: "01/06/2026 13:29 GMT+7",
+        highlights: [
+          { label: "HM khả dụng đầu kỳ", value: "18.885 tỷ VND" },
+          { label: "Thu DOPA 10/06", value: "3.283 tỷ VND" },
+          { label: "Số dư cuối kỳ", value: "17.794 tỷ VND" },
+          { label: "Thanh khoản", value: "Mỏng nhất 17.754 tỷ ngày 09/06" }
+        ],
+        contentHash: "sha256:test-company-2026-06-draft1",
+        sourceHtml: "./plans/2026-06/company.html",
+        sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 6-2026/KE_HOACH_DONG_TIEN_VA_HAN_MUC_THAU_CHI_KHA_DUNG_01-06-2026_15-07-2026.md"
+      },
+      personal: {
+        id: "2026-06-personal",
+        type: "personal",
+        title: "Kế hoạch quản lý Individual Treasury",
+        status: "draft",
+        version: "Pending draft",
+        owner: "Finance Team",
+        approver: "CFO",
+        preparedAt: "01/06/2026 13:29 GMT+7",
+        highlights: [
+          { label: "Trạng thái", value: "Chưa dựng" },
+          { label: "Kỳ kế hoạch", value: "01/06 - 15/07" },
+          { label: "Phụ thuộc", value: "Chờ assumption cá nhân" },
+          { label: "Ghi chú", value: "Vòng này chỉ làm plan công ty" }
+        ],
+        contentHash: "sha256:test-personal-2026-06-placeholder",
+        sourceHtml: "./plans/2026-06/personal.html",
+        sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 6-2026/GHI_CHU_KE_HOACH_CA_NHAN_THANG_06_2026.md"
+      },
+      automationPreview: {
+        nextDraftWindow: "25-28 hằng tháng",
+        expectedOutput: "Draft công ty tháng 6 đã dựng theo giả định thu DOPA 10/06; phần cá nhân sẽ bổ sung sau."
+      }
+    },
     "2026-05": {
       monthLabel: "Tháng 5/2026",
       periodLabel: "01/05/2026 - 15/06/2026",

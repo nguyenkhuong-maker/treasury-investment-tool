@@ -321,7 +321,7 @@
           </div>
         </div>
         <div class="iframe-wrap">
-          <iframe src="${plan.sourceHtml}" title="${plan.title}"></iframe>
+          <iframe src="${plan.sourceHtml}?v=${encodeURIComponent(plan.contentHash || DB.meta.updatedAt || '1')}" title="${plan.title}"></iframe>
         </div>
 
         <div class="section">

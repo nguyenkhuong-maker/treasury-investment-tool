@@ -1,7 +1,7 @@
 window.MONTHLY_PLANS_TEST_DATA = {
   meta: {
     name: "Treasury Monthly Plans Test Index",
-    updatedAt: "2026-06-01T13:29:00+07:00",
+    updatedAt: "2026-06-01T13:56:00+07:00",
     generatedBy: "Vesper",
     defaultMonth: "2026-06",
     storageMode: "browser-local-storage-for-test",
@@ -47,17 +47,17 @@ window.MONTHLY_PLANS_TEST_DATA = {
         type: "company",
         title: "Kế hoạch dòng tiền & hạn mức thấu chi khả dụng",
         status: "draft",
-        version: "Draft 1",
+        version: "Draft 2",
         owner: "Finance Team",
         approver: "CFO",
-        preparedAt: "01/06/2026 13:29 GMT+7",
+        preparedAt: "01/06/2026 13:56 GMT+7",
         highlights: [
-          { label: "HM khả dụng đầu kỳ", value: "18.885 tỷ VND" },
+          { label: "HM khả dụng đầu kỳ", value: "18.869 tỷ VND" },
           { label: "Thu DOPA 10/06", value: "3.283 tỷ VND" },
-          { label: "Số dư cuối kỳ", value: "17.794 tỷ VND" },
-          { label: "Thanh khoản", value: "Mỏng nhất 17.754 tỷ ngày 09/06" }
+          { label: "Số dư cuối kỳ", value: "17.778 tỷ VND" },
+          { label: "Thanh khoản", value: "Mỏng nhất 17.738 tỷ ngày 09/06" }
         ],
-        contentHash: "sha256:test-company-2026-06-draft1",
+        contentHash: "sha256:test-company-2026-06-draft2",
         sourceHtml: "./plans/2026-06/company.html",
         sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 6-2026/KE_HOACH_DONG_TIEN_VA_HAN_MUC_THAU_CHI_KHA_DUNG_01-06-2026_15-07-2026.md"
       },

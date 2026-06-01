@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-06-01T13:30:17+07:00",
+    "updatedAt": "2026-06-01T13:56:00+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -17,11 +17,11 @@
     }
   },
   "summary": {
-    "totalOutstanding": 41874746578,
-    "availableLimit": 18884583422,
-    "bidvAvailableLimit": 16262537165,
+    "totalOutstanding": 41890260878,
+    "availableLimit": 18869069122,
+    "bidvAvailableLimit": 16247022865,
     "scAvailableLimit": 2622046257,
-    "bidvOverdraftAvailableLimit": 3930826887,
+    "bidvOverdraftAvailableLimit": 3915312587,
     "bidvWorkingCapitalAvailableLimit": 12331710278
   },
   "maturityFocus": [
@@ -134,10 +134,10 @@
       "maturityDate": "2027-03-26",
       "interestRate": 7.1,
       "pledgedAccount": "HĐ TGCKH 05-2024/HĐTG",
-      "principalOutstanding": 4421000000,
-      "interestPayable": 13879083,
-      "projectedSettlement": 7942617185,
-      "availableLimit": 179000000,
+      "principalOutstanding": 4436514300,
+      "interestPayable": 13900208,
+      "projectedSettlement": 7958152610,
+      "availableLimit": 163485700,
       "notes": "Khoản thấu chi TS có dư nợ; hạn mức còn lại lấy theo cột C Hạn mức của sheet Loan-BIDV.",
       "collateralGroupName": "Sổ công ty VIHALI BIDV",
       "depositCodes": [
@@ -800,8 +800,8 @@
         "8670018067",
         "8690020465"
       ],
-      "totalOutstanding": 9294979964,
-      "totalAvailableLimit": 255020036
+      "totalOutstanding": 9310494264,
+      "totalAvailableLimit": 239505736
     }
   ]
 }

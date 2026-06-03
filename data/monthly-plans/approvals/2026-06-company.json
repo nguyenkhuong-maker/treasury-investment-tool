@@ -7,9 +7,11 @@
   "approverEmail": "duc.ho@atherlabs.com",
   "version": "Draft 3",
   "contentHash": "2026-06-company:Draft 3",
-  "status": "pending_cfo_review",
-  "submittedAt": "2026-06-01T10:57:07.459Z",
+  "status": "approved",
   "channel": "google_apps_script_mail",
+  "reviewedAt": "2026-06-03T08:19:27.727Z",
+  "title": "K? ho?ch ng?n qu? VIHALI",
   "planUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/plans/2026-06/company.html",
-  "title": "K? ho?ch ng?n qu? VIHALI"
+  "approvedBy": "duc.ho@atherlabs.com",
+  "approvedAt": "2026-06-03T08:19:27.727Z"
 }

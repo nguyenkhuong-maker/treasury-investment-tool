@@ -2,6 +2,12 @@
 
 Mục tiêu: thêm flow **Gửi CFO qua Slack** mà **không làm hỏng** flow **Gửi CFO qua mail** đang chạy.
 
+Flow Slack mới:
+- bot chỉ gửi **1 thông báo vào `#treasury-management`**
+- tin nhắn chứa **link review web**
+- ai có link đều có thể mở màn hình review và bấm `Duyệt kế hoạch` / `Cần điều chỉnh`
+- không duyệt trực tiếp trong Slack
+
 ## 1) Giữ nguyên các phần mail đang dùng
 Không đổi / không xóa các giá trị đang cần cho mail:
 - `MAKER_EMAIL`
@@ -25,15 +31,11 @@ Thêm các key sau trong **Apps Script → Project Settings → Script propertie
 - `SLACK_APPROVAL_CHANNEL_ID=C0AT2E4CBDX`
 - `SLACK_APPROVAL_CHANNEL_NAME=#treasury-management`
 - `SLACK_BOT_USERNAME=vesper_treasury`
-- `SLACK_CFO_USER_ID=<Slack user id của CFO hợp lệ>`
 
-## 3) Slack app cần bật Interactivity
-Trong Slack App config:
-- bật **Interactivity & Shortcuts**
-- Request URL trỏ về **Apps Script Web App URL**
+`SLACK_CFO_USER_ID` không còn bắt buộc cho flow mới vì quyền duyệt không kiểm tại Slack nữa.
 
-Ví dụ:
-- `https://script.google.com/macros/s/XXXXX/exec`
+## 3) Slack app không cần Interactivity cho flow mới
+Tin nhắn Slack chỉ dùng để mở link review web, nên không cần cấu hình callback duyệt ngay trong Slack.
 
 ## 4) Redeploy Apps Script Web App
 Sau khi cập nhật `Code.gs`:
@@ -55,11 +57,13 @@ Test tối thiểu 2 case:
 ### Case B — Gửi qua Slack
 - bấm `Gửi CFO qua Slack`
 - bot post vào `#treasury-management`
-- message có 2 nút thật:
+- message có nút / link:
+  - `Mở màn hình duyệt`
+  - `Mở index live`
+- mở link review web phải thấy 2 nút:
   - `Duyệt kế hoạch`
   - `Cần điều chỉnh`
-- user không đúng `SLACK_CFO_USER_ID` bấm thử phải bị từ chối
-- CFO hợp lệ bấm phải cập nhật JSON
+- người mở link bấm action phải cập nhật JSON
 - dashboard reload phải đổi trạng thái theo
 
 ## 6) File liên quan trong repo
@@ -70,6 +74,6 @@ Test tối thiểu 2 case:
 
 ## 7) Kết quả mong muốn
 - Mail approval vẫn hoạt động như cũ
-- Slack approval chạy song song
+- Slack notification + web review chạy song song
 - Cả hai cùng ghi về:
   - `data/monthly-plans/approvals/<planId>.json`

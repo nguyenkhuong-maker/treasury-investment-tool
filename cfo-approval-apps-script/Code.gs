@@ -20,12 +20,15 @@ const CONFIG = (() => {
 function doGet(e) {
   const token = e && e.parameter ? e.parameter.token : '';
   const action = e && e.parameter ? e.parameter.action : '';
-  if (!token || !action) {
-    return HtmlService.createHtmlOutput('<h3>Thiếu token hoặc action.</h3>');
+  if (!token) {
+    return HtmlService.createHtmlOutput('<h3>Thiếu token review.</h3>');
   }
 
   try {
     const record = loadApprovalRecord(token);
+    if (!action) {
+      return HtmlService.createHtmlOutput(buildReviewPageHtml(record));
+    }
     const result = applyReviewAction(record, action, { source: 'web_link' });
     return HtmlService.createHtmlOutput(buildResultHtml(result));
   } catch (error) {
@@ -101,7 +104,7 @@ function submitPlanToSlack(plan) {
   if (!CONFIG.slackBotToken) {
     throw new Error('Thiếu SLACK_BOT_TOKEN trong Script Properties.');
   }
-  const record = createApprovalRecord(plan, 'slack_interactive');
+  const record = createApprovalRecord(plan, 'slack_channel_notice');
   storeApprovalRecord(record);
 
   const postResult = postSlackApprovalMessage(record);
@@ -114,10 +117,11 @@ function submitPlanToSlack(plan) {
 
   return {
     submittedAt: record.submittedAt,
-    channel: 'slack_interactive',
+    channel: 'slack_channel_notice',
     slackChannelId: record.slackChannelId,
     slackChannelName: record.slackChannelName,
-    slackMessageTs: record.slackMessageTs
+    slackMessageTs: record.slackMessageTs,
+    reviewUrl: buildReviewUrl(record.tokens.approve)
   };
 }
 
@@ -279,7 +283,7 @@ function applyReviewAction(record, action, options) {
 function postSlackApprovalMessage(record) {
   const result = slackApi('chat.postMessage', {
     channel: record.slackChannelId || CONFIG.slackApprovalChannelId,
-    text: `Kế hoạch ${record.month} đã chuẩn bị: ${record.title}`,
+    text: `Kế hoạch ${record.month} đã sẵn sàng review: ${record.title}`,
     blocks: buildSlackApprovalBlocks(record)
   });
 
@@ -331,7 +335,8 @@ function postSlackEphemeral(payload) {
 }
 
 function buildSlackApprovalBlocks(record) {
-  const intro = `*Kế hoạch ngân quỹ tháng ${record.month} đã chuẩn bị*\n- Plan: *${escapeSlackText(record.title)}*\n- Version: *${escapeSlackText(record.version)}*\n- Trạng thái: *Sẵn sàng trình CFO*\n- Xem live: ${record.indexUrl}`;
+  const reviewUrl = buildReviewUrl(record.tokens.approve);
+  const intro = `*Kế hoạch ngân quỹ tháng ${record.month} đã sẵn sàng review*\n- Plan: *${escapeSlackText(record.title)}*\n- Version: *${escapeSlackText(record.version)}*\n- Mở màn hình duyệt: ${reviewUrl}\n- Xem live: ${record.indexUrl}`;
   return [
     {
       type: 'section',
@@ -340,7 +345,7 @@ function buildSlackApprovalBlocks(record) {
     {
       type: 'context',
       elements: [
-        { type: 'mrkdwn', text: `Bot: ${CONFIG.slackBotUsername} · Channel: ${record.slackChannelName} · Chỉ CFO hợp lệ mới bấm được nút.` }
+        { type: 'mrkdwn', text: `Bot: ${CONFIG.slackBotUsername} · Channel: ${record.slackChannelName} · Ai có link review đều có thể mở và thao tác duyệt trên web.` }
       ]
     },
     {
@@ -348,17 +353,10 @@ function buildSlackApprovalBlocks(record) {
       elements: [
         {
           type: 'button',
-          text: { type: 'plain_text', text: 'Duyệt kế hoạch' },
+          text: { type: 'plain_text', text: 'Mở màn hình duyệt' },
           style: 'primary',
-          action_id: 'approve_plan',
-          value: record.tokens.approve
-        },
-        {
-          type: 'button',
-          text: { type: 'plain_text', text: 'Cần điều chỉnh' },
-          style: 'danger',
-          action_id: 'revise_plan',
-          value: record.tokens.revise
+          url: reviewUrl,
+          action_id: 'open_review_page'
         },
         {
           type: 'button',
@@ -440,6 +438,31 @@ function validatePlanPayload(plan) {
 function buildActionUrl(token, action) {
   const base = ScriptApp.getService().getUrl();
   return `${base}?token=${encodeURIComponent(token)}&action=${encodeURIComponent(action)}`;
+}
+
+function buildReviewUrl(token) {
+  const base = ScriptApp.getService().getUrl();
+  return `${base}?token=${encodeURIComponent(token)}`;
+}
+
+function buildReviewPageHtml(record) {
+  const approveUrl = buildActionUrl(record.tokens.approve, 'approve');
+  const reviseUrl = buildActionUrl(record.tokens.revise, 'revise');
+  return `
+    <div style="font-family:Arial,sans-serif;padding:24px;line-height:1.6;max-width:760px;margin:0 auto">
+      <h2>Trình review kế hoạch ngân quỹ</h2>
+      <p><strong>Người trình:</strong> ${escapeHtml(record.makerEmail)}</p>
+      <p><strong>Kế hoạch:</strong> ${escapeHtml(record.title)}</p>
+      <p><strong>Tháng:</strong> ${escapeHtml(record.month)}</p>
+      <p><strong>Version:</strong> ${escapeHtml(record.version)}</p>
+      <p><strong>Link xem live:</strong><br/><a href="${record.indexUrl}">${record.indexUrl}</a></p>
+      <p style="color:#475569">Bất kỳ ai có link review này đều có thể thao tác trên web.</p>
+      <p>
+        <a href="${reviseUrl}" style="display:inline-block;padding:10px 14px;background:#f59e0b;color:#fff;text-decoration:none;border-radius:8px;margin-right:8px">Cần điều chỉnh</a>
+        <a href="${approveUrl}" style="display:inline-block;padding:10px 14px;background:#1e3a8a;color:#fff;text-decoration:none;border-radius:8px">Duyệt kế hoạch</a>
+      </p>
+    </div>
+  `;
 }
 
 function buildResultHtml(result) {

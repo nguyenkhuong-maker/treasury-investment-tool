@@ -411,7 +411,7 @@
     }
 
     function approvalDeliveryLabel(approval) {
-      if (approval?.channel === 'slack_interactive') {
+      if (approval?.channel === 'slack_interactive' || approval?.channel === 'slack_channel_notice') {
         return approval?.slackChannelName || REVIEW_SLACK_TARGET.channelName;
       }
       return approval?.approverEmail || REVIEW_TEST_EMAIL;
@@ -419,7 +419,10 @@
 
     function approvalSubmittedHelper(approval) {
       if (approval?.channel === 'slack_interactive') {
-        return `Đã gửi Slack review tới ${approvalDeliveryLabel(approval)}, chờ hành động tiếp theo từ CFO.`;
+        return `Đã gửi Slack review tới ${approvalDeliveryLabel(approval)}, chờ hành động tiếp theo trên Slack.`;
+      }
+      if (approval?.channel === 'slack_channel_notice') {
+        return `Đã gửi thông báo review vào ${approvalDeliveryLabel(approval)}; ai có link đều có thể mở web để duyệt.`;
       }
       return `Đã gửi mail review tới ${approvalDeliveryLabel(approval)}, chờ hành động tiếp theo từ CFO.`;
     }
@@ -431,10 +434,10 @@
       const idleLabel = isSlack ? '💬 Gửi CFO qua Slack' : '📨 Gửi CFO qua mail';
       const sendingLabel = isSlack ? 'Đang gửi Slack...' : 'Đang gửi mail...';
       const defaultHelper = isSlack
-        ? `Bot ${REVIEW_SLACK_TARGET.botUsername} sẽ gửi vào ${REVIEW_SLACK_TARGET.channelName}.`
+        ? `Bot ${REVIEW_SLACK_TARGET.botUsername} sẽ gửi 1 thông báo review vào ${REVIEW_SLACK_TARGET.channelName}.`
         : `Mail phê duyệt hiện tại: ${REVIEW_TEST_EMAIL}`;
       const revisionHelper = isSlack
-        ? `CFO đã yêu cầu điều chỉnh. Anh có thể gửi lại qua Slack vào ${REVIEW_SLACK_TARGET.channelName}.`
+        ? `Đã có yêu cầu điều chỉnh. Anh có thể gửi lại thông báo review vào ${REVIEW_SLACK_TARGET.channelName}.`
         : `CFO đã yêu cầu điều chỉnh. Anh có thể gửi lại tới ${REVIEW_TEST_EMAIL}.`;
 
       if (approvalStatus === 'approved') {
@@ -473,7 +476,7 @@
           disabled: true,
           label: sendingLabel,
           helper: isSlack
-            ? `Đang gửi Slack review tới ${REVIEW_SLACK_TARGET.channelName}...`
+            ? `Đang gửi thông báo review vào ${REVIEW_SLACK_TARGET.channelName}...`
             : `Đang gửi mail review tới ${REVIEW_TEST_EMAIL}...`
         };
       }
@@ -484,7 +487,7 @@
           disabled: true,
           label: 'Đã gửi',
           helper: isSlack
-            ? `Đã gửi Slack review tới ${REVIEW_SLACK_TARGET.channelName}, chờ hành động tiếp theo từ CFO.`
+            ? `Đã gửi thông báo review vào ${REVIEW_SLACK_TARGET.channelName}; ai có link đều có thể mở web để duyệt.`
             : `Đã gửi mail review tới ${REVIEW_TEST_EMAIL}, chờ hành động tiếp theo từ CFO.`
         };
       }
@@ -545,7 +548,9 @@
           label: 'Đã trình CFO',
           note: approval?.channel === 'slack_interactive'
             ? `Đã gửi Slack review tới ${approvalDeliveryLabel(approval)}.`
-            : `Đã gửi mail review tới ${approvalDeliveryLabel(approval)}.`
+            : approval?.channel === 'slack_channel_notice'
+              ? `Đã gửi thông báo review vào ${approvalDeliveryLabel(approval)}.`
+              : `Đã gửi mail review tới ${approvalDeliveryLabel(approval)}.`
         });
         if (approval.status === 'revision_requested') {
           items.push({
@@ -775,7 +780,7 @@
           approverEmail: REVIEW_TEST_EMAIL,
           status: 'pending_cfo_review',
           submittedAt,
-          channel: isSlack ? 'slack_interactive' : 'google_apps_script_mail',
+          channel: isSlack ? 'slack_channel_notice' : 'google_apps_script_mail',
           slackChannelId: isSlack ? REVIEW_SLACK_TARGET.channelId : undefined,
           slackChannelName: isSlack ? REVIEW_SLACK_TARGET.channelName : undefined
         });
@@ -785,7 +790,7 @@
         });
         render();
         alert(isSlack
-          ? `Đã gửi yêu cầu duyệt qua Slack vào ${REVIEW_SLACK_TARGET.channelName} cho ${plan.title}.`
+          ? `Đã gửi thông báo review vào ${REVIEW_SLACK_TARGET.channelName} cho ${plan.title}. Ai có link trong tin nhắn đều có thể mở web để duyệt.`
           : `Đã gửi yêu cầu trình CFO cho ${plan.title}. Anh kiểm tra inbox ${REVIEW_TEST_EMAIL} giúp em nhé.`);
       } catch (error) {
         console.error(error);

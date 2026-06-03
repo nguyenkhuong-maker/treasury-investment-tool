@@ -1,7 +1,7 @@
 window.MONTHLY_PLANS_LIVE_DATA = {
   meta: {
     name: "Treasury Monthly Plans Live Index",
-    updatedAt: "2026-06-01T17:29:00+07:00",
+    updatedAt: "2026-06-03T15:53:00+07:00",
     defaultMonth: "2026-06",
     reviewTestEmail: "duc.ho@atherlabs.com",
     slackApprovalTarget: {
@@ -58,8 +58,8 @@ window.MONTHLY_PLANS_LIVE_DATA = {
         id: "2026-06-personal",
         type: "personal",
         title: "Kế hoạch ngân quỹ CÁ NHÂN",
-        version: "Draft 4",
-        preparedAt: "01/06/2026 17:05 GMT+7",
+        version: "Draft 5",
+        preparedAt: "03/06/2026 15:53 GMT+7",
         status: "ready_for_cfo",
         allowSendToCfo: true,
         highlights: [

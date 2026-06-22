@@ -1,16 +1,16 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-06-19T13:30:40+07:00",
+    "updatedAt": "2026-06-22T13:30:45+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet"
   },
   "summary": {
-    "totalPersonalDeposits": 163713264149,
+    "totalPersonalDeposits": 162568459099,
     "totalPersonalLoans": 27125000000,
-    "netPersonalTreasury": 136588264149
+    "netPersonalTreasury": 135443459099
   },
   "personalDeposits": [
     {
@@ -471,17 +471,17 @@
       "depositCode": "VPB-PL-DTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "09388885678",
-      "principal": 1351780631,
-      "amountOnCertificate": 1351780631,
+      "principal": 1106975581,
+      "amountOnCertificate": 1106975581,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 1351780631,
+      "unpledgedAmount": 1106975581,
       "accruedInterest": 0,
-      "projectedSettlement": 1351780631
+      "projectedSettlement": 1106975581
     },
     {
       "owner": "Nguyễn Trung Tín",
@@ -528,17 +528,17 @@
       "depositCode": "VPB-PL-NTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "543033162",
-      "principal": 6969841916,
-      "amountOnCertificate": 6969841916,
+      "principal": 6069841916,
+      "amountOnCertificate": 6069841916,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 6969841916,
+      "unpledgedAmount": 6069841916,
       "accruedInterest": 0,
-      "projectedSettlement": 6969841916
+      "projectedSettlement": 6069841916
     },
     {
       "owner": "Đặng Thu Thảo",

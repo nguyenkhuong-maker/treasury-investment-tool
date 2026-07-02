@@ -54,17 +54,17 @@ window.MONTHLY_PLANS_TEST_DATA = {
         type: "company",
         title: "Kế hoạch dòng tiền & hạn mức thấu chi khả dụng",
         status: "draft",
-        version: "Draft 1",
+        version: "Draft 2",
         owner: "Finance Team",
         approver: "CFO",
-        preparedAt: "02/07/2026 11:04 GMT+7",
+        preparedAt: "02/07/2026 11:16 GMT+7",
         highlights: [
           { label: "HM khả dụng đầu kỳ", value: "12.086 tỷ VND" },
-          { label: "Tổng chi trong kỳ", value: "5.134 tỷ VND" },
-          { label: "Số dư cuối kỳ", value: "6.952 tỷ VND" },
-          { label: "Thanh khoản", value: "Mỏng nhất 6.952 tỷ ngày 10/08" }
+          { label: "Thu DOPA 06/07", value: "3.153 tỷ VND" },
+          { label: "Số dư cuối kỳ", value: "10.106 tỷ VND" },
+          { label: "Thanh khoản", value: "Mỏng nhất 11.766 tỷ ngày 03/07" }
         ],
-        contentHash: "sha256:test-company-2026-07-draft1",
+        contentHash: "sha256:test-company-2026-07-draft2",
         sourceHtml: "./plans/2026-07/company.html",
         sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 7-2026/KE_HOACH_DONG_TIEN_VA_HAN_MUC_THAU_CHI_KHA_DUNG_01-07-2026_15-08-2026.md"
       },

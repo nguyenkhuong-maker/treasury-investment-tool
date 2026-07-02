@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-06-30T11:27:19+07:00",
+    "updatedAt": "2026-07-02T10:35:40+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -18,10 +18,10 @@
   },
   "summary": {
     "totalOutstanding": 39629173242,
-    "availableLimit": 21130156758,
-    "bidvAvailableLimit": 16012374180,
+    "availableLimit": 29410156758,
+    "bidvAvailableLimit": 24292374180,
     "scAvailableLimit": 5117782578,
-    "bidvOverdraftAvailableLimit": 3806040646,
+    "bidvOverdraftAvailableLimit": 12086040646,
     "bidvWorkingCapitalAvailableLimit": 12206333534
   },
   "maturityFocus": [
@@ -97,6 +97,32 @@
       "branchName": "BIDV chi nhánh Thống Nhất",
       "reportingGroupCode": "bidv-overdraft-tn",
       "reportingGroupLabel": "Ngân hàng BIDV — chi nhánh Thống Nhất (nhóm thấu chi)"
+    },
+    {
+      "bank": "BIDV",
+      "group": "overdraft",
+      "company": "VIHALI",
+      "loanCode": "1440280147",
+      "loanName": "BIDV TN ? Th?u chi",
+      "disbursementDate": "2026-06-22",
+      "maturityDate": "2027-06-09",
+      "interestRate": 8.0,
+      "pledgedAccount": "VIP0108857",
+      "principalOutstanding": 0,
+      "interestPayable": 0,
+      "projectedSettlement": 0,
+      "availableLimit": 8280000000,
+      "notes": "H?n m?c th?u chi m?i t?i BIDV TN; ?? ???c c?p, ch?a ghi nh?n gi?i ng?n.",
+      "collateralGroupName": "S? c? nh?n BIDV c?a H? Th? Y?n Nhi",
+      "depositCodes": [
+        "819017973477"
+      ],
+      "mappingStatus": "confirmed",
+      "mappingNote": "??m b?o b?ng s? c? nh?n H? Th? Y?n Nhi t?i BIDV s? t?i kho?n/s? ch?ng ch? 819017973477, s? s? VIP0108857 theo x?c nh?n m?i nh?t c?a anh Nguy?n.",
+      "branchCode": "TN",
+      "branchName": "BIDV chi nh?nh Th?ng Nh?t",
+      "reportingGroupCode": "bidv-overdraft-tn",
+      "reportingGroupLabel": "Ng?n h?ng BIDV ? chi nh?nh Th?ng Nh?t (nh?m th?u chi)"
     },
     {
       "bank": "BIDV",

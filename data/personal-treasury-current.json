@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-06-30T11:27:19+07:00",
+    "updatedAt": "2026-07-02T10:35:40+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
@@ -85,11 +85,17 @@
       "openDate": "2026-06-09",
       "maturityDate": "2027-06-09",
       "interestPayoutType": "Cuối kỳ",
-      "pledged": false,
-      "pledgedAmount": 0,
-      "unpledgedAmount": 8280000000,
+      "pledged": true,
+      "pledgedAmount": 8280000000,
+      "unpledgedAmount": 0,
       "accruedInterest": 662400000,
-      "projectedSettlement": 8942400000
+      "projectedSettlement": 8942400000,
+      "linkedLoanCodes": [
+        "1440280147"
+      ],
+      "collateralGroupName": "S? c? nh?n BIDV c?a H? Th? Y?n Nhi",
+      "mappingNote": "?ang ??m b?o cho kho?n vay BIDV TN 1440280147 theo x?c nh?n m?i nh?t c?a anh Nguy?n.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Đặng Thu Thảo",

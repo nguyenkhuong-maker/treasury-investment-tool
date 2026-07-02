@@ -1,9 +1,9 @@
 window.MONTHLY_PLANS_TEST_DATA = {
   meta: {
     name: "Treasury Monthly Plans Test Index",
-    updatedAt: "2026-06-01T17:23:00+07:00",
+    updatedAt: "2026-07-02T11:06:00+07:00",
     generatedBy: "Vesper",
-    defaultMonth: "2026-06",
+    defaultMonth: "2026-07",
     storageMode: "browser-local-storage-for-test",
     makerEmail: "nguyen.khuong@atherlabs.com",
     designatedApproverEmail: "duc.ho@atherlabs.com",
@@ -20,6 +20,12 @@ window.MONTHLY_PLANS_TEST_DATA = {
     }
   },
   availableMonths: [
+    {
+      key: "2026-07",
+      label: "Tháng 7/2026",
+      periodLabel: "01/07/2026 - 15/08/2026",
+      status: "draft"
+    },
     {
       key: "2026-06",
       label: "Tháng 6/2026",
@@ -40,6 +46,52 @@ window.MONTHLY_PLANS_TEST_DATA = {
     }
   ],
   months: {
+    "2026-07": {
+      monthLabel: "Tháng 7/2026",
+      periodLabel: "01/07/2026 - 15/08/2026",
+      company: {
+        id: "2026-07-company",
+        type: "company",
+        title: "Kế hoạch dòng tiền & hạn mức thấu chi khả dụng",
+        status: "draft",
+        version: "Draft 1",
+        owner: "Finance Team",
+        approver: "CFO",
+        preparedAt: "02/07/2026 11:04 GMT+7",
+        highlights: [
+          { label: "HM khả dụng đầu kỳ", value: "12.086 tỷ VND" },
+          { label: "Tổng chi trong kỳ", value: "5.134 tỷ VND" },
+          { label: "Số dư cuối kỳ", value: "6.952 tỷ VND" },
+          { label: "Thanh khoản", value: "Mỏng nhất 6.952 tỷ ngày 10/08" }
+        ],
+        contentHash: "sha256:test-company-2026-07-draft1",
+        sourceHtml: "./plans/2026-07/company.html",
+        sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 7-2026/KE_HOACH_DONG_TIEN_VA_HAN_MUC_THAU_CHI_KHA_DUNG_01-07-2026_15-08-2026.md"
+      },
+      personal: {
+        id: "2026-07-personal",
+        type: "personal",
+        title: "Kế hoạch quản lý Individual Treasury",
+        status: "draft",
+        version: "Waiting",
+        owner: "Finance Team",
+        approver: "CFO",
+        preparedAt: "02/07/2026 11:06 GMT+7",
+        highlights: [
+          { label: "Trạng thái", value: "Chờ cập nhật" },
+          { label: "Tiền gửi", value: "Chưa dựng draft" },
+          { label: "Dư nợ vay", value: "Chưa dựng draft" },
+          { label: "Thanh khoản", value: "Chờ anh Nguyên chốt tiếp" }
+        ],
+        contentHash: "sha256:test-personal-2026-07-placeholder",
+        sourceHtml: "./plans/2026-07/personal.html",
+        sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 7-2026/"
+      },
+      automationPreview: {
+        nextDraftWindow: "25-28 hằng tháng",
+        expectedOutput: "Draft công ty tháng 7 đã dựng; phần cá nhân đang chờ cập nhật tiếp."
+      }
+    },
     "2026-06": {
       monthLabel: "Tháng 6/2026",
       periodLabel: "01/06/2026 - 15/07/2026",

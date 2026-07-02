@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-07-02T10:35:40+07:00",
+    "updatedAt": "2026-07-02T10:41:57+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -730,10 +730,11 @@
       "branchName": "BIDV chi nhánh Thống Nhất",
       "displayLabel": "Ngân hàng BIDV — chi nhánh Thống Nhất (nhóm thấu chi)",
       "loanCodes": [
-        "8610037624"
+        "8610037624",
+        "1440280147"
       ],
       "totalOutstanding": 13218526990,
-      "totalAvailableLimit": 3581473010
+      "totalAvailableLimit": 11861473010
     },
     {
       "groupCode": "bidv-overdraft-ts",

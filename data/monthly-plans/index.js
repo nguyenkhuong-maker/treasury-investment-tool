@@ -73,23 +73,23 @@ window.MONTHLY_PLANS_TEST_DATA = {
         type: "personal",
         title: "Kế hoạch quản lý Individual Treasury",
         status: "draft",
-        version: "Waiting",
+        version: "Draft 1",
         owner: "Finance Team",
         approver: "CFO",
-        preparedAt: "02/07/2026 11:06 GMT+7",
+        preparedAt: "02/07/2026 11:45 GMT+7",
         highlights: [
-          { label: "Trạng thái", value: "Chờ cập nhật" },
-          { label: "Tiền gửi", value: "Chưa dựng draft" },
-          { label: "Dư nợ vay", value: "Chưa dựng draft" },
-          { label: "Thanh khoản", value: "Chờ anh Nguyên chốt tiếp" }
+          { label: "Tổng tiền gửi/giấy tờ có giá", value: "154.871 tỷ VND" },
+          { label: "Thanh khoản mỏng nhất", value: "0.605 tỷ ngày 01/07" },
+          { label: "Dư nợ vay đầu kỳ", value: "27.125 tỷ VND" },
+          { label: "Thanh khoản VPBank", value: "0.605 tỷ VND" }
         ],
-        contentHash: "sha256:test-personal-2026-07-placeholder",
+        contentHash: "sha256:test-personal-2026-07-draft1",
         sourceHtml: "./plans/2026-07/personal.html",
-        sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 7-2026/"
+        sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 7-2026/KE_HOACH_QUAN_LY_INDIVIDUAL_TREASURY_01-07-2026_15-08-2026.md"
       },
       automationPreview: {
         nextDraftWindow: "25-28 hằng tháng",
-        expectedOutput: "Draft công ty tháng 7 đã dựng; phần cá nhân đang chờ cập nhật tiếp."
+        expectedOutput: "Draft công ty và cá nhân tháng 7 đã dựng để anh Nguyên rà trước khi chốt tiếp."
       }
     },
     "2026-06": {

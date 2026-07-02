@@ -1,16 +1,16 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-07-02T10:35:40+07:00",
+    "updatedAt": "2026-07-02T10:53:24+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet"
   },
   "summary": {
-    "totalPersonalDeposits": 156525916155,
+    "totalPersonalDeposits": 154870692831,
     "totalPersonalLoans": 27125000000,
-    "netPersonalTreasury": 129400916155
+    "netPersonalTreasury": 127745692831
   },
   "personalDeposits": [
     {
@@ -270,25 +270,6 @@
       "owner": "Đặng Thu Thảo",
       "sourceGroup": "HOAN_DOI_USD_STABLES_SANG_VND",
       "bank": "VDR",
-      "depositCode": "26012026.03/HĐMB/GSC01/VNDS-ĐTT",
-      "depositType": "Đầu tư VDR / IPA",
-      "certificateNumber": "26012026.03/HĐMB/GSC01/VNDS-ĐTT",
-      "principal": 1175671189,
-      "amountOnCertificate": 1175671189,
-      "interestRate": 8.3,
-      "openDate": "2026-04-28",
-      "maturityDate": "2026-06-29",
-      "interestPayoutType": "Cuối kỳ",
-      "pledged": false,
-      "pledgedAmount": 0,
-      "unpledgedAmount": 1175671189,
-      "accruedInterest": 16575353,
-      "projectedSettlement": 1192246543
-    },
-    {
-      "owner": "Đặng Thu Thảo",
-      "sourceGroup": "HOAN_DOI_USD_STABLES_SANG_VND",
-      "bank": "VDR",
       "depositCode": "26012026.03/HĐMB/GSC02/VNDS-ĐTT",
       "depositType": "Đầu tư VDR / IPA",
       "certificateNumber": "26012026.03/HĐMB/GSC02/VNDS-ĐTT",
@@ -400,7 +381,8 @@
         "007385614",
         "007405487",
         "007419194",
-        "007431226"
+        "007431226",
+        "007464194"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -445,7 +427,8 @@
         "007385614",
         "007405487",
         "007419194",
-        "007431226"
+        "007431226",
+        "007464194"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -477,17 +460,17 @@
       "depositCode": "VPB-PL-DTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "09388885678",
-      "principal": 1106975581,
-      "amountOnCertificate": 1106975581,
+      "principal": 604722418,
+      "amountOnCertificate": 604722418,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 1106975581,
+      "unpledgedAmount": 604722418,
       "accruedInterest": 0,
-      "projectedSettlement": 1106975581
+      "projectedSettlement": 604722418
     },
     {
       "owner": "Nguyễn Trung Tín",
@@ -534,17 +517,17 @@
       "depositCode": "VPB-PL-NTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "543033162",
-      "principal": 27298972,
-      "amountOnCertificate": 27298972,
+      "principal": 50000000,
+      "amountOnCertificate": 50000000,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 27298972,
+      "unpledgedAmount": 50000000,
       "accruedInterest": 0,
-      "projectedSettlement": 27298972
+      "projectedSettlement": 50000000
     },
     {
       "owner": "Đặng Thu Thảo",

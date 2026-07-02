@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-07-02T10:53:24+07:00",
+    "updatedAt": "2026-07-02T12:05:44+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
@@ -9,8 +9,8 @@
   },
   "summary": {
     "totalPersonalDeposits": 154870692831,
-    "totalPersonalLoans": 27125000000,
-    "netPersonalTreasury": 127745692831
+    "totalPersonalLoans": 27000000000,
+    "netPersonalTreasury": 127870692831
   },
   "personalDeposits": [
     {
@@ -575,12 +575,12 @@
       "loanCode": "PERSONAL-BIDV-REFINANCE-01",
       "loanType": "Vay cá nhân",
       "principalOriginal": 30000000000,
-      "principalOutstanding": 27125000000,
+      "principalOutstanding": 27000000000,
       "interestRate": 6,
       "disbursementDate": "2024-07-11",
       "maturityDate": "2026-07-11",
-      "interestPayable": 364582192,
-      "projectedSettlement": 27489582192,
+      "interestPayable": 80630137,
+      "projectedSettlement": 27080630137,
       "securedBy": "Cụm 6 sổ cá nhân BIDV của Đặng Thu Thảo",
       "linkedDeposits": [
         "813005446854",

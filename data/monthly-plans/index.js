@@ -73,18 +73,18 @@ window.MONTHLY_PLANS_TEST_DATA = {
         type: "personal",
         title: "Kế hoạch quản lý Individual Treasury",
         status: "draft",
-        version: "Draft 1",
+        version: "Draft 2",
         owner: "Finance Team",
         approver: "CFO",
-        preparedAt: "02/07/2026 11:45 GMT+7",
+        preparedAt: "02/07/2026 12:08 GMT+7",
         highlights: [
           { label: "Tổng tiền gửi/giấy tờ có giá", value: "154.871 tỷ VND" },
-          { label: "Thanh khoản mỏng nhất", value: "0.605 tỷ ngày 01/07" },
-          { label: "Dư nợ vay đầu kỳ", value: "27.125 tỷ VND" },
+          { label: "Thanh khoản mỏng nhất", value: "0.050 tỷ ngày 01/07" },
+          { label: "Dư nợ vay đầu kỳ", value: "27.000 tỷ VND" },
           { label: "Thanh khoản VPBank", value: "0.605 tỷ VND" }
         ],
-        contentHash: "sha256:test-personal-2026-07-draft1",
-        sourceHtml: "./plans/2026-07/personal.html",
+        contentHash: "sha256:test-personal-2026-07-draft2",
+        sourceHtml: "./plans/2026-07/personal.html?v=20260702-1208",
         sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 7-2026/KE_HOACH_QUAN_LY_INDIVIDUAL_TREASURY_01-07-2026_15-08-2026.md"
       },
       automationPreview: {

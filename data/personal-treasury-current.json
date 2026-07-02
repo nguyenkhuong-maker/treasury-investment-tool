@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-07-02T12:05:44+07:00",
+    "updatedAt": "2026-07-02T13:30:17+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
@@ -579,8 +579,8 @@
       "interestRate": 6,
       "disbursementDate": "2024-07-11",
       "maturityDate": "2026-07-11",
-      "interestPayable": 80630137,
-      "projectedSettlement": 27080630137,
+      "interestPayable": 226356165,
+      "projectedSettlement": 27226356165,
       "securedBy": "Cụm 6 sổ cá nhân BIDV của Đặng Thu Thảo",
       "linkedDeposits": [
         "813005446854",

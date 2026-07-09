@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-07-08T13:30:35+07:00",
+    "updatedAt": "2026-07-09T13:30:15+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
@@ -312,17 +312,16 @@
       "certificateNumber": null,
       "principal": 2940000000,
       "amountOnCertificate": 2940000000,
-      "interestRate": null,
-      "openDate": null,
-      "maturityDate": null,
+      "interestRate": 8,
+      "openDate": "2026-07-07",
+      "maturityDate": "2027-07-07",
       "interestPayoutType": "Cuối kỳ",
       "pledged": false,
       "pledgedAmount": 0,
       "unpledgedAmount": 2940000000,
-      "accruedInterest": 0,
-      "projectedSettlement": 2940000000,
+      "accruedInterest": 235200000,
+      "projectedSettlement": 3175200000,
       "linkedLoanCodes": [
-        "007219384",
         "007230274",
         "007249501",
         "007259697",
@@ -408,7 +407,7 @@
       "depositType": "Tiết kiệm VND",
       "certificateNumber": "Chứng chỉ tiền gửi 2m",
       "principal": 3402282000,
-      "amountOnCertificate": 4276941000,
+      "amountOnCertificate": 3402282000,
       "interestRate": 7.1,
       "openDate": "2026-06-09",
       "maturityDate": "2026-08-09",
@@ -417,7 +416,7 @@
       "pledgedAmount": 0,
       "unpledgedAmount": 3402282000,
       "accruedInterest": 40370639,
-      "projectedSettlement": 4327690128
+      "projectedSettlement": 3442652640
     },
     {
       "owner": "Nguyễn Trung Tín",

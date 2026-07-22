@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-07-21T14:50:24+07:00",
+    "updatedAt": "2026-07-22T15:02:26+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
@@ -27,24 +27,15 @@
       "maturityDate": "2027-04-28",
       "interestPayoutType": "Cuối kỳ",
       "pledged": true,
-      "pledgedAmount": 7858000000,
-      "unpledgedAmount": 800663289,
+      "pledgedAmount": 8658663289,
+      "unpledgedAmount": 0,
       "accruedInterest": 692693063,
       "projectedSettlement": 9351356352,
       "linkedLoanCodes": [
-        "407004096429",
-        "405004152702",
-        "409004187568",
-        "401004238120",
-        "405004265499",
-        "404004377692",
-        "405004401881",
-        "404004478705",
-        "400004586176",
-        "406004639406"
+        "1440328001"
       ],
-      "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 810004228033 + tín chấp",
-      "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động BIDV; phần đảm bảo bằng sổ chiếm 60% hạn mức.",
+      "collateralGroupName": "Sổ cá nhân BIDV của Hồ Thị Yến Nhi — 810004228033",
+      "mappingNote": "Đang bảo đảm cho hạn mức thấu chi mới BIDV TN 1440328001 bằng đúng số tiền trên sổ.",
       "mappingStatus": "confirmed"
     },
     {
@@ -110,11 +101,24 @@
       "openDate": "2026-07-06",
       "maturityDate": "2027-07-06",
       "interestPayoutType": "Cuối kỳ",
-      "pledged": false,
-      "pledgedAmount": 0,
-      "unpledgedAmount": 3000000000,
+      "pledged": true,
+      "pledgedAmount": 3000000000,
+      "unpledgedAmount": 0,
       "accruedInterest": 240000000,
-      "projectedSettlement": 3240000000
+      "projectedSettlement": 3240000000,
+      "linkedLoanCodes": [
+        "404004377692",
+        "405004401881",
+        "404004478705",
+        "400004586176",
+        "406004639406",
+        "404004807798",
+        "400004871689",
+        "406004974623"
+      ],
+      "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 817018585429 + tín chấp",
+      "mappingNote": "Đang bảo đảm cho toàn bộ cụm vay vốn lưu động BIDV theo quyết định mapping mới; sổ 810004228033 đã được rút khỏi cụm này.",
+      "mappingStatus": "confirmed"
     },
     {
       "owner": "Đặng Thu Thảo",

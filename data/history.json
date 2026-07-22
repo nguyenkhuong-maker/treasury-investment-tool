@@ -2,7 +2,7 @@
   "meta": {
     "name": "Treasury Rate Dashboard Data",
     "timezone": "Asia/Ho_Chi_Minh",
-    "updatedAt": "2026-07-21T14:38:00+07:00",
+    "updatedAt": "2026-07-22T13:59:00+07:00",
     "defaultMonth": "2026-07",
     "defaultWeek": "4",
     "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4. Có thể cập nhật dần theo thời gian."
@@ -3039,9 +3039,9 @@
         "4": {
           "label": "Tuần 4",
           "available": true,
-          "updatedAt": "2026-07-21T14:38:00+07:00",
+          "updatedAt": "2026-07-22T13:59:00+07:00",
           "summary": {
-            "note": "Cập nhật lãi suất tuần 4 tháng 07/2026 theo thông tin anh Nguyên cung cấp ngày 21/07/2026. NCB điều chỉnh lên 9.30% cho cả 6 tháng và 12 tháng; OCB điều chỉnh lên 8.70% cho 6 tháng và giữ 12 tháng 8.50%. Các dữ liệu còn lại giữ nguyên như tuần 3 tháng 07/2026."
+            "note": "Cập nhật lãi suất tuần 4 tháng 07/2026 theo thông tin anh Nguyên cung cấp ngày 22/07/2026. NCB điều chỉnh 6 tháng xuống 9.10% và 12 tháng xuống 9.20%, đồng thời biên độ cầm cố sổ cá nhân vay lại cá nhân giảm còn +2.00%/năm. VPBank điều chỉnh 6 tháng và 12 tháng lên 9.20%. Các dữ liệu còn lại giữ nguyên như lần cập nhật tuần 4 trước đó."
           },
           "mediumTerm": {
             "items": [
@@ -3070,9 +3070,9 @@
               {
                 "name": "VPBank",
                 "rates": {
-                  "6m": 8.8,
+                  "6m": 9.2,
                   "9m": null,
-                  "12m": 8.8
+                  "12m": 9.2
                 },
                 "corpBorrowRate": null,
                 "strategy": "Ưu tiên lợi suất + hỗ trợ vay cá nhân",
@@ -3085,9 +3085,9 @@
                   "loanRateSpread": 0.5,
                   "loanToValueRatio": 0.95,
                   "loanRates": {
-                    "6m": 9.3,
+                    "6m": 9.7,
                     "9m": null,
-                    "12m": 9.3
+                    "12m": 9.7
                   }
                 }
               },
@@ -3105,24 +3105,24 @@
               {
                 "name": "NCB",
                 "rates": {
-                  "6m": 9.3,
+                  "6m": 9.1,
                   "9m": null,
-                  "12m": 9.3
+                  "12m": 9.2
                 },
                 "corpBorrowRate": null,
                 "strategy": "Ưu tiên lợi suất, có thể cầm cố 100% cho vay cá nhân",
-                "comment": "Cầm cố sổ cá nhân, cá nhân vay lại với lãi vay = lãi gửi + 2.99%/năm; tỷ lệ vay tối đa 100% giá trị sổ.",
+                "comment": "Cầm cố sổ cá nhân, cá nhân vay lại với lãi vay = lãi gửi + 2.0%/năm; tỷ lệ vay tối đa 100% giá trị sổ.",
                 "personalPledgeLoan": {
                   "type": "personal_deposit_pledge",
                   "borrower": "Cá nhân vay lại",
                   "securedBy": "Cầm cố sổ cá nhân",
-                  "loanRateFormula": "Lãi vay = lãi gửi + 2.99%/năm",
-                  "loanRateSpread": 2.99,
+                  "loanRateFormula": "Lãi vay = lãi gửi + 2.0%/năm",
+                  "loanRateSpread": 2.0,
                   "loanToValueRatio": 1,
                   "loanRates": {
-                    "6m": 12.29,
+                    "6m": 11.1,
                     "9m": null,
-                    "12m": 12.29
+                    "12m": 11.2
                   }
                 }
               },

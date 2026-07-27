@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-07-22T15:02:26+07:00",
+    "updatedAt": "2026-07-27T09:00:21+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
@@ -107,7 +107,6 @@
       "accruedInterest": 240000000,
       "projectedSettlement": 3240000000,
       "linkedLoanCodes": [
-        "404004377692",
         "405004401881",
         "404004478705",
         "400004586176",
@@ -322,9 +321,9 @@
       "openDate": "2026-07-07",
       "maturityDate": "2027-07-07",
       "interestPayoutType": "Cuối kỳ",
-      "pledged": false,
-      "pledgedAmount": 0,
-      "unpledgedAmount": 2940000000,
+      "pledged": true,
+      "pledgedAmount": 2940000000,
+      "unpledgedAmount": 0,
       "accruedInterest": 235200000,
       "projectedSettlement": 3175200000,
       "linkedLoanCodes": [

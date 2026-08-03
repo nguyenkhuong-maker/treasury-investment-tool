@@ -1,8 +1,8 @@
 window.MONTHLY_PLANS_LIVE_DATA = {
   meta: {
     name: "Treasury Monthly Plans Live Index",
-    updatedAt: "2026-07-02T12:31:00+07:00",
-    defaultMonth: "2026-07",
+    updatedAt: "2026-08-03T15:48:00+07:00",
+    defaultMonth: "2026-08",
     reviewTestEmail: "duc.ho@atherlabs.com",
     slackApprovalTarget: {
       channelName: "#treasury-management",
@@ -16,6 +16,11 @@ window.MONTHLY_PLANS_LIVE_DATA = {
     }
   },
   availableMonths: [
+    {
+      key: "2026-08",
+      label: "Tháng 8/2026",
+      periodLabel: "01/08/2026 - 15/09/2026"
+    },
     {
       key: "2026-07",
       label: "Tháng 7/2026",
@@ -38,6 +43,46 @@ window.MONTHLY_PLANS_LIVE_DATA = {
     }
   ],
   months: {
+    "2026-08": {
+      monthLabel: "Tháng 8/2026",
+      periodLabel: "01/08/2026 - 15/09/2026",
+      company: {
+        id: "2026-08-company",
+        type: "company",
+        title: "Kế hoạch ngân quỹ VIHALI",
+        version: "Draft 1",
+        preparedAt: "03/08/2026 14:55 GMT+7",
+        status: "ready_for_cfo",
+        allowSendToCfo: true,
+        highlights: [
+          { label: "Hạn mức khả dụng đầu kỳ", value: "19.894 tỷ VND" },
+          { label: "Dòng tiền trong kỳ", value: "Thu 0 tỷ · Chi 4.493 tỷ" },
+          { label: "Hạn mức khả dụng cuối kỳ", value: "15.401 tỷ VND" },
+          { label: "Thanh khoản", value: "Mỏng nhất 15.401 tỷ ngày 14/09" }
+        ],
+        sourceHtml: "./plans/2026-08/company.html",
+        sourcePdf: "./plans/2026-08/company.html",
+        timeline: []
+      },
+      personal: {
+        id: "2026-08-personal",
+        type: "personal",
+        title: "Kế hoạch ngân quỹ CÁ NHÂN",
+        version: "Draft 2",
+        preparedAt: "03/08/2026 15:15 GMT+7",
+        status: "ready_for_cfo",
+        allowSendToCfo: true,
+        highlights: [
+          { label: "Tổng tiền gửi/giấy tờ có giá", value: "127.712 tỷ VND" },
+          { label: "Thanh khoản mỏng nhất", value: "4.854 tỷ ngày 01/08" },
+          { label: "Tổng đáo hạn trong kỳ", value: "34.940 tỷ VND" },
+          { label: "VPB5678 cuối kỳ", value: "6.202 tỷ VND" }
+        ],
+        sourceHtml: "./plans/2026-08/personal.html",
+        sourcePdf: "./plans/2026-08/personal.html",
+        timeline: []
+      }
+    },
     "2026-07": {
       monthLabel: "Tháng 7/2026",
       periodLabel: "01/07/2026 - 15/08/2026",

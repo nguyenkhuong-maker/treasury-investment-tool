@@ -1,7 +1,7 @@
 window.MONTHLY_PLANS_TEST_DATA = {
   meta: {
     name: "Treasury Monthly Plans Test Index",
-    updatedAt: "2026-08-03T15:15:00+07:00",
+    updatedAt: "2026-08-03T15:54:00+07:00",
     generatedBy: "Vesper",
     defaultMonth: "2026-08",
     storageMode: "browser-local-storage-for-test",
@@ -79,18 +79,18 @@ window.MONTHLY_PLANS_TEST_DATA = {
         type: "personal",
         title: "Kế hoạch quản lý Individual Treasury",
         status: "draft",
-        version: "Draft 2",
+        version: "Draft 3",
         owner: "Finance Team",
         approver: "CFO",
-        preparedAt: "03/08/2026 15:15 GMT+7",
+        preparedAt: "03/08/2026 15:54 GMT+7",
         highlights: [
           { label: "Tổng tiền gửi/giấy tờ có giá", value: "127.712 tỷ VND" },
-          { label: "Thanh khoản mỏng nhất", value: "4.854 tỷ ngày 01/08" },
+          { label: "Thanh khoản mỏng nhất", value: "3.458 tỷ ngày 01/08" },
           { label: "Tổng đáo hạn trong kỳ", value: "34.940 tỷ VND" },
-          { label: "VPB5678 cuối kỳ", value: "6.202 tỷ VND" }
+          { label: "VPB5678 cuối kỳ", value: "4.807 tỷ VND" }
         ],
-        contentHash: "sha256:test-personal-2026-08-draft2",
-        sourceHtml: "./plans/2026-08/personal.html?v=20260803-1515",
+        contentHash: "sha256:test-personal-2026-08-draft3",
+        sourceHtml: "./plans/2026-08/personal.html?v=20260803-1554",
         sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 8-2026/KE_HOACH_QUAN_LY_INDIVIDUAL_TREASURY_01-08-2026_15-09-2026.md"
       },
       automationPreview: {

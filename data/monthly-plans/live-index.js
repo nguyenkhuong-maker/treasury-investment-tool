@@ -1,7 +1,7 @@
 window.MONTHLY_PLANS_LIVE_DATA = {
   meta: {
     name: "Treasury Monthly Plans Live Index",
-    updatedAt: "2026-08-03T15:54:00+07:00",
+    updatedAt: "2026-08-03T16:02:00+07:00",
     defaultMonth: "2026-08",
     reviewTestEmail: "duc.ho@atherlabs.com",
     slackApprovalTarget: {
@@ -68,12 +68,12 @@ window.MONTHLY_PLANS_LIVE_DATA = {
         id: "2026-08-personal",
         type: "personal",
         title: "Kế hoạch ngân quỹ CÁ NHÂN",
-        version: "Draft 3",
-        preparedAt: "03/08/2026 15:54 GMT+7",
+        version: "Draft 4",
+        preparedAt: "03/08/2026 16:02 GMT+7",
         status: "ready_for_cfo",
         allowSendToCfo: true,
         highlights: [
-          { label: "Tổng tiền gửi/giấy tờ có giá", value: "127.712 tỷ VND" },
+          { label: "Tổng tiền gửi/giấy tờ có giá", value: "126.317 tỷ VND" },
           { label: "Thanh khoản mỏng nhất", value: "3.458 tỷ ngày 01/08" },
           { label: "Tổng đáo hạn trong kỳ", value: "34.940 tỷ VND" },
           { label: "VPB5678 cuối kỳ", value: "4.807 tỷ VND" }

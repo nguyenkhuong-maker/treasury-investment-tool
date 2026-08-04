@@ -1,16 +1,16 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-08-03T13:00:21+07:00",
+    "updatedAt": "2026-08-04T13:49:36+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet"
   },
   "summary": {
-    "totalPersonalDeposits": 127712099340,
+    "totalPersonalDeposits": 126016943827,
     "totalPersonalLoans": 0,
-    "netPersonalTreasury": 127712099340
+    "netPersonalTreasury": 126016943827
   },
   "personalDeposits": [
     {
@@ -371,17 +371,17 @@
       "depositCode": "VPB-PL-DTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "09388885678",
-      "principal": 1882686068,
-      "amountOnCertificate": 1882686068,
+      "principal": 487530555,
+      "amountOnCertificate": 487530555,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 1882686068,
+      "unpledgedAmount": 487530555,
       "accruedInterest": 0,
-      "projectedSettlement": 1882686068
+      "projectedSettlement": 487530555
     },
     {
       "owner": "Nguyễn Trung Tín",
@@ -409,17 +409,17 @@
       "depositCode": "VPB-PL-NTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "543033162",
-      "principal": 2856478177,
-      "amountOnCertificate": 2856478177,
+      "principal": 2556478177,
+      "amountOnCertificate": 2556478177,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 2856478177,
+      "unpledgedAmount": 2556478177,
       "accruedInterest": 0,
-      "projectedSettlement": 2856478177
+      "projectedSettlement": 2556478177
     },
     {
       "owner": "Đặng Thu Thảo",

@@ -7,9 +7,11 @@
   "approverEmail": "duc.ho@atherlabs.com",
   "version": "Draft 4",
   "contentHash": "2026-08-personal:Draft 4",
-  "status": "pending_cfo_review",
-  "submittedAt": "2026-08-03T09:04:06.166Z",
+  "status": "approved",
   "channel": "google_apps_script_mail",
+  "reviewedAt": "2026-08-04T08:06:46.229Z",
+  "title": "K? ho?ch ng?n qu? C? NH?N",
   "planUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/plans/2026-08/personal.html",
-  "title": "K? ho?ch ng?n qu? C? NH?N"
+  "approvedBy": "duc.ho@atherlabs.com",
+  "approvedAt": "2026-08-04T08:06:46.229Z"
 }

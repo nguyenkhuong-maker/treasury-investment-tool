@@ -1782,10 +1782,13 @@
     const weekLabel = week?.label || `Tuần ${weekKey}`;
     return `${monthLabel} · ${weekLabel}`;
   }
+  function getWeekKeys(monthKey) {
+    return Object.keys(HISTORY.months?.[monthKey]?.weeks || {}).sort((a, b) => Number(a) - Number(b));
+  }
   function getAvailablePeriods() {
     return Object.keys(HISTORY.months || {})
       .sort()
-      .flatMap(monthKey => ['1','2','3','4'].map(weekKey => {
+      .flatMap(monthKey => getWeekKeys(monthKey).map(weekKey => {
         const week = HISTORY.months?.[monthKey]?.weeks?.[weekKey];
         if (!week?.available) return null;
         return {
@@ -1838,12 +1841,13 @@
     const ws = document.getElementById('week-select');
     const cv = ws.value;
     const weeks = HISTORY.months?.[ms.value]?.weeks || {};
-    const wk = ['1','2','3','4'];
+    const wk = getWeekKeys(ms.value);
     ws.innerHTML = wk.map(k => {
       const w = weeks[k] || { label: `Tuần ${k}`, available: false };
       return `<option value="${k}">${w.label || `Tuần ${k}`}${w.available ? '' : ' (chưa có dữ liệu)'}</option>`;
     }).join('');
-    ws.value = wk.includes(cv) ? cv : (HISTORY.meta.defaultWeek || '1');
+    const fallbackWeek = wk.includes(HISTORY.meta.defaultWeek) ? HISTORY.meta.defaultWeek : (wk[0] || '1');
+    ws.value = wk.includes(cv) ? cv : fallbackWeek;
   }
   function refreshComparePeriodSelector() {
     const ms = document.getElementById('month-select');

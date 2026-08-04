@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-08-04T13:49:36+07:00",
+    "updatedAt": "2026-08-04T13:56:00+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -624,7 +624,7 @@
       "bank": "Standard Chartered",
       "group": "working-capital",
       "company": "VIHALI",
-      "loanCode": "007484215",
+      "loanCode": "007517847",
       "loanName": "SC VLĐ",
       "disbursementDate": "2026-07-31",
       "maturityDate": "2027-01-27",

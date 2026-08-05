@@ -797,13 +797,13 @@
 
       <section class="ui-section">
         <div class="ui-section-head">
-          <span class="label">03 — Đầu tư ngắn hạn 1–3 tháng</span>
+          <span class="label">03 — Đầu tư ngắn hạn 1–5 tháng</span>
           <div class="line"></div>
-          <span class="ui-chip ui-chip-blue">1–3 tháng</span>
+          <span class="ui-chip ui-chip-blue">1–5 tháng</span>
         </div>
         <div class="ui-card">
           <div class="ui-card-head">
-            <div class="ui-card-title"><span class="ui-card-icon">📊</span> Bảng đầu tư ngắn hạn 1–3 tháng</div>
+            <div class="ui-card-title"><span class="ui-card-icon">💳</span> Bảng đầu tư ngắn hạn 1–5 tháng</div>
           </div>
           <div class="table-wrap">
             <table>
@@ -813,6 +813,8 @@
                   <th class="center">1 tháng</th>
                   <th class="center">2 tháng</th>
                   <th class="center">3 tháng</th>
+                  <th class="center">4 tháng</th>
+                  <th class="center">5 tháng</th>
                   <th class="right">Điều kiện tối thiểu</th>
                   <th>Đề xuất sử dụng</th>
                   <th id="short-compare-header">Biến động</th>
@@ -821,7 +823,7 @@
               <tbody id="short-term-body"></tbody>
             </table>
           </div>
-          <div id="short-empty" class="empty" style="display:none">Tuần này chưa có dữ liệu đầu tư ngắn hạn 1–3 tháng.</div>
+          <div id="short-empty" class="empty" style="display:none">Tuần này chưa có dữ liệu đầu tư ngắn hạn 1–5 tháng.</div>
         </div>
       </section>
 
@@ -883,6 +885,8 @@
                     <option value="1m">1 tháng</option>
                     <option value="2m">2 tháng</option>
                     <option value="3m">3 tháng</option>
+                    <option value="4m">4 tháng</option>
+                    <option value="5m">5 tháng</option>
                     <option value="6m">6 tháng</option>
                     <option value="9m">9 tháng</option>
                     <option value="12m">12 tháng</option>
@@ -1689,6 +1693,8 @@
     '1m':  { label: '1 tháng',  days: 30  },
     '2m':  { label: '2 tháng',  days: 60  },
     '3m':  { label: '3 tháng',  days: 90  },
+    '4m':  { label: '4 tháng',  days: 120 },
+    '5m':  { label: '5 tháng',  days: 150 },
     '6m':  { label: '6 tháng',  days: 180 },
     '9m':  { label: '9 tháng',  days: 270 },
     '12m': { label: '12 tháng', days: 365 }
@@ -1907,7 +1913,7 @@
     const bestNet = netOptions[0] || null;
 
     const shortProducts = [];
-    short.forEach(item => ['1m','2m','3m'].forEach(k => {
+    short.forEach(item => ['1m','2m','3m','4m','5m'].forEach(k => {
       const rate = item.rates?.[k];
       if (rate != null) shortProducts.push({ name: item.name, tenor: TENORS[k].label, rate, minAmount: item.minAmount || 0 });
     }));
@@ -1944,7 +1950,7 @@
         <div class="ui-kpi-card amber">
           <div class="ui-kpi-label">Best short-term</div>
           <div class="ui-kpi-value">${bestShort ? bestShort.rate.toFixed(2) + '%/năm' : '—'}</div>
-          <div class="ui-kpi-sub">${bestShort ? bestShort.name + ' · ' + bestShort.tenor + (bestShort.minAmount ? ' · min ' + fmtMoney(bestShort.minAmount) : '') : 'Chưa có dữ liệu 1–3 tháng'}</div>
+          <div class="ui-kpi-sub">${bestShort ? bestShort.name + ' · ' + bestShort.tenor + (bestShort.minAmount ? ' · min ' + fmtMoney(bestShort.minAmount) : '') : 'Chưa có dữ liệu 1–5 tháng'}</div>
           <div class="ui-progress"><span style="width:${bestShort ? Math.min((bestShort.rate / 10) * 100, 100).toFixed(1) : 0}%;background:#d97706"></span></div>
         </div>
         <div class="ui-kpi-card red">
@@ -2041,18 +2047,24 @@
     const one = getColumnExtremes(items, '1m');
     const two = getColumnExtremes(items, '2m');
     const three = getColumnExtremes(items, '3m');
+    const four = getColumnExtremes(items, '4m');
+    const five = getColumnExtremes(items, '5m');
     body.innerHTML = items.map(item => {
       const prev = cMap.get(item.name);
       const cl = [
         ['1m', deltaValue(item.rates?.['1m'], prev?.rates?.['1m'])],
         ['2m', deltaValue(item.rates?.['2m'], prev?.rates?.['2m'])],
-        ['3m', deltaValue(item.rates?.['3m'], prev?.rates?.['3m'])]
+        ['3m', deltaValue(item.rates?.['3m'], prev?.rates?.['3m'])],
+        ['4m', deltaValue(item.rates?.['4m'], prev?.rates?.['4m'])],
+        ['5m', deltaValue(item.rates?.['5m'], prev?.rates?.['5m'])]
       ].filter(([,d]) => d != null).map(([l,d]) => `${l}: ${deltaHtml(d)}`).join('<br/>');
       return `<tr>
         <td><strong>${item.name}</strong></td>
         <td class="center ${rateClass(item.rates?.['1m'], one.max, one.min)}">${fmtRate(item.rates?.['1m'])}</td>
         <td class="center ${rateClass(item.rates?.['2m'], two.max, two.min)}">${fmtRate(item.rates?.['2m'])}</td>
         <td class="center ${rateClass(item.rates?.['3m'], three.max, three.min)}">${fmtRate(item.rates?.['3m'])}</td>
+        <td class="center ${rateClass(item.rates?.['4m'], four.max, four.min)}">${fmtRate(item.rates?.['4m'])}</td>
+        <td class="center ${rateClass(item.rates?.['5m'], five.max, five.min)}">${fmtRate(item.rates?.['5m'])}</td>
         <td class="right">${item.minAmount ? fmtMoney(item.minAmount) + ' VND' : '<span class="muted">—</span>'}</td>
         <td>${item.strategy || ''}</td>
         <td style="white-space:nowrap;font-size:12.5px">${cl || '<span class="muted">—</span>'}</td>
@@ -2104,7 +2116,7 @@
   function buildProductsFromWeek(weekData) {
     const products = [];
     (weekData?.mediumTerm?.items || []).forEach(item => ['6m','9m','12m'].forEach(t => { const r = item.rates?.[t]; if (r != null) products.push({ name: item.name, tenorKey: t, rate: r, minAmount: 0, rollable: false, note: item.comment || item.strategy || '' }); }));
-    (weekData?.shortTerm?.items  || []).forEach(item => ['1m','2m','3m'].forEach(t => { const r = item.rates?.[t]; if (r != null) products.push({ name: item.name, tenorKey: t, rate: r, minAmount: item.minAmount || 0, rollable: false, note: item.strategy || '' }); }));
+    (weekData?.shortTerm?.items  || []).forEach(item => ['1m','2m','3m','4m','5m'].forEach(t => { const r = item.rates?.[t]; if (r != null) products.push({ name: item.name, tenorKey: t, rate: r, minAmount: item.minAmount || 0, rollable: false, note: item.strategy || '' }); }));
     (weekData?.underOneMonth?.items || []).forEach(item => ['1d','1w','2w','3w'].forEach(t => { const r = item.rates?.[t]; if (r != null) products.push({ name: item.name, tenorKey: t, rate: r, minAmount: item.minAmount || 0, rollable: item.rollable || false, note: item.strategy || '' }); }));
     return products;
   }

@@ -2,7 +2,7 @@
   "meta": {
     "name": "Treasury Rate Dashboard Data",
     "timezone": "Asia/Ho_Chi_Minh",
-    "updatedAt": "2026-08-03T14:58:00+07:00",
+    "updatedAt": "2026-08-05T13:51:00+07:00",
     "defaultMonth": "2026-08",
     "defaultWeek": "1",
     "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4-5. Có thể cập nhật dần theo thời gian."
@@ -3494,9 +3494,9 @@
         "1": {
           "label": "Tuần 1",
           "available": true,
-          "updatedAt": "2026-08-03T14:58:00+07:00",
+          "updatedAt": "2026-08-05T13:51:00+07:00",
           "summary": {
-            "note": "C?p nh?t l?i su?t tu?n 1 th?ng 08/2026 theo th?ng tin anh Nguy?n cung c?p ng?y 03/08/2026. VPBank 6 th?ng v? 12 th?ng l?n 9.30% cho kho?n tr?n 10 t?; NCB 6 th?ng v? 12 th?ng l? 9.40%; OCB 6 th?ng 8.90% v? 12 th?ng 8.70%; Standard Chartered 6 th?ng v? 12 th?ng l? 8.50%. C?c l?i su?t c?n l?i gi? nguy?n nh? tu?n 5 th?ng 07/2026."
+            "note": "Cập nhật lãi suất chứng chỉ tiền gửi tuần 1 tháng 08/2026 theo bảng anh Nguyên gửi ngày 05/08/2026. Đã làm mới nhóm kỳ hạn 1-5 tháng cho VPBank, MB, BVBank và OCB; nhóm 6-12 tháng và dưới 1 tháng giữ nguyên dữ liệu hiện có."
           },
           "mediumTerm": {
             "items": [
@@ -3632,34 +3632,52 @@
           "shortTerm": {
             "items": [
               {
-                "name": "Chứng chỉ tiền gửi VPBank",
+                "name": "VPBank",
                 "rates": {
-                  "1m": 7,
-                  "2m": 7.1,
-                  "3m": 7.5
+                  "1m": 7.3,
+                  "2m": 7.5,
+                  "3m": 8,
+                  "4m": 8,
+                  "5m": 8
                 },
                 "minAmount": 0,
-                "strategy": "Ưu tiên cho vốn nhàn rỗi kỳ hạn 1-3 tháng."
+                "strategy": "Giữ như phương án tham chiếu nhóm chứng chỉ tiền gửi VPBank kỳ hạn 1-5 tháng."
               },
               {
-                "name": "Trái phiếu VNDirect",
+                "name": "MB",
                 "rates": {
-                  "1m": 8.2,
-                  "2m": 8.6,
-                  "3m": 9.2
-                },
-                "minAmount": 10000000000,
-                "strategy": "Ưu tiên cho khoản trên 10 tỷ cần neo tiền đúng tenor 1-3 tháng."
-              },
-              {
-                "name": "Trái phiếu IPA",
-                "rates": {
-                  "1m": 7.6,
-                  "2m": 8.5,
-                  "3m": 8.7
+                  "1m": 7.7,
+                  "2m": 7.7,
+                  "3m": 8.5,
+                  "4m": 8.5,
+                  "5m": 8.5
                 },
                 "minAmount": 0,
-                "strategy": "Ưu tiên cho vốn nhàn rỗi kỳ hạn 2-3 tháng."
+                "strategy": "Đang là phương án lãi suất cao nhất trong bảng CD ngân hàng anh gửi cho các kỳ 1-5 tháng."
+              },
+              {
+                "name": "BVBank",
+                "rates": {
+                  "1m": 6,
+                  "2m": 6,
+                  "3m": 6.5,
+                  "4m": 6.5,
+                  "5m": 6.7
+                },
+                "minAmount": 0,
+                "strategy": "Phương án lãi suất thấp hơn, giữ để so sánh tương quan thị trường."
+              },
+              {
+                "name": "OCB",
+                "rates": {
+                  "1m": 6.4,
+                  "2m": 7,
+                  "3m": 7.1,
+                  "4m": 7.1,
+                  "5m": 7.1
+                },
+                "minAmount": 0,
+                "strategy": "Phương án trung gian, nổi hơn ở tenor 2-5 tháng so với BVBank."
               }
             ]
           },

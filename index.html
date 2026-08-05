@@ -763,6 +763,15 @@
         <div id="rate-overview-grid" class="ui-overview-grid"></div>
       </section>
 
+      <section class="ui-section" id="rate-policy-section">
+        <div class="ui-section-head">
+          <span class="label">01A — Khung phân bổ treasury</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-green">Policy</span>
+        </div>
+        <div id="rate-policy-card"></div>
+      </section>
+
       <section class="ui-section">
         <div class="ui-section-head">
           <span class="label">02 — Tiền gửi trung hạn</span>
@@ -1989,6 +1998,73 @@
         </div>
       </div>`;
   }
+  function renderRatePolicy() {
+    const wrap = document.getElementById('rate-policy-card');
+    if (!wrap) return;
+    const guidance = HISTORY?.meta?.treasuryGuidance;
+    if (!guidance) {
+      wrap.innerHTML = '<div class="ui-card"><div class="ui-toolbar-note">Chưa có treasury guidance trong `data/history.json`.</div></div>';
+      return;
+    }
+    const orientation = (guidance.orientation || []).map((item, idx) => `${idx + 1}. ${item}`).join(' → ');
+    const axes = (guidance.decisionAxes || []).join(' · ');
+    const ge6 = guidance.allocationRules?.atOrAbove6Months || {};
+    const lt6 = guidance.allocationRules?.under6Months || {};
+    const vehicles = guidance.vehicleNotes || [];
+    const vehicleHtml = vehicles.length
+      ? vehicles.map(item => `
+          <div class="rate-insight-item">
+            <div>
+              <strong>${item.name || ''}</strong>
+              <div class="meta">${item.summary || ''}</div>
+              <div class="meta" style="margin-top:4px">${item.details || ''}</div>
+            </div>
+            <span class="rate-badge">Vehicle</span>
+          </div>`).join('')
+      : '<div class="ui-toolbar-note">Chưa có chú giải sản phẩm.</div>';
+    const bulletList = (items) => Array.isArray(items) && items.length
+      ? `<ul class="ui-kpi-list">${items.map(item => `<li>${item}</li>`).join('')}</ul>`
+      : '<div class="ui-toolbar-note">Chưa có tiêu chí chọn.</div>';
+    wrap.innerHTML = `
+      <div class="ui-card">
+        <div class="ui-card-head">
+          <div class="ui-card-title"><span class="ui-card-icon">📌</span> Logic phân bổ đang dùng trên dashboard</div>
+        </div>
+        <div class="rate-insight-list" style="margin-bottom:18px">
+          <div class="rate-insight-item">
+            <div>
+              <strong>Thứ tự ưu tiên điều hành</strong>
+              <div class="meta">${orientation}</div>
+            </div>
+            <span class="rate-badge">Priority</span>
+          </div>
+          <div class="rate-insight-item">
+            <div>
+              <strong>Hai trục ra quyết định</strong>
+              <div class="meta">Luôn nhìn theo ${axes}.</div>
+            </div>
+            <span class="rate-badge">Filter</span>
+          </div>
+        </div>
+        <div class="ui-grid-2">
+          <div class="ui-card" style="box-shadow:none;border:1px solid var(--line)">
+            <div class="ui-card-head">
+              <div class="ui-card-title"><span class="ui-card-icon">🏦</span> ${ge6.label || 'Kỳ hạn >= 6 tháng'}</div>
+            </div>
+            <div class="ui-toolbar-note"><strong>Rule:</strong> ${ge6.rule || '—'}</div>
+            ${bulletList(ge6.selectionPriority)}
+          </div>
+          <div class="ui-card" style="box-shadow:none;border:1px solid var(--line)">
+            <div class="ui-card-head">
+              <div class="ui-card-title"><span class="ui-card-icon">🔁</span> ${lt6.label || 'Kỳ hạn < 6 tháng'}</div>
+            </div>
+            <div class="ui-toolbar-note"><strong>Rule:</strong> ${lt6.rule || '—'}</div>
+            ${bulletList(lt6.selectionPriority)}
+          </div>
+        </div>
+        <div class="rate-insight-list" style="margin-top:18px">${vehicleHtml}</div>
+      </div>`;
+  }
   function renderMediumTerm(weekData) {
     const body  = document.getElementById('medium-term-body');
     const empty = document.getElementById('medium-empty');
@@ -2104,11 +2180,24 @@
   }
   function renderStrategy(weekData) {
     const body = document.getElementById('strategy-body');
+    const guidance = HISTORY?.meta?.treasuryGuidance;
     const mItems = weekData?.mediumTerm?.items || [];
     const best = mItems.filter(i => i.corpBorrowRate != null).sort((a,b) => a.corpBorrowRate - b.corpBorrowRate)[0];
     const balance = mItems.find(i => i.name === 'BIDV');
     const highest = mItems.map(i => ({ name: i.name, maxRate: Math.max(...Object.values(i.rates || {}).filter(v => v != null)) })).sort((a,b) => b.maxRate - a.maxRate)[0];
+    const ge6 = guidance?.allocationRules?.atOrAbove6Months;
+    const lt6 = guidance?.allocationRules?.under6Months;
+    const orientation = (guidance?.orientation || []).join(' → ');
+    const axes = (guidance?.decisionAxes || []).join(' + ');
+    const vehicles = guidance?.vehicleNotes || [];
+    const repoVehicle = vehicles[0];
+    const bankVehicle = vehicles[1];
     body.innerHTML = `
+      <tr><td>Định hướng điều hành</td><td>${orientation ? `<strong>${orientation}</strong>.` : ''} Luôn chốt phương án theo 2 trục: ${axes || 'mục đích sử dụng vốn và kỳ hạn sử dụng vốn'}.</td></tr>
+      <tr><td>Rule cho vốn >= 6 tháng</td><td>${ge6 ? `<strong>${ge6.rule}</strong> ${ge6.selectionPriority?.[0] ? 'Ưu tiên ' + ge6.selectionPriority[0].replace(/^Chọn /i, '').toLowerCase() + '.' : ''}` : 'Chưa có guidance.'}</td></tr>
+      <tr><td>Rule cho vốn < 6 tháng</td><td>${lt6 ? `<strong>${lt6.rule}</strong> ${lt6.selectionPriority?.[0] ? 'Ưu tiên ' + lt6.selectionPriority[0].replace(/^Ưu tiên /i, '').toLowerCase() + '.' : ''}` : 'Chưa có guidance.'}</td></tr>
+      <tr><td>REPO / cam kết mua lại</td><td>${repoVehicle ? `<strong>${repoVehicle.summary}</strong> ${repoVehicle.details}` : 'Chưa có guidance.'}</td></tr>
+      <tr><td>CD / sản phẩm bank</td><td>${bankVehicle ? `<strong>${bankVehicle.summary}</strong> ${bankVehicle.details}` : 'Chưa có guidance.'}</td></tr>
       <tr><td>Phương án lõi</td><td>${best ? `<strong>${best.name}</strong> cho phần tiền cần gắn trực tiếp với mục tiêu doanh nghiệp vay rẻ.` : 'Chưa có dữ liệu.'}</td></tr>
       <tr><td>Phương án cân bằng</td><td>${balance ? `<strong>${balance.name}</strong> cho phần cần vừa giữ lãi ổn, vừa hỗ trợ cấu trúc vay.` : 'Chưa có dữ liệu.'}</td></tr>
       <tr><td>Phần tối ưu lãi</td><td>${highest ? `<strong>${highest.name}</strong> đang có lợi suất cao nhất trong nhóm trung hạn ở kỳ đang xem.` : 'Chưa có dữ liệu.'}</td></tr>`;
@@ -2176,6 +2265,7 @@
     const wd = getSelectedWeekData();
     renderPeriodHeader(wd);
     renderRateOverview(wd);
+    renderRatePolicy();
     renderMediumTerm(wd);
     renderShortTerm(wd);
     renderUnderOneMonth(wd);

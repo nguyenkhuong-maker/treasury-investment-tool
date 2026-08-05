@@ -12,7 +12,13 @@ Dùng cho lịch sử lãi suất theo **tháng / tuần**.
     "hasHistory": true,
     "granularity": "month-week",
     "defaultMonth": "2026-04",
-    "defaultWeek": "1"
+    "defaultWeek": "1",
+    "treasuryGuidance": {
+      "orientation": ["An toàn thanh khoản", "Đa dạng phân bổ", "Tối ưu lợi suất"],
+      "decisionAxes": ["Mục đích và nhu cầu sử dụng vốn", "Kỳ hạn sử dụng vốn"],
+      "allocationRules": {},
+      "vehicleNotes": []
+    }
   },
   "months": {
     "2026-04": {
@@ -34,6 +40,61 @@ Dùng cho lịch sử lãi suất theo **tháng / tuần**.
   }
 }
 ```
+
+### `meta.treasuryGuidance` (optional nhưng nên duy trì)
+
+Dùng để lưu định hướng điều hành treasury chung của dashboard, giúp phần UI và AI context đọc thống nhất cùng một logic phân bổ.
+
+```json
+{
+  "orientation": [
+    "An toàn thanh khoản",
+    "Đa dạng phân bổ",
+    "Tối ưu lợi suất"
+  ],
+  "decisionAxes": [
+    "Mục đích và nhu cầu sử dụng vốn",
+    "Kỳ hạn sử dụng vốn"
+  ],
+  "allocationRules": {
+    "atOrAbove6Months": {
+      "label": "Kỳ hạn >= 6 tháng",
+      "rule": "Ưu tiên tiền gửi tiết kiệm tại ngân hàng",
+      "selectionPriority": [
+        "Lợi suất tốt nhất",
+        "Biên vay lại thấp"
+      ]
+    },
+    "under6Months": {
+      "label": "Kỳ hạn < 6 tháng",
+      "rule": "Ưu tiên sản phẩm tài chính ngắn hạn có cam kết mua lại",
+      "selectionPriority": [
+        "Thanh khoản",
+        "Lợi suất"
+      ]
+    }
+  },
+  "vehicleNotes": [
+    {
+      "name": "REPO / cam kết mua lại",
+      "summary": "Dùng cho tiền 1-6 tháng",
+      "details": "Có thể triển khai qua CTCK như VNDirect hoặc LPBS nếu được đánh giá phù hợp"
+    },
+    {
+      "name": "Chứng chỉ tiền gửi / sản phẩm bank",
+      "summary": "Làm trực tiếp với ngân hàng",
+      "details": "Thanh khoản thường cao hơn nhưng lợi suất thấp hơn nhóm REPO"
+    }
+  ]
+}
+```
+
+Quy ước đọc:
+- `orientation` = thứ tự ưu tiên điều hành tổng thể.
+- `decisionAxes` = 2 trục bắt buộc khi giải thích phương án treasury.
+- `allocationRules.atOrAbove6Months` = rule cứng cho vốn có thể khóa từ 6 tháng trở lên.
+- `allocationRules.under6Months` = rule cứng cho vốn nhàn rỗi 1-6 tháng.
+- `vehicleNotes` = phần chú giải khác nhau giữa REPO / cam kết mua lại và sản phẩm ngắn hạn làm trực tiếp với bank.
 
 ### `mediumTerm.items[]`
 ```json

@@ -5,7 +5,50 @@
     "updatedAt": "2026-08-05T13:51:00+07:00",
     "defaultMonth": "2026-08",
     "defaultWeek": "1",
-    "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4-5. Có thể cập nhật dần theo thời gian."
+    "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4-5. Có thể cập nhật dần theo thời gian.",
+    "treasuryGuidance": {
+      "orientation": [
+        "An toàn thanh khoản",
+        "Đa dạng phân bổ",
+        "Tối ưu lợi suất"
+      ],
+      "decisionAxes": [
+        "Mục đích và nhu cầu sử dụng vốn",
+        "Kỳ hạn sử dụng vốn"
+      ],
+      "allocationRules": {
+        "atOrAbove6Months": {
+          "label": "Kỳ hạn >= 6 tháng",
+          "rule": "Luôn ưu tiên tiền gửi tiết kiệm tại ngân hàng.",
+          "selectionPriority": [
+            "Chọn lợi suất tốt nhất trong nhóm ngân hàng phù hợp",
+            "Ưu tiên thêm nơi có biên vay lại thấp khi cần cầm cố hoặc vay lại",
+            "Chỉ dùng khi dòng tiền thực sự có thể khóa từ 6 tháng trở lên"
+          ]
+        },
+        "under6Months": {
+          "label": "Kỳ hạn < 6 tháng",
+          "rule": "Không tối ưu bằng tiền gửi tiết kiệm; ưu tiên sản phẩm tài chính ngắn hạn có cam kết mua lại.",
+          "selectionPriority": [
+            "Ưu tiên tính thanh khoản và khả năng thoát vị thế đúng lúc cần vốn",
+            "Sau đó mới so lợi suất giữa các bên cung cấp",
+            "Dùng để giữ linh hoạt cho tiền nhàn rỗi trong 1-6 tháng"
+          ]
+        }
+      },
+      "vehicleNotes": [
+        {
+          "name": "REPO / sản phẩm tài chính có cam kết mua lại",
+          "summary": "Phương án đang vận hành với VNDirect và tiếp tục dùng làm lựa chọn ngắn hạn trọng tâm cho tiền 1-6 tháng.",
+          "details": "VNDirect được chọn dựa trên đánh giá về uy tín, thanh khoản và lợi suất. LPBS là bên mới đang được cân nhắc vì có bank chống lưng, cấu trúc sản phẩm tương tự VNDirect và tài sản nền là trái phiếu Vin dài hạn."
+        },
+        {
+          "name": "Chứng chỉ tiền gửi / sản phẩm ngắn hạn làm trực tiếp với bank",
+          "summary": "Bản chất sử dụng gần với nhóm REPO nhưng làm việc trực tiếp với ngân hàng thay vì qua công ty chứng khoán.",
+          "details": "Mức độ thanh khoản về cơ bản cao hơn trái phiếu, nhưng lợi suất thấp hơn khá đáng kể; phù hợp khi ưu tiên chắc chắn thanh khoản hơn là tối đa hóa lợi suất."
+        }
+      ]
+    }
   },
   "months": {
     "2026-04": {

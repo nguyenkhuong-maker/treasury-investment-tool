@@ -2,7 +2,7 @@
   "meta": {
     "name": "Treasury Rate Dashboard Data",
     "timezone": "Asia/Ho_Chi_Minh",
-    "updatedAt": "2026-08-10T13:29:00+07:00",
+    "updatedAt": "2026-08-10T13:52:00+07:00",
     "defaultMonth": "2026-08",
     "defaultWeek": "2",
     "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4-5. Có thể cập nhật dần theo thời gian."
@@ -3737,9 +3737,9 @@
         "2": {
           "label": "Tuần 2",
           "available": true,
-          "updatedAt": "2026-08-10T13:29:00+07:00",
+          "updatedAt": "2026-08-10T13:52:00+07:00",
           "summary": {
-            "note": "Cập nhật lãi suất chứng chỉ tiền gửi tuần 2 tháng 08/2026 theo bảng anh Nguyên gửi ngày 10/08/2026. Eximbank giữ 8.80% cho 6-12 tháng, VPBank giữ 9.30% cho 6-12 tháng, OCB điều chỉnh còn 8.70% kỳ hạn 6 tháng và 8.10% kỳ hạn 12 tháng; các ngân hàng và nhóm kỳ hạn còn lại giữ nguyên như tuần 1 tháng 08/2026."
+            "note": "Cập nhật lãi suất chứng chỉ tiền gửi tuần 2 tháng 08/2026 theo bảng anh Nguyên gửi ngày 10/08/2026. Eximbank giữ 8.80% cho 6-12 tháng, VPBank giữ 9.30% cho 6-12 tháng, NCB điều chỉnh lên 9.45% cho 6-12 tháng, OCB điều chỉnh còn 8.70% kỳ hạn 6 tháng và 8.10% kỳ hạn 12 tháng; các ngân hàng và nhóm kỳ hạn còn lại giữ nguyên như tuần 1 tháng 08/2026."
           },
           "mediumTerm": {
             "items": [
@@ -3803,9 +3803,9 @@
               {
                 "name": "NCB",
                 "rates": {
-                  "6m": 9.4,
+                  "6m": 9.45,
                   "9m": null,
-                  "12m": 9.4
+                  "12m": 9.45
                 },
                 "corpBorrowRate": null,
                 "strategy": "Ưu tiên lợi suất, có thể cầm cố 100% cho vay cá nhân",
@@ -3818,9 +3818,9 @@
                   "loanRateSpread": 2,
                   "loanToValueRatio": 1,
                   "loanRates": {
-                    "6m": 11.4,
+                    "6m": 11.45,
                     "9m": null,
-                    "12m": 11.4
+                    "12m": 11.45
                   }
                 }
               },

@@ -1,16 +1,16 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-08-06T13:00:22+07:00",
+    "updatedAt": "2026-08-10T13:00:19+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet"
   },
   "summary": {
-    "totalPersonalDeposits": 125416943827,
+    "totalPersonalDeposits": 124216943827,
     "totalPersonalLoans": 0,
-    "netPersonalTreasury": 125416943827
+    "netPersonalTreasury": 124216943827
   },
   "personalDeposits": [
     {
@@ -328,7 +328,6 @@
       "accruedInterest": 235200000,
       "projectedSettlement": 3175200000,
       "linkedLoanCodes": [
-        "007265357",
         "007285498",
         "007295472",
         "007305767",
@@ -411,17 +410,17 @@
       "depositCode": "VPB-PL-NTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "543033162",
-      "principal": 1956478177,
-      "amountOnCertificate": 1956478177,
+      "principal": 756478177,
+      "amountOnCertificate": 756478177,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 1956478177,
+      "unpledgedAmount": 756478177,
       "accruedInterest": 0,
-      "projectedSettlement": 1956478177
+      "projectedSettlement": 756478177
     },
     {
       "owner": "Đặng Thu Thảo",

@@ -1,16 +1,16 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-08-10T13:00:19+07:00",
+    "updatedAt": "2026-08-12T13:00:25+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet"
   },
   "summary": {
-    "totalPersonalDeposits": 124216943827,
+    "totalPersonalDeposits": 123343189423,
     "totalPersonalLoans": 0,
-    "netPersonalTreasury": 124216943827
+    "netPersonalTreasury": 123343189423
   },
   "personalDeposits": [
     {
@@ -136,25 +136,6 @@
       "unpledgedAmount": 994610,
       "accruedInterest": 0,
       "projectedSettlement": 994610
-    },
-    {
-      "owner": "Đặng Thu Thảo",
-      "sourceGroup": "HOAN_DOI_USD_STABLES_SANG_VND",
-      "bank": "VDR",
-      "depositCode": "26012026.04/HĐMB/IPA12501/VNDS-ĐTT",
-      "depositType": "Đầu tư VDR / IPA",
-      "certificateNumber": "26012026.04/HĐMB/IPA12501/VNDS-ĐTT",
-      "principal": 15599994227,
-      "amountOnCertificate": 15599994227,
-      "interestRate": 8.5,
-      "openDate": "2026-05-11",
-      "maturityDate": "2026-08-11",
-      "interestPayoutType": "Cuối kỳ",
-      "pledged": false,
-      "pledgedAmount": 0,
-      "unpledgedAmount": 15599994227,
-      "accruedInterest": 334224534,
-      "projectedSettlement": 15934218761
     },
     {
       "owner": "Đặng Thu Thảo",
@@ -372,36 +353,17 @@
       "depositCode": "VPB-PL-DTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "09388885678",
-      "principal": 487530555,
-      "amountOnCertificate": 487530555,
+      "principal": 16422530555,
+      "amountOnCertificate": 16422530555,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 487530555,
+      "unpledgedAmount": 16422530555,
       "accruedInterest": 0,
-      "projectedSettlement": 487530555
-    },
-    {
-      "owner": "Nguyễn Trung Tín",
-      "sourceGroup": "HOAN_DOI_USD_STABLES_SANG_VND",
-      "bank": "VPB-PL",
-      "depositCode": "Chứng chỉ tiền gửi 2m",
-      "depositType": "Tiết kiệm VND",
-      "certificateNumber": "Chứng chỉ tiền gửi 2m",
-      "principal": 3402282000,
-      "amountOnCertificate": 3402282000,
-      "interestRate": 7.1,
-      "openDate": "2026-06-09",
-      "maturityDate": "2026-08-09",
-      "interestPayoutType": "Cuối kỳ",
-      "pledged": false,
-      "pledgedAmount": 0,
-      "unpledgedAmount": 3402282000,
-      "accruedInterest": 40370639,
-      "projectedSettlement": 3442652640
+      "projectedSettlement": 16422530555
     },
     {
       "owner": "Nguyễn Trung Tín",
@@ -410,17 +372,17 @@
       "depositCode": "VPB-PL-NTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "543033162",
-      "principal": 756478177,
-      "amountOnCertificate": 756478177,
+      "principal": 2950000000,
+      "amountOnCertificate": 2950000000,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 756478177,
+      "unpledgedAmount": 2950000000,
       "accruedInterest": 0,
-      "projectedSettlement": 756478177
+      "projectedSettlement": 2950000000
     },
     {
       "owner": "Đặng Thu Thảo",

@@ -2,7 +2,7 @@
   "meta": {
     "name": "Treasury Rate Dashboard Data",
     "timezone": "Asia/Ho_Chi_Minh",
-    "updatedAt": "2026-09-03T09:45:00+07:00",
+    "updatedAt": "2026-09-03T11:15:00+07:00",
     "defaultMonth": "2026-09",
     "defaultWeek": "1",
     "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4-5. Có thể cập nhật dần theo thời gian."
@@ -4483,9 +4483,9 @@
         "1": {
           "label": "Tuần 1",
           "available": true,
-          "updatedAt": "2026-09-03T09:45:00+07:00",
+          "updatedAt": "2026-09-03T11:15:00+07:00",
           "summary": {
-            "note": "Cập nhật lãi suất tuần 1 tháng 09/2026 theo thông tin anh Nguyên chốt ngày 03/09/2026. ACB giữ 8.30% kỳ hạn 6 tháng và 8.70% kỳ hạn 12 tháng; NCB giữ 9.50% cho 6-12 tháng; Eximbank điều chỉnh lên 8.90% cho 6-12 tháng; VNDirect giữ 9.80% cho 6-9-12 tháng, đồng thời bổ sung 4-5 tháng ở mức 9.70%; các mức còn lại giữ nguyên như tuần 4 tháng 08/2026."
+            "note": "Cập nhật lãi suất tuần 1 tháng 09/2026 theo thông tin anh Nguyên chốt ngày 03/09/2026. ACB giữ 8.30% kỳ hạn 6 tháng và 8.70% kỳ hạn 12 tháng; NCB giữ 9.50% cho 6-12 tháng; Eximbank điều chỉnh lên 8.90% cho 6-12 tháng; VNDirect giữ 9.80% cho 6-9-12 tháng, đồng thời bổ sung 4-5 tháng ở mức 9.70%; mức hỗ trợ DN vay của BIDV điều chỉnh lên 8.00%; các mức còn lại giữ nguyên như tuần 4 tháng 08/2026."
           },
           "mediumTerm": {
             "items": [
@@ -4496,7 +4496,7 @@
                   "9m": null,
                   "12m": 8.0
                 },
-                "corpBorrowRate": 7.2,
+                "corpBorrowRate": 8.0,
                 "strategy": "Ưu tiên cân bằng",
                 "comment": "Cân bằng giữa gửi tiền và hỗ trợ vay."
               },

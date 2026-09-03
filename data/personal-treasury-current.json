@@ -1,16 +1,16 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-09-03T08:56:24+07:00",
+    "updatedAt": "2026-09-03T13:00:22+07:00",
     "source": "Google Sheets / Dashboard-fix",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet"
   },
   "summary": {
-    "totalPersonalDeposits": 120388089469,
+    "totalPersonalDeposits": 119888089469,
     "totalPersonalLoans": 0,
-    "netPersonalTreasury": 120388089469
+    "netPersonalTreasury": 119888089469
   },
   "personalDeposits": [
     {
@@ -254,7 +254,9 @@
         "007431226",
         "007464194",
         "007484215",
-        "007517847"
+        "007517847",
+        "007535213",
+        "007556066"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -302,7 +304,9 @@
         "007431226",
         "007464194",
         "007484215",
-        "007517847"
+        "007517847",
+        "007535213",
+        "007556066"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -337,7 +341,9 @@
         "007431226",
         "007464194",
         "007484215",
-        "007517847"
+        "007517847",
+        "007535213",
+        "007556066"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -388,17 +394,17 @@
       "depositCode": "VPB-PL-NTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "543033162",
-      "principal": 1450000000,
-      "amountOnCertificate": 1450000000,
+      "principal": 950000000,
+      "amountOnCertificate": 950000000,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 1450000000,
+      "unpledgedAmount": 950000000,
       "accruedInterest": 0,
-      "projectedSettlement": 1450000000
+      "projectedSettlement": 950000000
     },
     {
       "owner": "Đặng Thu Thảo",

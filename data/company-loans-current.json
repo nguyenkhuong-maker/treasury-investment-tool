@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-09-03T08:56:15+07:00",
+    "updatedAt": "2026-09-03T15:30:00+07:00",
     "hasHistory": false,
     "source": "Google Sheets / Loan-BIDV / Loan-SC",
     "abbreviationDefinitions": {
@@ -17,12 +17,12 @@
     }
   },
   "summary": {
-    "totalOutstanding": 45990093617,
-    "availableLimit": 26464254306,
-    "bidvAvailableLimit": 19610548308,
-    "scAvailableLimit": 6853705998,
-    "bidvOverdraftAvailableLimit": 15843565206,
-    "bidvWorkingCapitalAvailableLimit": 3766983102
+    "totalOutstanding": 39561793975,
+    "availableLimit": 37986921325,
+    "bidvAvailableLimit": 35026022912,
+    "scAvailableLimit": 2960898413,
+    "bidvOverdraftAvailableLimit": 22477453689,
+    "bidvWorkingCapitalAvailableLimit": 12548569223
   },
   "maturityFocus": [
     {
@@ -541,7 +541,7 @@
       "bank": "Standard Chartered",
       "group": "working-capital",
       "company": "VIHALI",
-      "loanCode": "007517847",
+      "loanCode": "007535213",
       "loanName": "SC VLĐ",
       "disbursementDate": "2026-08-13",
       "maturityDate": "2027-02-11",
@@ -562,7 +562,7 @@
       "bank": "Standard Chartered",
       "group": "working-capital",
       "company": "VIHALI",
-      "loanCode": "007517847",
+      "loanCode": "007556066",
       "loanName": "SC VLĐ",
       "disbursementDate": "2026-08-27",
       "maturityDate": "2027-02-23",

@@ -1,9 +1,9 @@
 window.MONTHLY_PLANS_TEST_DATA = {
   meta: {
     name: "Treasury Monthly Plans Test Index",
-    updatedAt: "2026-08-03T16:02:00+07:00",
+    updatedAt: "2026-09-04T10:58:00+07:00",
     generatedBy: "Vesper",
-    defaultMonth: "2026-08",
+    defaultMonth: "2026-09",
     storageMode: "browser-local-storage-for-test",
     makerEmail: "nguyen.khuong@atherlabs.com",
     designatedApproverEmail: "duc.ho@atherlabs.com",
@@ -20,6 +20,12 @@ window.MONTHLY_PLANS_TEST_DATA = {
     }
   },
   availableMonths: [
+    {
+      key: "2026-09",
+      label: "Tháng 9/2026",
+      periodLabel: "01/09/2026 - 15/10/2026",
+      status: "draft"
+    },
     {
       key: "2026-08",
       label: "Tháng 8/2026",
@@ -52,6 +58,52 @@ window.MONTHLY_PLANS_TEST_DATA = {
     }
   ],
   months: {
+    "2026-09": {
+      monthLabel: "Tháng 9/2026",
+      periodLabel: "01/09/2026 - 15/10/2026",
+      company: {
+        id: "2026-09-company",
+        type: "company",
+        title: "Kế hoạch dòng tiền & hạn mức thấu chi khả dụng",
+        status: "draft",
+        version: "Draft 1",
+        owner: "Finance Team",
+        approver: "CFO",
+        preparedAt: "04/09/2026 11:40 GMT+7",
+        highlights: [
+          { label: "HM khả dụng đầu kỳ", value: "15.844 tỷ VND" },
+          { label: "Tổng thu trong kỳ", value: "18.959 tỷ VND" },
+          { label: "Số dư cuối kỳ", value: "15.261 tỷ VND" },
+          { label: "Thanh khoản", value: "Mỏng nhất 2.295 tỷ ngày 15/09" }
+        ],
+        contentHash: "sha256:test-company-2026-09-draft1",
+        sourceHtml: "./plans/2026-09/company.html",
+        sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 9-2026/KE_HOACH_DONG_TIEN_VA_HAN_MUC_THAU_CHI_KHA_DUNG_01-09-2026_15-10-2026.md"
+      },
+      personal: {
+        id: "2026-09-personal",
+        type: "personal",
+        title: "Kế hoạch quản lý Individual Treasury",
+        status: "draft",
+        version: "Draft 1",
+        owner: "Finance Team",
+        approver: "CFO",
+        preparedAt: "04/09/2026 10:58 GMT+7",
+        highlights: [
+          { label: "Tổng tiền gửi/giấy tờ có giá", value: "119.827 tỷ VND" },
+          { label: "Thanh khoản đầu kỳ", value: "1.736 tỷ VND" },
+          { label: "Tổng đáo hạn trong kỳ", value: "25.651 tỷ VND" },
+          { label: "VPB5678 cuối kỳ", value: "0.000 tỷ VND" }
+        ],
+        contentHash: "sha256:test-personal-2026-09-draft1",
+        sourceHtml: "./plans/2026-09/personal.html?v=20260904-1058",
+        sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 9-2026/KE_HOACH_QUAN_LY_INDIVIDUAL_TREASURY_01-09-2026_15-10-2026.md"
+      },
+      automationPreview: {
+        nextDraftWindow: "25-28 hằng tháng",
+        expectedOutput: "Draft công ty và cá nhân tháng 9 đã dựng từ live sheet để anh Nguyên rà trước khi chốt / trình CFO."
+      }
+    },
     "2026-08": {
       monthLabel: "Tháng 8/2026",
       periodLabel: "01/08/2026 - 15/09/2026",

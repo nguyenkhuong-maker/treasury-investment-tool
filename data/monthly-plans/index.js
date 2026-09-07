@@ -69,12 +69,12 @@ window.MONTHLY_PLANS_TEST_DATA = {
         version: "Draft 1",
         owner: "Finance Team",
         approver: "CFO",
-        preparedAt: "04/09/2026 11:40 GMT+7",
+        preparedAt: "07/09/2026 11:32 GMT+7",
         highlights: [
           { label: "HM khả dụng đầu kỳ", value: "15.844 tỷ VND" },
-          { label: "Tổng thu trong kỳ", value: "18.959 tỷ VND" },
-          { label: "Số dư cuối kỳ", value: "15.261 tỷ VND" },
-          { label: "Thanh khoản", value: "Mỏng nhất 2.295 tỷ ngày 15/09" }
+          { label: "HM cấp thêm/tái cấp", value: "19.581 tỷ VND" },
+          { label: "Số dư cuối kỳ", value: "15.884 tỷ VND" },
+          { label: "Thanh khoản", value: "Mỏng nhất 2.917 tỷ ngày 15/09" }
         ],
         contentHash: "sha256:test-company-2026-09-draft1",
         sourceHtml: "./plans/2026-09/company.html",
@@ -88,15 +88,15 @@ window.MONTHLY_PLANS_TEST_DATA = {
         version: "Draft 1",
         owner: "Finance Team",
         approver: "CFO",
-        preparedAt: "04/09/2026 10:58 GMT+7",
+        preparedAt: "07/09/2026 11:32 GMT+7",
         highlights: [
           { label: "Tổng tiền gửi/giấy tờ có giá", value: "119.827 tỷ VND" },
           { label: "Thanh khoản đầu kỳ", value: "1.736 tỷ VND" },
           { label: "Tổng đáo hạn trong kỳ", value: "25.651 tỷ VND" },
-          { label: "VPB5678 cuối kỳ", value: "0.000 tỷ VND" }
+          { label: "VPB5678 cuối kỳ", value: "0.732 tỷ VND" }
         ],
         contentHash: "sha256:test-personal-2026-09-draft1",
-        sourceHtml: "./plans/2026-09/personal.html?v=20260904-1058",
+        sourceHtml: "./plans/2026-09/personal.html?v=20260907-1132",
         sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 9-2026/KE_HOACH_QUAN_LY_INDIVIDUAL_TREASURY_01-09-2026_15-10-2026.md"
       },
       automationPreview: {

@@ -56,14 +56,14 @@ window.MONTHLY_PLANS_LIVE_DATA = {
         type: "company",
         title: "Kế hoạch dòng tiền & hạn mức thấu chi khả dụng",
         version: "Draft 1",
-        preparedAt: "04/09/2026 11:40 GMT+7",
+        preparedAt: "07/09/2026 11:32 GMT+7",
         status: "ready_for_cfo",
         allowSendToCfo: true,
         highlights: [
           { label: "HM khả dụng đầu kỳ", value: "15.844 tỷ VND" },
-          { label: "Tổng thu trong kỳ", value: "18.959 tỷ VND" },
-          { label: "Số dư cuối kỳ", value: "15.261 tỷ VND" },
-          { label: "Thanh khoản", value: "Mỏng nhất 2.295 tỷ ngày 15/09" }
+          { label: "HM cấp thêm/tái cấp", value: "19.581 tỷ VND" },
+          { label: "Số dư cuối kỳ", value: "15.884 tỷ VND" },
+          { label: "Thanh khoản", value: "Mỏng nhất 2.917 tỷ ngày 15/09" }
         ],
         sourceHtml: "./plans/2026-09/company.html",
         sourcePdf: "./plans/2026-09/company.html",
@@ -74,17 +74,17 @@ window.MONTHLY_PLANS_LIVE_DATA = {
         type: "personal",
         title: "Kế hoạch ngân quỹ CÁ NHÂN",
         version: "Draft 1",
-        preparedAt: "04/09/2026 16:52 GMT+7",
+        preparedAt: "07/09/2026 11:32 GMT+7",
         status: "ready_for_cfo",
         allowSendToCfo: true,
         highlights: [
           { label: "Tổng tiền gửi/giấy tờ có giá", value: "119.827 tỷ VND" },
           { label: "Thanh khoản đầu kỳ", value: "1.736 tỷ VND" },
           { label: "Tổng đáo hạn trong kỳ", value: "25.651 tỷ VND" },
-          { label: "VPB5678 cuối kỳ", value: "0.000 tỷ VND" }
+          { label: "VPB5678 cuối kỳ", value: "0.732 tỷ VND" }
         ],
-        sourceHtml: "./plans/2026-09/personal.html?v=20260904-1058",
-        sourcePdf: "./plans/2026-09/personal.html?v=20260904-1058",
+        sourceHtml: "./plans/2026-09/personal.html?v=20260907-1132",
+        sourcePdf: "./plans/2026-09/personal.html?v=20260907-1132",
         timeline: []
       }
     },

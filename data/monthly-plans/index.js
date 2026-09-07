@@ -77,7 +77,7 @@ window.MONTHLY_PLANS_TEST_DATA = {
           { label: "Thanh khoản", value: "Mỏng nhất 1.749 tỷ ngày 15/09" }
         ],
         contentHash: "sha256:test-company-2026-09-draft1",
-        sourceHtml: "./plans/2026-09/company.html?v=20260907-1308",
+        sourceHtml: "./plans/2026-09/company.html?v=20260907-1336",
         sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 9-2026/KE_HOACH_DONG_TIEN_VA_HAN_MUC_THAU_CHI_KHA_DUNG_01-09-2026_15-10-2026.md"
       },
       personal: {
@@ -96,7 +96,7 @@ window.MONTHLY_PLANS_TEST_DATA = {
           { label: "VPB5678 cuối kỳ", value: "0.732 tỷ VND" }
         ],
         contentHash: "sha256:test-personal-2026-09-draft1",
-        sourceHtml: "./plans/2026-09/personal.html?v=20260907-1308",
+        sourceHtml: "./plans/2026-09/personal.html?v=20260907-1336",
         sourceMarkdown: "../Kế hoạch ngân quỹ/Tháng 9-2026/KE_HOACH_QUAN_LY_INDIVIDUAL_TREASURY_01-09-2026_15-10-2026.md"
       },
       automationPreview: {

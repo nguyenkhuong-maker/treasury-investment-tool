@@ -65,8 +65,8 @@ window.MONTHLY_PLANS_LIVE_DATA = {
           { label: "Số dư cuối kỳ", value: "14.715 tỷ VND" },
           { label: "Thanh khoản", value: "Mỏng nhất 1.749 tỷ ngày 15/09" }
         ],
-        sourceHtml: "./plans/2026-09/company.html?v=20260907-1308",
-        sourcePdf: "./plans/2026-09/company.html?v=20260907-1308",
+        sourceHtml: "./plans/2026-09/company.html?v=20260907-1336",
+        sourcePdf: "./plans/2026-09/company.html?v=20260907-1336",
         timeline: []
       },
       personal: {
@@ -83,8 +83,8 @@ window.MONTHLY_PLANS_LIVE_DATA = {
           { label: "Tổng đáo hạn trong kỳ", value: "25.651 tỷ VND" },
           { label: "VPB5678 cuối kỳ", value: "0.732 tỷ VND" }
         ],
-        sourceHtml: "./plans/2026-09/personal.html?v=20260907-1308",
-        sourcePdf: "./plans/2026-09/personal.html?v=20260907-1308",
+        sourceHtml: "./plans/2026-09/personal.html?v=20260907-1336",
+        sourcePdf: "./plans/2026-09/personal.html?v=20260907-1336",
         timeline: []
       }
     },

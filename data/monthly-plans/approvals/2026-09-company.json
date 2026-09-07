@@ -7,9 +7,9 @@
   "approverEmail": "duc.ho@atherlabs.com",
   "version": "Draft 1",
   "contentHash": "2026-09-company:Draft 1",
-  "status": "revision_requested",
+  "status": "pending_cfo_review",
+  "submittedAt": "2026-09-07T04:47:09.378Z",
   "channel": "google_apps_script_mail",
-  "reviewedAt": "2026-09-07T04:21:47.286Z",
-  "title": "K? ho?ch d?ng ti?n & h?n m?c th?u chi kh? d?ng",
-  "planUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/plans/2026-09/company.html"
+  "planUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/plans/2026-09/company.html",
+  "title": "K? ho?ch d?ng ti?n & h?n m?c th?u chi kh? d?ng"
 }

@@ -1,7 +1,7 @@
 window.MONTHLY_PLANS_LIVE_DATA = {
   meta: {
     name: "Treasury Monthly Plans Live Index",
-    updatedAt: "2026-09-04T16:52:00+07:00",
+    updatedAt: "2026-10-01T15:57:00+07:00",
     defaultMonth: "2026-09",
     reviewTestEmail: "duc.ho@atherlabs.com",
     slackApprovalTarget: {
@@ -16,6 +16,11 @@ window.MONTHLY_PLANS_LIVE_DATA = {
     }
   },
   availableMonths: [
+    {
+      key: "2026-10",
+      label: "Th\u00e1ng 10/2026",
+      periodLabel: "01/10/2026 - 15/11/2026"
+    },
     {
       key: "2026-09",
       label: "Tháng 9/2026",
@@ -48,6 +53,34 @@ window.MONTHLY_PLANS_LIVE_DATA = {
     }
   ],
   months: {
+    "2026-10": {
+      monthLabel: "Th\u00e1ng 10/2026",
+      periodLabel: "01/10/2026 - 15/11/2026",
+      company: {
+        id: "2026-10-company", type: "company",
+        title: "K\u1ebf ho\u1ea1ch d\u00f2ng ti\u1ec1n & h\u1ea1n m\u1ee9c th\u1ea5u chi kh\u1ea3 d\u1ee5ng",
+        version: "Draft 3", preparedAt: "01/10/2026 15:57 GMT+7", status: "draft", allowSendToCfo: false,
+        highlights: [
+          { label: "HM kh\u1ea3 d\u1ee5ng BIDV \u0111\u1ea7u k\u1ef3", value: "15.288 t\u1ef7 VND" },
+          { label: "Thu DOPA", value: "0 VND" },
+          { label: "Chi \u0111\u00e1o h\u1ea1n k\u1ef3", value: "3.488 t\u1ef7 VND" },
+          { label: "HM cu\u1ed1i k\u1ef3", value: "11.800 t\u1ef7 VND" }
+        ],
+        sourceHtml: "./plans/2026-10/company.html", sourcePdf: "./plans/2026-10/company.html", timeline: []
+      },
+      personal: {
+        id: "2026-10-personal", type: "personal",
+        title: "K\u1ebf ho\u1ea1ch qu\u1ea3n l\u00fd Individual Treasury",
+        version: "Draft 3", preparedAt: "01/10/2026 15:57 GMT+7", status: "draft", allowSendToCfo: false,
+        highlights: [
+          { label: "T\u1ed5ng ti\u1ec1n g\u1eedi/gi\u1ea5y t\u1edd c\u00f3 gi\u00e1", value: "116.382 t\u1ef7 VND" },
+          { label: "Thanh kho\u1ea3n \u0111\u1ea7u k\u1ef3", value: "4.097 t\u1ef7 VND" },
+          { label: "\u0110\u00e1o h\u1ea1n trong k\u1ef3", value: "26.388 t\u1ef7 VND" },
+          { label: "Chi Opex + CP nh\u00e2n vi\u00ean", value: "1.700 t\u1ef7 VND" }
+        ],
+        sourceHtml: "./plans/2026-10/personal.html", sourcePdf: "./plans/2026-10/personal.html", timeline: []
+      }
+    },
     "2026-09": {
       monthLabel: "Tháng 9/2026",
       periodLabel: "01/09/2026 - 15/10/2026",

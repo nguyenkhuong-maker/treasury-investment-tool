@@ -1,16 +1,26 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-09-15T13:00:30+07:00",
-    "source": "Google Sheets / Dashboard-fix",
+    "updatedAt": "2026-10-01T13:00:21+07:00",
+    "source": "Google Sheets live export 2026-10-01T06:00:03.260Z",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
-    "status": "updated_from_live_online_sheet"
+    "status": "updated_from_live_online_sheet",
+    "liveSource": {
+      "type": "google-sheets-live-export",
+      "generatedAt": "2026-10-01T06:00:03.260Z",
+      "workbookIds": [
+        "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
+        "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ"
+      ],
+      "sheets": "Loan-BIDV (gid 1186104758) / Loan-SC (gid 2025947730) / Dashboard-fix (gid 1112915361)",
+      "rule": "Always refresh via scripts/fetch_treasury_online_data.mjs before building a new monthly plan; do not use a prior tmp export or hand-edited JSON as source."
+    }
   },
   "summary": {
-    "totalPersonalDeposits": 118772116388,
+    "totalPersonalDeposits": 116381555469,
     "totalPersonalLoans": 0,
-    "netPersonalTreasury": 118772116388
+    "netPersonalTreasury": 116381555469
   },
   "personalDeposits": [
     {
@@ -107,10 +117,10 @@
       "accruedInterest": 240000000,
       "projectedSettlement": 3240000000,
       "linkedLoanCodes": [
-        "406004639406",
         "404004807798",
         "400004871689",
-        "406004974623"
+        "406004974623",
+        "402005414934"
       ],
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 817018585429 + tín chấp",
       "mappingNote": "Đang bảo đảm cho toàn bộ cụm vay vốn lưu động BIDV theo quyết định mapping mới; sổ 810004228033 đã được rút khỏi cụm này.",
@@ -274,7 +284,8 @@
         "007484215",
         "007517847",
         "007535213",
-        "007556066"
+        "007556066",
+        "007577594"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -289,15 +300,15 @@
       "certificateNumber": "44-1470100-06",
       "principal": 9544500000,
       "amountOnCertificate": 9544500000,
-      "interestRate": 5.7,
-      "openDate": "2025-09-25",
-      "maturityDate": "2026-09-25",
+      "interestRate": 8.2,
+      "openDate": "2026-09-25",
+      "maturityDate": "2027-09-25",
       "interestPayoutType": "Cuối kỳ",
       "pledged": true,
       "pledgedAmount": 9544500000,
       "unpledgedAmount": 0,
-      "accruedInterest": 544036500,
-      "projectedSettlement": 10088536500,
+      "accruedInterest": 782649000,
+      "projectedSettlement": 10327149000,
       "linkedLoanCodes": [
         "007142807",
         "007157673",
@@ -324,7 +335,8 @@
         "007484215",
         "007517847",
         "007535213",
-        "007556066"
+        "007556066",
+        "007577594"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -349,7 +361,6 @@
       "accruedInterest": 235200000,
       "projectedSettlement": 3175200000,
       "linkedLoanCodes": [
-        "007332686",
         "007349292",
         "007365017",
         "007385614",
@@ -360,7 +371,8 @@
         "007484215",
         "007517847",
         "007535213",
-        "007556066"
+        "007556066",
+        "007577594"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -392,17 +404,17 @@
       "depositCode": "VPB-PL-DTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "09388885678",
-      "principal": 2495430601,
-      "amountOnCertificate": 2495430601,
+      "principal": 1604869682,
+      "amountOnCertificate": 1604869682,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 2495430601,
+      "unpledgedAmount": 1604869682,
       "accruedInterest": 0,
-      "projectedSettlement": 2495430601
+      "projectedSettlement": 1604869682
     },
     {
       "owner": "Nguyễn Trung Tín",
@@ -411,17 +423,17 @@
       "depositCode": "VPB-PL-NTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "543033162",
-      "principal": 3877782543,
-      "amountOnCertificate": 3877782543,
+      "principal": 2377782543,
+      "amountOnCertificate": 2377782543,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 3877782543,
+      "unpledgedAmount": 2377782543,
       "accruedInterest": 0,
-      "projectedSettlement": 3877782543
+      "projectedSettlement": 2377782543
     },
     {
       "owner": "Đặng Thu Thảo",

@@ -73,8 +73,8 @@ window.MONTHLY_PLANS_LIVE_DATA = {
         title: "K\u1ebf ho\u1ea1ch qu\u1ea3n l\u00fd Individual Treasury",
         version: "Draft 4", preparedAt: "05/10/2026 10:45 GMT+7", status: "draft", allowSendToCfo: true,
         highlights: [
-          { label: "T\u1ed5ng ti\u1ec1n g\u1eedi/gi\u1ea5y t\u1edd c\u00f3 gi\u00e1", value: "116.382 t\u1ef7 VND" },
-          { label: "Thanh kho\u1ea3n \u0111\u1ea7u k\u1ef3", value: "4.097 t\u1ef7 VND" },
+          { label: "T\u1ed5ng ti\u1ec1n g\u1eedi/gi\u1ea5y t\u1edd c\u00f3 gi\u00e1", value: "115.382 t\u1ef7 VND" },
+          { label: "Thanh kho\u1ea3n \u0111\u1ea7u k\u1ef3", value: "3.097 t\u1ef7 VND" },
           { label: "\u0110\u00e1o h\u1ea1n trong k\u1ef3", value: "26.388 t\u1ef7 VND" },
           { label: "Chi Opex + CP nh\u00e2n vi\u00ean", value: "1.700 t\u1ef7 VND" }
         ],

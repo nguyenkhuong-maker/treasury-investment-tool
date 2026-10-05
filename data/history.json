@@ -2,7 +2,7 @@
   "meta": {
     "name": "Treasury Rate Dashboard Data",
     "timezone": "Asia/Ho_Chi_Minh",
-    "updatedAt": "2026-10-05T13:20:00+07:00",
+    "updatedAt": "2026-10-05T14:04:29+07:00",
     "defaultMonth": "2026-10",
     "defaultWeek": "1",
     "note": "File dữ liệu lịch sử lãi suất theo tháng và tuần 1-2-3-4-5. Có thể cập nhật dần theo thời gian."
@@ -5508,9 +5508,9 @@
         "1": {
           "label": "Tuần 1",
           "available": true,
-          "updatedAt": "2026-10-05T13:20:00+07:00",
+          "updatedAt": "2026-10-05T14:04:29+07:00",
           "summary": {
-            "note": "Cập nhật lãi suất tuần 1 tháng 10/2026 theo yêu cầu anh Nguyên ngày 05/10/2026. Toàn bộ mức lãi suất, chiến lược và ghi chú giữ nguyên theo tuần 4 tháng 09/2026."
+            "note": "Cập nhật lãi suất tuần 1 tháng 10/2026 theo yêu cầu anh Nguyên ngày 05/10/2026. Giữ nguyên theo tuần 4 tháng 09/2026, riêng NCB kỳ hạn 12 tháng điều chỉnh từ 9.50% lên 10.20%/năm (lãi vay cầm cố 12 tháng tương ứng 12.20%/năm)."
           },
           "mediumTerm": {
             "items": [
@@ -5576,7 +5576,7 @@
                 "rates": {
                   "6m": 9.5,
                   "9m": null,
-                  "12m": 9.5
+                  "12m": 10.2
                 },
                 "corpBorrowRate": null,
                 "strategy": "Ưu tiên lợi suất, có thể cầm cố 100% cho vay cá nhân",
@@ -5591,7 +5591,7 @@
                   "loanRates": {
                     "6m": 11.5,
                     "9m": null,
-                    "12m": 11.5
+                    "12m": 12.2
                   }
                 }
               },

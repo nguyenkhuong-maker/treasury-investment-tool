@@ -59,19 +59,19 @@ window.MONTHLY_PLANS_LIVE_DATA = {
       company: {
         id: "2026-10-company", type: "company",
         title: "K\u1ebf ho\u1ea1ch d\u00f2ng ti\u1ec1n & h\u1ea1n m\u1ee9c th\u1ea5u chi kh\u1ea3 d\u1ee5ng",
-        version: "Draft 3", preparedAt: "01/10/2026 15:57 GMT+7", status: "draft", allowSendToCfo: true,
+        version: "Draft 4", preparedAt: "05/10/2026 10:45 GMT+7", status: "draft", allowSendToCfo: true,
         highlights: [
           { label: "HM kh\u1ea3 d\u1ee5ng BIDV \u0111\u1ea7u k\u1ef3", value: "15.288 t\u1ef7 VND" },
           { label: "Thu DOPA", value: "0 VND" },
-          { label: "Chi \u0111\u00e1o h\u1ea1n k\u1ef3", value: "3.488 t\u1ef7 VND" },
-          { label: "HM cu\u1ed1i k\u1ef3", value: "11.800 t\u1ef7 VND" }
+          { label: "Chi \u0111\u00e1o h\u1ea1n k\u1ef3", value: "3.588 t\u1ef7 VND" },
+          { label: "HM cu\u1ed1i k\u1ef3", value: "11.700 t\u1ef7 VND" }
         ],
         sourceHtml: "./plans/2026-10/company.html", sourcePdf: "./plans/2026-10/company.html", timeline: []
       },
       personal: {
         id: "2026-10-personal", type: "personal",
         title: "K\u1ebf ho\u1ea1ch qu\u1ea3n l\u00fd Individual Treasury",
-        version: "Draft 3", preparedAt: "01/10/2026 15:57 GMT+7", status: "draft", allowSendToCfo: true,
+        version: "Draft 4", preparedAt: "05/10/2026 10:45 GMT+7", status: "draft", allowSendToCfo: true,
         highlights: [
           { label: "T\u1ed5ng ti\u1ec1n g\u1eedi/gi\u1ea5y t\u1edd c\u00f3 gi\u00e1", value: "116.382 t\u1ef7 VND" },
           { label: "Thanh kho\u1ea3n \u0111\u1ea7u k\u1ef3", value: "4.097 t\u1ef7 VND" },

@@ -21,6 +21,12 @@ window.MONTHLY_PLANS_TEST_DATA = {
   },
   availableMonths: [
     {
+      key: "2026-10",
+      label: "Tháng 10/2026",
+      periodLabel: "01/10/2026 - 15/11/2026",
+      status: "draft"
+    },
+    {
       key: "2026-09",
       label: "Tháng 9/2026",
       periodLabel: "01/09/2026 - 15/10/2026",
@@ -58,6 +64,12 @@ window.MONTHLY_PLANS_TEST_DATA = {
     }
   ],
   months: {
+    "2026-10": {
+      monthLabel: "Th\u00e1ng 10/2026", periodLabel: "01/10/2026 - 15/11/2026",
+      company: { id: "2026-10-company", type: "company", title: "K\u1ebf ho\u1ea1ch d\u00f2ng ti\u1ec1n & h\u1ea1n m\u1ee9c th\u1ea5u chi kh\u1ea3 d\u1ee5ng", status: "draft", version: "Draft 4", owner: "Finance Team", approver: "CFO", preparedAt: "05/10/2026 10:45 GMT+7", highlights: [ { label: "HM kh\u1ea3 d\u1ee5ng BIDV \u0111\u1ea7u k\u1ef3", value: "15.288 t\u1ef7 VND" }, { label: "Thu DOPA", value: "0 VND" }, { label: "Chi \u0111\u00e1o h\u1ea1n k\u1ef3", value: "3.588 t\u1ef7 VND" }, { label: "HM cu\u1ed1i k\u1ef3", value: "11.700 t\u1ef7 VND" } ], contentHash: "sha256:test-company-2026-10-draft4", sourceHtml: "./plans/2026-10/company.html", sourceMarkdown: "../K\u1ebf ho\u1ea1ch ng\u00e2n qu\u1ef9/Th\u00e1ng 10-2026/KE_HOACH_DONG_TIEN_VA_HAN_MUC_THAU_CHI_KHA_DUNG_01-10-2026_15-11-2026.md" },
+      personal: { id: "2026-10-personal", type: "personal", title: "K\u1ebf ho\u1ea1ch qu\u1ea3n l\u00fd Individual Treasury", status: "draft", version: "Draft 4", owner: "Finance Team", approver: "CFO", preparedAt: "05/10/2026 10:45 GMT+7", highlights: [ { label: "T\u1ed5ng ti\u1ec1n g\u1eedi/gi\u1ea5y t\u1edd c\u00f3 gi\u00e1", value: "116.382 t\u1ef7 VND" }, { label: "Thanh kho\u1ea3n \u0111\u1ea7u k\u1ef3", value: "4.097 t\u1ef7 VND" }, { label: "\u0110\u00e1o h\u1ea1n trong k\u1ef3", value: "26.388 t\u1ef7 VND" }, { label: "D\u01b0 n\u1ee3 vay \u0111\u1ea7u k\u1ef3", value: "0 VND" }, { label: "Chi Opex + CP nh\u00e2n vi\u00ean", value: "1.700 t\u1ef7 VND" } ], contentHash: "sha256:test-personal-2026-10-draft4", sourceHtml: "./plans/2026-10/personal.html", sourceMarkdown: "../K\u1ebf ho\u1ea1ch ng\u00e2n qu\u1ef9/Th\u00e1ng 10-2026/KE_HOACH_QUAN_LY_INDIVIDUAL_TREASURY_01-10-2026_15-11-2026.md" },
+      automationPreview: { nextDraftWindow: "25-28 h\u1eb1ng th\u00e1ng", expectedOutput: "Draft th\u00e1ng 10 sau khi refresh live data; ch\u01b0a tr\u00ecnh CFO." }
+    },
     "2026-09": {
       monthLabel: "Tháng 9/2026",
       periodLabel: "01/09/2026 - 15/10/2026",

@@ -7,9 +7,11 @@
   "approverEmail": "duc.ho@atherlabs.com",
   "version": "Draft 4",
   "contentHash": "2026-10-personal:Draft 4",
-  "status": "pending_cfo_review",
-  "submittedAt": "2026-10-05T03:45:28.180Z",
+  "status": "approved",
   "channel": "google_apps_script_mail",
+  "reviewedAt": "2026-10-07T07:51:33.191Z",
+  "title": "K? ho?ch qu?n l? Individual Treasury",
   "planUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/plans/2026-10/personal.html",
-  "title": "K? ho?ch qu?n l? Individual Treasury"
+  "approvedBy": "duc.ho@atherlabs.com",
+  "approvedAt": "2026-10-07T07:51:33.191Z"
 }

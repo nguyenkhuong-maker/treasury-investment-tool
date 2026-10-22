@@ -1,14 +1,14 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-10-01T13:00:21+07:00",
-    "source": "Google Sheets live export 2026-10-01T06:00:03.260Z",
+    "updatedAt": "2026-10-22T07:37:32+00:00",
+    "source": "Google Sheets live export 2026-10-22T06:00:03.037Z",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet",
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-10-01T06:00:03.260Z",
+      "generatedAt": "2026-10-22T06:00:03.037Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ"
@@ -18,9 +18,9 @@
     }
   },
   "summary": {
-    "totalPersonalDeposits": 116381555469,
+    "totalPersonalDeposits": 112944936126,
     "totalPersonalLoans": 0,
-    "netPersonalTreasury": 116381555469
+    "netPersonalTreasury": 112944936126
   },
   "personalDeposits": [
     {
@@ -120,7 +120,8 @@
         "404004807798",
         "400004871689",
         "406004974623",
-        "402005414934"
+        "402005414934",
+        "401005541941"
       ],
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 817018585429 + tín chấp",
       "mappingNote": "Đang bảo đảm cho toàn bộ cụm vay vốn lưu động BIDV theo quyết định mapping mới; sổ 810004228033 đã được rút khỏi cụm này.",
@@ -139,11 +140,17 @@
       "openDate": "2026-09-10",
       "maturityDate": "2027-09-10",
       "interestPayoutType": "Cuối kỳ",
-      "pledged": false,
-      "pledgedAmount": 0,
-      "unpledgedAmount": 2500000000,
+      "pledged": true,
+      "pledgedAmount": 2500000000,
+      "unpledgedAmount": 0,
       "accruedInterest": 200000000,
-      "projectedSettlement": 2700000000
+      "projectedSettlement": 2700000000,
+      "linkedLoanCodes": [
+        "1440267672"
+      ],
+      "collateralGroupName": "Sổ cá nhân BIDV-TN của Hồ Thị Yến Nhi — 818020135596",
+      "mappingStatus": "confirmed",
+      "mappingNote": "Đang bảo đảm cho khoản vay 1440267672."
     },
     {
       "owner": "Đặng Thu Thảo",
@@ -228,17 +235,17 @@
       "depositCode": "Chứng chỉ tiền gửi 1m",
       "depositType": "Tiết kiệm VND",
       "certificateNumber": "Chứng chỉ tiền gửi 1m",
-      "principal": 6922217457,
+      "principal": 3877217457,
       "amountOnCertificate": 6922217457,
       "interestRate": 7.5,
       "openDate": "2026-09-11",
-      "maturityDate": "2026-10-12",
+      "maturityDate": "2026-11-12",
       "interestPayoutType": "Cuối kỳ",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 6922217457,
-      "accruedInterest": 44093577,
-      "projectedSettlement": 6966311033
+      "unpledgedAmount": 3877217457,
+      "accruedInterest": 49394688,
+      "projectedSettlement": 7010404610
     },
     {
       "owner": "Hồ Thị Yến Nhi",
@@ -285,9 +292,13 @@
         "007517847",
         "007535213",
         "007556066",
-        "007577594"
+        "007577594",
+        "007611201",
+        "007619264",
+        "007626477",
+        "007632204"
       ],
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
       "mappingStatus": "confirmed"
     },
@@ -336,9 +347,13 @@
         "007517847",
         "007535213",
         "007556066",
-        "007577594"
+        "007577594",
+        "007611201",
+        "007619264",
+        "007626477",
+        "007632204"
       ],
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
       "mappingStatus": "confirmed"
     },
@@ -361,8 +376,6 @@
       "accruedInterest": 235200000,
       "projectedSettlement": 3175200000,
       "linkedLoanCodes": [
-        "007349292",
-        "007365017",
         "007385614",
         "007405487",
         "007419194",
@@ -372,9 +385,13 @@
         "007517847",
         "007535213",
         "007556066",
-        "007577594"
+        "007577594",
+        "007611201",
+        "007619264",
+        "007626477",
+        "007632204"
       ],
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
       "mappingStatus": "confirmed"
     },
@@ -404,17 +421,17 @@
       "depositCode": "VPB-PL-DTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "09388885678",
-      "principal": 1604869682,
-      "amountOnCertificate": 1604869682,
+      "principal": 1546032882,
+      "amountOnCertificate": 1546032882,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 1604869682,
+      "unpledgedAmount": 1546032882,
       "accruedInterest": 0,
-      "projectedSettlement": 1604869682
+      "projectedSettlement": 1546032882
     },
     {
       "owner": "Nguyễn Trung Tín",
@@ -423,17 +440,17 @@
       "depositCode": "VPB-PL-NTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "543033162",
-      "principal": 2377782543,
-      "amountOnCertificate": 2377782543,
+      "principal": 2045000000,
+      "amountOnCertificate": 2045000000,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 2377782543,
+      "unpledgedAmount": 2045000000,
       "accruedInterest": 0,
-      "projectedSettlement": 2377782543
+      "projectedSettlement": 2045000000
     },
     {
       "owner": "Đặng Thu Thảo",

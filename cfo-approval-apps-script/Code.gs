@@ -13,7 +13,10 @@ const CONFIG = (() => {
     slackApprovalChannelId: props.getProperty('SLACK_APPROVAL_CHANNEL_ID') || 'C0AT2E4CBDX',
     slackApprovalChannelName: props.getProperty('SLACK_APPROVAL_CHANNEL_NAME') || '#treasury-management',
     slackBotUsername: props.getProperty('SLACK_BOT_USERNAME') || 'vesper_treasury',
-    slackCfoUserId: props.getProperty('SLACK_CFO_USER_ID') || ''
+    slackCfoUserId: props.getProperty('SLACK_CFO_USER_ID') || '',
+    editorCode: props.getProperty('EDITOR_CODE') || '1993',
+    planInputsPrefix: props.getProperty('PLAN_INPUTS_PREFIX') || 'data/monthly-plans/inputs',
+    contractLinksPath: props.getProperty('CONTRACT_LINKS_PATH') || 'data/contract-links.json'
   };
 })();
 
@@ -47,6 +50,8 @@ function doPost(e) {
     }
 
     const payload = JSON.parse(raw || '{}');
+    if (payload.action === 'savePlanInputs') return jsonResponse({ ok: true, result: savePlanInputs(payload) });
+    if (payload.action === 'saveContractLink') return jsonResponse({ ok: true, result: saveContractLink(payload) });
     const reviewChannel = payload.reviewChannel || payload.channel || 'mail';
     const result = reviewChannel === 'slack'
       ? submitPlanToSlack(payload)
@@ -251,6 +256,7 @@ function applyReviewAction(record, action, options) {
     status,
     channel: options && options.source === 'slack_interactive' ? 'slack_interactive' : record.channel,
     reviewedAt: now,
+    submittedAt: record.submittedAt || null,
     title: record.title,
     planUrl: record.planUrl,
     indexUrl: record.indexUrl,
@@ -402,14 +408,27 @@ function upsertGitHubApproval(payload) {
     headers: { Authorization: `Bearer ${CONFIG.githubToken}`, Accept: 'application/vnd.github+json' },
     muteHttpExceptions: true
   });
+  let previousHistory = [];
   if (getRes.getResponseCode() === 200) {
     const existing = JSON.parse(getRes.getContentText());
     sha = existing.sha;
+    try {
+      const previous = JSON.parse(Utilities.newBlob(Utilities.base64Decode(existing.content.replace(/\n/g, ''))).getDataAsString('UTF-8'));
+      previousHistory = Array.isArray(previous.history) ? previous.history : [];
+    } catch (err) {
+      previousHistory = [];
+    }
   }
+  // Lịch sử trình/duyệt để dashboard vẽ timeline
+  payload.history = previousHistory.concat([{
+    at: payload.reviewedAt || payload.submittedAt || new Date().toISOString(),
+    status: payload.status,
+    version: payload.version
+  }]);
 
   const body = {
     message: `Update approval status for ${payload.planId}`,
-    content: Utilities.base64Encode(JSON.stringify(payload, null, 2)),
+    content: Utilities.base64Encode(JSON.stringify(payload, null, 2), Utilities.Charset.UTF_8),
     branch: CONFIG.githubBranch
   };
   if (sha) body.sha = sha;
@@ -502,4 +521,83 @@ function escapeHtml(text) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+
+/* ---------- Dashboard: lưu nhập liệu kế hoạch và link hợp đồng ---------- */
+
+function assertEditor(payload) {
+  if (!payload || String(payload.editorCode || '') !== String(CONFIG.editorCode)) {
+    throw new Error('Mã người lập không đúng.');
+  }
+}
+
+function githubGetJson(path) {
+  const url = `https://api.github.com/repos/${CONFIG.githubOwner}/${CONFIG.githubRepo}/contents/${encodeURIComponent(path)}?ref=${CONFIG.githubBranch}`;
+  const res = UrlFetchApp.fetch(url, {
+    method: 'get',
+    headers: { Authorization: `Bearer ${CONFIG.githubToken}`, Accept: 'application/vnd.github+json' },
+    muteHttpExceptions: true
+  });
+  if (res.getResponseCode() !== 200) return { sha: null, json: null };
+  const meta = JSON.parse(res.getContentText());
+  const text = Utilities.newBlob(Utilities.base64Decode(meta.content.replace(/\n/g, ''))).getDataAsString('UTF-8');
+  return { sha: meta.sha, json: JSON.parse(text) };
+}
+
+function githubPutJson(path, obj, message, sha) {
+  if (!CONFIG.githubToken) throw new Error('Thiếu GITHUB_TOKEN trong Script Properties.');
+  const url = `https://api.github.com/repos/${CONFIG.githubOwner}/${CONFIG.githubRepo}/contents/${encodeURIComponent(path)}`;
+  const body = {
+    message,
+    content: Utilities.base64Encode(JSON.stringify(obj, null, 2) + '\n', Utilities.Charset.UTF_8),
+    branch: CONFIG.githubBranch
+  };
+  if (sha) body.sha = sha;
+  const res = UrlFetchApp.fetch(url, {
+    method: 'put',
+    contentType: 'application/json',
+    headers: { Authorization: `Bearer ${CONFIG.githubToken}`, Accept: 'application/vnd.github+json' },
+    payload: JSON.stringify(body),
+    muteHttpExceptions: true
+  });
+  if (res.getResponseCode() >= 300) throw new Error(`GitHub update failed: ${res.getResponseCode()} ${res.getContentText()}`);
+  return JSON.parse(res.getContentText());
+}
+
+function savePlanInputs(payload) {
+  assertEditor(payload);
+  const month = String(payload.month || '');
+  if (!/^\d{4}-\d{2}$/.test(month)) throw new Error('Tháng kế hoạch không hợp lệ.');
+  const inputs = payload.inputs || {};
+  const path = `${CONFIG.planInputsPrefix}/${month}.json`;
+  const current = githubGetJson(path);
+  const saved = Object.assign({}, inputs, {
+    month,
+    updatedAt: new Date().toISOString(),
+    updatedBy: CONFIG.makerEmail
+  });
+  githubPutJson(path, saved, `Update plan inputs for ${month}`, current.sha);
+  const indexPath = `${CONFIG.planInputsPrefix}/index.json`;
+  const index = githubGetJson(indexPath);
+  const months = (index.json && Array.isArray(index.json.months)) ? index.json.months : [];
+  if (months.indexOf(month) === -1) {
+    githubPutJson(indexPath, { months: months.concat([month]).sort() }, `Add plan month ${month}`, index.sha);
+  }
+  return { month, updatedAt: saved.updatedAt, version: saved.version || null };
+}
+
+function saveContractLink(payload) {
+  assertEditor(payload);
+  const code = String(payload.code || '').trim();
+  const url = String(payload.url || '').trim();
+  if (!code) throw new Error('Thiếu mã khế ước.');
+  if (url && !/^https:\/\//.test(url)) throw new Error('Link hợp đồng phải bắt đầu bằng https://');
+  const current = githubGetJson(CONFIG.contractLinksPath);
+  const data = current.json || { links: {} };
+  data.links = data.links || {};
+  if (url) data.links[code] = url; else delete data.links[code];
+  data.updatedAt = new Date().toISOString();
+  githubPutJson(CONFIG.contractLinksPath, data, `Update contract link for ${code}`, current.sha);
+  return { code, url };
 }

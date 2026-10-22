@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Treasury Monthly Plans</title>
+  <style>
+    :root {
+      --navy:#0b1f4b;
+      --navy-2:#1e3a8a;
+      --navy-3:#2d4faa;
+      --bg:#f1f5f9;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --line:#e2e8f0;
+      --line-2:#cbd5e1;
+      --ok:#15803d;
+      --warn:#a16207;
+      --soft-blue:#eff6ff;
+      --soft-gold:#fffbeb;
+      --soft-green:#f0fdf4;
+      --soft-red:#fef2f2;
+      --soft-slate:#f8fafc;
+      --accent:#3b82f6;
+      --accent-hover:#2563eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap { max-width: 1520px; margin: 0 auto; padding: 24px; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0b1f4b 0%, #1e3a8a 55%, #2563eb 100%);
+      color: #fff;
+      border-radius: 20px;
+      padding: 24px 28px;
+      box-shadow: 0 20px 60px rgba(11,31,75,.22);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .hero-icon {
+      width: 52px; height: 52px; flex-shrink: 0;
+      background: rgba(255,255,255,.13);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+    }
+    .hero-text h1 { margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -.3px; }
+    .hero-text p  { margin: 6px 0 0; color: rgba(255,255,255,.78); font-size: 13.5px; line-height: 1.6; }
+
+    /* ── TOOLBAR ── */
+    .toolbar {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 14px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 12px rgba(15,23,42,.05);
+      align-items: center;
+    }
+    .field label {
+      display: block; margin-bottom: 8px;
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .07em;
+    }
+    select {
+      width: 100%; padding: 11px 14px;
+      border: 1.5px solid var(--line-2); border-radius: 12px;
+      background: #f8fafc; font: inherit; font-size: 14px; color: var(--text);
+      cursor: pointer;
+      transition: border-color .15s;
+    }
+    select:focus { outline: none; border-color: var(--accent); }
+    .toolbar-note {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px; border-radius: 12px;
+      background: var(--soft-blue); border: 1px solid #bfdbfe;
+      color: #1e40af; font-size: 13px; line-height: 1.6;
+    }
+    .toolbar-note-icon { font-size: 18px; flex-shrink: 0; }
+
+    /* ── PLAN GRID ── */
+    .plans {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: start;
+    }
+    .plan-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(15,23,42,.07);
+      transition: box-shadow .2s;
+    }
+    .plan-card:hover { box-shadow: 0 8px 36px rgba(15,23,42,.11); }
+
+    /* ── PLAN HEADER ── */
+    .plan-head {
+      padding: 22px 22px 18px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #fafcff 0%, #fff 100%);
+    }
+    .plan-title-row { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    .plan-title {
+      margin: 0; font-size: 20px; font-weight: 800;
+      color: var(--navy); letter-spacing: -.2px;
+    }
+    .plan-meta { margin-top: 5px; font-size: 13px; color: var(--muted); }
+    .badges, .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .badges { margin-top: 10px; }
+
+    /* ── BADGES ── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 11px; border-radius: 999px;
+      font-size: 12px; font-weight: 700; line-height: 1;
+    }
+    .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .badge.blue   { background: var(--soft-blue);  color: #1d4ed8; }
+    .badge.blue::before   { background: #3b82f6; }
+    .badge.gold   { background: var(--soft-gold);  color: #92400e; }
+    .badge.gold::before   { background: #f59e0b; }
+    .badge.green  { background: var(--soft-green); color: #166534; }
+    .badge.green::before  { background: #22c55e; }
+    .badge.red    { background: var(--soft-red);   color: #991b1b; }
+    .badge.red::before    { background: #ef4444; }
+    .badge.gray   { background: #f1f5f9; color: #475569; }
+    .badge.gray::before   { background: #94a3b8; }
+
+    /* ── HIGHLIGHTS ── */
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+      align-items: stretch;
+    }
+    .highlight {
+      align-self: stretch;
+      min-height: 88px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 13px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .highlight .label { font-size: 11.5px; color: var(--muted); font-weight: 500; }
+    .highlight .value { margin-top: 6px; font-weight: 800; font-size: 15px; color: var(--navy); }
+    .metric-list { margin-top: 8px; display: grid; gap: 7px; }
+    .metric-row {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 12px;
+    }
+    .metric-row .metric-label { font-size: 12px; color: var(--muted); }
+    .metric-row .metric-value { font-size: 14px; font-weight: 800; text-align: right; color: var(--navy); }
+    .metric-row .metric-value.green { color: #15803d; }
+    .metric-row .metric-value.red   { color: #b91c1c; }
+
+    /* ── HEAD ACTIONS ── */
+    .head-actions { margin-top: 16px; }
+    .helper-note  { margin-top: 8px; font-size: 12px; color: var(--muted); }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 20px 22px;
+      border-top: 1px solid var(--line);
+    }
+    .section-title {
+      display: flex; align-items: center; gap: 8px;
+      margin: 0 0 14px;
+      font-size: 13.5px; font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    .section-title .icon {
+      width: 28px; height: 28px;
+      background: var(--soft-blue);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+
+    /* ── CFO PANEL (merged status + log) ── */
+    .cfo-panel {
+      background: linear-gradient(135deg, #f0f7ff 0%, #fafcff 100%);
+      border: 1.5px solid #bfdbfe;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .cfo-panel-top {
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      border-bottom: 1px dashed #bfdbfe;
+    }
+    .cfo-stat { }
+    .cfo-stat-label {
+      font-size: 10.5px; font-weight: 700; color: #93c5fd;
+      text-transform: uppercase; letter-spacing: .07em;
+      margin-bottom: 6px;
+    }
+    .cfo-stat-body { font-size: 13.5px; line-height: 1.5; color: var(--text); }
+    .cfo-stat-body strong { color: var(--navy); }
+    .cfo-divider { width: 1px; background: #bfdbfe; margin: 0; }
+
+    /* CFO Timeline inside panel */
+    .cfo-log { padding: 14px 16px; }
+    .cfo-log-label {
+      font-size: 10.5px; font-weight: 700; color: #64748b;
+      text-transform: uppercase; letter-spacing: .07em;
+      margin-bottom: 10px;
+    }
+    .cfo-timeline { display: grid; gap: 8px; }
+    .cfo-timeline-item {
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .cfo-timeline-dot-col {
+      display: flex; flex-direction: column; align-items: center; padding-top: 3px;
+    }
+    .cfo-timeline-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+      box-shadow: 0 0 0 3px #dbeafe;
+    }
+    .cfo-timeline-line {
+      width: 1px; flex: 1; min-height: 16px;
+      background: #bfdbfe; margin-top: 4px;
+    }
+    .cfo-timeline-content { flex: 1; padding-bottom: 6px; }
+    .cfo-timeline-label {
+      font-size: 13px; font-weight: 700; color: var(--navy);
+    }
+    .cfo-timeline-time {
+      font-size: 11px; color: var(--muted); margin-top: 2px;
+    }
+    .cfo-timeline-note {
+      font-size: 12.5px; color: var(--text); margin-top: 4px;
+      line-height: 1.5;
+    }
+    .cfo-log-empty {
+      font-size: 13px; color: var(--muted);
+      font-style: italic; padding: 4px 0;
+    }
+
+    /* ── IFRAME ── */
+    .iframe-wrap { background: #f1f5f9; padding: 16px; }
+    iframe {
+      width: 100%; min-height: 920px;
+      border: 1px solid var(--line); border-radius: 16px;
+      background: #fff;
+    }
+
+    /* ── BUTTONS ── */
+    .btn, button.btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      text-decoration: none; padding: 10px 18px; border-radius: 12px;
+      border: 1.5px solid var(--line-2); background: #fff; color: var(--navy);
+      font-weight: 700; cursor: pointer; font: inherit; font-size: 13.5px;
+      transition: all .15s;
+    }
+    .btn:hover, button.btn:hover { background: #f1f5f9; border-color: #94a3b8; }
+    .btn.primary, button.btn.primary {
+      background: var(--navy); color: #fff; border-color: var(--navy);
+    }
+    .btn.primary:hover, button.btn.primary:hover { background: var(--navy-3); }
+    .btn.slack, button.btn.slack {
+      background: #4a154b; color: #fff; border-color: #4a154b;
+    }
+    .btn.slack:hover, button.btn.slack:hover { background: #611f69; border-color: #611f69; }
+    .btn.primary:disabled, button.btn.primary:disabled,
+    .btn.slack:disabled, button.btn.slack:disabled,
+    .btn:disabled, button.btn:disabled {
+      opacity: .55; cursor: not-allowed;
+    }
+
+    /* ── DOCS SECTION ── */
+    .doc-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1180px) {
+      .toolbar { grid-template-columns: 1fr; }
+      .plans   { grid-template-columns: 1fr; }
+      .highlights { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .wrap  { padding: 14px; }
+      .hero  { padding: 18px; }
+      .hero-text h1 { font-size: 20px; }
+      .plan-title-row { flex-direction: column; }
+      .cfo-panel-top  { grid-template-columns: 1fr; }
+      iframe { min-height: 760px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero" id="heroBlock">
+      <div class="hero-icon">📅</div>
+      <div class="hero-text">
+        <h1>Kế hoạch ngân quỹ theo tháng</h1>
+        <p>Xem kế hoạch ngân quỹ VIHALI và CÁ NHÂN theo từng tháng, ưu tiên thao tác gọn để đọc nhanh, in báo cáo và trình CFO khi cần.</p>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="field">
+        <label>Tháng kế hoạch</label>
+        <select id="monthSelect"></select>
+      </div>
+      <div class="toolbar-note" id="toolbarNote">
+        <span class="toolbar-note-icon">📋</span>
+        <span></span>
+      </div>
+    </section>
+
+    <section class="plans" id="plans"></section>
+  </div>
+
+  <script>
+    (async function () {
+    async function loadSiteVersion() {
+      try {
+        const res = await fetch('./data/site-version.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error('site-version fetch failed');
+        const data = await res.json();
+        return data.version || String(Date.now());
+      } catch (error) {
+        console.error('loadSiteVersion failed', error);
+        return String(Date.now());
+      }
+    }
+
+    async function loadDataScript(version) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = `./data/monthly-plans/live-index.js?v=${version}`;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.body.appendChild(script);
+      });
+    }
+
+    const siteVersion = await loadSiteVersion();
+    await loadDataScript(siteVersion);
+
+    const DB = window.MONTHLY_PLANS_LIVE_DATA;
+    const monthSelect = document.getElementById('monthSelect');
+    const toolbarNote = document.getElementById('toolbarNote');
+    const plansEl = document.getElementById('plans');
+    const heroBlock = document.getElementById('heroBlock');
+    const CFO_APPROVAL_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyMyXnoXOj4PJ7f5w4fPaXzbt4DpsRfA6mxIWEFV3LeYCKUO0aWle-W20CZxzEjvMhWyA/exec';
+    const REVIEW_TEST_EMAIL = DB.meta.reviewTestEmail || 'duc.ho@atherlabs.com';
+    const REVIEW_SLACK_TARGET = DB.meta.slackApprovalTarget || {
+      channelName: '#treasury-management',
+      channelId: 'C0AT2E4CBDX',
+      botUsername: 'vesper_treasury'
+    };
+    const APPROVAL_CACHE_BUST = siteVersion;
+    const PLAN_ASSET_BUST = siteVersion;
+    const SEND_STATE_VERSION = siteVersion;
+    const LAYOUT_VERSION = '20260423-1851';
+    const APPROVAL_PATHS = [
+      './data/monthly-plans/approvals',
+      './treasury-master-dashboard/data/monthly-plans/approvals'
+    ];
+    const approvalCache = new Map();
+
+    function sendStateKey(planId, delivery) {
+      return `treasury-send-state::${SEND_STATE_VERSION}::${delivery}::${planId}`;
+    }
+
+    function getSendState(planId, delivery) {
+      try {
+        const raw = localStorage.getItem(sendStateKey(planId, delivery));
+        return raw ? JSON.parse(raw) : null;
+      } catch (error) {
+        console.error('getSendState failed', planId, delivery, error);
+        return null;
+      }
+    }
+
+    function setSendState(planId, delivery, state) {
+      try {
+        localStorage.setItem(sendStateKey(planId, delivery), JSON.stringify(state));
+      } catch (error) {
+        console.error('setSendState failed', planId, delivery, error);
+      }
+    }
+
+    function approvalActorLabel(approval) {
+      return approval?.approvedByLabel || approval?.approvedBy || approval?.approverEmail || REVIEW_TEST_EMAIL;
+    }
+
+    function approvalDeliveryLabel(approval) {
+      if (approval?.channel === 'slack_interactive' || approval?.channel === 'slack_channel_notice') {
+        return approval?.slackChannelName || REVIEW_SLACK_TARGET.channelName;
+      }
+      return approval?.approverEmail || REVIEW_TEST_EMAIL;
+    }
+
+    function approvalSubmittedHelper(approval) {
+      if (approval?.channel === 'slack_interactive') {
+        return `Đã gửi Slack review tới ${approvalDeliveryLabel(approval)}, chờ hành động tiếp theo trên Slack.`;
+      }
+      if (approval?.channel === 'slack_channel_notice') {
+        return `Đã gửi thông báo review vào ${approvalDeliveryLabel(approval)}; ai có link đều có thể mở web để duyệt.`;
+      }
+      return `Đã gửi mail review tới ${approvalDeliveryLabel(approval)}, chờ hành động tiếp theo từ CFO.`;
+    }
+
+    function sendButtonMeta(plan, approval, delivery) {
+      const state = getSendState(plan.id, delivery);
+      const approvalStatus = approval?.status || null;
+      const isSlack = delivery === 'slack';
+      const idleLabel = isSlack ? '💬 Gửi CFO qua Slack' : '📨 Gửi CFO qua mail';
+      const sendingLabel = isSlack ? 'Đang gửi Slack...' : 'Đang gửi mail...';
+      const defaultHelper = isSlack
+        ? `Bot ${REVIEW_SLACK_TARGET.botUsername} sẽ gửi 1 thông báo review vào ${REVIEW_SLACK_TARGET.channelName}.`
+        : `Mail phê duyệt hiện tại: ${REVIEW_TEST_EMAIL}`;
+      const revisionHelper = isSlack
+        ? `Đã có yêu cầu điều chỉnh. Anh có thể gửi lại thông báo review vào ${REVIEW_SLACK_TARGET.channelName}.`
+        : `CFO đã yêu cầu điều chỉnh. Anh có thể gửi lại tới ${REVIEW_TEST_EMAIL}.`;
+
+      if (approvalStatus === 'approved') {
+        setSendState(plan.id, delivery, { status: 'approved', updatedAt: Date.now() });
+        return {
+          hidden: true,
+          disabled: true,
+          label: '',
+          helper: defaultHelper
+        };
+      }
+
+      if (approvalStatus === 'revision_requested') {
+        setSendState(plan.id, delivery, { status: 'idle', updatedAt: Date.now() });
+        return {
+          hidden: false,
+          disabled: false,
+          label: idleLabel,
+          helper: revisionHelper
+        };
+      }
+
+      if (approvalStatus === 'pending_cfo_review') {
+        setSendState(plan.id, delivery, { status: 'sent', updatedAt: Date.now() });
+        return {
+          hidden: false,
+          disabled: true,
+          label: 'Đã gửi',
+          helper: approvalSubmittedHelper(approval)
+        };
+      }
+
+      if (state?.status === 'sending') {
+        return {
+          hidden: false,
+          disabled: true,
+          label: sendingLabel,
+          helper: isSlack
+            ? `Đang gửi thông báo review vào ${REVIEW_SLACK_TARGET.channelName}...`
+            : `Đang gửi mail review tới ${REVIEW_TEST_EMAIL}...`
+        };
+      }
+
+      if (state?.status === 'sent') {
+        return {
+          hidden: false,
+          disabled: true,
+          label: 'Đã gửi',
+          helper: isSlack
+            ? `Đã gửi thông báo review vào ${REVIEW_SLACK_TARGET.channelName}; ai có link đều có thể mở web để duyệt.`
+            : `Đã gửi mail review tới ${REVIEW_TEST_EMAIL}, chờ hành động tiếp theo từ CFO.`
+        };
+      }
+
+      return {
+        hidden: false,
+        disabled: false,
+        label: idleLabel,
+        helper: defaultHelper
+      };
+    }
+
+    if (window.self !== window.top) {
+      heroBlock.style.display = 'none';
+      document.body.style.background = '#f8fafc';
+      document.querySelector('.wrap').style.paddingTop = '14px';
+    }
+
+    function buildOptions() {
+      DB.availableMonths.forEach((item) => {
+        const option = document.createElement('option');
+        option.value = item.key;
+        option.textContent = `${item.label} · ${item.periodLabel}`;
+        if (item.key === DB.meta.defaultMonth) option.selected = true;
+        monthSelect.appendChild(option);
+      });
+    }
+
+    function badge(text, kind) {
+      return `<span class="badge ${kind}">${text}</span>`;
+    }
+
+    function formatApprovalTime(iso) {
+      if (!iso) return '';
+      const date = new Date(iso);
+      if (Number.isNaN(date.getTime())) return iso;
+      return new Intl.DateTimeFormat('vi-VN', {
+        timeZone: 'Asia/Ho_Chi_Minh',
+        day: '2-digit', month: '2-digit', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', hour12: false
+      }).format(date).replace(',', '') + ' GMT+7';
+    }
+
+    function approvalStatusMeta(plan, approval) {
+      const status = approval?.status || plan.status;
+      if (status === 'approved')            return { label: 'Đã được CFO duyệt', cls: 'green' };
+      if (status === 'revision_requested')  return { label: 'Cần điều chỉnh',    cls: 'red'   };
+      if (status === 'pending_cfo_review')  return { label: 'Đang chờ CFO duyệt', cls: 'gold' };
+      if (status === 'ready_for_cfo')       return { label: 'Sẵn sàng trình CFO', cls: 'gold' };
+      return { label: 'Bản kế hoạch', cls: 'gray' };
+    }
+
+    function buildTimeline(plan, approval) {
+      if (approval) {
+        const items = [];
+        items.push({
+          at: formatApprovalTime(approval.submittedAt || approval.reviewedAt || approval.approvedAt),
+          label: 'Đã trình CFO',
+          note: approval?.channel === 'slack_interactive'
+            ? `Đã gửi Slack review tới ${approvalDeliveryLabel(approval)}.`
+            : approval?.channel === 'slack_channel_notice'
+              ? `Đã gửi thông báo review vào ${approvalDeliveryLabel(approval)}.`
+              : `Đã gửi mail review tới ${approvalDeliveryLabel(approval)}.`
+        });
+        if (approval.status === 'revision_requested') {
+          items.push({
+            at: formatApprovalTime(approval.reviewedAt),
+            label: 'CFO yêu cầu điều chỉnh',
+            note: `CFO đã phản hồi cần điều chỉnh kế hoạch${approval?.reviewedBySlackUserId ? ' trên Slack' : ''}.`
+          });
+        }
+        if (approval.status === 'approved') {
+          items.push({
+            at: formatApprovalTime(approval.approvedAt || approval.reviewedAt),
+            label: 'CFO duyệt',
+            note: `Kế hoạch đã được ${approvalActorLabel(approval)} duyệt.`
+          });
+        }
+        return items;
+      }
+      return (plan.timeline || []).filter((item) => ['cfo_reviewed', 'approved', 'published'].includes(item.type));
+    }
+
+    /* ── MERGED CFO PANEL (status + log) ── */
+    function renderCfoPanel(plan, approval) {
+      if (!approval && !plan.allowSendToCfo) return '';
+
+      const status = approvalStatusMeta(plan, approval);
+      const timeText = approval?.approvedAt || approval?.reviewedAt || approval?.submittedAt;
+      const latestText = timeText ? formatApprovalTime(timeText) : '—';
+      const actorText = approvalActorLabel(approval);
+
+      const timelineItems = buildTimeline(plan, approval);
+      const timelineHtml = timelineItems.length
+        ? timelineItems.map((item, idx) => `
+            <div class="cfo-timeline-item">
+              <div class="cfo-timeline-dot-col">
+                <div class="cfo-timeline-dot"></div>
+                ${idx < timelineItems.length - 1 ? '<div class="cfo-timeline-line"></div>' : ''}
+              </div>
+              <div class="cfo-timeline-content">
+                <div class="cfo-timeline-label">${item.label}</div>
+                <div class="cfo-timeline-time">${item.at}</div>
+                <div class="cfo-timeline-note">${item.note}</div>
+              </div>
+            </div>
+          `).join('')
+        : `<div class="cfo-log-empty">Chưa có lịch sử hoạt động CFO.</div>`;
+
+      return `
+        <div class="section">
+          <div class="section-title">
+            <span class="icon">🛡️</span>
+            Phê duyệt CFO
+          </div>
+          <div class="cfo-panel">
+            <div class="cfo-panel-top">
+              <div class="cfo-stat">
+                <div class="cfo-stat-label">Trạng thái hiện tại</div>
+                <div class="cfo-stat-body">${badge(status.label, status.cls)}</div>
+              </div>
+              <div class="cfo-stat">
+                <div class="cfo-stat-label">Cập nhật gần nhất</div>
+                <div class="cfo-stat-body">
+                  ${latestText}
+                  ${approval?.status === 'approved' ? `<br/><strong>${actorText}</strong>` : ''}
+                </div>
+              </div>
+            </div>
+            <div class="cfo-log">
+              <div class="cfo-log-label">Lịch sử hoạt động</div>
+              <div class="cfo-timeline">${timelineHtml}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderHighlight(item) {
+      if (item.rows && item.rows.length) {
+        return `
+          <div class="highlight">
+            <div class="label">${item.label}</div>
+            <div class="metric-list">
+              ${item.rows.map((row) => `
+                <div class="metric-row">
+                  <div class="metric-label">${row.label}</div>
+                  <div class="metric-value ${row.tone || ''}">${row.value}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+      return `
+        <div class="highlight">
+          <div class="label">${item.label}</div>
+          <div class="value">${item.value}</div>
+        </div>
+      `;
+    }
+
+    function renderPlan(plan, monthKey, month, approval) {
+      const status = approvalStatusMeta(plan, approval);
+      const sendMetaMail = sendButtonMeta(plan, approval, 'mail');
+      const sendMetaSlack = sendButtonMeta(plan, approval, 'slack');
+      return `
+        <article class="plan-card">
+          <div class="plan-head">
+            <div class="plan-title-row">
+              <div>
+                <h2 class="plan-title">${plan.type === 'company' ? '🏢' : '👤'} ${plan.title}</h2>
+                <div class="plan-meta">${month.monthLabel} · ${month.periodLabel}</div>
+                <div class="badges">
+                  ${badge('Version ' + plan.version, 'gray')}
+                  ${badge(status.label, status.cls)}
+                </div>
+              </div>
+            </div>
+            <div class="highlights">
+              ${plan.highlights.map((item) => renderHighlight(item)).join('')}
+            </div>
+            ${plan.allowSendToCfo && (!sendMetaMail.hidden || !sendMetaSlack.hidden) ? `
+              <div class="head-actions actions">
+                ${!sendMetaMail.hidden ? `<button class="btn primary" data-action="send-cfo-mail" data-plan-id="${plan.id}" ${sendMetaMail.disabled ? 'disabled' : ''}>${sendMetaMail.label}</button>` : ''}
+                ${!sendMetaSlack.hidden ? `<button class="btn slack" data-action="send-cfo-slack" data-plan-id="${plan.id}" ${sendMetaSlack.disabled ? 'disabled' : ''}>${sendMetaSlack.label}</button>` : ''}
+              </div>
+              <div class="helper-note">${!sendMetaMail.hidden ? `Mail: ${sendMetaMail.helper}` : ''}${(!sendMetaMail.hidden && !sendMetaSlack.hidden) ? '<br/>' : ''}${!sendMetaSlack.hidden ? `Slack: ${sendMetaSlack.helper}` : ''}</div>
+            ` : ''}
+          </div>
+
+          ${renderCfoPanel(plan, approval)}
+
+          <div class="iframe-wrap">
+            <iframe src="${plan.sourceHtml}?v=${PLAN_ASSET_BUST}" title="${plan.title}"></iframe>
+          </div>
+
+          <div class="section">
+            <div class="section-title">
+              <span class="icon">📄</span>
+              Tài liệu liên quan
+            </div>
+            <div class="doc-actions">
+              <a class="btn" href="${plan.sourcePdf}?v=${PLAN_ASSET_BUST}" target="_blank" rel="noreferrer">📥 Mở bản PDF</a>
+              <button class="btn" data-action="print-report" data-plan-id="${plan.id}">🖨️ In báo cáo</button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function currentMonth() {
+      return DB.months[monthSelect.value];
+    }
+
+    function currentPlans() {
+      const month = currentMonth();
+      return [month.company, month.personal];
+    }
+
+    function bindActions() {
+      const monthKey = monthSelect.value;
+      const planMap = new Map(currentPlans().map((plan) => [plan.id, plan]));
+
+      document.querySelectorAll('[data-action="print-report"]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const plan = planMap.get(btn.dataset.planId);
+          if (plan) printPlanReport(plan);
+        });
+      });
+
+      document.querySelectorAll('[data-action="send-cfo-mail"]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const plan = planMap.get(btn.dataset.planId);
+          if (plan) await sendPlanApproval(monthKey, plan, 'mail');
+        });
+      });
+
+      document.querySelectorAll('[data-action="send-cfo-slack"]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const plan = planMap.get(btn.dataset.planId);
+          if (plan) await sendPlanApproval(monthKey, plan, 'slack');
+        });
+      });
+    }
+
+    function printPlanReport(plan) {
+      const printWindow = window.open(`${plan.sourceHtml}?v=${PLAN_ASSET_BUST}`, '_blank');
+      if (!printWindow) {
+        alert('Trình duyệt đang chặn popup. Anh cho phép mở tab mới rồi thử lại giúp em nhé.');
+        return;
+      }
+      printWindow.addEventListener('load', () => {
+        setTimeout(() => printWindow.print(), 300);
+      }, { once: true });
+    }
+
+    async function sendPlanApproval(monthKey, plan, delivery) {
+      const isSlack = delivery === 'slack';
+      const payload = {
+        planId: plan.id,
+        month: monthKey,
+        planType: plan.type,
+        title: plan.title,
+        version: plan.version,
+        contentHash: `${plan.id}:${plan.version}`,
+        planUrl: new URL(plan.sourceHtml.replace(/^\.\//, ''), window.location.href).href,
+        indexUrl: window.location.href,
+        reviewChannel: delivery,
+        slackChannelId: REVIEW_SLACK_TARGET.channelId,
+        slackChannelName: REVIEW_SLACK_TARGET.channelName
+      };
+
+      setSendState(plan.id, delivery, {
+        status: 'sending',
+        updatedAt: Date.now()
+      });
+      render();
+
+      try {
+        await fetch(CFO_APPROVAL_WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        const submittedAt = new Date().toISOString();
+        approvalCache.set(plan.id, {
+          planId: plan.id,
+          approverEmail: REVIEW_TEST_EMAIL,
+          status: 'pending_cfo_review',
+          submittedAt,
+          channel: isSlack ? 'slack_channel_notice' : 'google_apps_script_mail',
+          slackChannelId: isSlack ? REVIEW_SLACK_TARGET.channelId : undefined,
+          slackChannelName: isSlack ? REVIEW_SLACK_TARGET.channelName : undefined
+        });
+        setSendState(plan.id, delivery, {
+          status: 'sent',
+          updatedAt: Date.now()
+        });
+        render();
+        alert(isSlack
+          ? `Đã gửi thông báo review vào ${REVIEW_SLACK_TARGET.channelName} cho ${plan.title}. Ai có link trong tin nhắn đều có thể mở web để duyệt.`
+          : `Đã gửi yêu cầu trình CFO cho ${plan.title}. Anh kiểm tra inbox ${REVIEW_TEST_EMAIL} giúp em nhé.`);
+      } catch (error) {
+        console.error(error);
+        setSendState(plan.id, delivery, {
+          status: 'idle',
+          updatedAt: Date.now()
+        });
+        render();
+        alert(isSlack
+          ? 'Không gọi được Apps Script Web App để gửi duyệt qua Slack. Anh thử lại giúp em nhé.'
+          : 'Không gọi được Apps Script Web App. Anh thử lại giúp em nhé.');
+      }
+    }
+
+    /* ── EQUALIZE plan-head heights so both cards are visually aligned ── */
+    let _eqObserver = null;
+
+    function equalizeHeads() {
+      const heads = [...document.querySelectorAll('.plan-head')];
+      if (heads.length < 2) return;
+      /* reset trước để đo natural height */
+      heads.forEach((el) => { el.style.height = ''; });
+      /* force reflow rồi đo */
+      const maxH = Math.max(...heads.map((el) => el.getBoundingClientRect().height));
+      if (maxH > 0) heads.forEach((el) => { el.style.height = maxH + 'px'; });
+    }
+
+    function scheduleEqualize() {
+      /* huỷ observer cũ nếu có */
+      if (_eqObserver) { _eqObserver.disconnect(); _eqObserver = null; }
+
+      /* chạy ngay + sau các mốc timing */
+      requestAnimationFrame(equalizeHeads);
+      setTimeout(equalizeHeads, 150);
+      setTimeout(equalizeHeads, 600);
+      setTimeout(equalizeHeads, 1200);
+
+      /* đảm bảo font tải xong vẫn re-equalize */
+      if (document.fonts?.ready) {
+        document.fonts.ready.then(() => equalizeHeads()).catch(() => {});
+      }
+
+      /* dùng ResizeObserver để tự re-equalize khi content thay đổi kích thước */
+      if (typeof ResizeObserver !== 'undefined') {
+        _eqObserver = new ResizeObserver(() => equalizeHeads());
+        document.querySelectorAll('.plan-head, .highlights, .helper-note').forEach((el) => {
+          if (el) _eqObserver.observe(el);
+        });
+      }
+    }
+
+    /* ── Báo chiều cao thực lên parent index.html để auto-resize iframe ── */
+    function notifyParentHeight() {
+      if (window.parent === window) return;
+      const h = document.documentElement.scrollHeight || document.body.scrollHeight;
+      window.parent.postMessage({ type: 'treasury-iframe-height', height: h }, '*');
+    }
+
+    window.addEventListener('load', function() { equalizeHeads(); notifyParentHeight(); });
+    window.addEventListener('resize', function() { equalizeHeads(); notifyParentHeight(); });
+
+    async function loadApproval(plan) {
+      if (approvalCache.has(plan.id)) return approvalCache.get(plan.id);
+      for (const basePath of APPROVAL_PATHS) {
+        try {
+          const res = await fetch(`${basePath}/${plan.id}.json?v=${APPROVAL_CACHE_BUST}`, { cache: 'no-store' });
+          if (!res.ok) continue;
+          const data = await res.json();
+          approvalCache.set(plan.id, data);
+          return data;
+        } catch (error) {
+          console.error('load approval failed', plan.id, basePath, error);
+        }
+      }
+      approvalCache.set(plan.id, null);
+      return null;
+    }
+
+    async function render() {
+      const monthKey = monthSelect.value;
+      const month = DB.months[monthKey];
+      const noteEl = toolbarNote.querySelector('span:last-child');
+      noteEl.innerHTML = `<strong>${month.monthLabel}</strong> · ${month.periodLabel}<br/>${DB.meta.note}`;
+      const plans = [month.company, month.personal];
+      approvalCache.clear();
+      const approvals = await Promise.all(plans.map((plan) => loadApproval(plan)));
+      plansEl.innerHTML = plans.map((plan, index) => renderPlan(plan, monthKey, month, approvals[index])).join('');
+      bindActions();
+      scheduleEqualize();
+      setTimeout(notifyParentHeight, 700);
+    }
+
+    monthSelect.addEventListener('change', render);
+    buildOptions();
+    render();
+    })();
+  </script>
+</body>
+</html>

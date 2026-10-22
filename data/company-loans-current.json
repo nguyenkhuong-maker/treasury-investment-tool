@@ -1,9 +1,9 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-10-01T13:00:21+07:00",
+    "updatedAt": "2026-10-22T07:37:31+00:00",
     "hasHistory": false,
-    "source": "Google Sheets live export 2026-10-01T06:00:03.260Z",
+    "source": "Google Sheets live export 2026-10-22T06:00:03.037Z",
     "abbreviationDefinitions": {
       "BIDV TN": "BIDV chi nhánh Thống Nhất",
       "BIDV TS": "BIDV chi nhánh Trường Sơn",
@@ -17,7 +17,7 @@
     },
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-10-01T06:00:03.260Z",
+      "generatedAt": "2026-10-22T06:00:03.037Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ"
@@ -27,32 +27,14 @@
     }
   },
   "summary": {
-    "totalOutstanding": 49804074542,
-    "availableLimit": 25150273381,
-    "bidvAvailableLimit": 18623387026,
-    "scAvailableLimit": 6526886355,
-    "bidvOverdraftAvailableLimit": 15287973791,
-    "bidvWorkingCapitalAvailableLimit": 3335413235
+    "totalOutstanding": 52939700646,
+    "availableLimit": 22014647277,
+    "bidvAvailableLimit": 14983810116,
+    "scAvailableLimit": 7030837161,
+    "bidvOverdraftAvailableLimit": 12118531914,
+    "bidvWorkingCapitalAvailableLimit": 2865278202
   },
   "maturityFocus": [
-    {
-      "bank": "Standard Chartered",
-      "loanCode": "007349292",
-      "maturityDate": "2026-10-09",
-      "interestRate": 5.75,
-      "principalOutstanding": 723221694,
-      "projectedSettlement": 743615555,
-      "notes": "Khế ước active."
-    },
-    {
-      "bank": "Standard Chartered",
-      "loanCode": "007365017",
-      "maturityDate": "2026-10-19",
-      "interestRate": 5.75,
-      "principalOutstanding": 2035495088,
-      "projectedSettlement": 2092893261,
-      "notes": "Khế ước active."
-    },
     {
       "bank": "Standard Chartered",
       "loanCode": "007385614",
@@ -68,7 +50,7 @@
       "maturityDate": "2026-11-06",
       "interestRate": 7.8,
       "principalOutstanding": 286952249,
-      "projectedSettlement": 289221137,
+      "projectedSettlement": 288607924,
       "notes": "Khế ước active."
     },
     {
@@ -78,6 +60,24 @@
       "interestRate": 5.75,
       "principalOutstanding": 389289246,
       "projectedSettlement": 400327996,
+      "notes": "Khế ước active."
+    },
+    {
+      "bank": "BIDV",
+      "loanCode": "400004871689",
+      "maturityDate": "2026-11-20",
+      "interestRate": 7.8,
+      "principalOutstanding": 146020720,
+      "projectedSettlement": 146863240,
+      "notes": "Khế ước active."
+    },
+    {
+      "bank": "Standard Chartered",
+      "loanCode": "007419194",
+      "maturityDate": "2026-11-24",
+      "interestRate": 5.75,
+      "principalOutstanding": 2056731530,
+      "projectedSettlement": 2115052547,
       "notes": "Khế ước active."
     }
   ],
@@ -93,8 +93,8 @@
       "interestRate": 7.06,
       "pledgedAccount": "HĐ TGCKH 04-2024/HĐTG",
       "principalOutstanding": 4945475635,
-      "interestPayable": 146423850,
-      "projectedSettlement": 5091899485,
+      "interestPayable": 106849836,
+      "projectedSettlement": 5052325471,
       "availableLimit": 4524365,
       "notes": "Khoản thấu chi TS hiện hữu; hạn mức còn lại lấy theo cột C Hạn mức của sheet Loan-BIDV.",
       "collateralGroupName": "Sổ công ty VIHALI BIDV",
@@ -118,10 +118,10 @@
       "maturityDate": "2027-03-22",
       "interestRate": 8.2,
       "pledgedAccount": "-",
-      "principalOutstanding": 2285000000,
-      "interestPayable": 18993671,
-      "projectedSettlement": 2303993671,
-      "availableLimit": 14515000000,
+      "principalOutstanding": 5121248391,
+      "interestPayable": 31064230,
+      "projectedSettlement": 5152312621,
+      "availableLimit": 11678751609,
       "notes": "Khoản thấu chi mới tại BIDV TN; đang còn dư nợ và còn hạn mức chưa giải ngân.",
       "collateralGroupName": "Sổ cá nhân BIDV của Hồ Thị Yến Nhi",
       "depositCodes": [
@@ -141,12 +141,12 @@
       "loanCode": "8690020465",
       "loanName": "BIDV TS — Thấu chi",
       "disbursementDate": "2026-03-26",
-      "maturityDate": "2027-03-26",
+      "maturityDate": "2027-04-03",
       "interestRate": 7.1,
       "pledgedAccount": "HĐ TGCKH 05-2024/HĐTG",
       "principalOutstanding": 4597224058,
-      "interestPayable": 74629197,
-      "projectedSettlement": 8179591357,
+      "interestPayable": 54459144,
+      "projectedSettlement": 8159421304,
       "availableLimit": 2775942,
       "notes": "Khoản thấu chi TS có dư nợ; hạn mức còn lại lấy theo cột C Hạn mức của sheet Loan-BIDV.",
       "collateralGroupName": "Sổ công ty VIHALI BIDV",
@@ -171,8 +171,8 @@
       "interestRate": 8.3,
       "pledgedAccount": "-",
       "principalOutstanding": 8275000000,
-      "interestPayable": 69623356,
-      "projectedSettlement": 8344623356,
+      "interestPayable": 50806233,
+      "projectedSettlement": 8325806233,
       "availableLimit": 5000000,
       "notes": "H?n m?c th?u chi m?i t?i BIDV TN; ?? ???c c?p, ch?a ghi nh?n gi?i ng?n.",
       "collateralGroupName": "S? c? nh?n BIDV c?a H? Th? Y?n Nhi",
@@ -197,8 +197,8 @@
       "interestRate": 8.3,
       "pledgedAccount": "810004228033",
       "principalOutstanding": 8654174200,
-      "interestPayable": 72813614,
-      "projectedSettlement": 8726987814,
+      "interestPayable": 53134259,
+      "projectedSettlement": 8707308459,
       "availableLimit": 4489089,
       "notes": "Khoản thấu chi còn hiệu lực, hiện chưa có dư nợ.",
       "branchCode": "TN",
@@ -221,16 +221,22 @@
       "disbursementDate": "2026-09-17",
       "maturityDate": "2027-09-12",
       "interestRate": 8.3,
-      "pledgedAccount": "-",
-      "principalOutstanding": 1743815605,
-      "interestPayable": 14671939,
-      "projectedSettlement": 1758487544,
-      "availableLimit": 756184395,
+      "pledgedAccount": "818020135596",
+      "principalOutstanding": 2077009091,
+      "interestPayable": 12752267,
+      "projectedSettlement": 2089761358,
+      "availableLimit": 422990909,
       "notes": "Khoản thấu chi active.",
       "branchCode": "TN",
       "branchName": "BIDV chi nhánh Thống Nhất",
       "reportingGroupCode": "bidv-overdraft-tn",
-      "reportingGroupLabel": "Ngân hàng BIDV — chi nhánh Thống Nhất (nhóm thấu chi)"
+      "reportingGroupLabel": "Ngân hàng BIDV — chi nhánh Thống Nhất (nhóm thấu chi)",
+      "depositCodes": [
+        "818020135596"
+      ],
+      "collateralGroupName": "Sổ cá nhân BIDV 818020135596",
+      "mappingStatus": "confirmed",
+      "mappingNote": "Theo cột STK thế chấp của sheet Loan-BIDV."
     }
   ],
   "bidvWorkingCapital": [
@@ -244,8 +250,8 @@
       "maturityDate": "2026-11-06",
       "interestRate": 7.8,
       "principalOutstanding": 286952249,
-      "interestPayable": 2268888,
-      "projectedSettlement": 289221137,
+      "interestPayable": 1655675,
+      "projectedSettlement": 288607924,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 817018585429 + tín chấp",
       "depositCodes": [
@@ -264,8 +270,8 @@
       "maturityDate": "2026-11-20",
       "interestRate": 7.8,
       "principalOutstanding": 146020720,
-      "interestPayable": 1154564,
-      "projectedSettlement": 147175284,
+      "interestPayable": 842520,
+      "projectedSettlement": 146863240,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 817018585429 + tín chấp",
       "depositCodes": [
@@ -284,8 +290,8 @@
       "maturityDate": "2026-12-11",
       "interestRate": 7.8,
       "principalOutstanding": 577298941,
-      "interestPayable": 4564616,
-      "projectedSettlement": 581863557,
+      "interestPayable": 3330936,
+      "projectedSettlement": 580629877,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 817018585429 + tín chấp",
       "depositCodes": [
@@ -305,9 +311,29 @@
       "interestRate": 8.4,
       "pledgedAccount": "",
       "principalOutstanding": 654314855,
-      "interestPayable": 5571536,
-      "projectedSettlement": 659886391,
+      "interestPayable": 4065715,
+      "projectedSettlement": 658380570,
       "notes": "Kh? ??c active theo live export 30/09/2026.",
+      "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 817018585429 + tín chấp",
+      "depositCodes": [
+        "817018585429"
+      ],
+      "mappingStatus": "confirmed",
+      "mappingNote": "Theo quyết định mapping mới: toàn bộ khoản vay vốn lưu động BIDV được chuyển sang bảo đảm bằng sổ cá nhân BIDV 817018585429; sổ 810004228033 được rút khỏi cụm này."
+    },
+    {
+      "bank": "BIDV",
+      "group": "working-capital",
+      "company": "VIHALI",
+      "loanCode": "401005541941",
+      "loanName": "BIDV VLĐ",
+      "disbursementDate": "2026-10-20",
+      "maturityDate": "2027-04-15",
+      "interestRate": 8.4,
+      "principalOutstanding": 470135033,
+      "interestPayable": 2921277,
+      "projectedSettlement": 473056310,
+      "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 817018585429 + tín chấp",
       "depositCodes": [
         "817018585429"
@@ -321,48 +347,6 @@
       "bank": "Standard Chartered",
       "group": "working-capital",
       "company": "VIHALI",
-      "loanCode": "007349292",
-      "loanName": "SC VLĐ",
-      "disbursementDate": "2026-04-13",
-      "maturityDate": "2026-10-09",
-      "interestRate": 5.75,
-      "principalOutstanding": 723221694,
-      "interestPayable": 20393861,
-      "projectedSettlement": 743615555,
-      "notes": "Khế ước active.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
-      "depositCodes": [
-        "44-1470100-04",
-        "44-1470100-06"
-      ],
-      "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
-    },
-    {
-      "bank": "Standard Chartered",
-      "group": "working-capital",
-      "company": "VIHALI",
-      "loanCode": "007365017",
-      "loanName": "SC VLĐ",
-      "disbursementDate": "2026-04-23",
-      "maturityDate": "2026-10-19",
-      "interestRate": 5.75,
-      "principalOutstanding": 2035495088,
-      "interestPayable": 57398173,
-      "projectedSettlement": 2092893261,
-      "notes": "Khế ước active.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
-      "depositCodes": [
-        "44-1470100-04",
-        "44-1470100-06"
-      ],
-      "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
-    },
-    {
-      "bank": "Standard Chartered",
-      "group": "working-capital",
-      "company": "VIHALI",
       "loanCode": "007385614",
       "loanName": "SC VLĐ",
       "disbursementDate": "2026-05-07",
@@ -372,13 +356,14 @@
       "interestPayable": 9927400,
       "projectedSettlement": 361979977,
       "notes": "Khế ước active.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [
         "44-1470100-04",
-        "44-1470100-06"
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
     },
     {
       "bank": "Standard Chartered",
@@ -393,13 +378,14 @@
       "interestPayable": 11038750,
       "projectedSettlement": 400327996,
       "notes": "Khế ước active.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [
         "44-1470100-04",
-        "44-1470100-06"
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
     },
     {
       "bank": "Standard Chartered",
@@ -414,13 +400,14 @@
       "interestPayable": 58321017,
       "projectedSettlement": 2115052547,
       "notes": "Khế ước active.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [
         "44-1470100-04",
-        "44-1470100-06"
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
     },
     {
       "bank": "Standard Chartered",
@@ -435,13 +422,14 @@
       "interestPayable": 6377614,
       "projectedSettlement": 231288654,
       "notes": "Khế ước active.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [
         "44-1470100-04",
-        "44-1470100-06"
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
     },
     {
       "bank": "Standard Chartered",
@@ -456,13 +444,14 @@
       "interestPayable": 63825134,
       "projectedSettlement": 2327237706,
       "notes": "Khế ước active.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [
         "44-1470100-04",
-        "44-1470100-06"
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
     },
     {
       "bank": "Standard Chartered",
@@ -477,13 +466,14 @@
       "interestPayable": 25797902,
       "projectedSettlement": 935578987,
       "notes": "Khế ước active.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [
         "44-1470100-04",
-        "44-1470100-06"
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
     },
     {
       "bank": "Standard Chartered",
@@ -498,13 +488,14 @@
       "interestPayable": 71878525,
       "projectedSettlement": 2606725060,
       "notes": "Khế ước active.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [
         "44-1470100-04",
-        "44-1470100-06"
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
     },
     {
       "bank": "Standard Chartered",
@@ -519,13 +510,14 @@
       "interestPayable": 18177069,
       "projectedSettlement": 652159885,
       "notes": "Khế ước active.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [
         "44-1470100-04",
-        "44-1470100-06"
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
     },
     {
       "bank": "Standard Chartered",
@@ -540,13 +532,14 @@
       "interestPayable": 65276498,
       "projectedSettlement": 2367297929,
       "notes": "Khế ước active.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [
         "44-1470100-04",
-        "44-1470100-06"
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
     },
     {
       "bank": "Standard Chartered",
@@ -561,13 +554,102 @@
       "interestPayable": 12977935,
       "projectedSettlement": 491457375,
       "notes": "Khế ước active.",
-      "collateralGroupName": "Cụm SC VLĐ — 2 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "depositCodes": [
         "44-1470100-04",
-        "44-1470100-06"
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
       ],
       "mappingStatus": "confirmed",
-      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo bằng 2 sổ cá nhân SC 44-1470100-04 và 44-1470100-06."
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
+    },
+    {
+      "bank": "Standard Chartered",
+      "group": "working-capital",
+      "company": "VIHALI",
+      "loanCode": "007611201",
+      "loanName": "SC VLĐ",
+      "disbursementDate": "2026-10-01",
+      "maturityDate": "2027-03-29",
+      "interestRate": 5.75,
+      "principalOutstanding": 2734573225,
+      "interestPayable": 77111219,
+      "projectedSettlement": 2811684444,
+      "notes": "Khế ước active.",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "depositCodes": [
+        "44-1470100-04",
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
+      ],
+      "mappingStatus": "confirmed",
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
+    },
+    {
+      "bank": "Standard Chartered",
+      "group": "working-capital",
+      "company": "VIHALI",
+      "loanCode": "007619264",
+      "loanName": "SC VLĐ",
+      "disbursementDate": "2026-10-07",
+      "maturityDate": "2027-04-05",
+      "interestRate": 5.75,
+      "principalOutstanding": 854085397,
+      "interestPayable": 24218586,
+      "projectedSettlement": 878303983,
+      "notes": "Khế ước active.",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "depositCodes": [
+        "44-1470100-04",
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
+      ],
+      "mappingStatus": "confirmed",
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
+    },
+    {
+      "bank": "Standard Chartered",
+      "group": "working-capital",
+      "company": "VIHALI",
+      "loanCode": "007626477",
+      "loanName": "SC VLĐ",
+      "disbursementDate": "2026-10-12",
+      "maturityDate": "2027-04-09",
+      "interestRate": 5.75,
+      "principalOutstanding": 724306859,
+      "interestPayable": 20424461,
+      "projectedSettlement": 744731320,
+      "notes": "Khế ước active.",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "depositCodes": [
+        "44-1470100-04",
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
+      ],
+      "mappingStatus": "confirmed",
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
+    },
+    {
+      "bank": "Standard Chartered",
+      "group": "working-capital",
+      "company": "VIHALI",
+      "loanCode": "007632204",
+      "loanName": "SC VLĐ",
+      "disbursementDate": "2026-10-15",
+      "maturityDate": "2027-04-13",
+      "interestRate": 5.75,
+      "principalOutstanding": 363293000,
+      "interestPayable": 10301596,
+      "projectedSettlement": 373594596,
+      "notes": "Khế ước active.",
+      "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
+      "depositCodes": [
+        "44-1470100-04",
+        "44-1470100-06",
+        "SC-HCM-Hồ Thị Yến Nhi-2940000000"
+      ],
+      "mappingStatus": "confirmed",
+      "mappingNote": "Toàn bộ khoản vay vốn lưu động SC được đảm bảo chung bằng 3 sổ cá nhân SC: 44-1470100-04, 44-1470100-06 và sổ 2.94 tỷ (07/07/2026)."
     }
   ],
   "companyDeposits": [
@@ -628,8 +710,8 @@
         "1440328001",
         "1440267672"
       ],
-      "totalOutstanding": 20957989805,
-      "totalAvailableLimit": 15280673484
+      "totalOutstanding": 24127431682,
+      "totalAvailableLimit": 12111231607
     },
     {
       "groupCode": "bidv-overdraft-ts",

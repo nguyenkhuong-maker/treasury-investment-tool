@@ -1,0 +1,2282 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vihali — Treasury Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ══ Design Tokens ════════════════════════════════════════════ */
+    :root {
+      --navy:        #0b1f4b;
+      --navy-mid:    #122866;
+      --navy-light:  #1e3a8a;
+      --gold:        #c9973a;
+      --gold-light:  #f5e6c8;
+      --gold-soft:   #fdf6e8;
+      --bg:          #f5f7fa;
+      --card:        #ffffff;
+      --border:      #d1d9e6;
+      --border-soft: #e8edf5;
+      --text:        #0f172a;
+      --muted:       #64748b;
+      --green:       #166534;
+      --green-bg:    #dcfce7;
+      --amber:       #92400e;
+      --amber-bg:    #fef3c7;
+      --red:         #991b1b;
+      --red-bg:      #fee2e2;
+      --blue:        #1d4ed8;
+      --blue-bg:     #dbeafe;
+      --shadow:      0 1px 3px rgba(11,31,75,.04), 0 2px 8px rgba(11,31,75,.04);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-padding-top: 168px; } /* sticky header + tab nav + buffer */
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    /* ══ Sticky Topbar ════════════════════════════════════════════ */
+    .topbar {
+      background: var(--navy);
+      border-bottom: 3px solid var(--gold);
+      height: 64px; padding: 0 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 300;
+    }
+    .topbar-brand { display: flex; align-items: center; gap: 14px; }
+    .topbar-logo {
+      width: 38px; height: 38px;
+      background: var(--gold); border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; color: var(--navy);
+      letter-spacing: -1px; flex-shrink: 0;
+    }
+    .topbar-title { color: #fff; font-size: 16px; font-weight: 700; letter-spacing: .2px; }
+    .topbar-subtitle { color: rgba(255,255,255,.48); font-size: 11px; letter-spacing: .5px; text-transform: uppercase; margin-top: 1px; }
+    .topbar-right { display: flex; align-items: center; gap: 16px; }
+    .topbar-clock { color: rgba(255,255,255,.7); font-size: 13px; font-variant-numeric: tabular-nums; letter-spacing: .3px; }
+    .topbar-badge {
+      background: rgba(201,151,58,.18); border: 1px solid rgba(201,151,58,.5);
+      color: var(--gold); font-size: 11px; font-weight: 700;
+      padding: 3px 11px; border-radius: 999px;
+      text-transform: uppercase; letter-spacing: .8px;
+    }
+
+    /* ══ Main Tab Navigation ══════════════════════════════════════ */
+    .tab-nav {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 64px; z-index: 250;
+      box-shadow: 0 2px 8px rgba(11,31,75,.07);
+    }
+    .tab-nav-inner {
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 28px; display: flex; gap: 0;
+    }
+    .tab-btn {
+      padding: 14px 24px;
+      background: none; border: none;
+      border-bottom: 3px solid transparent;
+      font-family: inherit; font-size: 13.5px;
+      font-weight: 600; color: var(--muted);
+      cursor: pointer; letter-spacing: .2px;
+      white-space: nowrap;
+      transition: color .15s, border-color .15s;
+    }
+    .tab-btn:hover { color: var(--navy); border-bottom-color: rgba(30,58,138,.25); }
+    .tab-btn.active { color: var(--navy); border-bottom-color: var(--gold); }
+
+    /* ══ Tab Panels ═══════════════════════════════════════════════ */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ══ Wrap ═════════════════════════════════════════════════════ */
+    .wrap {
+      max-width: 1440px; margin: 0 auto;
+      padding: 28px 28px 60px;
+    }
+
+    /* ══ Lightweight chips used across all tabs ═════════════════ */
+    .ui-chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 10px; border-radius: 999px;
+      font-size: 11.5px; font-weight: 600; letter-spacing: .2px;
+    }
+    .ui-chip-navy   { background: rgba(11,31,75,.08);  color: var(--navy);  border: 1px solid rgba(11,31,75,.12); }
+    .ui-chip-gold   { background: var(--gold-soft);    color: #7a5a1c;      border: 1px solid var(--gold-light); }
+    .ui-chip-green  { background: var(--green-bg);     color: var(--green); border: 1px solid #86efac; }
+    .ui-chip-amber  { background: var(--amber-bg);     color: var(--amber); border: 1px solid #fcd34d; }
+    .ui-chip-red    { background: var(--red-bg);       color: var(--red);   border: 1px solid #fca5a5; }
+    .ui-chip-blue   { background: var(--blue-bg);      color: var(--blue);  border: 1px solid #93c5fd; }
+    .ui-chip-dark   { background: var(--navy); color: var(--gold); border: 1px solid var(--navy-mid); padding: 4px 12px; font-size: 12px; letter-spacing: .5px; }
+
+    /* ══ Alert / Note ═════════════════════════════════════════════ */
+    .alert {
+      display: flex; gap: 12px; padding: 14px 16px;
+      border-radius: 10px; font-size: 13.5px; line-height: 1.6; margin-top: 14px;
+    }
+    .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .alert-navy  { background: #f0f4ff; border-left: 4px solid var(--navy-light); color: #1e3a5f; }
+    .alert-gold  { background: var(--gold-soft); border-left: 4px solid var(--gold); color: #7a5a1c; }
+    .alert-red   { background: var(--red-bg); border-left: 4px solid #dc2626; color: var(--red); }
+    .alert-green { background: var(--green-bg); border-left: 4px solid #16a34a; color: var(--green); }
+
+    /* ══ Form controls ════════════════════════════════════════════ */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px; margin-top: 14px;
+    }
+    label {
+      display: block; margin-bottom: 5px;
+      font-weight: 600; font-size: 12px;
+      text-transform: uppercase; letter-spacing: .5px; color: var(--muted);
+    }
+    input, select {
+      width: 100%; padding: 9px 12px;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      background: #fff; color: var(--text);
+      font-family: inherit; font-size: 14px;
+      transition: border-color .15s, box-shadow .15s; outline: none;
+    }
+    input:focus, select:focus {
+      border-color: var(--navy-light);
+      box-shadow: 0 0 0 3px rgba(30,58,138,.1);
+    }
+
+    /* ══ Buttons ══════════════════════════════════════════════════ */
+    button {
+      padding: 9px 18px; border: 0; border-radius: 8px;
+      cursor: pointer; font-family: inherit; font-size: 13px;
+      font-weight: 600; letter-spacing: .2px; transition: all .15s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--navy-mid), var(--navy-light));
+      color: #fff; box-shadow: 0 2px 8px rgba(11,31,75,.25);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(11,31,75,.35); }
+    .btn-secondary { background: #f0f4f9; color: var(--navy); border: 1.5px solid var(--border); }
+    .btn-secondary:hover { background: #e4e9f2; }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), #a87e2a);
+      color: #fff; box-shadow: 0 2px 8px rgba(201,151,58,.35);
+    }
+    .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(201,151,58,.4); }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+
+    /* ══ Tables ═══════════════════════════════════════════════════ */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 4px; border-radius: 10px; border: 1px solid var(--border-soft); }
+    .table-wrap table { min-width: 480px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: #f0f4fb; }
+    thead th {
+      padding: 11px 12px; color: #374151;
+      font-size: 11.5px; font-weight: 700; letter-spacing: .3px;
+      text-align: left; white-space: nowrap;
+      border-right: 1px solid #e2e8f0;
+      border-bottom: 2px solid #d1d9e6;
+    }
+    thead th:last-child { border-right: none; }
+    tbody tr { border-bottom: 1px solid var(--border-soft); }
+    tbody tr:nth-child(even) { background: #f7f9fc; }
+    tbody tr:hover { background: #eef3ff; transition: background .1s; }
+    tbody td {
+      padding: 10px 12px; vertical-align: middle; color: var(--text);
+      border-right: 1px solid var(--border-soft);
+    }
+    tbody td:last-child { border-right: none; }
+    tbody tr:last-child td { border-bottom: none; }
+    tr.subtotal-row td { background: #f3f6fb; font-weight: 600; font-size: 12.5px; border-top: 2px solid var(--border); }
+    tr.total-row td { background: var(--navy); color: #fff !important; font-weight: 700; font-size: 13px; border: none; }
+    .right  { text-align: right; }
+    .center { text-align: center; }
+    .num      { font-variant-numeric: tabular-nums; font-weight: 500; }
+    .num-bold { font-variant-numeric: tabular-nums; font-weight: 700; }
+    .muted  { color: var(--muted); }
+    .good   { color: var(--green); font-weight: 700; }
+    .bad    { color: var(--red);   font-weight: 700; }
+    .delta-up   { color: var(--green); font-weight: 700; }
+    .delta-down { color: var(--red);   font-weight: 700; }
+    .delta-flat { color: var(--muted); font-weight: 700; }
+    .rate-high  { color: var(--green); font-weight: 700; background: var(--green-bg); }
+    .rate-low   { color: var(--red);   font-weight: 700; background: var(--red-bg); }
+
+    /* ══ Status chips ═════════════════════════════════════════════ */
+    .days-chip { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+    .days-critical { background: var(--red-bg);   color: var(--red);   }
+    .days-warn     { background: var(--amber-bg); color: var(--amber); }
+    .days-ok       { background: var(--green-bg); color: var(--green); }
+    .days-long     { background: var(--blue-bg);  color: var(--blue);  }
+
+    /* ══ Maturity Timeline ════════════════════════════════════════ */
+    /* VLD toggle row */
+    .vld-toggle-row { cursor: pointer; user-select: none; transition: background .15s; }
+    .vld-toggle-row:hover { background: var(--gold-soft) !important; }
+    .vld-arrow {
+      display: inline-block;
+      font-size: 10px;
+      margin-right: 6px;
+      color: var(--navy);
+      transition: transform .2s ease;
+      vertical-align: middle;
+    }
+    .vld-arrow.open { transform: rotate(90deg); }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px; margin-top: 12px;
+    }
+    .tl-item { border: 1px solid var(--border-soft); border-radius: 10px; padding: 12px 14px; background: #fafcff; }
+    .tl-item.tl-urgent { border-color: #fca5a5; background: #fff8f8; }
+    .tl-item.tl-near   { border-color: #fcd34d; background: #fffdf5; }
+    .tl-bank { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .tl-code { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .tl-date { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .tl-days { font-size: 12px; font-weight: 700; margin-top: 6px; }
+    .tl-days.urgent { color: var(--red); }
+    .tl-days.warn   { color: var(--amber); }
+
+    /* ══ Mini KPIs ════════════════════════════════════════════════ */
+    .mini-kpis {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 10px; margin-bottom: 16px;
+    }
+    .mini-kpi { border: 1px solid var(--border-soft); border-radius: 10px; background: #f8fafd; padding: 12px 14px; }
+    .mini-kpi .mk-label { font-size: 11px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+    .mini-kpi .mk-val   { font-size: 15px; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
+
+    /* ══ Details/Summary ══════════════════════════════════════════ */
+    details.detail-box {
+      margin-top: 14px; border: 1px solid var(--border-soft);
+      border-radius: 12px; background: #fcfeff; overflow: hidden;
+    }
+    details.detail-box > summary {
+      list-style: none; cursor: pointer; padding: 13px 18px;
+      font-weight: 600; font-size: 13.5px; color: var(--navy-light);
+      background: #f4f7ff; border-bottom: 1px solid transparent;
+      display: flex; align-items: center; gap: 8px; user-select: none;
+    }
+    details.detail-box > summary::-webkit-details-marker { display: none; }
+    details.detail-box > summary::before {
+      content: '▸'; display: inline-block;
+      transition: transform .18s ease; font-size: 12px;
+    }
+    details.detail-box[open] > summary { border-bottom-color: var(--border-soft); }
+    details.detail-box[open] > summary::before { transform: rotate(90deg); }
+    .detail-content { padding: 16px 18px 18px; }
+
+    /* ══ Summary table (Treasury tab) ════════════════════════════ */
+    .summary-table td:first-child {
+      width: 22%; font-weight: 700; color: var(--navy);
+      background: #f4f7fc; font-size: 12px;
+      text-transform: uppercase; letter-spacing: .4px; vertical-align: top;
+    }
+
+    /* ══ Empty state ══════════════════════════════════════════════ */
+    .empty {
+      padding: 20px; border: 1.5px dashed var(--border);
+      border-radius: 10px; color: var(--muted);
+      background: #fafbfd; text-align: center; font-size: 13px; margin-top: 12px;
+    }
+
+    /* ══ Footer ═══════════════════════════════════════════════════ */
+    .page-footer {
+      background: var(--navy);
+      border-top: 3px solid var(--gold);
+    }
+    .footer-inner {
+      max-width: 1440px; margin: 0 auto;
+      padding: 20px 28px;
+      display: flex; justify-content: space-between;
+      align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .footer-left  { font-size: 12px; color: rgba(255,255,255,.5); line-height: 1.7; }
+    .footer-left strong { color: rgba(255,255,255,.8); }
+    .footer-right { font-size: 11px; color: rgba(255,255,255,.35); text-align: right; }
+
+    /* ══ Print button ═════════════════════════════════════════════ */
+    .print-btn {
+      position: fixed; bottom: 28px; right: 28px;
+      background: var(--navy); color: #fff; border: none;
+      border-radius: 50px; padding: 12px 22px;
+      font-family: inherit; font-size: 13px; font-weight: 600;
+      cursor: pointer; box-shadow: 0 4px 20px rgba(11,31,75,.35);
+      display: flex; align-items: center; gap: 8px;
+      transition: background .2s; z-index: 999;
+    }
+    .print-btn:hover { background: var(--navy-light); }
+
+    /* ══ Hidden ═══════════════════════════════════════════════════ */
+    .hidden-file { display: none; }
+
+    /* ══ Responsive ═══════════════════════════════════════════════ */
+    /* ── Tablet (≤900px) ──────────────────────────────────── */
+    @media (max-width: 900px) {
+      .wrap { padding: 20px 18px 52px; }
+      thead th, tbody td { padding: 8px 10px; font-size: 12.5px; }
+      .topbar { padding: 0 18px; height: 56px; }
+      .topbar-subtitle { display: none; }
+      .topbar-badge { display: none; }
+      .tab-nav { top: 56px; }
+      .tab-nav-inner { padding: 0 18px; }
+      html { scroll-padding-top: 160px; }
+    }
+
+    /* ── Mobile (≤640px) ──────────────────────────────────── */
+    @media (max-width: 640px) {
+      /* Topbar: compact, hide right side */
+      .topbar { height: 50px; padding: 0 14px; }
+      .topbar-logo { width: 32px; height: 32px; font-size: 13px; border-radius: 7px; }
+      .topbar-title { font-size: 14px; }
+      .topbar-clock { display: none; }
+      .topbar-badge { display: none; }
+
+      /* Tab nav */
+      .tab-nav { top: 50px; overflow-x: auto; }
+      .tab-nav-inner { padding: 0 10px; gap: 0; }
+      .tab-btn { padding: 12px 16px; font-size: 12.5px; }
+
+      /* Scroll offset for sticky header */
+      html { scroll-padding-top: 120px; }
+
+      /* Layout */
+      .wrap { padding: 14px 12px 48px; }
+
+      /* Mini-kpis */
+      .mini-kpis { gap: 8px; }
+      .mini-kpi { padding: 10px 12px; }
+      .mk-val { font-size: 14px; }
+
+      /* Tables: enable horizontal scroll, tighten up */
+      .table-wrap { border-radius: 8px; }
+      thead th, tbody td { padding: 7px 8px; font-size: 11.5px; white-space: nowrap; }
+      .num, .num-bold { font-size: 11.5px; }
+      .days-chip { font-size: 10px; padding: 2px 7px; }
+
+      /* Alert boxes */
+      .alert { padding: 10px 12px; font-size: 12.5px; }
+
+      /* Print button */
+      .print-btn { bottom: 14px; right: 14px; padding: 9px 16px; font-size: 12px; }
+    }
+
+    /* ── Small mobile (≤400px) ────────────────────────────── */
+    @media (max-width: 400px) {
+      .tab-btn { padding: 11px 12px; font-size: 12px; }
+      thead th, tbody td { padding: 6px 7px; font-size: 11px; }
+    }
+    @media print {
+      .print-btn, .topbar, .tab-nav { display: none; }
+      body { background: #fff; }
+      .tab-panel { display: block !important; }
+      .ui-card { box-shadow: none; break-inside: avoid; }
+      thead tr, tr.total-row td { print-color-adjust: exact; }
+    }
+
+    /* ══ Unified dashboard UI refresh ═════════════════════════════ */
+    .ui-wrap { max-width: 1440px; margin: 0 auto; padding: 28px 28px 60px; }
+    .ui-stack { display:flex; flex-direction:column; gap:18px; }
+    .ui-hero {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+      border: 1px solid #dbe7f5; border-radius: 18px; padding: 24px 26px;
+      box-shadow: 0 1px 3px rgba(11,31,75,.05), 0 8px 24px rgba(11,31,75,.05);
+    }
+    .ui-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: #64748b; margin-bottom: 8px; }
+    .ui-hero-row { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+    .ui-hero h1 { font-size: 28px; line-height:1.15; letter-spacing:-.5px; color:#0b1f4b; margin:0 0 8px; }
+    .ui-hero p { color:#5b6b84; font-size:14px; margin:0; }
+    .ui-badges { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .ui-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; font-size:11px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; }
+    .ui-badge.blue { background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; }
+    .ui-badge.gold { background:#fff8eb; color:#b45309; border:1px solid #fcd34d; }
+    .ui-badge.green { background:#f0fdf4; color:#15803d; border:1px solid #bbf7d0; }
+    .ui-meta-note { margin-top:10px; font-size:12px; color:#64748b; }
+    .ui-meta-note strong { color:#0f172a; font-weight:700; }
+    .ui-stat-grid { display:grid; grid-template-columns:repeat(2, minmax(180px, 1fr)); gap:12px; min-width:340px; }
+    .ui-stat { background:#fff; border:1px solid #e6edf5; border-radius:14px; padding:14px 16px; }
+    .ui-stat-label { color:#64748b; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+    .ui-stat-value { color:#0f172a; font-size:22px; font-weight:800; letter-spacing:-.6px; line-height:1.15; }
+    .ui-toolbar { background:#fff; border:1px solid #e6edf5; border-radius:16px; padding:18px 20px; box-shadow: var(--shadow); }
+    .ui-toolbar-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:12px; }
+    .ui-toolbar-title { font-size:16px; font-weight:700; color:#0b1f4b; }
+    .ui-toolbar-note { font-size:13px; color:#64748b; max-width:840px; }
+    .ui-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+    .ui-section { margin-top:8px; }
+    .ui-section-head { display:flex; align-items:center; gap:10px; margin:10px 0 14px; }
+    .ui-section-head .line { flex:1; height:1px; background:#dbe4ef; }
+    .ui-section-head .label { font-size:11px; font-weight:700; color:#64748b; letter-spacing:1.4px; text-transform:uppercase; }
+    .ui-overview-grid { display:grid; grid-template-columns: minmax(320px, 1.2fr) minmax(320px, .9fr); gap:18px; align-items:stretch; }
+    .ui-kpi-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; }
+    .ui-kpi-card { background:#fff; border:1px solid #e6edf5; border-radius:16px; padding:18px; box-shadow: var(--shadow); }
+    .ui-kpi-card.blue { border-top:4px solid #2563eb; }
+    .ui-kpi-card.green { border-top:4px solid #16a34a; }
+    .ui-kpi-card.amber { border-top:4px solid #d97706; }
+    .ui-kpi-card.red { border-top:4px solid #dc2626; }
+    .ui-kpi-label { color:#64748b; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }
+    .ui-kpi-value { color:#0f172a; font-size:27px; font-weight:800; line-height:1.1; letter-spacing:-.7px; }
+    .ui-kpi-sub { color:#64748b; font-size:12px; margin-top:8px; }
+    .ui-kpi-list { margin:8px 0 0 18px; padding:0; color:#475569; font-size:12px; line-height:1.55; }
+    .ui-kpi-list li { margin:3px 0; }
+    .ui-kpi-list strong { color:#0f172a; font-weight:700; }
+    .ui-progress { margin-top:12px; height:8px; background:#eef3f8; border-radius:999px; overflow:hidden; }
+    .ui-progress > span { display:block; height:100%; border-radius:999px; }
+    .ui-card { background:#fff; border:1px solid #e6edf5; border-radius:16px; padding:20px; box-shadow: var(--shadow); }
+    .ui-card-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
+    .ui-card-title { font-size:16px; font-weight:700; color:#0b1f4b; display:flex; align-items:center; gap:10px; }
+    .ui-card-icon { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#eff6ff; border:1px solid #dbeafe; }
+    .ui-donut-wrap { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+    .ui-donut-meta { flex:1; min-width:220px; display:flex; flex-direction:column; gap:10px; }
+    .ui-legend { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 14px; border-radius:12px; cursor:pointer; border:1px solid #e6edf5; }
+    .ui-legend:hover { background:#f8fbff; }
+    .ui-legend-left { display:flex; align-items:center; gap:10px; }
+    .ui-dot { width:10px; height:10px; border-radius:999px; }
+    .ui-grid-2 { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:18px; }
+    .ui-grid-2 > *, .ui-overview-grid > *, .ui-hero-row > * { min-width: 0; }
+    .ui-maturity-table thead th { background:#f8fafc; }
+    .ui-anchor { scroll-margin-top: 130px; }
+
+    .ui-card table thead th { background:#f8fafc; }
+    .ui-micro-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
+    .ui-micro-card { background:#fff; border:1px solid #e6edf5; border-radius:14px; padding:14px 16px; }
+    .ui-micro-label { color:#64748b; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+    .ui-micro-value { color:#0f172a; font-size:20px; font-weight:800; line-height:1.1; letter-spacing:-.5px; }
+    .ui-micro-sub { color:#64748b; font-size:12px; margin-top:6px; }
+    .status-chip { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
+    .status-chip.pledged { color:#b45309; background:#fff7ed; border:1px solid #fdba74; }
+    .status-chip.unpledged { color:#166534; background:#f0fdf4; border:1px solid #86efac; }
+    .rate-insight-list { display:flex; flex-direction:column; gap:10px; }
+    .rate-insight-item { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:12px 14px; border:1px solid #e6edf5; border-radius:12px; background:#fff; }
+    .rate-insight-item strong { color:#0f172a; }
+    .rate-insight-item .meta { font-size:12px; color:#64748b; margin-top:4px; }
+    .rate-badge { display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border-radius:999px; font-size:11px; font-weight:700; border:1px solid #bfdbfe; color:#1d4ed8; background:#eff6ff; white-space:nowrap; }
+    .td-subnote { margin-top:6px; font-size:12px; color:#64748b; }
+    .row-critical td { background:#fff5f5; }
+    .row-soon td { background:#fffaf0; }
+    .ui-card .table-wrap thead th { position: sticky; top: 0; z-index: 2; background:#f8fafc; }
+    @media (max-width: 1080px) {
+      .ui-overview-grid, .ui-grid-2 { grid-template-columns:1fr; }
+    }
+    @media (max-width: 720px) {
+      .ui-wrap { padding: 18px 16px 40px; }
+      .ui-hero { padding:18px; }
+      .ui-hero h1 { font-size:22px; }
+      .ui-stat-grid, .ui-kpi-grid { grid-template-columns:1fr; min-width:0; }
+      .ui-donut-wrap { justify-content:center; }
+      .mobile-hide { display:none; }
+      .ui-card table { min-width: 980px; }
+      .ui-card, .ui-toolbar, .ui-hero, .ui-stat, .ui-micro-card { min-width: 0; }
+      .table-wrap { width: 100%; max-width: 100%; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     STICKY TOPBAR
+═══════════════════════════════════════════════════════ -->
+<header class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-logo">VH</div>
+    <div>
+      <div class="topbar-title">Vihali Treasury Dashboard</div>
+      <div class="topbar-subtitle">Quản lý tín dụng, lãi suất và treasury hợp nhất</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-clock" id="live-clock">--:--:--</span>
+    <span class="topbar-badge">BOD · Internal Only</span>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════
+     MAIN TAB NAVIGATION
+═══════════════════════════════════════════════════════ -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" data-tab="laisuat" onclick="switchTab('laisuat')">📈 LÃI SUẤT &amp; TIỀN GỬI</button>
+    <button class="tab-btn"         data-tab="dunno"   onclick="switchTab('dunno')">📊 CTY VIHALI</button>
+    <button class="tab-btn"         data-tab="canhan"  onclick="switchTab('canhan')">👤 CÁ NHÂN</button>
+    <button class="tab-btn"         data-tab="kehoach" onclick="switchTab('kehoach')">🗂 KẾ HOẠCH</button>
+  </div>
+</nav>
+
+
+<!-- ╔══════════════════════════════════════════════════════╗
+     ║   TAB 1 — DƯ NỢ TÍN DỤNG                           ║
+     ╚══════════════════════════════════════════════════════╝ -->
+<div id="tab-dunno" class="tab-panel">
+  <div class="ui-wrap">
+    <div class="ui-stack">
+      <section class="ui-hero ui-anchor">
+        <div class="ui-hero-row">
+          <div style="flex:1;min-width:320px">
+            <div class="ui-eyebrow">CTY VIHALI · Treasury Dashboard</div>
+            <h1>Dư nợ BIDV &amp; Standard Chartered</h1>
+            <div class="ui-badges">
+              <span class="ui-badge blue">Snapshot hiện tại</span>
+              <span class="ui-badge gold">BOD Dashboard</span>
+              <span class="ui-badge green" id="loan-check-badge">Lần check: <span id="loan-last-checked-at">--</span></span>
+            </div>
+            <div class="ui-meta-note" id="loan-meta-note">Dữ liệu công ty đổi gần nhất: <strong id="loan-data-updated-at">--</strong></div>
+          </div>
+          <div class="ui-stat-grid">
+            <div class="ui-stat">
+              <div class="ui-stat-label">Tổng dư nợ active</div>
+              <div class="ui-stat-value" id="loan-total-outstanding">--</div>
+            </div>
+            <div class="ui-stat">
+              <div class="ui-stat-label">Hạn mức còn lại</div>
+              <div class="ui-stat-value" id="loan-available-limit">--</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ui-section" id="loan-overview">
+        <div class="ui-section-head">
+          <span class="label">01 — Tổng quan điều hành</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-navy">BOD Dashboard</span>
+        </div>
+        <div id="loan-overview-grid" class="ui-overview-grid"></div>
+      </section>
+
+      <section class="ui-section ui-anchor" id="loan-maturity">
+        <div class="ui-section-head">
+          <span class="label">02 — Lịch đáo hạn quan trọng</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-red">Ưu tiên theo dõi</span>
+        </div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">⏱</span> Các khoản gần hạn cần theo dõi</div>
+          </div>
+          <div class="table-wrap ui-maturity-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ngân hàng / Mã khoản vay</th>
+                  <th>Ngày đáo hạn</th>
+                  <th class="center">Còn lại</th>
+                  <th class="center">Lãi suất</th>
+                  <th class="right">Dư nợ gốc</th>
+                  <th class="right">Dự trả gốc+lãi</th>
+                  <th>Nhận định</th>
+                </tr>
+              </thead>
+              <tbody id="loan-maturity-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="ui-section ui-anchor" id="loan-bidv">
+        <div class="ui-section-head">
+          <span class="label">03 — BIDV</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-gold">Overdraft + VLĐ</span>
+        </div>
+        <div class="ui-grid-2">
+          <div class="ui-card">
+            <div class="ui-card-head">
+              <div class="ui-card-title"><span class="ui-card-icon">🏦</span> BIDV — Thấu chi</div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Mã khoản vay</th>
+                    <th>Tên khoản vay</th>
+                    <th class="mobile-hide">Ngày giải ngân</th>
+                    <th>Ngày đáo hạn</th>
+                    <th class="center">Lãi suất</th>
+                    <th class="right">Dư nợ gốc</th>
+                    <th class="right mobile-hide">Lãi còn phải trả</th>
+                    <th class="right">Dự trả gốc+lãi</th>
+                    <th class="right">Hạn mức còn lại</th>
+                  </tr>
+                </thead>
+                <tbody id="loan-bidv-overdraft-body"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="ui-card">
+            <div class="ui-card-head">
+              <div class="ui-card-title"><span class="ui-card-icon">📄</span> BIDV — Vốn lưu động</div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nhóm khoản vay</th>
+                    <th class="center">Số khế ước</th>
+                    <th>Ngày đáo hạn gần nhất</th>
+                    <th class="center">Còn lại</th>
+                    <th class="center">Lãi suất bình quân</th>
+                    <th class="right">Dư nợ gốc</th>
+                    <th class="right">Lãi còn phải trả</th>
+                    <th class="right">Dự trả gốc+lãi</th>
+                    <th class="right">Hạn mức còn lại</th>
+                  </tr>
+                </thead>
+                <tbody id="loan-bidv-wc-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ui-section ui-anchor" id="loan-sc">
+        <div class="ui-section-head">
+          <span class="label">04 — Standard Chartered</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-blue">Working Capital</span>
+        </div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">🏛</span> Standard Chartered — Vốn lưu động</div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nhóm khoản vay</th>
+                  <th class="center">Số khế ước</th>
+                  <th>Ngày đáo hạn gần nhất</th>
+                  <th class="center">Còn lại</th>
+                  <th class="center">Lãi suất bình quân</th>
+                  <th class="right">Dư nợ gốc</th>
+                  <th class="right">Lãi còn phải trả</th>
+                  <th class="right">Dự trả gốc+lãi</th>
+                  <th class="right">Hạn mức còn lại</th>
+                </tr>
+              </thead>
+              <tbody id="loan-sc-wc-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="ui-section" id="loan-company-deposits">
+        <div class="ui-section-head">
+          <span class="label">05 — Tài sản đảm bảo BIDV</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-gold">Cầm cố STK</span>
+        </div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">🛡</span> Sổ tiết kiệm cầm cố của VIHALI</div>
+          </div>
+          <div class="table-wrap" style="margin-top:14px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ngân hàng</th>
+                  <th>Mã STK</th>
+                  <th>Hình thức trả lãi</th>
+                  <th>Ngày gửi</th>
+                  <th>Ngày đáo hạn</th>
+                  <th class="center">Lãi suất</th>
+                  <th class="right">Số tiền trên sổ</th>
+                  <th class="right mobile-hide">Lãi dự thu</th>
+                  <th class="right">Số cuối kỳ</th>
+                  <th>Đang đảm bảo cho khoản vay</th>
+                </tr>
+              </thead>
+              <tbody id="loan-company-deposits-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div><!-- #tab-dunno -->
+
+
+
+
+<!-- ╔══════════════════════════════════════════════════════╗
+     ║   TAB 2 — LÃI SUẤT & TIỀN GỬI                      ║
+     ╚══════════════════════════════════════════════════════╝ -->
+<div id="tab-laisuat" class="tab-panel active">
+  <div class="ui-wrap">
+    <div class="ui-stack">
+      <section class="ui-hero ui-anchor">
+        <div class="ui-hero-row">
+          <div style="flex:1;min-width:320px">
+            <div class="ui-eyebrow">TREASURY RATE DASHBOARD</div>
+            <h1>Cập nhật lãi suất tiền gửi / trái phiếu</h1>
+            <div class="ui-badges">
+              <span class="ui-badge blue">Nguồn: <span id="data-source-label">data/history.json</span></span>
+              <span class="ui-badge gold">JSON cập nhật theo tuần</span>
+              <span class="ui-badge green">HTML cố định · sửa dữ liệu là chính</span>
+            </div>
+          </div>
+          <div class="ui-stat-grid">
+            <div class="ui-stat">
+              <div class="ui-stat-label">Kỳ đang xem</div>
+              <div class="ui-stat-value" id="current-period">-</div>
+            </div>
+            <div class="ui-stat">
+              <div class="ui-stat-label">Ngày cập nhật</div>
+              <div class="ui-stat-value" id="current-updated-at">-</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ui-toolbar">
+        <div class="ui-toolbar-head">
+          <div>
+            <div class="ui-toolbar-title">So sánh tuần dữ liệu</div>
+            <div class="ui-toolbar-note">Mặc định luôn lấy tuần hiện tại trên dashboard và chỉ cho chọn kỳ dùng để so sánh.</div>
+          </div>
+        </div>
+        <div class="form-grid" style="grid-template-columns:minmax(320px, 520px);">
+          <div>
+            <label for="compare-period-select">So sánh tuần hiện tại với</label>
+            <select id="compare-period-select"></select>
+          </div>
+        </div>
+        <div style="display:none">
+          <select id="month-select"></select>
+          <select id="week-select"></select>
+          <input id="local-json-file" class="hidden-file" type="file" accept=".json,application/json" />
+        </div>
+      </section>
+
+      <section class="ui-section" id="rate-overview-section">
+        <div class="ui-section-head">
+          <span class="label">01 — Góc nhìn nhanh</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-blue">Overview</span>
+        </div>
+        <div id="rate-overview-grid" class="ui-overview-grid"></div>
+      </section>
+
+      <section class="ui-section">
+        <div class="ui-section-head">
+          <span class="label">02 — Tiền gửi trung hạn</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-gold">6–12 tháng</span>
+        </div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">🏦</span> Bảng so sánh tiền gửi trung hạn</div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ngân hàng</th>
+                  <th class="center">6 tháng</th>
+                  <th class="center">9 tháng</th>
+                  <th class="center">12 tháng</th>
+                  <th class="center">Mức hỗ trợ DN vay</th>
+                  <th class="center">Lợi ích ròng</th>
+                  <th>Đề xuất sử dụng</th>
+                  <th>Nhận định ngắn</th>
+                  <th id="medium-compare-header">Biến động</th>
+                </tr>
+              </thead>
+              <tbody id="medium-term-body"></tbody>
+            </table>
+          </div>
+          <div id="medium-empty" class="empty" style="display:none">Tuần này chưa có dữ liệu tiền gửi trung hạn.</div>
+        </div>
+      </section>
+
+      <section class="ui-section">
+        <div class="ui-section-head">
+          <span class="label">03 — Đầu tư ngắn hạn 1–5 tháng</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-blue">1–5 tháng</span>
+        </div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">💳</span> Bảng đầu tư ngắn hạn 1–5 tháng</div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sản phẩm</th>
+                  <th class="center">1 tháng</th>
+                  <th class="center">2 tháng</th>
+                  <th class="center">3 tháng</th>
+                  <th class="center">4 tháng</th>
+                  <th class="center">5 tháng</th>
+                  <th class="right">Điều kiện tối thiểu</th>
+                  <th>Đề xuất sử dụng</th>
+                  <th id="short-compare-header">Biến động</th>
+                </tr>
+              </thead>
+              <tbody id="short-term-body"></tbody>
+            </table>
+          </div>
+          <div id="short-empty" class="empty" style="display:none">Tuần này chưa có dữ liệu đầu tư ngắn hạn 1–5 tháng.</div>
+        </div>
+      </section>
+
+      <section class="ui-section">
+        <div class="ui-section-head">
+          <span class="label">04 — Phương án dưới 1 tháng</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-amber">Ultra short</span>
+        </div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">⚡</span> Phương án dưới 1 tháng</div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sản phẩm</th>
+                  <th class="center">1 ngày</th>
+                  <th class="center">1 tuần</th>
+                  <th class="center">2 tuần</th>
+                  <th class="center">3 tuần</th>
+                  <th>Đề xuất sử dụng</th>
+                  <th id="under-compare-header">Biến động</th>
+                </tr>
+              </thead>
+              <tbody id="under-one-body"></tbody>
+            </table>
+          </div>
+          <div id="under-empty" class="empty" style="display:none">Tuần này chưa có dữ liệu dưới 1 tháng.</div>
+        </div>
+      </section>
+
+      <section class="ui-section">
+        <div class="ui-section-head">
+          <span class="label">05 — Công cụ khuyến nghị đầu tư</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-green">Auto-rank</span>
+        </div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">💡</span> Khuyến nghị đầu tư theo số tiền &amp; tenor</div>
+          </div>
+          <div class="ui-grid-2">
+            <div>
+              <div class="form-grid">
+                <div>
+                  <label for="recommend-amount">Số tiền đầu tư (VND)</label>
+                  <input id="recommend-amount" type="number" value="" min="0" step="1000000" placeholder="Nhập số tiền đầu tư" />
+                </div>
+                <div>
+                  <label for="recommend-tenor">Tenor đầu tư</label>
+                  <select id="recommend-tenor">
+                    <option value="" selected>— Chọn tenor đầu tư —</option>
+                    <option value="1d">1 ngày</option>
+                    <option value="1w">1 tuần</option>
+                    <option value="2w">2 tuần</option>
+                    <option value="3w">3 tuần</option>
+                    <option value="1m">1 tháng</option>
+                    <option value="2m">2 tháng</option>
+                    <option value="3m">3 tháng</option>
+                    <option value="4m">4 tháng</option>
+                    <option value="5m">5 tháng</option>
+                    <option value="6m">6 tháng</option>
+                    <option value="9m">9 tháng</option>
+                    <option value="12m">12 tháng</option>
+                  </select>
+                </div>
+              </div>
+              <div class="ui-actions">
+                <button class="btn-primary" onclick="runRecommendation()">▶ Đưa ra khuyến nghị</button>
+              </div>
+              <div id="recommend-summary" class="ui-toolbar-note" style="margin-top:14px">Nhập số tiền và tenor để nhận khuyến nghị.</div>
+            </div>
+            <div>
+              <div class="ui-toolbar-note" style="margin-top:0">
+                Xếp hạng theo Top 3 tiền lãi ước tính của đúng kỳ đang xem. Công thức: số tiền × lãi suất năm × số ngày / 365; sản phẩm qua đêm tính theo quay vòng hằng ngày.
+              </div>
+            </div>
+          </div>
+          <div class="table-wrap" style="margin-top:18px">
+            <table>
+              <thead>
+                <tr>
+                  <th class="center">Ưu tiên</th>
+                  <th>Sản phẩm</th>
+                  <th>Tenor áp dụng</th>
+                  <th class="center">Lãi suất</th>
+                  <th class="right">Tiền lãi ước tính</th>
+                  <th>Ghi chú</th>
+                </tr>
+              </thead>
+              <tbody id="recommend-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="ui-section">
+        <div class="ui-section-head">
+          <span class="label">06 — Gợi ý điều hành</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-navy">Chiến lược</span>
+        </div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">🧭</span> Gợi ý điều hành theo kỳ đang xem</div>
+          </div>
+          <div class="table-wrap">
+            <table class="summary-table">
+              <tbody id="strategy-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div><!-- .wrap -->
+</div><!-- #tab-laisuat -->
+
+
+
+<!-- ╔══════════════════════════════════════════════════════╗
+     ║   TAB 3 — SỔ TIẾT KIỆM CÁ NHÂN                      ║
+     ╚══════════════════════════════════════════════════════╝ -->
+<div id="tab-canhan" class="tab-panel">
+  <div class="ui-wrap">
+    <div class="ui-stack">
+      <section class="ui-hero ui-anchor">
+        <div class="ui-hero-row">
+          <div style="flex:1;min-width:320px">
+            <div class="ui-eyebrow">CÁ NHÂN · Treasury Snapshot</div>
+            <h1>Sổ tiết kiệm &amp; Khoản vay cá nhân</h1>
+            <div class="ui-badges">
+              <span class="ui-badge blue">Personal treasury snapshot</span>
+              <span class="ui-badge gold">Dashboard-fix source</span>
+              <span class="ui-badge green" id="personal-check-badge">Lần check: <span id="personal-last-checked-at">--</span></span>
+            </div>
+            <div class="ui-meta-note" id="personal-meta-note">Dữ liệu cá nhân đổi gần nhất: <strong id="personal-data-updated-at">--</strong></div>
+          </div>
+          <div class="ui-stat-grid">
+            <div class="ui-stat">
+              <div class="ui-stat-label">Tổng tiền gửi cá nhân</div>
+              <div class="ui-stat-value" id="personal-hero-total-deposits">--</div>
+            </div>
+            <div class="ui-stat">
+              <div class="ui-stat-label">Treasury ròng cá nhân</div>
+              <div class="ui-stat-value" id="personal-hero-net-treasury">--</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ui-section" id="personal-overview">
+        <div class="ui-section-head">
+          <span class="label">01 — Tổng quan treasury cá nhân</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-gold">Personal Snapshot</span>
+        </div>
+        <div id="personal-overview-grid" class="ui-overview-grid"></div>
+      </section>
+
+      <section class="ui-section" id="personal-deposits-section">
+        <div class="ui-section-head">
+          <span class="label">02 — Tiền gửi tiết kiệm cá nhân</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-gold">Tiết kiệm VND</span>
+        </div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">💰</span> Bảng kê tiền gửi tiết kiệm VND</div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Chủ sổ</th>
+                  <th>Ngân hàng</th>
+                  <th>Mã / sổ</th>
+                  <th class="right">Số tiền gốc</th>
+                  <th class="center">Lãi suất</th>
+                  <th class="mobile-hide">Ngày mở</th>
+                  <th>Ngày đáo hạn</th>
+                  <th>Thế chấp</th>
+                  <th class="right">Lãi dự thu</th>
+                  <th class="right">Dự thu cuối kỳ</th>
+                  <th>Đang đảm bảo cho khoản vay</th>
+                </tr>
+              </thead>
+              <tbody id="personal-deposits-body"></tbody>
+            </table>
+          </div>
+          <div id="personal-deposits-empty" class="empty" style="display:none">Chưa có dữ liệu tiền gửi cá nhân.</div>
+        </div>
+      </section>
+
+      <section class="ui-section" id="personal-loans-section">
+        <div class="ui-section-head">
+          <span class="label">03 — Khoản vay cá nhân</span>
+          <div class="line"></div>
+          <span class="ui-chip ui-chip-navy">Dư nợ cá nhân</span>
+        </div>
+        <div class="ui-card">
+          <div class="ui-card-head">
+            <div class="ui-card-title"><span class="ui-card-icon">🏦</span> Khoản vay cá nhân BIDV</div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Người vay</th>
+                  <th>Ngân hàng</th>
+                  <th>Mã khoản vay</th>
+                  <th class="right mobile-hide">Gốc ban đầu</th>
+                  <th class="right">Dư nợ gốc</th>
+                  <th class="center">Lãi suất</th>
+                  <th>Ngày giải ngân</th>
+                  <th>Ngày đáo hạn</th>
+                  <th class="right">Lãi còn phải trả</th>
+                  <th class="right">Dự trả cuối kỳ</th>
+                </tr>
+              </thead>
+              <tbody id="personal-loans-body"></tbody>
+            </table>
+          </div>
+          <div id="personal-loans-empty" class="empty" style="display:none">Chưa có dữ liệu khoản vay cá nhân.</div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div><!-- #tab-canhan -->
+
+
+<!-- ╔══════════════════════════════════════════════════════╗
+     ║   TAB 4 — KẾ HOẠCH NGÂN QUỸ THEO THÁNG             ║
+     ╚══════════════════════════════════════════════════════╝ -->
+<div id="tab-kehoach" class="tab-panel">
+  <div style="padding:24px 20px 28px; max-width: 1600px; margin: 0 auto;">
+    <div style="background:linear-gradient(135deg,#0b1f4b,#1e3a8a);color:#fff;border-radius:18px;padding:22px 24px;box-shadow:0 18px 60px rgba(15,23,42,.14);margin-bottom:18px;">
+      <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:700;">Treasury Monthly Plans</div>
+      <h1 style="margin:8px 0 10px;font-size:28px;line-height:1.2;">Kế hoạch ngân quỹ theo tháng</h1>
+    </div>
+    <iframe
+      id="monthlyPlansFrame"
+      src="./monthly-plans-live.html"
+      title="Treasury Monthly Plans"
+      style="width:100%;min-height:2600px;border:1px solid #e2e8f0;border-radius:18px;background:#fff;box-shadow:0 10px 30px rgba(15,23,42,.06);"
+    ></iframe>
+    <script>
+      (async function () {
+        try {
+          const res = await fetch('./data/site-version.json', { cache: 'no-store' });
+          if (!res.ok) return;
+          const data = await res.json();
+          if (!data.version) return;
+          const frame = document.getElementById('monthlyPlansFrame');
+          if (frame) frame.src = `./monthly-plans-live.html?v=${data.version}`;
+        } catch (error) {
+          console.error('load monthly plans version failed', error);
+        }
+      })();
+    </script>
+  </div>
+</div><!-- #tab-kehoach -->
+
+
+<!-- ══════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════ -->
+<footer class="page-footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <strong>Vihali Corporation</strong> — Treasury Dashboard (Dư nợ &amp; Lãi suất)<br/>
+      Tài liệu nội bộ · Chỉ lưu hành trong BOD · Dữ liệu cập nhật thường xuyên từ nguồn ngân hàng và JSON nội bộ.
+    </div>
+    <div class="footer-right">
+      Không sao chép hoặc phân phối ra bên ngoài tổ chức<br/>
+      Internal Use Only · Confidential
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════
+     PRINT BUTTON
+═══════════════════════════════════════════════════════ -->
+<button class="print-btn" onclick="window.print()">🖨 In báo cáo</button>
+
+
+<!-- ══════════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════════ -->
+<script>
+  /* ── Live Clock ─────────────────────────────────────── */
+  (function clock() {
+    const el = document.getElementById('live-clock');
+    if (el) el.textContent = new Date().toLocaleTimeString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', hour12: false });
+    setTimeout(clock, 1000);
+  })();
+
+  /* ── Tab Switching ──────────────────────────────────── */
+  /* ── Live "Còn lại" calculator ──────────────────────── */
+  function updateDaysChips() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    document.querySelectorAll('tr').forEach(row => {
+      const chip = row.querySelector('.days-chip');
+      if (!chip) return;
+
+      // Tìm ngày đáo hạn trong row (định dạng dd/mm/yyyy)
+      // Nếu có 2 dates (giải ngân + đáo hạn) thì lấy cái cuối cùng
+      let dueDate = null;
+      row.querySelectorAll('td').forEach(td => {
+        const m = td.textContent.trim().match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+        if (m) dueDate = new Date(+m[3], +m[2] - 1, +m[1]);
+      });
+      if (!dueDate) return;
+
+      const diff = Math.round((dueDate - today) / 86400000);
+
+      // Update class
+      chip.className = 'days-chip ' + (
+        diff <= 0  ? 'days-critical' :
+        diff <= 7  ? 'days-critical' :
+        diff <= 30 ? 'days-warn'     :
+        diff <= 90 ? 'days-ok'       : 'days-long'
+      );
+
+      // Update text
+      chip.textContent =
+        diff < 0  ? `Quá hạn ${Math.abs(diff)} ngày` :
+        diff === 0 ? 'Đáo hạn hôm nay'                :
+                    `${diff} ngày`;
+    });
+  }
+  updateDaysChips(); // chạy ngay khi load
+
+  /* ── BIDV VLD toggle ─────────────────────────────────── */
+  function toggleVLD(triggerRow) {
+    const subRow = triggerRow.nextElementSibling;
+    const arrow  = triggerRow.querySelector('.vld-arrow');
+    const isOpen = subRow.style.display !== 'none';
+    subRow.style.display = isOpen ? 'none' : 'table-row';
+    arrow.classList.toggle('open', !isOpen);
+  }
+
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + tabId).classList.add('active');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('[data-tab="' + tabId + '"]').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (tabId === 'laisuat' && HISTORY) renderSelectedPeriod();
+  }
+
+  /* ══════════════════════════════════════════════════════
+     COMPANY LOANS SNAPSHOT — Core Logic
+  ══════════════════════════════════════════════════════ */
+  let LOANS = null;
+  let SITE_META = null;
+
+  function fmtDateVN(value) {
+    if (!value) return '<span class="muted">—</span>';
+    const d = new Date(value + 'T00:00:00');
+    return d.toLocaleDateString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
+  }
+  function calcDaysRemaining(value) {
+    if (!value) return null;
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const due = new Date(value + 'T00:00:00');
+    return Math.round((due - today) / 86400000);
+  }
+  function isLoanVisible(item) {
+    const days = calcDaysRemaining(item?.maturityDate);
+    const principal = Number(item?.principalOutstanding || 0);
+    return (days == null || days >= 0) && principal > 0;
+  }
+  function isFacilityVisible(item) {
+    const days = calcDaysRemaining(item?.maturityDate);
+    return days == null || days >= 0;
+  }
+  function daysChipHtml(value) {
+    if (value == null) return '<span class="muted">—</span>';
+    const cls = value <= 7 ? 'days-critical' : value <= 30 ? 'days-warn' : value <= 90 ? 'days-ok' : 'days-long';
+    const txt = value < 0 ? `Quá hạn ${Math.abs(value)} ngày` : value === 0 ? 'Đáo hạn hôm nay' : `${value} ngày`;
+    return `<span class="days-chip ${cls}">${txt}</span>`;
+  }
+  function aggregateLoanValues(items, key) {
+    return (items || []).reduce((sum, item) => sum + Number(item[key] || 0), 0);
+  }
+  function renderLoanKpis() {
+    const overdraft = (LOANS?.bidvOverdraft || []).filter(isLoanVisible);
+    const bidvWC = (LOANS?.bidvWorkingCapital || []).filter(isLoanVisible);
+    const scWC = (LOANS?.scWorkingCapital || []).filter(isLoanVisible);
+    const companyDeposits = (LOANS?.companyDeposits || []).filter(item => {
+      const days = calcDaysRemaining(item.maturityDate);
+      return days == null || days >= 0;
+    });
+    const totalBidv = aggregateLoanValues(overdraft, 'principalOutstanding') + aggregateLoanValues(bidvWC, 'principalOutstanding');
+    const totalSc = aggregateLoanValues(scWC, 'principalOutstanding');
+    const total = totalBidv + totalSc;
+    const availableLimit = Number(LOANS?.summary?.availableLimit || 0);
+    const bidvOverdraftAvailableLimit = Number(LOANS?.summary?.bidvOverdraftAvailableLimit || 0);
+    const bidvWorkingCapitalAvailableLimit = Number(LOANS?.summary?.bidvWorkingCapitalAvailableLimit || 0);
+    const scWorkingCapitalAvailableLimit = Number(LOANS?.summary?.scAvailableLimit || 0);
+    const totalCompanyDepositsActive = companyDeposits.reduce((sum, item) => sum + Number(item.bookAmount || item.principal || 0), 0);
+    const focus = (LOANS?.maturityFocus || []).filter(isLoanVisible).slice().sort((a,b) => new Date(a.maturityDate) - new Date(b.maturityDate));
+    const nearest = focus[0];
+    const nearestDays = nearest ? calcDaysRemaining(nearest.maturityDate) : null;
+    const near30 = focus.filter(item => {
+      const d = calcDaysRemaining(item.maturityDate);
+      return d != null && d >= 0 && d <= 30;
+    }).length;
+    const bidvPct = total ? ((totalBidv / total) * 100) : 0;
+    const scPct = total ? ((totalSc / total) * 100) : 0;
+    const totalUtilPct = total && availableLimit ? (total / (total + availableLimit) * 100) : 0;
+    const depositCoveragePct = total ? Math.min((totalCompanyDepositsActive / total) * 100, 100) : 0;
+    document.getElementById('loan-total-outstanding').textContent = fmtMoney(total) + ' VNĐ';
+    document.getElementById('loan-available-limit').textContent = fmtMoney(availableLimit) + ' VNĐ';
+    renderLoanRefreshMeta();
+    const wrap = document.getElementById('loan-overview-grid');
+    const circumference = 2 * Math.PI * 70;
+    const bidvArc = (bidvPct / 100) * circumference;
+    const scArc = circumference - bidvArc;
+    wrap.innerHTML = `
+      <div class="ui-kpi-grid">
+        <div class="ui-kpi-card blue">
+          <div class="ui-kpi-label">Tổng dư nợ active</div>
+          <div class="ui-kpi-value">${fmtMoney(total)}</div>
+          <div class="ui-kpi-sub">BIDV + SC đang còn hiệu lực trên dashboard</div>
+          <div class="ui-progress"><span style="width:${Math.min(totalUtilPct,100).toFixed(1)}%;background:#2563eb"></span></div>
+        </div>
+        <div class="ui-kpi-card green">
+          <div class="ui-kpi-label">Hạn mức còn lại</div>
+          <div class="ui-kpi-value">${fmtMoney(availableLimit)}</div>
+          <div class="ui-kpi-sub">Mức đệm thanh khoản hiện tại của khoản vay công ty
+            <ul class="ui-kpi-list">
+              <li>Hạn mức BIDV thấu chi còn: <strong>${fmtMoney(bidvOverdraftAvailableLimit)}</strong></li>
+              <li>Hạn mức BIDV vốn lưu động còn: <strong>${fmtMoney(bidvWorkingCapitalAvailableLimit)}</strong></li>
+              <li>Hạn mức SC vốn lưu động còn: <strong>${fmtMoney(scWorkingCapitalAvailableLimit)}</strong></li>
+            </ul>
+          </div>
+          <div class="ui-progress"><span style="width:${Math.max(0,100-totalUtilPct).toFixed(1)}%;background:#16a34a"></span></div>
+        </div>
+        <div class="ui-kpi-card amber">
+          <div class="ui-kpi-label">Khoản gần đáo hạn ≤ 30 ngày</div>
+          <div class="ui-kpi-value">${near30}</div>
+          <div class="ui-kpi-sub">${nearest ? 'Gần nhất: ' + nearest.loanCode + ' · ' + fmtDateVN(nearest.maturityDate) : 'Chưa có khoản gần hạn'}</div>
+          <div class="ui-progress"><span style="width:${Math.min((near30/Math.max(focus.length || 1,1))*100,100).toFixed(1)}%;background:#d97706"></span></div>
+        </div>
+        <div class="ui-kpi-card red">
+          <div class="ui-kpi-label">Tổng tiền gửi VIHALI active</div>
+          <div class="ui-kpi-value">${fmtMoney(totalCompanyDepositsActive)}</div>
+          <div class="ui-kpi-sub">${companyDeposits.length} sổ công ty còn hiệu lực trên dashboard</div>
+          <div class="ui-progress"><span style="width:${depositCoveragePct.toFixed(1)}%;background:#dc2626"></span></div>
+        </div>
+      </div>
+      <div class="ui-card">
+        <div class="ui-card-head">
+          <div class="ui-card-title"><span class="ui-card-icon">🥧</span> Cơ cấu dư nợ theo ngân hàng</div>
+        </div>
+        <div class="ui-donut-wrap">
+          <svg width="220" height="220" viewBox="0 0 220 220" style="overflow:visible;flex-shrink:0">
+            <circle cx="110" cy="110" r="70" fill="none" stroke="#e2e8f0" stroke-width="26"></circle>
+            <circle cx="110" cy="110" r="70" fill="none" stroke="#16a34a" stroke-width="26"
+              stroke-dasharray="${bidvArc.toFixed(2)} ${scArc.toFixed(2)}" stroke-dashoffset="0"
+              transform="rotate(-90 110 110)"
+              style="cursor:pointer"
+              onclick="document.getElementById('loan-bidv').scrollIntoView({behavior:'smooth',block:'start'})"></circle>
+            <circle cx="110" cy="110" r="70" fill="none" stroke="#2563eb" stroke-width="26"
+              stroke-dasharray="${scArc.toFixed(2)} ${bidvArc.toFixed(2)}" stroke-dashoffset="-${bidvArc.toFixed(2)}"
+              transform="rotate(-90 110 110)"
+              style="cursor:pointer"
+              onclick="document.getElementById('loan-sc').scrollIntoView({behavior:'smooth',block:'start'})"></circle>
+            <text x="110" y="103" text-anchor="middle" font-size="11" fill="#64748b" font-family="Inter,sans-serif">Tổng active</text>
+            <text x="110" y="124" text-anchor="middle" font-size="18" font-weight="800" fill="#0f172a" font-family="Inter,sans-serif">${(total/1000000000).toFixed(1)} tỷ</text>
+          </svg>
+          <div class="ui-donut-meta">
+            <div class="ui-legend" onclick="document.getElementById('loan-bidv').scrollIntoView({behavior:'smooth',block:'start'})">
+              <div class="ui-legend-left">
+                <span class="ui-dot" style="background:#16a34a"></span>
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:#14532d">BIDV</div>
+                  <div style="font-size:12px;color:#64748b">${fmtMoney(totalBidv)} VNĐ</div>
+                </div>
+              </div>
+              <div style="font-size:24px;font-weight:800;color:#16a34a;letter-spacing:-.8px">${bidvPct.toFixed(1)}%</div>
+            </div>
+            <div class="ui-legend" onclick="document.getElementById('loan-sc').scrollIntoView({behavior:'smooth',block:'start'})">
+              <div class="ui-legend-left">
+                <span class="ui-dot" style="background:#2563eb"></span>
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:#1e3a8a">Standard Chartered</div>
+                  <div style="font-size:12px;color:#64748b">${fmtMoney(totalSc)} VNĐ</div>
+                </div>
+              </div>
+              <div style="font-size:24px;font-weight:800;color:#2563eb;letter-spacing:-.8px">${scPct.toFixed(1)}%</div>
+            </div>
+            <div class="ui-toolbar-note">Khoản gần hạn nhất: <strong style="color:#0f172a">${nearest ? nearest.loanCode : '—'}</strong>${nearest ? ' · ' + fmtDateVN(nearest.maturityDate) + ' · ' + (nearestDays == null ? '—' : nearestDays + ' ngày') : ''}</div>
+          </div>
+        </div>
+      </div>`;
+  }
+  function renderLoanMaturity() {
+    const body = document.getElementById('loan-maturity-body');
+    const rows = (LOANS?.maturityFocus || []).filter(isLoanVisible).slice().sort((a,b) => new Date(a.maturityDate) - new Date(b.maturityDate));
+    if (!rows.length) {
+      body.innerHTML = '<tr><td colspan="7" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>';
+      return;
+    }
+    body.innerHTML = rows.map(item => {
+      const days = calcDaysRemaining(item.maturityDate);
+      const levelClass = days != null && days <= 7 ? 'style="background:#fff5f5"' : days != null && days <= 30 ? 'style="background:#fffdf5"' : '';
+      return `<tr ${levelClass}>
+        <td><strong>${item.bank}</strong><br/><span style="color:var(--muted);font-size:12px">${item.loanCode}</span></td>
+        <td>${fmtDateVN(item.maturityDate)}</td>
+        <td class="center">${daysChipHtml(days)}</td>
+        <td class="center">${fmtRate(item.interestRate)}</td>
+        <td class="right num-bold">${fmtMoney(item.principalOutstanding)}</td>
+        <td class="right num-bold">${fmtMoney(item.projectedSettlement)}</td>
+        <td class="muted">${item.notes || ''}</td>
+      </tr>`;
+    }).join('');
+  }
+  function fmtList(items) {
+    return Array.isArray(items) && items.length ? items.join(', ') : '—';
+  }
+  function formatLinkedLoanLabel(item) {
+    const group = String(item?.collateralGroupName || '');
+    if (group.includes('BIDV VLĐ')) return 'BIDV - Vốn lưu động';
+    if (group.includes('SC VLĐ')) return 'SC - Vốn lưu động';
+    return fmtList(item?.linkedLoanCodes);
+  }
+  function renderLoanTable(bodyId, items, includeLimit) {
+    const body = document.getElementById(bodyId);
+    const visibleItems = items.filter(includeLimit ? isFacilityVisible : isLoanVisible);
+    if (!visibleItems.length) {
+      body.innerHTML = `<tr><td colspan="${includeLimit ? 9 : 8}" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>`;
+      return;
+    }
+    body.innerHTML = visibleItems.map(item => {
+      const days = calcDaysRemaining(item.maturityDate);
+      const limitCell = includeLimit ? `<td class="right">${item.availableLimit != null ? fmtMoney(item.availableLimit) : '<span class="muted">—</span>'}</td>` : '';
+      const codeOrName = includeLimit ? `<td>${item.loanName || ''}</td>` : '';
+      return `<tr>
+        <td><strong>${item.loanCode}</strong></td>
+        ${codeOrName}
+        <td>${fmtDateVN(item.disbursementDate)}</td>
+        <td>${fmtDateVN(item.maturityDate)}</td>
+        <td class="center">${includeLimit ? fmtRate(item.interestRate) : daysChipHtml(days)}</td>
+        ${includeLimit ? '' : `<td class="center">${fmtRate(item.interestRate)}</td>`}
+        <td class="right">${fmtMoney(item.principalOutstanding)}</td>
+        <td class="right">${fmtMoney(item.interestPayable || 0)}</td>
+        <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
+        ${limitCell}
+      </tr>`;
+    }).join('');
+  }
+  function averageRate(items) {
+    const vals = (items || []).map(item => Number(item.interestRate || 0)).filter(v => v > 0);
+    if (!vals.length) return null;
+    return vals.reduce((s, v) => s + v, 0) / vals.length;
+  }
+  function renderLoanGroupSummary(bodyId, items, label, availableLimit = null) {
+    const body = document.getElementById(bodyId);
+    const visibleItems = (items || []).filter(isLoanVisible);
+    if (!body) return;
+    if (!visibleItems.length) {
+      body.innerHTML = '<tr><td colspan="9" class="center muted">Không có khoản vay còn hiệu lực để hiển thị.</td></tr>';
+      return;
+    }
+    const sorted = visibleItems.slice().sort((a,b) => new Date(a.maturityDate) - new Date(b.maturityDate));
+    const nearest = sorted[0];
+    const days = calcDaysRemaining(nearest?.maturityDate);
+    const totalPrincipal = aggregateLoanValues(visibleItems, 'principalOutstanding');
+    const totalInterest = aggregateLoanValues(visibleItems, 'interestPayable');
+    const totalProjected = aggregateLoanValues(visibleItems, 'projectedSettlement');
+    const avgRate = averageRate(visibleItems);
+    const availableCell = availableLimit == null ? '<span class="muted">—</span>' : fmtMoney(availableLimit);
+    const detailRows = visibleItems.map(item => `<tr>
+      <td><strong>${item.loanCode || ''}</strong></td>
+      <td>${fmtDateVN(item.disbursementDate)}</td>
+      <td>${fmtDateVN(item.maturityDate)}</td>
+      <td class="center">${daysChipHtml(calcDaysRemaining(item.maturityDate))}</td>
+      <td class="center">${fmtRate(item.interestRate)}</td>
+      <td class="right">${fmtMoney(item.principalOutstanding || 0)}</td>
+      <td class="right">${fmtMoney(item.interestPayable || 0)}</td>
+      <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
+      <td class="right"><span class="muted">—</span></td>
+    </tr>`).join('');
+    body.innerHTML = `<tr class="vld-toggle-row" onclick="toggleVLD(this)">
+      <td><span class="vld-arrow">▶</span><strong>${label}</strong></td>
+      <td class="center">${visibleItems.length}</td>
+      <td>${fmtDateVN(nearest?.maturityDate)}</td>
+      <td class="center">${daysChipHtml(days)}</td>
+      <td class="center">${fmtRate(avgRate)}</td>
+      <td class="right">${fmtMoney(totalPrincipal)}</td>
+      <td class="right">${fmtMoney(totalInterest)}</td>
+      <td class="right">${fmtMoney(totalProjected)}</td>
+      <td class="right">${availableCell}</td>
+    </tr>
+    <tr style="display:none">
+      <td colspan="9" style="padding:0;background:#fbfcfe">
+        <div class="detail-content">
+          <div class="table-wrap" style="margin-top:0">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mã khoản vay</th>
+                  <th>Ngày giải ngân</th>
+                  <th>Ngày đáo hạn</th>
+                  <th class="center">Còn lại</th>
+                  <th class="center">Lãi suất</th>
+                  <th class="right">Dư nợ gốc</th>
+                  <th class="right">Lãi còn phải trả</th>
+                  <th class="right">Dự trả gốc+lãi</th>
+                  <th class="right">Hạn mức còn lại</th>
+                </tr>
+              </thead>
+              <tbody>${detailRows}</tbody>
+            </table>
+          </div>
+        </div>
+      </td>
+    </tr>`;
+  }
+  function renderCompanyDepositTable() {
+    const body = document.getElementById('loan-company-deposits-body');
+    const items = LOANS?.companyDeposits || [];
+    if (!body) return;
+    if (!items.length) {
+      body.innerHTML = '<tr><td colspan="10" class="center muted">Chưa có dữ liệu sổ tiết kiệm VIHALI tại BIDV.</td></tr>';
+      return;
+    }
+    body.innerHTML = items.map(item => `<tr>
+      <td>${item.bank || ''}</td>
+      <td><strong>${item.depositCode || ''}</strong></td>
+      <td>${item.payoutType || ''}</td>
+      <td>${fmtDateVN(item.openDate)}</td>
+      <td>${fmtDateVN(item.maturityDate)}</td>
+      <td class="center">${fmtRate(item.interestRate)}</td>
+      <td class="right">${fmtMoney(item.bookAmount || item.principal || 0)}</td>
+      <td class="right">${fmtMoney(item.accruedInterest || 0)}</td>
+      <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
+      <td>${formatLinkedLoanLabel(item)}</td>
+    </tr>`).join('');
+  }
+  function renderLoanSnapshot() {
+    if (!LOANS) return;
+    renderLoanKpis();
+    renderLoanMaturity();
+    renderLoanTable('loan-bidv-overdraft-body', LOANS.bidvOverdraft || [], true);
+    renderLoanGroupSummary('loan-bidv-wc-body', LOANS.bidvWorkingCapital || [], 'BIDV - Vốn lưu động', Number(LOANS?.summary?.bidvWorkingCapitalAvailableLimit || 0));
+    renderCompanyDepositTable();
+    renderLoanGroupSummary('loan-sc-wc-body', LOANS.scWorkingCapital || [], 'SC - Vốn lưu động', Number(LOANS?.summary?.scAvailableLimit || 0));
+  }
+  function applyLoanData(data) {
+    LOANS = data;
+    renderLoanSnapshot();
+  }
+  async function tryLoadDefaultLoansJson() {
+    const res = await fetch(withCacheBust('data/company-loans-current.json'));
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    applyLoanData(data);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     PERSONAL TREASURY SNAPSHOT — Core Logic
+  ══════════════════════════════════════════════════════ */
+  let PERSONAL = null;
+
+  function setPersonalDataSourceLabel(text) {
+    const el = document.getElementById('personal-data-source-label');
+    if (el) el.textContent = text;
+  }
+  function renderPersonalSummary() {
+    const summary = PERSONAL?.summary || {};
+    const depositsItems = PERSONAL?.personalDeposits || [];
+    const loansItems = PERSONAL?.personalLoans || [];
+    const deposits = depositsItems.reduce((sum, item) => sum + Number(item.principal || 0), 0);
+    const loans = loansItems.reduce((sum, item) => sum + Number(item.principalOutstanding || 0), 0);
+    const totalDeposits = Number(summary.totalPersonalDeposits || deposits);
+    const totalLoans = Number(summary.totalPersonalLoans || loans);
+    const net = Number(summary.netPersonalTreasury || (deposits - loans));
+    const pledgedCount = depositsItems.filter(item => Boolean(item.pledged) || Number(item.pledgedAmount || 0) > 0).length;
+    const unpledgedCount = Math.max(depositsItems.length - pledgedCount, 0);
+    const nearestDeposit = depositsItems
+      .filter(item => {
+        const days = calcDaysRemaining(item.maturityDate);
+        return days != null && days >= 0;
+      })
+      .sort((a, b) => new Date(a.maturityDate) - new Date(b.maturityDate))[0];
+    const nearestLoan = loansItems
+      .filter(item => {
+        const days = calcDaysRemaining(item.maturityDate);
+        return days != null && days >= 0;
+      })
+      .sort((a, b) => new Date(a.maturityDate) - new Date(b.maturityDate))[0];
+    const depositShare = totalDeposits + totalLoans ? (totalDeposits / (totalDeposits + totalLoans)) * 100 : 0;
+    const loanShare = 100 - depositShare;
+
+    const heroDeposits = document.getElementById('personal-hero-total-deposits');
+    const heroNet = document.getElementById('personal-hero-net-treasury');
+    if (heroDeposits) heroDeposits.textContent = fmtMoney(totalDeposits) + ' VNĐ';
+    if (heroNet) heroNet.textContent = fmtMoney(net) + ' VNĐ';
+    renderPersonalRefreshMeta();
+
+    const wrap = document.getElementById('personal-overview-grid');
+    if (!wrap) return;
+    wrap.innerHTML = `
+      <div class="ui-kpi-grid">
+        <div class="ui-kpi-card blue">
+          <div class="ui-kpi-label">Tổng tiền gửi cá nhân</div>
+          <div class="ui-kpi-value">${fmtMoney(totalDeposits)}</div>
+          <div class="ui-kpi-sub">${depositsItems.length} khoản tiền gửi / số dư đang theo dõi</div>
+          <div class="ui-progress"><span style="width:100%;background:#2563eb"></span></div>
+        </div>
+        <div class="ui-kpi-card amber">
+          <div class="ui-kpi-label">Tổng vay cá nhân</div>
+          <div class="ui-kpi-value">${fmtMoney(totalLoans)}</div>
+          <div class="ui-kpi-sub">${loansItems.length} khoản vay cá nhân còn trong snapshot</div>
+          <div class="ui-progress"><span style="width:${Math.min(loanShare,100).toFixed(1)}%;background:#d97706"></span></div>
+        </div>
+        <div class="ui-kpi-card green">
+          <div class="ui-kpi-label">Treasury ròng cá nhân</div>
+          <div class="ui-kpi-value">${fmtMoney(net)}</div>
+          <div class="ui-kpi-sub">Chênh lệch tiền gửi trừ dư nợ cá nhân hiện tại</div>
+          <div class="ui-progress"><span style="width:${Math.max(0, Math.min((net && totalDeposits) ? (net / totalDeposits) * 100 : 0, 100)).toFixed(1)}%;background:#16a34a"></span></div>
+        </div>
+        <div class="ui-kpi-card red">
+          <div class="ui-kpi-label">Sổ đang thế chấp</div>
+          <div class="ui-kpi-value">${pledgedCount}</div>
+          <div class="ui-kpi-sub">${unpledgedCount} khoản còn lại chưa thế chấp / không ghi nhận thế chấp</div>
+          <div class="ui-progress"><span style="width:${depositsItems.length ? ((pledgedCount / depositsItems.length) * 100).toFixed(1) : 0}%;background:#dc2626"></span></div>
+        </div>
+      </div>
+      <div class="ui-card">
+        <div class="ui-card-head">
+          <div class="ui-card-title"><span class="ui-card-icon">👤</span> Góc nhìn nhanh treasury cá nhân</div>
+        </div>
+        <div class="ui-donut-meta" style="min-width:0">
+          <div class="ui-legend" style="cursor:default">
+            <div class="ui-legend-left">
+              <span class="ui-dot" style="background:#2563eb"></span>
+              <div>
+                <div style="font-size:13px;font-weight:700;color:#1e3a8a">Tỷ trọng tiền gửi</div>
+                <div style="font-size:12px;color:#64748b">${fmtMoney(totalDeposits)} VNĐ</div>
+              </div>
+            </div>
+            <div style="font-size:24px;font-weight:800;color:#2563eb;letter-spacing:-.8px">${depositShare.toFixed(1)}%</div>
+          </div>
+          <div class="ui-legend" style="cursor:default">
+            <div class="ui-legend-left">
+              <span class="ui-dot" style="background:#d97706"></span>
+              <div>
+                <div style="font-size:13px;font-weight:700;color:#92400e">Tỷ trọng dư nợ cá nhân</div>
+                <div style="font-size:12px;color:#64748b">${fmtMoney(totalLoans)} VNĐ</div>
+              </div>
+            </div>
+            <div style="font-size:24px;font-weight:800;color:#d97706;letter-spacing:-.8px">${loanShare.toFixed(1)}%</div>
+          </div>
+          <div class="ui-micro-grid">
+            <div class="ui-micro-card">
+              <div class="ui-micro-label">Sổ gần đáo hạn nhất</div>
+              <div class="ui-micro-value">${nearestDeposit ? nearestDeposit.depositCode || nearestDeposit.certificateNumber || nearestDeposit.bank || 'Có dữ liệu' : '—'}</div>
+              <div class="ui-micro-sub">${nearestDeposit ? fmtDateVN(nearestDeposit.maturityDate) + ' · ' + (calcDaysRemaining(nearestDeposit.maturityDate) ?? '—') + ' ngày' : 'Chưa có khoản tiền gửi đủ ngày đáo hạn để xếp hạng'}</div>
+            </div>
+            <div class="ui-micro-card">
+              <div class="ui-micro-label">Khoản vay gần đáo hạn</div>
+              <div class="ui-micro-value">${nearestLoan ? nearestLoan.loanCode || nearestLoan.bank || 'Có dữ liệu' : '—'}</div>
+              <div class="ui-micro-sub">${nearestLoan ? fmtDateVN(nearestLoan.maturityDate) + ' · ' + (calcDaysRemaining(nearestLoan.maturityDate) ?? '—') + ' ngày' : 'Chưa có khoản vay đủ ngày đáo hạn để xếp hạng'}</div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+  function renderPersonalDeposits() {
+    const body = document.getElementById('personal-deposits-body');
+    const empty = document.getElementById('personal-deposits-empty');
+    const items = PERSONAL?.personalDeposits || [];
+    if (!items.length) {
+      body.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    body.innerHTML = items.map(item => {
+      const days = calcDaysRemaining(item.maturityDate);
+      const rowClass = days != null && days <= 7 ? 'row-critical' : days != null && days <= 30 ? 'row-soon' : '';
+      const pledged = Boolean(item.pledged) || Number(item.pledgedAmount || 0) > 0;
+      const pledgedChip = `<span class="status-chip ${pledged ? 'pledged' : 'unpledged'}">${pledged ? 'Đang thế chấp' : 'Chưa thế chấp'}</span>`;
+      return `<tr class="${rowClass}">
+        <td><strong>${item.owner || ''}</strong></td>
+        <td>${item.bank || ''}</td>
+        <td><strong>${item.depositCode || ''}</strong></td>
+        <td class="right">${fmtMoney(item.principal || 0)}</td>
+        <td class="center">${fmtRate(item.interestRate) || '<span class="muted">—</span>'}</td>
+        <td class="mobile-hide">${fmtDateVN(item.openDate)}</td>
+        <td>
+          <div>${fmtDateVN(item.maturityDate)}</div>
+          <div class="td-subnote">${daysChipHtml(days)}</div>
+        </td>
+        <td>${pledgedChip}</td>
+        <td class="right mobile-hide">${fmtMoney(item.accruedInterest || 0)}</td>
+        <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
+        <td>${formatLinkedLoanLabel(item)}</td>
+      </tr>`;
+    }).join('');
+  }
+  function renderPersonalLoans() {
+    const body = document.getElementById('personal-loans-body');
+    const empty = document.getElementById('personal-loans-empty');
+    const items = PERSONAL?.personalLoans || [];
+    if (!items.length) {
+      body.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    body.innerHTML = items.map(item => {
+      const days = calcDaysRemaining(item.maturityDate);
+      const rowClass = days != null && days <= 7 ? 'row-critical' : days != null && days <= 30 ? 'row-soon' : '';
+      return `<tr class="${rowClass}">
+        <td><strong>${item.borrower || ''}</strong></td>
+        <td>${item.bank || ''}</td>
+        <td><strong>${item.loanCode || ''}</strong></td>
+        <td class="right mobile-hide">${fmtMoney(item.principalOriginal || 0)}</td>
+        <td class="right">${fmtMoney(item.principalOutstanding || 0)}</td>
+        <td class="center">${fmtRate(item.interestRate)}</td>
+        <td class="mobile-hide">${fmtDateVN(item.disbursementDate)}</td>
+        <td>
+          <div>${fmtDateVN(item.maturityDate)}</div>
+          <div class="td-subnote">${daysChipHtml(days)}</div>
+        </td>
+        <td class="right mobile-hide">${fmtMoney(item.interestPayable || 0)}</td>
+        <td class="right">${fmtMoney(item.projectedSettlement || 0)}</td>
+      </tr>`;
+    }).join('');
+  }
+  function renderPersonalSnapshot() {
+    if (!PERSONAL) return;
+    renderPersonalSummary();
+    renderPersonalDeposits();
+    renderPersonalLoans();
+  }
+  function applyPersonalData(data) {
+    PERSONAL = data;
+    setPersonalDataSourceLabel('data/personal-treasury-current.json');
+    renderPersonalSnapshot();
+  }
+  async function tryLoadDefaultPersonalJson() {
+    const res = await fetch(withCacheBust('data/personal-treasury-current.json'));
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    applyPersonalData(data);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     TREASURY RATE DASHBOARD — Core Logic
+  ══════════════════════════════════════════════════════ */
+  const TENORS = {
+    '1d':  { label: '1 ngày',   days: 1   },
+    '1w':  { label: '1 tuần',   days: 7   },
+    '2w':  { label: '2 tuần',   days: 14  },
+    '3w':  { label: '3 tuần',   days: 21  },
+    '1m':  { label: '1 tháng',  days: 30  },
+    '2m':  { label: '2 tháng',  days: 60  },
+    '3m':  { label: '3 tháng',  days: 90  },
+    '4m':  { label: '4 tháng',  days: 120 },
+    '5m':  { label: '5 tháng',  days: 150 },
+    '6m':  { label: '6 tháng',  days: 180 },
+    '9m':  { label: '9 tháng',  days: 270 },
+    '12m': { label: '12 tháng', days: 365 }
+  };
+
+  let HISTORY = null;
+
+  function fmtRate(value) {
+    return value == null ? '' : Number(value).toFixed(2) + '%/năm';
+  }
+  function fmtMoney(value) {
+    return new Intl.NumberFormat('vi-VN').format(Math.round(value || 0));
+  }
+  function fmtDateTime(value) {
+    if (!value) return '-';
+    return new Date(value).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
+  }
+  function getSiteSectionCheckAt(section) {
+    return SITE_META?.[section]?.lastCheckedAt || SITE_META?.lastCheckedAt || null;
+  }
+  function getSiteSectionUpdatedAt(section, fallbackValue) {
+    return SITE_META?.[section]?.updatedAt || fallbackValue || null;
+  }
+  function renderSectionRefreshMeta(section, config) {
+    const checkValue = fmtDateTime(getSiteSectionCheckAt(section));
+    const updatedValue = fmtDateTime(getSiteSectionUpdatedAt(section, config.fallbackUpdatedAt));
+    const checkEl = document.getElementById(config.checkId);
+    const updatedEl = document.getElementById(config.updatedId);
+    const badgeEl = document.getElementById(config.badgeId);
+    if (checkEl) checkEl.textContent = checkValue;
+    if (updatedEl) updatedEl.textContent = updatedValue;
+    if (badgeEl) badgeEl.title = `Lần check hệ thống: ${checkValue}\n${config.noteLabel}: ${updatedValue}`;
+  }
+  function renderLoanRefreshMeta() {
+    renderSectionRefreshMeta('company', {
+      badgeId: 'loan-check-badge',
+      checkId: 'loan-last-checked-at',
+      updatedId: 'loan-data-updated-at',
+      fallbackUpdatedAt: LOANS?.meta?.updatedAt,
+      noteLabel: 'Dữ liệu công ty đổi gần nhất',
+    });
+  }
+  function renderPersonalRefreshMeta() {
+    renderSectionRefreshMeta('personal', {
+      badgeId: 'personal-check-badge',
+      checkId: 'personal-last-checked-at',
+      updatedId: 'personal-data-updated-at',
+      fallbackUpdatedAt: PERSONAL?.meta?.updatedAt,
+      noteLabel: 'Dữ liệu cá nhân đổi gần nhất',
+    });
+  }
+  function rateClass(value, max, min) {
+    if (value == null) return '';
+    if (max != null && value === max && max !== min) return 'rate-high';
+    if (min != null && value === min && max !== min) return 'rate-low';
+    return '';
+  }
+  function getColumnExtremes(items, tenorKey, path = 'rates') {
+    const values = items.map(item => path === 'rates' ? item.rates?.[tenorKey] : item[path]).filter(v => v != null);
+    if (!values.length) return { max: null, min: null };
+    return { max: Math.max(...values), min: Math.min(...values) };
+  }
+  function setDataSourceLabel(text) {
+    const el = document.getElementById('data-source-label');
+    if (el) el.textContent = text;
+  }
+  function setLocalLoadStatus(html) {
+    const box = document.getElementById('local-load-status');
+    if (box) box.innerHTML = html;
+  }
+  function getSelectedWeekData() {
+    const m = document.getElementById('month-select').value;
+    const w = document.getElementById('week-select').value;
+    return HISTORY.months?.[m]?.weeks?.[w] || null;
+  }
+  function parsePeriodValue(value) {
+    if (!value) return null;
+    const [monthKey, weekKey] = String(value).split('|');
+    if (!monthKey || !weekKey) return null;
+    return { monthKey, weekKey };
+  }
+  function comparePeriodOrder(monthA, weekA, monthB, weekB) {
+    if (monthA < monthB) return -1;
+    if (monthA > monthB) return 1;
+    return Number(weekA) - Number(weekB);
+  }
+  function getPeriodLabel(monthKey, weekKey) {
+    const month = HISTORY.months?.[monthKey];
+    const week = month?.weeks?.[weekKey];
+    const monthLabel = month?.label || monthKey;
+    const weekLabel = week?.label || `Tuần ${weekKey}`;
+    return `${monthLabel} · ${weekLabel}`;
+  }
+  function getWeekKeys(monthKey) {
+    return Object.keys(HISTORY.months?.[monthKey]?.weeks || {}).sort((a, b) => Number(a) - Number(b));
+  }
+  function getAvailablePeriods() {
+    return Object.keys(HISTORY.months || {})
+      .sort()
+      .flatMap(monthKey => getWeekKeys(monthKey).map(weekKey => {
+        const week = HISTORY.months?.[monthKey]?.weeks?.[weekKey];
+        if (!week?.available) return null;
+        return {
+          monthKey,
+          weekKey,
+          value: `${monthKey}|${weekKey}`,
+          label: getPeriodLabel(monthKey, weekKey)
+        };
+      }).filter(Boolean));
+  }
+  function getSuggestedComparisonValue(currentMonthKey, currentWeekKey) {
+    const periods = getAvailablePeriods();
+    const earlier = periods.filter(period => comparePeriodOrder(period.monthKey, period.weekKey, currentMonthKey, currentWeekKey) < 0);
+    if (earlier.length) return earlier[earlier.length - 1].value;
+    const fallback = periods.find(period => !(period.monthKey === currentMonthKey && period.weekKey === currentWeekKey));
+    return fallback?.value || '';
+  }
+  function getComparisonWeekData() {
+    const selection = parsePeriodValue(document.getElementById('compare-period-select').value);
+    if (!selection) return null;
+    return HISTORY.months?.[selection.monthKey]?.weeks?.[selection.weekKey] || null;
+  }
+  function getComparisonPeriodLabel() {
+    const selection = parsePeriodValue(document.getElementById('compare-period-select').value);
+    if (!selection) return '';
+    return getPeriodLabel(selection.monthKey, selection.weekKey);
+  }
+  function deltaValue(cur, prev) {
+    if (cur == null || prev == null) return null;
+    return Number((cur - prev).toFixed(2));
+  }
+  function deltaHtml(delta) {
+    if (delta == null) return '';
+    if (delta > 0) return `<span class="delta-up">&#9650; +${delta.toFixed(2)}%</span>`;
+    if (delta < 0) return `<span class="delta-down">&#9660; ${delta.toFixed(2)}%</span>`;
+    return `<span class="delta-flat">&#8212; 0.00%</span>`;
+  }
+  function populatePeriodSelectors() {
+    const ms = document.getElementById('month-select');
+    const ws = document.getElementById('week-select');
+    const monthKeys = Object.keys(HISTORY.months || {}).sort();
+    ms.innerHTML = monthKeys.map(k => `<option value="${k}">${HISTORY.months[k].label || k}</option>`).join('');
+    ms.value = HISTORY.meta.defaultMonth || monthKeys[0] || '';
+    refreshWeekSelector();
+    ws.value = HISTORY.meta.defaultWeek || ws.value;
+    refreshComparePeriodSelector();
+  }
+  function refreshWeekSelector() {
+    const ms = document.getElementById('month-select');
+    const ws = document.getElementById('week-select');
+    const cv = ws.value;
+    const weeks = HISTORY.months?.[ms.value]?.weeks || {};
+    const wk = getWeekKeys(ms.value);
+    ws.innerHTML = wk.map(k => {
+      const w = weeks[k] || { label: `Tuần ${k}`, available: false };
+      return `<option value="${k}">${w.label || `Tuần ${k}`}${w.available ? '' : ' (chưa có dữ liệu)'}</option>`;
+    }).join('');
+    const fallbackWeek = wk.includes(HISTORY.meta.defaultWeek) ? HISTORY.meta.defaultWeek : (wk[0] || '1');
+    ws.value = wk.includes(cv) ? cv : fallbackWeek;
+  }
+  function refreshComparePeriodSelector() {
+    const ms = document.getElementById('month-select');
+    const ws = document.getElementById('week-select');
+    const cs = document.getElementById('compare-period-select');
+    const pv = cs.value;
+    const currentMonthKey = ms.value;
+    const currentWeekKey = ws.value;
+    const currentValue = `${currentMonthKey}|${currentWeekKey}`;
+    const periods = getAvailablePeriods().filter(period => period.value !== currentValue);
+    cs.innerHTML = ['<option value="">Không so sánh</option>'].concat(
+      periods.map(period => `<option value="${period.value}">${period.label}</option>`)
+    ).join('');
+    const nextValue = (pv && Array.from(cs.options).some(o => o.value === pv))
+      ? pv
+      : getSuggestedComparisonValue(currentMonthKey, currentWeekKey);
+    cs.value = Array.from(cs.options).some(o => o.value === nextValue) ? nextValue : '';
+    updateComparisonHeaders();
+  }
+  function updateComparisonHeaders() {
+    const compareLabel = getComparisonPeriodLabel();
+    const label = compareLabel ? `Biến động vs ${compareLabel}` : 'Biến động';
+    ['medium-compare-header','short-compare-header','under-compare-header'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = label;
+    });
+  }
+  function renderPeriodHeader(weekData) {
+    const mk = document.getElementById('month-select').value;
+    const wk = document.getElementById('week-select').value;
+    const currentLabel = getPeriodLabel(mk, wk);
+    document.getElementById('current-period').textContent = currentLabel;
+    document.getElementById('current-updated-at').textContent = fmtDateTime(weekData?.updatedAt);
+  }
+  function renderRateOverview(weekData) {
+    const wrap = document.getElementById('rate-overview-grid');
+    if (!wrap) return;
+    const medium = weekData?.mediumTerm?.items || [];
+    const short = weekData?.shortTerm?.items || [];
+    const ultra = weekData?.underOneMonth?.items || [];
+    const compare = getComparisonWeekData();
+    const compareLabel = getComparisonPeriodLabel() || 'Không so sánh';
+
+    const mediumProducts = [];
+    medium.forEach(item => ['6m','9m','12m'].forEach(k => {
+      const rate = item.rates?.[k];
+      if (rate != null) mediumProducts.push({ name: item.name, tenor: TENORS[k].label, rate });
+    }));
+    const bestMedium = mediumProducts.sort((a,b) => b.rate - a.rate)[0] || null;
+
+    const netOptions = medium.map(item => {
+      const rates = Object.values(item.rates || {}).filter(v => v != null);
+      const base = rates.length ? Math.max(...rates) : null;
+      const net = item.corpBorrowRate != null && base != null ? Number((base - item.corpBorrowRate).toFixed(2)) : null;
+      return net != null ? { name: item.name, net, borrow: item.corpBorrowRate, bestRate: base } : null;
+    }).filter(Boolean).sort((a,b) => b.net - a.net);
+    const bestNet = netOptions[0] || null;
+
+    const shortProducts = [];
+    short.forEach(item => ['1m','2m','3m','4m','5m'].forEach(k => {
+      const rate = item.rates?.[k];
+      if (rate != null) shortProducts.push({ name: item.name, tenor: TENORS[k].label, rate, minAmount: item.minAmount || 0 });
+    }));
+    const bestShort = shortProducts.sort((a,b) => b.rate - a.rate)[0] || null;
+
+    const ultraProducts = [];
+    ultra.forEach(item => ['1d','1w','2w','3w'].forEach(k => {
+      const rate = item.rates?.[k];
+      if (rate != null) ultraProducts.push({ name: item.name, tenor: TENORS[k].label, rate, rollable: !!item.rollable });
+    }));
+    const bestUltra = ultraProducts.sort((a,b) => b.rate - a.rate)[0] || null;
+
+    let compareNote = 'Không so sánh kỳ nào nên em đang hiển thị snapshot độc lập.';
+    if (compare) {
+      const curCount = medium.length + short.length + ultra.length;
+      const prevCount = (compare.mediumTerm?.items || []).length + (compare.shortTerm?.items || []).length + (compare.underOneMonth?.items || []).length;
+      compareNote = `So với ${compareLabel}, số nhóm sản phẩm đang xem là ${curCount} vs ${prevCount}. Anh có thể nhìn nhanh best rate rồi mới xuống bảng biến động.`;
+    }
+
+    wrap.innerHTML = `
+      <div class="ui-kpi-grid">
+        <div class="ui-kpi-card blue">
+          <div class="ui-kpi-label">Best rate trung hạn</div>
+          <div class="ui-kpi-value">${bestMedium ? bestMedium.rate.toFixed(2) + '%/năm' : '—'}</div>
+          <div class="ui-kpi-sub">${bestMedium ? bestMedium.name + ' · ' + bestMedium.tenor : 'Chưa có dữ liệu trung hạn'}</div>
+          <div class="ui-progress"><span style="width:${bestMedium ? Math.min((bestMedium.rate / 10) * 100, 100).toFixed(1) : 0}%;background:#2563eb"></span></div>
+        </div>
+        <div class="ui-kpi-card green">
+          <div class="ui-kpi-label">Best net benefit DN vay</div>
+          <div class="ui-kpi-value">${bestNet ? '+' + bestNet.net.toFixed(2) + '%/năm' : '—'}</div>
+          <div class="ui-kpi-sub">${bestNet ? bestNet.name + ' · borrow ' + fmtRate(bestNet.borrow) + ' / best ' + fmtRate(bestNet.bestRate) : 'Chưa có option có dữ liệu hỗ trợ DN vay'}</div>
+          <div class="ui-progress"><span style="width:${bestNet ? Math.min((bestNet.net / 3) * 100, 100).toFixed(1) : 0}%;background:#16a34a"></span></div>
+        </div>
+        <div class="ui-kpi-card amber">
+          <div class="ui-kpi-label">Best short-term</div>
+          <div class="ui-kpi-value">${bestShort ? bestShort.rate.toFixed(2) + '%/năm' : '—'}</div>
+          <div class="ui-kpi-sub">${bestShort ? bestShort.name + ' · ' + bestShort.tenor + (bestShort.minAmount ? ' · min ' + fmtMoney(bestShort.minAmount) : '') : 'Chưa có dữ liệu 1–5 tháng'}</div>
+          <div class="ui-progress"><span style="width:${bestShort ? Math.min((bestShort.rate / 10) * 100, 100).toFixed(1) : 0}%;background:#d97706"></span></div>
+        </div>
+        <div class="ui-kpi-card red">
+          <div class="ui-kpi-label">Best ultra short</div>
+          <div class="ui-kpi-value">${bestUltra ? bestUltra.rate.toFixed(2) + '%/năm' : '—'}</div>
+          <div class="ui-kpi-sub">${bestUltra ? bestUltra.name + ' · ' + bestUltra.tenor + (bestUltra.rollable ? ' · quay vòng' : '') : 'Chưa có dữ liệu dưới 1 tháng'}</div>
+          <div class="ui-progress"><span style="width:${bestUltra ? Math.min((bestUltra.rate / 10) * 100, 100).toFixed(1) : 0}%;background:#dc2626"></span></div>
+        </div>
+      </div>
+      <div class="ui-card">
+        <div class="ui-card-head">
+          <div class="ui-card-title"><span class="ui-card-icon">🔎</span> Cách đọc nhanh tab lãi suất</div>
+        </div>
+        <div class="rate-insight-list">
+          <div class="rate-insight-item">
+            <div>
+              <strong>Bắt đầu từ 4 KPI phía trái</strong>
+              <div class="meta">Best rate, best spread, best short-term và best ultra short giúp nhìn nhanh hướng đi của tuần đang xem.</div>
+            </div>
+            <span class="rate-badge">Overview</span>
+          </div>
+          <div class="rate-insight-item">
+            <div>
+              <strong>Chỉ cần chọn kỳ dùng để so sánh</strong>
+              <div class="meta">Dashboard mặc định giữ tuần hiện tại làm mốc và chỉ đổi kỳ đối chiếu để anh nhìn biến động nhanh.</div>
+            </div>
+            <span class="rate-badge">Compare</span>
+          </div>
+          <div class="rate-insight-item">
+            <div>
+              <strong>Sau đó xuống bảng chi tiết & khuyến nghị</strong>
+              <div class="meta">${compareNote}</div>
+            </div>
+            <span class="rate-badge">Detail</span>
+          </div>
+        </div>
+      </div>`;
+  }
+  function renderMediumTerm(weekData) {
+    const body  = document.getElementById('medium-term-body');
+    const empty = document.getElementById('medium-empty');
+    const items = weekData?.mediumTerm?.items || [];
+    const cItems = getComparisonWeekData()?.mediumTerm?.items || [];
+    const cMap = new Map(cItems.map(i => [i.name, i]));
+    if (!items.length) { body.innerHTML = ''; empty.style.display = 'block'; return; }
+    empty.style.display = 'none';
+    const six = getColumnExtremes(items, '6m');
+    const nine = getColumnExtremes(items, '9m');
+    const twelve = getColumnExtremes(items, '12m');
+    const support = getColumnExtremes(items, null, 'corpBorrowRate');
+    const netValues = items.map(item => {
+      const rates = Object.values(item.rates || {}).filter(v => v != null);
+      const base = rates.length ? Math.max(...rates) : null;
+      return item.corpBorrowRate != null && base != null ? Number((base - item.corpBorrowRate).toFixed(2)) : null;
+    }).filter(v => v != null);
+    const netMax = netValues.length ? Math.max(...netValues) : null;
+    const netMin = netValues.length ? Math.min(...netValues) : null;
+    body.innerHTML = items.map(item => {
+      const rv = Object.values(item.rates || {}).filter(v => v != null);
+      const base = rv.length ? Math.max(...rv) : null;
+      const net = item.corpBorrowRate != null && base != null ? Number((base - item.corpBorrowRate).toFixed(2)) : null;
+      const prev = cMap.get(item.name);
+      const prv = Object.values(prev?.rates || {}).filter(v => v != null);
+      const prevBase = prv.length ? Math.max(...prv) : null;
+      const prevNet = prev?.corpBorrowRate != null && prevBase != null ? Number((prevBase - prev.corpBorrowRate).toFixed(2)) : null;
+      const cl = [
+        ['6m', deltaValue(item.rates?.['6m'], prev?.rates?.['6m'])],
+        ['9m', deltaValue(item.rates?.['9m'], prev?.rates?.['9m'])],
+        ['12m', deltaValue(item.rates?.['12m'], prev?.rates?.['12m'])],
+        ['DN vay', deltaValue(item.corpBorrowRate, prev?.corpBorrowRate)],
+        ['Lợi ích ròng', deltaValue(net, prevNet)]
+      ].filter(([,d]) => d != null).map(([l,d]) => `${l}: ${deltaHtml(d)}`).join('<br/>');
+      return `<tr>
+        <td><strong>${item.name}</strong></td>
+        <td class="center ${rateClass(item.rates?.['6m'], six.max, six.min)}">${fmtRate(item.rates?.['6m'])}</td>
+        <td class="center ${rateClass(item.rates?.['9m'], nine.max, nine.min)}">${fmtRate(item.rates?.['9m'])}</td>
+        <td class="center ${rateClass(item.rates?.['12m'], twelve.max, twelve.min)}">${fmtRate(item.rates?.['12m'])}</td>
+        <td class="center ${rateClass(item.corpBorrowRate, support.max, support.min)}">${fmtRate(item.corpBorrowRate)}</td>
+        <td class="center ${net != null ? rateClass(net, netMax, netMin) : ''}">${net != null ? ('+' + net.toFixed(2) + '%/năm') : ''}</td>
+        <td><span class="ui-chip ${item.strategy && item.strategy.includes('hỗ trợ') ? 'ui-chip-green' : 'ui-chip-amber'}">${item.strategy || ''}</span></td>
+        <td class="muted">${item.comment || ''}</td>
+        <td style="white-space:nowrap;font-size:12.5px">${cl || '<span class="muted">—</span>'}</td>
+      </tr>`;
+    }).join('');
+  }
+  function renderShortTerm(weekData) {
+    const body  = document.getElementById('short-term-body');
+    const empty = document.getElementById('short-empty');
+    const items = weekData?.shortTerm?.items || [];
+    const cItems = getComparisonWeekData()?.shortTerm?.items || [];
+    const cMap = new Map(cItems.map(i => [i.name, i]));
+    if (!items.length) { body.innerHTML = ''; empty.style.display = 'block'; return; }
+    empty.style.display = 'none';
+    const one = getColumnExtremes(items, '1m');
+    const two = getColumnExtremes(items, '2m');
+    const three = getColumnExtremes(items, '3m');
+    const four = getColumnExtremes(items, '4m');
+    const five = getColumnExtremes(items, '5m');
+    body.innerHTML = items.map(item => {
+      const prev = cMap.get(item.name);
+      const cl = [
+        ['1m', deltaValue(item.rates?.['1m'], prev?.rates?.['1m'])],
+        ['2m', deltaValue(item.rates?.['2m'], prev?.rates?.['2m'])],
+        ['3m', deltaValue(item.rates?.['3m'], prev?.rates?.['3m'])],
+        ['4m', deltaValue(item.rates?.['4m'], prev?.rates?.['4m'])],
+        ['5m', deltaValue(item.rates?.['5m'], prev?.rates?.['5m'])]
+      ].filter(([,d]) => d != null).map(([l,d]) => `${l}: ${deltaHtml(d)}`).join('<br/>');
+      return `<tr>
+        <td><strong>${item.name}</strong></td>
+        <td class="center ${rateClass(item.rates?.['1m'], one.max, one.min)}">${fmtRate(item.rates?.['1m'])}</td>
+        <td class="center ${rateClass(item.rates?.['2m'], two.max, two.min)}">${fmtRate(item.rates?.['2m'])}</td>
+        <td class="center ${rateClass(item.rates?.['3m'], three.max, three.min)}">${fmtRate(item.rates?.['3m'])}</td>
+        <td class="center ${rateClass(item.rates?.['4m'], four.max, four.min)}">${fmtRate(item.rates?.['4m'])}</td>
+        <td class="center ${rateClass(item.rates?.['5m'], five.max, five.min)}">${fmtRate(item.rates?.['5m'])}</td>
+        <td class="right">${item.minAmount ? fmtMoney(item.minAmount) + ' VND' : '<span class="muted">—</span>'}</td>
+        <td>${item.strategy || ''}</td>
+        <td style="white-space:nowrap;font-size:12.5px">${cl || '<span class="muted">—</span>'}</td>
+      </tr>`;
+    }).join('');
+  }
+  function renderUnderOneMonth(weekData) {
+    const body  = document.getElementById('under-one-body');
+    const empty = document.getElementById('under-empty');
+    const items = weekData?.underOneMonth?.items || [];
+    const cItems = getComparisonWeekData()?.underOneMonth?.items || [];
+    const cMap = new Map(cItems.map(i => [i.name, i]));
+    if (!items.length) { body.innerHTML = ''; empty.style.display = 'block'; return; }
+    empty.style.display = 'none';
+    const d1 = getColumnExtremes(items, '1d');
+    const w1 = getColumnExtremes(items, '1w');
+    const w2 = getColumnExtremes(items, '2w');
+    const w3 = getColumnExtremes(items, '3w');
+    body.innerHTML = items.map(item => {
+      const prev = cMap.get(item.name);
+      const cl = [
+        ['1d', deltaValue(item.rates?.['1d'], prev?.rates?.['1d'])],
+        ['1w', deltaValue(item.rates?.['1w'], prev?.rates?.['1w'])],
+        ['2w', deltaValue(item.rates?.['2w'], prev?.rates?.['2w'])],
+        ['3w', deltaValue(item.rates?.['3w'], prev?.rates?.['3w'])]
+      ].filter(([,d]) => d != null).map(([l,d]) => `${l}: ${deltaHtml(d)}`).join('<br/>');
+      return `<tr>
+        <td><strong>${item.name}</strong></td>
+        <td class="center ${rateClass(item.rates?.['1d'], d1.max, d1.min)}">${fmtRate(item.rates?.['1d'])}</td>
+        <td class="center ${rateClass(item.rates?.['1w'], w1.max, w1.min)}">${fmtRate(item.rates?.['1w'])}</td>
+        <td class="center ${rateClass(item.rates?.['2w'], w2.max, w2.min)}">${fmtRate(item.rates?.['2w'])}</td>
+        <td class="center ${rateClass(item.rates?.['3w'], w3.max, w3.min)}">${fmtRate(item.rates?.['3w'])}</td>
+        <td>${item.strategy || ''}</td>
+        <td style="white-space:nowrap;font-size:12.5px">${cl || '<span class="muted">—</span>'}</td>
+      </tr>`;
+    }).join('');
+  }
+  function renderStrategy(weekData) {
+    const body = document.getElementById('strategy-body');
+    const mItems = weekData?.mediumTerm?.items || [];
+    const best = mItems.filter(i => i.corpBorrowRate != null).sort((a,b) => a.corpBorrowRate - b.corpBorrowRate)[0];
+    const balance = mItems.find(i => i.name === 'BIDV');
+    const highest = mItems.map(i => ({ name: i.name, maxRate: Math.max(...Object.values(i.rates || {}).filter(v => v != null)) })).sort((a,b) => b.maxRate - a.maxRate)[0];
+    body.innerHTML = `
+      <tr><td>Phương án lõi</td><td>${best ? `<strong>${best.name}</strong> cho phần tiền cần gắn trực tiếp với mục tiêu doanh nghiệp vay rẻ.` : 'Chưa có dữ liệu.'}</td></tr>
+      <tr><td>Phương án cân bằng</td><td>${balance ? `<strong>${balance.name}</strong> cho phần cần vừa giữ lãi ổn, vừa hỗ trợ cấu trúc vay.` : 'Chưa có dữ liệu.'}</td></tr>
+      <tr><td>Phần tối ưu lãi</td><td>${highest ? `<strong>${highest.name}</strong> đang có lợi suất cao nhất trong nhóm trung hạn ở kỳ đang xem.` : 'Chưa có dữ liệu.'}</td></tr>`;
+  }
+  function buildProductsFromWeek(weekData) {
+    const products = [];
+    (weekData?.mediumTerm?.items || []).forEach(item => ['6m','9m','12m'].forEach(t => { const r = item.rates?.[t]; if (r != null) products.push({ name: item.name, tenorKey: t, rate: r, minAmount: 0, rollable: false, note: item.comment || item.strategy || '' }); }));
+    (weekData?.shortTerm?.items  || []).forEach(item => ['1m','2m','3m','4m','5m'].forEach(t => { const r = item.rates?.[t]; if (r != null) products.push({ name: item.name, tenorKey: t, rate: r, minAmount: item.minAmount || 0, rollable: false, note: item.strategy || '' }); }));
+    (weekData?.underOneMonth?.items || []).forEach(item => ['1d','1w','2w','3w'].forEach(t => { const r = item.rates?.[t]; if (r != null) products.push({ name: item.name, tenorKey: t, rate: r, minAmount: item.minAmount || 0, rollable: item.rollable || false, note: item.strategy || '' }); }));
+    return products;
+  }
+  function canUseProduct(product, targetTenor, amount) {
+    if (amount < (product.minAmount || 0)) return false;
+    if (product.tenorKey === targetTenor) return true;
+    if (product.rollable && product.tenorKey === '1d' && TENORS[targetTenor].days <= 30) return true;
+    return false;
+  }
+  function estimateInterest(amount, rate, tenorKey) {
+    return amount * (rate / 100) * (TENORS[tenorKey].days / 365);
+  }
+  function renderRecommendationSummary(results, amount, tenorKey, weekData) {
+    const box = document.getElementById('recommend-summary');
+    if (!amount || !tenorKey) { box.innerHTML = '<strong>Nhập số tiền và chọn tenor đầu tư</strong> để hệ thống đưa ra khuyến nghị.'; return; }
+    if (!weekData?.available) { box.innerHTML = '<strong class="bad">Kỳ dữ liệu đang chọn chưa có dữ liệu để khuyến nghị.</strong>'; return; }
+    if (!results.length) { box.innerHTML = '<strong class="bad">Không có phương án phù hợp</strong> cho số tiền và tenor đã chọn.'; return; }
+    const best = results[0];
+    box.innerHTML = `<strong>Kết quả:</strong> Option tốt nhất cho <strong>${fmtMoney(amount)} VND</strong> / <strong>${TENORS[tenorKey].label}</strong> là <span class="good">${best.name}</span> — ${fmtRate(best.rate)}.<br/><strong>Lãi ước tính:</strong> <span class="good">${fmtMoney(best.estimatedInterest)} VND</span>.`;
+  }
+  function runRecommendation() {
+    const amount   = Number(document.getElementById('recommend-amount').value || 0);
+    const tenorKey = document.getElementById('recommend-tenor').value;
+    const weekData = getSelectedWeekData();
+    const body     = document.getElementById('recommend-body');
+    if (!amount || !tenorKey) {
+      body.innerHTML = '<tr><td colspan="6" class="center muted">Nhập số tiền và chọn tenor rồi bấm "Đưa ra khuyến nghị".</td></tr>';
+      renderRecommendationSummary([], amount, tenorKey, weekData); return;
+    }
+    if (!weekData?.available) {
+      body.innerHTML = '<tr><td colspan="6" class="center bad">Tuần này chưa có dữ liệu để tính khuyến nghị.</td></tr>';
+      renderRecommendationSummary([], amount, tenorKey, weekData); return;
+    }
+    const products = buildProductsFromWeek(weekData)
+      .filter(p => canUseProduct(p, tenorKey, amount))
+      .map(p => ({ ...p, estimatedInterest: estimateInterest(amount, p.rate, tenorKey) }))
+      .sort((a,b) => b.estimatedInterest !== a.estimatedInterest ? b.estimatedInterest - a.estimatedInterest : b.rate - a.rate)
+      .slice(0, 3);
+    renderRecommendationSummary(products, amount, tenorKey, weekData);
+    if (!products.length) { body.innerHTML = '<tr><td colspan="6" class="center bad">Không có sản phẩm phù hợp.</td></tr>'; return; }
+    body.innerHTML = products.map((item, i) => {
+      const extra = item.minAmount ? ` · Tối thiểu ${fmtMoney(item.minAmount)} VND` : '';
+      const roll  = item.rollable && item.tenorKey === '1d' && tenorKey !== '1d' ? ' · Tính quay vòng qua đêm.' : '';
+      const rc = i === 0 ? 'ui-chip-green' : i === 1 ? 'ui-chip-blue' : 'ui-chip-amber';
+      return `<tr>
+        <td class="center"><span class="ui-chip ${rc}">#${i+1}</span></td>
+        <td><strong>${item.name}</strong></td>
+        <td>${TENORS[tenorKey].label}</td>
+        <td class="center">${fmtRate(item.rate)}</td>
+        <td class="right good"><strong>${fmtMoney(item.estimatedInterest)}</strong> VND</td>
+        <td class="muted" style="font-size:12.5px">${item.note || ''}${extra}${roll}</td>
+      </tr>`;
+    }).join('');
+  }
+  function renderSelectedPeriod() {
+    updateComparisonHeaders();
+    const wd = getSelectedWeekData();
+    renderPeriodHeader(wd);
+    renderRateOverview(wd);
+    renderMediumTerm(wd);
+    renderShortTerm(wd);
+    renderUnderOneMonth(wd);
+    renderStrategy(wd);
+    runRecommendation();
+  }
+  function resetToDefaultPeriod() {
+    document.getElementById('month-select').value = HISTORY.meta.defaultMonth;
+    refreshWeekSelector();
+    document.getElementById('week-select').value = HISTORY.meta.defaultWeek;
+    refreshComparePeriodSelector();
+    renderSelectedPeriod();
+  }
+  const DASHBOARD_CACHE_BUST = new URLSearchParams(window.location.search).get('v') || String(Date.now());
+  function withCacheBust(url) {
+    return url + (url.includes('?') ? '&' : '?') + 'v=' + encodeURIComponent(DASHBOARD_CACHE_BUST);
+  }
+  function applyHistoryData(data, sourceLabel) {
+    HISTORY = data;
+    setDataSourceLabel(sourceLabel);
+    populatePeriodSelectors();
+    renderSelectedPeriod();
+  }
+  async function tryLoadDefaultJson() {
+    try {
+      const res = await fetch(withCacheBust('data/history.json'));
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      applyHistoryData(data, 'data/history.json');
+      setLocalLoadStatus('<strong style="color:var(--gold-light)">&#10003; Đã đọc dữ liệu mặc định thành công.</strong> Nếu vẫn lỗi khi mở local, dùng nút <strong style="color:var(--gold-light)">Chọn history.json từ máy</strong>.');
+    } catch (err) {
+      setLocalLoadStatus('<strong class="bad">&#10007; Không đọc được data/history.json.</strong> Hãy bấm <strong style="color:var(--gold-light)">Chọn history.json từ máy</strong> để test local.');
+      throw err;
+    }
+  }
+  function chooseLocalJson() { document.getElementById('local-json-file').click(); }
+  async function loadLocalJsonFile(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    try {
+      const data = JSON.parse(await file.text());
+      applyHistoryData(data, 'Local: ' + file.name);
+      setLocalLoadStatus('<strong style="color:var(--gold-light)">&#10003; Đã nạp file local thành công:</strong> ' + file.name);
+    } catch (err) {
+      setLocalLoadStatus('<strong class="bad">&#10007; File JSON không hợp lệ.</strong> ' + String(err));
+    }
+  }
+  async function tryLoadSiteVersionMeta() {
+    try {
+      const res = await fetch(withCacheBust('data/site-version.json'));
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      SITE_META = await res.json();
+      renderLoanRefreshMeta();
+      renderPersonalRefreshMeta();
+    } catch (err) {
+      console.warn('Site version metadata load failed:', err);
+    }
+  }
+  async function init() {
+    document.getElementById('local-json-file').addEventListener('change', loadLocalJsonFile);
+    document.getElementById('month-select').addEventListener('change', () => { refreshWeekSelector(); refreshComparePeriodSelector(); renderSelectedPeriod(); });
+    document.getElementById('week-select').addEventListener('change', () => { refreshComparePeriodSelector(); renderSelectedPeriod(); });
+    document.getElementById('compare-period-select').addEventListener('change', renderSelectedPeriod);
+    await tryLoadSiteVersionMeta();
+    try { await tryLoadDefaultJson(); } catch (e) { console.warn('Default JSON load failed:', e); }
+    try { await tryLoadDefaultLoansJson(); } catch (e) { console.warn('Default company loans JSON load failed:', e); }
+    try { await tryLoadDefaultPersonalJson(); } catch (e) { console.warn('Default personal treasury JSON load failed:', e); }
+  }
+
+  /* ── FIX 1: Tab persistence ────────────────────────────────
+     Lưu tab đang active vào localStorage, khôi phục khi reload.
+     Không đụng đến data/render logic.
+  ─────────────────────────────────────────────────────────── */
+  (function applyTabPersistence() {
+    const _origSwitch = switchTab;
+    window.switchTab = function(tabId) {
+      _origSwitch(tabId);
+      try { localStorage.setItem('treasury-active-tab', tabId); } catch (e) {}
+    };
+  })();
+
+  /* ── FIX 2: iframe KE HOACH auto-height ────────────────────
+     Nhận postMessage từ monthly-plans-live.html để resize iframe
+     theo đúng chiều cao nội dung thực, không cần hardcode.
+  ─────────────────────────────────────────────── */
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'treasury-iframe-height') {
+      var frame = document.getElementById('monthlyPlansFrame');
+      if (frame) {
+        var h = Math.max(Number(e.data.height) || 0, 800);
+        frame.style.minHeight = h + 'px';
+      }
+    }
+  });
+
+  init().then(function() {
+    const saved = (() => { try { return localStorage.getItem('treasury-active-tab'); } catch (e) { return null; } })();
+    if (saved && document.getElementById('tab-' + saved)) {
+      switchTab(saved);
+    }
+  });
+</script>
+</body>
+</html>

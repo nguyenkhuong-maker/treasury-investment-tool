@@ -1,0 +1,135 @@
+{
+  "month": "2026-11",
+  "version": "Draft 1",
+  "updatedAt": "2026-10-22T14:30:00+07:00",
+  "opening": {
+    "vihali": 12351464975,
+    "personal": 3414966400,
+    "vihaliNote": "HM thấu chi BIDV sau các khoản chi của kế hoạch T10",
+    "personalNote": "Số dư VPB5678 cuối kỳ T10 + các tài khoản không kỳ hạn"
+  },
+  "carry": [
+    {
+      "id": "c1",
+      "date": "2026-11-11",
+      "entity": "personal",
+      "dir": "out",
+      "label": "Chi Opex DOPA T11",
+      "amount": 500000000,
+      "source": "carry"
+    },
+    {
+      "id": "c2",
+      "date": "2026-11-11",
+      "entity": "personal",
+      "dir": "out",
+      "label": "Chi Opex Beyond Atoms T11",
+      "amount": 500000000,
+      "source": "carry"
+    },
+    {
+      "id": "c3",
+      "date": "2026-11-11",
+      "entity": "personal",
+      "dir": "out",
+      "label": "Chi phí nhân viên DOPA T11",
+      "amount": 700000000,
+      "source": "carry"
+    },
+    {
+      "id": "c4",
+      "date": "2026-11-11",
+      "entity": "personal",
+      "dir": "out",
+      "label": "Mua USDT T11/2026",
+      "amount": 4105486000,
+      "source": "carry"
+    },
+    {
+      "id": "c5",
+      "date": "2026-11-11",
+      "entity": "personal",
+      "dir": "out",
+      "label": "Mua CCTG VPBank 1 tháng · 7.30%",
+      "amount": 9371432000,
+      "source": "carry",
+      "note": "Đáo hạn 11/12/2026"
+    },
+    {
+      "id": "c6",
+      "date": "2026-11-11",
+      "entity": "personal",
+      "dir": "out",
+      "label": "Gửi tiết kiệm NCB 6 tháng",
+      "amount": 5152625758,
+      "source": "carry"
+    },
+    {
+      "id": "c7",
+      "date": "2026-12-11",
+      "entity": "personal",
+      "dir": "in",
+      "label": "CCTG VPBank 1 tháng đáo hạn (gốc + lãi)",
+      "amount": 9427660592,
+      "source": "carry",
+      "note": "9,371,432,000 × (1 + 7.30% × 30/365)"
+    }
+  ],
+  "recurring": [
+    {
+      "id": "r1",
+      "label": "Chi Opex DOPA",
+      "entity": "personal",
+      "dir": "out",
+      "day": 11,
+      "amount": 500000000,
+      "seen": "T09, T10",
+      "on": true,
+      "startMonth": "2026-12"
+    },
+    {
+      "id": "r2",
+      "label": "Chi Opex Beyond Atoms",
+      "entity": "personal",
+      "dir": "out",
+      "day": 11,
+      "amount": 500000000,
+      "seen": "T09, T10",
+      "on": true,
+      "startMonth": "2026-12"
+    },
+    {
+      "id": "r3",
+      "label": "Chi phí nhân viên DOPA",
+      "entity": "personal",
+      "dir": "out",
+      "day": 11,
+      "amount": 700000000,
+      "seen": "T09, T10",
+      "on": true,
+      "startMonth": "2026-12"
+    },
+    {
+      "id": "r4",
+      "label": "Mua USDT",
+      "entity": "personal",
+      "dir": "out",
+      "day": 11,
+      "amount": 7671432000,
+      "seen": "T09, T10 · số T12 theo KH T10",
+      "on": true,
+      "startMonth": "2026-12"
+    },
+    {
+      "id": "r5",
+      "label": "Opex Vihali đi bằng thấu chi",
+      "entity": "vihali",
+      "dir": "out",
+      "day": 20,
+      "amount": 100000000,
+      "seen": "T10",
+      "on": true
+    }
+  ],
+  "adhoc": []
+}

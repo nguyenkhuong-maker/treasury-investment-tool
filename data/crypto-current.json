@@ -1,17 +1,17 @@
 {
   "meta": {
     "name": "Crypto Assets Snapshot",
-    "updatedAt": "2026-10-22T14:30:00+07:00",
-    "priceDate": "21-Oct-2026",
+    "updatedAt": "2026-10-23T13:00:23+07:00",
+    "priceDate": "22-Oct-2026",
     "source": "Sheet Crypto Assets (Sipher's Wallets)"
   },
   "prices": {
-    "BTC": 82932.92,
-    "ETH": 2427.96,
-    "SOL": 105.59,
-    "JitoSOL": 137.77,
+    "SOL": 104.47,
+    "BTC": 81856.49,
+    "ETH": 2392.14,
+    "JitoSOL": 136.24,
     "SIPHER": 0.0044,
-    "SAFE": 0.125
+    "SAFE": 0.1204
   },
   "tokens": [
     {
@@ -22,40 +22,40 @@
     {
       "k": "BTC",
       "qty": 32.8,
-      "usd": 2720222
+      "usd": 2684915
     },
     {
       "k": "ETH",
       "qty": 3296.24,
-      "usd": 8043343
+      "usd": 7924678
     },
     {
       "k": "SOL",
       "qty": 7324.94,
-      "usd": 773440
+      "usd": 765236
     },
     {
       "k": "OP",
       "qty": 216666,
-      "usd": 26412
+      "usd": 26087
     },
     {
       "k": "Others",
       "qty": 0,
-      "usd": 12386
+      "usd": 12098
     }
   ],
   "totals": {
     "stable": 2157641,
-    "btc": 2720221,
-    "eth": 8043344,
-    "other": 812237,
-    "total": 13733443
+    "btc": 2684915,
+    "eth": 7924677,
+    "other": 803421,
+    "total": 13570654
   },
   "wallets": [
     {
-      "group": "Treasury ERC-20",
-      "name": "Seed & Partnership Round MSIG",
+      "group": "ERC-20 Wallet",
+      "name": "Gnosis Sipher Seed & Partnership Round MSIG",
       "entity": "Sipher",
       "chain": "Ethereum",
       "type": "Gnosis Safe",
@@ -67,34 +67,34 @@
       "total": 0
     },
     {
-      "group": "Treasury ERC-20",
-      "name": "$SIPHER General Management MSIG",
+      "group": "ERC-20 Wallet",
+      "name": "Gnosis $SIPHER General Management MSIG",
       "entity": "Sipher",
       "chain": "Ethereum",
       "type": "Gnosis Safe",
       "address": "0x1198…1295",
       "stable": 0,
       "btc": 0,
-      "eth": 5099886,
-      "other": 695,
-      "total": 5100581
+      "eth": 5024646,
+      "other": 671,
+      "total": 5025317
     },
     {
-      "group": "Treasury ERC-20",
-      "name": "NFT OpenSea Commission MSIG",
+      "group": "ERC-20 Wallet",
+      "name": "Gnosis NFT OpenSea Commission MSIG",
       "entity": "Sipher",
       "chain": "Ethereum",
       "type": "Gnosis Safe",
       "address": "0x1299…b663",
       "stable": 0,
       "btc": 0,
-      "eth": 358252,
-      "other": 2759,
-      "total": 361011
+      "eth": 352966,
+      "other": 2715,
+      "total": 355681
     },
     {
-      "group": "Treasury ERC-20",
-      "name": "B2B Guilds MSIG",
+      "group": "ERC-20 Wallet",
+      "name": "Gnosis Sipher B2B Guilds MSIG",
       "entity": "Sipher",
       "chain": "Ethereum",
       "type": "Gnosis Safe",
@@ -106,20 +106,20 @@
       "total": 0
     },
     {
-      "group": "Treasury ERC-20",
-      "name": "NFT Sale MSIG",
+      "group": "ERC-20 Wallet",
+      "name": "Gnosis Sipher NFT Sale MSIG",
       "entity": "Sipher",
       "chain": "Ethereum",
       "type": "Gnosis Safe",
       "address": "0x1390…243F",
       "stable": 2154774,
       "btc": 22,
-      "eth": 617873,
-      "other": 8931,
-      "total": 2781600
+      "eth": 608757,
+      "other": 8712,
+      "total": 2772265
     },
     {
-      "group": "Treasury ERC-20",
+      "group": "ERC-20 Wallet",
       "name": "1102 Equity Fundraising",
       "entity": "1102",
       "chain": "Ethereum",
@@ -140,14 +140,14 @@
       "address": "0x1299…b663",
       "stable": 0,
       "btc": 0,
-      "eth": 4601,
+      "eth": 4533,
       "other": 0,
-      "total": 4601
+      "total": 4533
     },
     {
       "group": "Polygon Wallet",
       "name": "Dopa JSC Polygon Gnosis SALA",
-      "entity": "DOPA",
+      "entity": "Dopa",
       "chain": "Polygon",
       "type": "Gnosis Safe",
       "address": "0xf5D5…c35B",
@@ -160,7 +160,7 @@
     {
       "group": "Polygon Wallet",
       "name": "Dopa JSC Polygon Gnosis OPEX",
-      "entity": "DOPA",
+      "entity": "Dopa",
       "chain": "Polygon",
       "type": "Gnosis Safe",
       "address": "0xb727…39b2",
@@ -178,10 +178,10 @@
       "type": "Ví thường",
       "address": "0x3e8c…9a16",
       "stable": 0,
-      "btc": 2388469,
+      "btc": 2357468,
       "eth": 0,
       "other": 0,
-      "total": 2388469
+      "total": 2357468
     },
     {
       "group": "ERC-20 Wallet & Solana Wallet",
@@ -193,8 +193,8 @@
       "stable": 0,
       "btc": 0,
       "eth": 0,
-      "other": 773440,
-      "total": 773440
+      "other": 765236,
+      "total": 765236
     },
     {
       "group": "ERC-20 Wallet & Solana Wallet",
@@ -204,10 +204,10 @@
       "type": "Ví lạnh",
       "address": "0x3BC1…c002",
       "stable": 0,
-      "btc": 331730,
-      "eth": 1960710,
+      "btc": 327425,
+      "eth": 1931783,
       "other": 0,
-      "total": 2292440
+      "total": 2259208
     },
     {
       "group": "Sipher Gaming Revenue",
@@ -218,9 +218,9 @@
       "address": "0x6EFE…cdb2",
       "stable": 1550,
       "btc": 0,
-      "eth": 138,
+      "eth": 136,
       "other": 0,
-      "total": 1688
+      "total": 1686
     },
     {
       "group": "Sipher Gaming Revenue",
@@ -231,9 +231,9 @@
       "address": "0x819B…1e41",
       "stable": 521,
       "btc": 0,
-      "eth": 123,
+      "eth": 121,
       "other": 0,
-      "total": 644
+      "total": 642
     },
     {
       "group": "Sipher Gaming Revenue",
@@ -244,9 +244,9 @@
       "address": "0xb1d0…2723",
       "stable": 766,
       "btc": 0,
-      "eth": 1760,
+      "eth": 1734,
       "other": 0,
-      "total": 2526
+      "total": 2500
     },
     {
       "group": "Capytal War Gaming Revenue",
@@ -276,7 +276,7 @@
     },
     {
       "group": "Capytal War Gaming Revenue",
-      "name": "Capytalwar Payment - TON wallet (airdrop distributions)",
+      "name": "Capytalwar Payment - TON wallet (use for airdrop distributions)",
       "entity": "Ather Labs",
       "chain": "TON",
       "type": "Ví thường",
@@ -323,8 +323,8 @@
       "stable": 0,
       "btc": 0,
       "eth": 0,
-      "other": 26412,
-      "total": 26412
+      "other": 26087,
+      "total": 26087
     },
     {
       "group": "GIN Limited - OP Funds",

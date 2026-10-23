@@ -1,19 +1,20 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-10-22T07:37:32+00:00",
-    "source": "Google Sheets live export 2026-10-22T06:00:03.037Z",
+    "updatedAt": "2026-10-23T13:00:23+07:00",
+    "source": "Google Sheets live export 2026-10-23T06:00:03.112Z",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet",
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-10-22T06:00:03.037Z",
+      "generatedAt": "2026-10-23T06:00:03.112Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
-        "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ"
+        "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",
+        "1x4Z5HIBqSI-9fIb9Z32vLc_L8Offea7aY6UU-ftC_6A"
       ],
-      "sheets": "Loan-BIDV (gid 1186104758) / Loan-SC (gid 2025947730) / Dashboard-fix (gid 1112915361)",
+      "sheets": "Loan-BIDV (gid 1186104758) / Loan-SC (gid 2025947730) / Dashboard-fix (gid 1112915361) / Crypto Assets (gid 1601120065)",
       "rule": "Always refresh via scripts/fetch_treasury_online_data.mjs before building a new monthly plan; do not use a prior tmp export or hand-edited JSON as source."
     }
   },

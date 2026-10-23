@@ -20,11 +20,17 @@ export interface PlanInputs {
   month: string; version: string; updatedAt?: string;
   opening: { vihali: number; personal: number; vihaliNote?: string; personalNote?: string };
   carry: PlanLine[]; recurring: Recurring[]; adhoc: PlanLine[];
+  /* Ảnh chụp kế hoạch tại lần lưu/trình CFO gần nhất, dùng khi tháng đã qua */
+  snapshot?: { savedAt: string; opening: { vihali: number; personal: number }; lines: PlanLine[] };
 }
 export type ApprovalStatus = 'draft' | 'pending_cfo_review' | 'revision_requested' | 'approved';
 export interface TLEvent { at: string; kind: 'draft' | 'submit' | 'revise' | 'approve'; text: string }
 export interface PlanApproval { version: string; status: ApprovalStatus; events: TLEvent[] }
-export interface PlanMonth { key: string; label: string; from: string; to: string; live: boolean }
+export type PlanMode = 'live' | 'snapshot' | 'archive';
+export interface PlanMonth { key: string; label: string; from: string; to: string; live: boolean; mode: PlanMode }
+export interface ArchiveCell { t: string; b: boolean; n: boolean }
+export type ArchiveBlock = { type: 'h'; level: number; text: string } | { type: 'p'; text: string } | { type: 'ul'; items: string[] } | { type: 'table'; head: string[]; rows: ArchiveCell[][] };
+export interface ArchivePlan { title: string; meta: string; blocks: ArchiveBlock[]; source: string }
 
 export let LOANS: Loan[] = [];
 export let PERSONAL_DEPOSITS: Deposit[] = [];
@@ -170,6 +176,13 @@ function defaultInputs(key: string, prev: PlanInputs | undefined): PlanInputs {
   };
 }
 
+const archiveCache: Record<string, Promise<ArchivePlan | null>> = {};
+export function loadArchive(month: string, kind: 'company' | 'personal') {
+  const k = `${month}-${kind}`;
+  if (!archiveCache[k]) archiveCache[k] = getJson<ArchivePlan>(`./data/monthly-plans/archive/${k}.json`, true);
+  return archiveCache[k];
+}
+
 export async function loadAll() {
   const sv = await getJson<any>('./data/site-version.json', true);
   META.siteVersion = sv?.version || String(Date.now());
@@ -201,13 +214,16 @@ export async function loadAll() {
   });
   PLAN_INPUTS = inputs;
 
-  const oldMonths: PlanMonth[] = (live?.availableMonths || [])
-    .filter((m: any) => !inputs[m.key])
-    .map((m: any) => ({ key: m.key, label: m.label, ...(() => { const p = monthPeriod(m.key); return { from: p.from, to: p.to }; })(), live: false }));
-  PLAN_MONTHS = [
-    ...inputMonths.map(k => { const p = monthPeriod(k); return { key: k, label: p.label, from: p.from, to: p.to, live: true }; }),
-    ...oldMonths,
-  ].sort((a, b) => b.key.localeCompare(a.key));
+  const archiveIdx = await getJson<any>('./data/monthly-plans/archive/index.json', true);
+  const period = (k: string) => { const p = monthPeriod(k); return { from: p.from, to: p.to, label: p.label }; };
+  const archiveMonths: string[] = Array.from(new Set<string>([...(archiveIdx?.months || []), ...((live?.availableMonths || []).map((m: any) => m.key))]));
+  const monthMap = new Map<string, PlanMonth>();
+  archiveMonths.forEach(k => monthMap.set(k, { key: k, ...period(k), live: false, mode: 'archive' }));
+  inputMonths.forEach(k => {
+    const mode: PlanMode = k >= nextKey ? 'live' : (inputs[k]?.snapshot ? 'snapshot' : (monthMap.has(k) ? 'archive' : 'snapshot'));
+    monthMap.set(k, { key: k, ...period(k), live: mode === 'live', mode });
+  });
+  PLAN_MONTHS = [...monthMap.values()].sort((a, b) => b.key.localeCompare(a.key));
 
   PLAN_HIGHLIGHTS = {};
   Object.entries(live?.months || {}).forEach(([k, m]: [string, any]) => {

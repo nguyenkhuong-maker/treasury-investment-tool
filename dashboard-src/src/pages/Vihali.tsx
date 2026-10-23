@@ -7,32 +7,31 @@ import { Panel, Kpi, Donut, Legend, Chip, th, td, tn } from '@/components/kit';
 import { useApp } from '@/state';
 import { LOANS, CONTRACT_DEFAULTS } from '@/data/static';
 
-function ContractCell({ code, bank }: { code: string; bank: string }) {
+function ContractCell({ code, group }: { code: string; group: string }) {
   const { editor, links, saveLink } = useApp();
   const [edit, setEdit] = useState(false);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState('');
   const own = links[code];
-  const link = own || CONTRACT_DEFAULTS[bank];
+  const frame = CONTRACT_DEFAULTS[group];
   if (edit) return (
     <form className="flex gap-1 items-center" onSubmit={async e => {
       e.preventDefault(); const v = (e.currentTarget.elements.namedItem('u') as HTMLInputElement).value.trim();
       setBusy(true); setErr(''); const r = await saveLink(code, v); setBusy(false);
       if (r) setErr(r); else setEdit(false);
     }}>
-      <input id={'lk' + code} name="u" defaultValue={own || ''} placeholder="Dán link Google Drive (để trống để xóa)" className="h-7 w-52 rounded-sm border bg-background px-2 text-xs" autoFocus />
+      <input id={'lk' + code} name="u" defaultValue={own || ''} placeholder="Link Drive giấy nhận nợ (trống để xóa)" className="h-7 w-52 rounded-sm border bg-background px-2 text-xs" autoFocus />
       <button disabled={busy} className="h-7 px-2 text-xs rounded-sm bg-primary text-primary-foreground disabled:opacity-60">{busy ? '…' : 'Lưu'}</button>
       <button type="button" onClick={() => setEdit(false)} className="h-7 px-2 text-xs rounded-sm border">Hủy</button>
       {err && <span className="text-[11px] text-neg">{err}</span>}
     </form>
   );
+  const A = ({ href, label }: { href: string; label: string }) => (
+    <a href={href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline whitespace-nowrap"><FileText className="w-3.5 h-3.5" />{label}<ExternalLink className="w-3 h-3" /></a>);
   return (
-    <div className="flex items-center gap-2">
-      {link ? (
-        <a href={link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline whitespace-nowrap">
-          <FileText className="w-3.5 h-3.5" />{own ? 'Bản cứng' : 'HĐTD khung'}<ExternalLink className="w-3 h-3" />
-        </a>
-      ) : <span className="text-xs text-muted-foreground whitespace-nowrap">Chưa gắn</span>}
+    <div className="flex items-center gap-3">
+      {own ? <A href={own} label={group === 'sc-vld' ? 'Annex' : 'Khế ước'} /> : <span className="text-xs text-warn whitespace-nowrap">Thiếu bản scan</span>}
+      {frame && <A href={frame} label="HĐ khung" />}
       {editor && <button onClick={() => setEdit(true)} className="text-muted-foreground hover:text-primary" aria-label="Gắn link hợp đồng"><Link2 className="w-3.5 h-3.5" /></button>}
     </div>
   );
@@ -124,7 +123,7 @@ export default function Vihali() {
                             </button>
                           ) : <span className="text-xs text-muted-foreground">Chưa gắn</span>}
                         </td>
-                        <td className={td}><ContractCell code={l.code} bank={l.bank} /></td>
+                        <td className={td}><ContractCell code={l.code} group={l.group} /></td>
                       </tr>
                     );
                   })}

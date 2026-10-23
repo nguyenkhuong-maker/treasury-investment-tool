@@ -1,7 +1,20 @@
 {
   "defaults": {
-    "SC": "https://drive.google.com/file/d/1z0v6ZV3KG80lSj86QP0Lx3okZv9biRpN/view"
+    "sc-vld": "https://drive.google.com/file/d/1z0v6ZV3KG80lSj86QP0Lx3okZv9biRpN/view",
+    "bidv-vld": "https://drive.google.com/file/d/1JQa9-EtaUeh_OhSDlMnWgOAWZwhAGbK2/view"
   },
-  "links": {},
-  "updatedAt": "2026-10-22T14:30:00+07:00"
+  "links": {
+    "404004807798": "https://drive.google.com/file/d/1Xr4lGilEaGlW5D95F0q_drwnciiNsSWx/view",
+    "400004871689": "https://drive.google.com/file/d/1Rgchyka9sjYsP4c6r2MVTdRjbQgpFACi/view",
+    "406004974623": "https://drive.google.com/file/d/1yo83Tf4HF1HD-oYbL59qq6QZjHX-5_eO/view",
+    "007385614": "https://drive.google.com/file/d/1oblfCxh-VC8l6FqMB3CWswFLYk7SFvyj/view",
+    "007405487": "https://drive.google.com/file/d/1xOLYvSFwMkI75VbPLTzw6r-ISPbKC-QP/view",
+    "007419194": "https://drive.google.com/file/d/1MB_ON5GnXjeGbGRZudIRmRRvQ3dsrwyH/view",
+    "007431226": "https://drive.google.com/file/d/1NBMX3AjoSkTMio0aEmZORmlyuzQbCtbY/view",
+    "007464194": "https://drive.google.com/file/d/1p_gctdTU7f40DzTPXrz7to1gaO3nIQ5Y/view",
+    "007484215": "https://drive.google.com/file/d/18q7z7JY7XtIsDwjfL3M3ImRQDoAekC4K/view",
+    "007517847": "https://drive.google.com/file/d/18kILKy0JCKnf18E7xnHMA9uxut8_M1ry/view",
+    "007535213": "https://drive.google.com/file/d/1SXZ-dOml1ZKEovHZXALBRDQcvIAhi5Ht/view"
+  },
+  "updatedAt": "2026-10-23T11:30:00+07:00"
 }

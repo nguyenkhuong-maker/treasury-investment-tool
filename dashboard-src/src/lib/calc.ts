@@ -54,7 +54,7 @@ export function collateralFlows() {
 }
 
 /* Kế hoạch: khoản đến hạn lấy từ các tab + kế thừa + định kỳ + phát sinh (từ file nhập liệu tháng) */
-export function buildPlan(monthKey: string, recurring: Recurring[], adhoc: PlanLine[]): PlanLine[] {
+export function buildPlan(monthKey: string, recurring: Recurring[], adhoc: PlanLine[], carry?: PlanLine[]): PlanLine[] {
   const m = PLAN_MONTHS.find(x => x.key === monthKey);
   if (!m) return [];
   const inP = (d?: string | null) => !!d && d >= m.from && d <= m.to;
@@ -67,7 +67,7 @@ export function buildPlan(monthKey: string, recurring: Recurring[], adhoc: PlanL
     id: 'D' + d.code, date: d.due!, entity: 'personal', dir: 'in', label: `${d.bank} ${d.code} đến hạn`, amount: d.settle, source: 'deposit',
     note: `${d.owner} · gốc ${d.principal.toLocaleString('en-US')}${d.rate ? ` · LS ${d.rate}%` : ''}`,
   }));
-  lines.push(...(PLAN_INPUTS[monthKey]?.carry || []).filter(c => inP(c.date)));
+  lines.push(...(carry ?? PLAN_INPUTS[monthKey]?.carry ?? []).filter(c => inP(c.date)));
   const months = [m.from.slice(0, 7), m.to.slice(0, 7)];
   recurring.filter(r => r.on).forEach(r => {
     months.forEach(mm => {

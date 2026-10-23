@@ -1,0 +1,629 @@
+{
+ "title": "KẾ HOẠCH NGÂN QUỸ VIHALI",
+ "meta": "Kỳ kế hoạch: 01/07/2026 - 15/08/2026 | Ngày lập: 02/07/2026 | Version: Draft 5",
+ "blocks": [
+  {
+   "type": "h",
+   "level": 2,
+   "text": "1. Bảng kế hoạch chi tiết theo ngày"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Số dư HM TC đầu ngày",
+    "Phát sinh thu",
+    "Phát sinh chi",
+    "HM tái cấp",
+    "Số dư HM TC cuối ngày",
+    "Ghi chú"
+   ],
+   "rows": [
+    [
+     {
+      "t": "01/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "12,086,040,646",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "12,086,040,646",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Mở kỳ kế hoạch",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "03/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "12,086,040,646",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "319,671,435",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "11,766,369,211",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán SC 007213292",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "06/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "11,766,369,211",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "3,153,475,200",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "14,919,844,411",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thu DOPA 1 hóa đơn 119,904 USD; giả định tỷ giá 26,300 VND/USD",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "08/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "14,919,844,411",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "812,157,962",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "14,107,686,449",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán SC 007219384",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "10/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "14,107,686,449",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "8,658,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "22,765,686,449",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Chuyển sổ 810004228033 sang thấu chi BIDV TN với giá trị tính hạn mức 8,658 tỷ; mở sổ mới 3 tỷ tại BIDV để giữ BIDV VLĐ = 5 tỷ",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "17/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "22,765,686,449",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "449,154,599",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "22,316,531,850",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán SC 007230274",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "24/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "22,316,531,850",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "60,361,954",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "22,256,169,896",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán BIDV VLĐ 404004377692",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "29/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "22,256,169,896",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "2,124,719,034",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "20,131,450,862",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán SC 007249501",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "31/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "20,131,450,862",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "110,165,649",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "20,021,285,213",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán BIDV VLĐ 405004401881",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "05/08/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "20,021,285,213",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "797,484,904",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "19,223,800,309",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán SC 007259697",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "10/08/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "19,223,800,309",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "459,975,941",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "18,763,824,368",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán SC 007265357",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "15/08/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "18,763,824,368",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "18,763,824,368",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Kết thúc kỳ báo cáo",
+      "b": false,
+      "n": false
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "2. Tóm tắt chỉ tiêu"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chỉ tiêu",
+    "Giá trị"
+   ],
+   "rows": [
+    [
+     {
+      "t": "Hạn mức còn lại thấu chi BIDV đầu kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "12,086,040,646",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng thu trong kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "11,811,475,200",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng chi trong kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "(5,133,691,478)",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Số dư hạn mức cuối kỳ",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "18,763,824,368",
+      "b": true,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Thanh khoản mỏng nhất",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "11,766,369,211 (ngày 03/07/2026)",
+      "b": false,
+      "n": false
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "3. Mốc cần theo dõi"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Nội dung",
+    "Giá trị"
+   ],
+   "rows": [
+    [
+     {
+      "t": "06/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thu DOPA",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,153,475,200",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "10/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Tăng hạn mức thấu chi BIDV TN",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "8,658,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "29/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Khoản chi lớn nhất kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "2,124,719,034",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "03/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thanh khoản mỏng nhất trước khi thu DOPA",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "11,766,369,211",
+      "b": false,
+      "n": true
+     }
+    ]
+   ]
+  }
+ ],
+ "month": "2026-07",
+ "planType": "company",
+ "source": "plans/2026-07/company.html"
+}

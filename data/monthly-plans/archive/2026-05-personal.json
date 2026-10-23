@@ -1,0 +1,1311 @@
+{
+ "title": "KẾ HOẠCH NGÂN QUỸ CÁ NHÂN",
+ "meta": "Kỳ kế hoạch: 01/05/2026 - 15/06/2026 | Ngày lập: 23/04/2026 | Version: Draft 1",
+ "blocks": [
+  {
+   "type": "h",
+   "level": 2,
+   "text": "1. Tiền gửi đầu kỳ"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chủ tài khoản",
+    "Ngân hàng",
+    "Số tiền (VND)",
+    "Ngày đáo hạn",
+    "Trạng thái",
+    "Lãi dự thu (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - VIP0036804",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "8,657,491,176",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "27/04/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "709,914,276",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - VIP0036805",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "7,402,185,300",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "03/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "384,913,636",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - VIP0036806",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,350,400,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "06/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "157,468,800",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - VIP0101785",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "6,350,713,600",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "28/04/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "520,758,515",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - VIP0108820",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "16,800,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "08/04/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,377,600,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC-HCM - 44-1470100-04",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "12,688,088,160",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "15/04/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,015,047,053",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC-HCM - 44-1470100-06",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "9,544,500,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "25/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "544,036,500",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN (6 sổ)",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "31,410,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "05/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,601,910,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VDR - GSC01",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,175,671,189",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "29/06/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "16,575,353",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VDR - GSC02",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "8,746,094,318",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "28/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "185,345,314",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VDR / IPA",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "16,123,673,527",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "11/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "321,589,982",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "122,248,817,270",
+      "b": true,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "6,835,159,429",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "2. Dư nợ vay đầu kỳ"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chủ tài khoản",
+    "Ngân hàng",
+    "Số tiền gốc (VND)",
+    "Ngày đáo hạn",
+    "Lãi suất",
+    "Tiền gốc còn phải trả",
+    "Lãi còn phải trả"
+   ],
+   "rows": [
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "30,000,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "11/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "6.00%",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "27,250,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "498,965,754",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "30,000,000,000",
+      "b": true,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "27,250,000,000",
+      "b": true,
+      "n": true
+     },
+     {
+      "t": "498,965,754",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "3. Thanh khoản đầu kỳ"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chủ tài khoản",
+    "Ngân hàng",
+    "Số tài khoản",
+    "Số tiền (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPB-PL",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPB5678",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "2,258,133,460",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Nguyễn Trung Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPB-PL",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "543033162",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "3,274,386,208",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BVB-NSG",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "09388885678",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "111,439,728",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "8838888558",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "994,610",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC-HCM",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "99441890299",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "ACB-CVL",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "37472217",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,646,954,006",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "4. Dòng tiền VPBank chị Thảo"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Nội dung giao dịch",
+    "Thu vào (VND)",
+    "Chi ra (VND)",
+    "Số dư (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "01/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Số dư đầu kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "2,258,133,460",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "01/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chi CP nhân viên DOPA T04/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "633,086,200",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,625,047,260",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VDR IPA đáo hạn (gốc + lãi)",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "16,445,263,509",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "18,070,310,769",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Đầu tư VNDirect 3 tháng",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,180,263,509",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "2,890,047,260",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chi CP Opex DOPA",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "500,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "2,390,047,260",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chi CP Opex Beyond Atoms",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "500,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,890,047,260",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "28/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chi CP nhân viên DOPA T05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "600,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,290,047,260",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "28/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chi lãi vay cá nhân BIDV",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "259,383,562",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,030,663,698",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/06/2026",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "Số dư cuối kỳ",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,030,663,698",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "5. Dòng tiền VPBank anh Tín"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Nội dung giao dịch",
+    "Thu vào (VND)",
+    "Chi ra (VND)",
+    "Số dư (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "01/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Số dư đầu kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,274,386,208",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "03/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Tất toán BIDV VIP0036805 nhập về VPBank anh Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "7,787,098,936",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "11,061,485,144",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "06/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Tất toán BIDV VIP0036806 nhập về VPBank anh Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,507,868,800",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "14,569,353,944",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "06/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Tất toán BIDV VIP0101785 nhập về VPBank anh Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "6,350,713,600",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "20,920,067,544",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "07/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Gộp mở mới 1 STK VPBank 12 tháng tên Nguyễn Trung Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "20,920,067,544",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/06/2026",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "Số dư cuối kỳ",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "0",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "6. Kế hoạch tái tục / tái đầu tư"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Khoản",
+    "Phương án xử lý",
+    "Số tiền (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "03/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV VIP0036805",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Giữ lại để gom mở mới VPBank",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "7,787,098,936",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "06/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV VIP0036806",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Giữ lại để gom mở mới VPBank",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,507,868,800",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "06/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV VIP0101785",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Tất toán trước hạn để gom mở mới VPBank",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "6,350,713,600",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "07/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPB Nguyễn Trung Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Gộp vào 1 STK VPBank 12 tháng",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,274,386,208",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "07/05/2026",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "Tổng giá trị mở mới VPBank 12 tháng",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "1 STK VPBank tên Nguyễn Trung Tín",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "20,920,067,544",
+      "b": true,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VDR IPA",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Tiếp tục đầu tư VNDirect 3 tháng",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,180,263,509",
+      "b": false,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "7. Tóm tắt cuối kỳ"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chỉ tiêu",
+    "Giá trị"
+   ],
+   "rows": [
+    [
+     {
+      "t": "VPBank chị Thảo cuối kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,030,663,698",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "VPBank anh Tín cuối kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Giá trị mở mới VPBank 12 tháng",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "20,920,067,544",
+      "b": false,
+      "n": true
+     }
+    ]
+   ]
+  }
+ ],
+ "month": "2026-05",
+ "planType": "personal",
+ "source": "plans/2026-05/personal.html"
+}

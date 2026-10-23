@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { APPROVALS, PLAN_INPUTS, CONTRACT_LINKS, PLAN_MONTHS } from '@/data/static';
 import type { PlanInputs, PlanApproval, Entity } from '@/data/static';
 import { postToAppsScript, EDITOR_CODE, fmtStamp } from '@/data/store';
+import { buildPlan } from '@/lib/calc';
 
 type Approvals = typeof APPROVALS;
 interface Ctx {
@@ -10,7 +11,7 @@ interface Ctx {
   cryptoOpen: boolean; setCryptoOpen: (b: boolean) => void;
   links: Record<string, string>; saveLink: (code: string, url: string) => Promise<string | null>;
   inputs: Record<string, PlanInputs>; editInputs: (month: string, f: (p: PlanInputs) => PlanInputs) => void;
-  dirty: Record<string, boolean>; saveInputs: (month: string) => Promise<string | null>; discardInputs: (month: string) => void;
+  dirty: Record<string, boolean>; saveInputs: (month: string, opts?: { keepVersion?: boolean }) => Promise<string | null>; discardInputs: (month: string) => void;
   approvals: Approvals; setApproval: (month: string, ent: Entity, a: PlanApproval) => void;
   liveMonth: string;
   go: (v: string) => void;
@@ -39,14 +40,18 @@ export function AppProvider({ children, go }: { children: ReactNode; go: (v: str
     setInputs(x => ({ ...x, [month]: f(structuredClone(x[month])) }));
     setDirty(d => ({ ...d, [month]: true }));
   };
-  const saveInputs = async (month: string) => {
+  const saveInputs = async (month: string, opts: { keepVersion?: boolean } = {}) => {
     const a = approvals[month];
     let data = inputs[month];
     // Sửa sau khi CFO trả về hoặc đã duyệt thì nâng version để trình lại
-    if (a && (a.vihali.status !== 'draft' || a.personal.status !== 'draft')) {
+    if (!opts.keepVersion && a && (a.vihali.status !== 'draft' || a.personal.status !== 'draft')) {
       const n = (Number(String(data.version).match(/\d+/)?.[0]) || 1) + 1;
       data = { ...data, version: `Draft ${n}` };
     }
+    // Lưu kèm ảnh chụp các dòng kế hoạch để xem lại đúng như lúc trình, kể cả sau khi khoản vay đã tất toán
+    const { snapshot: _old, ...rest } = data;
+    void _old;
+    data = { ...rest, snapshot: { savedAt: new Date().toISOString(), opening: { vihali: rest.opening.vihali, personal: rest.opening.personal }, lines: buildPlan(month, rest.recurring, rest.adhoc, rest.carry) } };
     const r = await postToAppsScript({ action: 'savePlanInputs', editorCode: EDITOR_CODE, month, inputs: data });
     if (!r.ok) return r.error || 'Không lưu được kế hoạch';
     setInputs(x => ({ ...x, [month]: data }));

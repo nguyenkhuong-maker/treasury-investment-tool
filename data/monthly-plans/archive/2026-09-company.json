@@ -1,0 +1,547 @@
+{
+ "title": "KẾ HOẠCH NGÂN QUỸ VIHALI",
+ "meta": "Kỳ kế hoạch: 01/09/2026 - 15/10/2026 | Ngày lập: 04/09/2026 | Version: Draft 1",
+ "blocks": [
+  {
+   "type": "h",
+   "level": 2,
+   "text": "1. Bảng kế hoạch chi tiết theo ngày"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Số dư HM TC đầu ngày",
+    "Phát sinh thu",
+    "Phát sinh chi",
+    "HM tái cấp",
+    "Số dư HM TC cuối ngày",
+    "Ghi chú"
+   ],
+   "rows": [
+    [
+     {
+      "t": "01/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,843,565,206",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "15,843,565,206",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Mở kỳ; lấy theo BIDV overdraft available limit trong snapshot live 04/09/2026 11:40",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "09/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,843,565,206",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "504,576,368",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "15,338,988,838",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán SC 007305767",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "14/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,338,988,838",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "120,906,885",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "15,218,081,953",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán BIDV VLĐ 400004586176",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "15/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,218,081,953",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "15,969,278,923",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "2,500,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,748,803,030",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "BIDV cấp thêm hạn mức thấu chi 2,500,000,000 VND, TSĐB là sổ tiết kiệm Hồ Thị Yến Nhi mở tại BIDV ngày 10/09/2026; trả nợ BIDV TN thấu chi 8610037624 trong ngày",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "20/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,748,803,030",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "15,912,689,622",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "17,661,492,652",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Cấp lại hạn mức thấu chi mới BIDV TN",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "25/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "17,661,492,652",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "2,100,729,688",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "15,560,762,964",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán SC 007332686",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "29/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,560,762,964",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "102,289,186",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "15,458,473,778",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán BIDV VLĐ 406004639406",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "09/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,458,473,778",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "743,615,555",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "14,714,858,223",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán SC 007349292",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "15/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "14,714,858,223",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "14,714,858,223",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Kết thúc kỳ báo cáo",
+      "b": false,
+      "n": false
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "2. Tóm tắt chỉ tiêu"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chỉ tiêu",
+    "Giá trị"
+   ],
+   "rows": [
+    [
+     {
+      "t": "Hạn mức còn lại thấu chi BIDV đầu kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,843,565,206",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng thu trong kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng HM tái cấp / cấp thêm trong kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "18,412,689,622",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng chi trong kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "(19,541,396,605)",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Số dư hạn mức cuối kỳ",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "14,714,858,223",
+      "b": true,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Thanh khoản mỏng nhất",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,748,803,030 (ngày 15/09/2026)",
+      "b": false,
+      "n": false
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "3. Mốc cần theo dõi"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Nội dung",
+    "Giá trị"
+   ],
+   "rows": [
+    [
+     {
+      "t": "15/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Trả nợ BIDV TN thấu chi 8610037624",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,969,278,923",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV cấp thêm hạn mức thấu chi, TSĐB là sổ tiết kiệm Yến Nhi mở ngày 10/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "2,500,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thanh khoản mỏng nhất sau cấp thêm hạn mức và trả BIDV TN",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,748,803,030",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "20/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Line mới BIDV TN được cấp lại",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,912,689,622",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "25/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Khoản chi lớn nhất sau khi tất toán BIDV TN",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "2,100,729,688",
+      "b": false,
+      "n": true
+     }
+    ]
+   ]
+  }
+ ],
+ "month": "2026-09",
+ "planType": "company",
+ "source": "plans/2026-09/company.html"
+}

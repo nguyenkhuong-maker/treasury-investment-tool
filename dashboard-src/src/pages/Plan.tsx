@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend as RLegend } from 'recharts';
 import { Send, Check, RotateCcw, FilePen, Plus, Trash2, Lock, ExternalLink, Save } from 'lucide-react';
 import { PLAN_MONTHS, PLAN_HIGHLIGHTS, SOURCE_LABEL, STATUS_LABEL } from '@/data/static';
-import type { PlanLine, PlanApproval, Entity, PlanMonth } from '@/data/static';
-import { postToAppsScript } from '@/data/store';
+import type { PlanLine, PlanApproval, Entity, PlanMonth, ArchivePlan, ArchiveBlock } from '@/data/static';
+import { postToAppsScript, loadArchive, fmtStamp } from '@/data/store';
 import { buildPlan, runBalance } from '@/lib/calc';
 import { nf, ty, dm, dmy } from '@/lib/fmt';
 import { Panel, Chip, th, td, tn } from '@/components/kit';
@@ -19,13 +19,17 @@ const statusTone = (s: PlanApproval['status']) => (s === 'approved' ? 'pos' : s 
 const nowStr = () => { const d = new Date(); const p = (n: number) => String(n).padStart(2, '0'); return `${p(d.getDate())}/${p(d.getMonth() + 1)}/${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`; };
 
 function Approval({ month, ent, readonly }: { month: string; ent: Entity; readonly?: boolean }) {
-  const { approvals, setApproval, dirty } = useApp();
+  const { approvals, setApproval, dirty, saveInputs, inputs } = useApp();
   const a = approvals[month][ent];
   const [confirm, setConfirm] = useState(false);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState('');
   const submit = async () => {
     setBusy(true); setMsg('');
+    if (inputs[month]) {
+      const err = await saveInputs(month, { keepVersion: true });
+      if (err) { setBusy(false); setConfirm(false); setMsg(err); return; }
+    }
     const planType = ent === 'vihali' ? 'company' : 'personal';
     const r = await postToAppsScript({
       planId: `${month}-${planType}`, month, planType, title: TITLE[ent], version: a.version,
@@ -182,14 +186,73 @@ function EditorPanel({ m }: { m: PlanMonth }) {
   );
 }
 
+function ArchiveBlocks({ blocks }: { blocks: ArchiveBlock[] }) {
+  return (
+    <div className="grid">
+      {blocks.map((b, i) => {
+        if (b.type === 'h') return <h3 key={i} className={cn('px-4 font-semibold', b.level <= 2 ? 'pt-4 pb-2 text-[13.5px] border-t first:border-t-0 bg-muted/30' : 'pt-3 pb-1.5 text-[13px] text-muted-foreground')}>{b.text}</h3>;
+        if (b.type === 'p') return <p key={i} className="px-4 py-1.5 text-[12.5px] text-muted-foreground leading-relaxed whitespace-pre-line">{b.text}</p>;
+        if (b.type === 'ul') return <ul key={i} className="px-4 py-1.5 grid gap-1 text-[12.5px] list-disc pl-8">{b.items.map((t, k) => <li key={k} className="whitespace-pre-line">{t}</li>)}</ul>;
+        return (
+          <div key={i} className="overflow-x-auto">
+            <table className="w-full text-[12.5px] border-collapse">
+              {b.head.length > 0 && <thead><tr>{b.head.map((h, k) => <th key={k} className={th + (b.rows.some(r => r[k]?.n) ? ' text-right' : '')}>{h}</th>)}</tr></thead>}
+              <tbody>{b.rows.map((r, k) => {
+                const total = r.length > 0 && /^(tổng|cộng|số dư cuối kỳ)/i.test(r[0].t);
+                return (
+                  <tr key={k} className={cn('hover:bg-accent/40 align-top', total && 'bg-muted/50 font-semibold')}>
+                    {r.map((c, z) => <td key={z} className={cn(c.n ? tn : td, 'py-2 whitespace-pre-line', !c.n && c.t.length > 24 && 'min-w-[180px]', c.b && 'font-semibold', c.n && /^\(|^[-−]/.test(c.t) && 'text-neg')}>{c.t}</td>)}
+                  </tr>);
+              })}</tbody>
+            </table>
+          </div>);
+      })}
+    </div>
+  );
+}
+
+function ArchiveView({ m }: { m: PlanMonth }) {
+  const { approvals } = useApp();
+  const [data, setData] = useState<Record<string, ArchivePlan | null | undefined>>({});
+  useEffect(() => {
+    let on = true;
+    setData({});
+    Promise.all([loadArchive(m.key, 'company'), loadArchive(m.key, 'personal')]).then(([c, p]) => { if (on) setData({ vihali: c, personal: p }); });
+    return () => { on = false; };
+  }, [m.key]);
+  return (
+    <div className="grid xl:grid-cols-2 gap-4 items-start">
+      {(['vihali', 'personal'] as Entity[]).map(e => {
+        const d = data[e];
+        const hl = PLAN_HIGHLIGHTS[m.key]?.[e] || [];
+        return (
+          <Panel key={e} pad={false} title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{ENT[e]}</span>{e === 'vihali' ? 'Kế hoạch dòng tiền & hạn mức thấu chi' : 'Kế hoạch Individual Treasury'}</span>}
+            sub={d?.meta || `${approvals[m.key]?.[e]?.version || ''}`}
+            right={<a href={`${OLD}${m.key}/${e === 'vihali' ? 'company' : 'personal'}.html`} target="_blank" rel="noreferrer" className="text-xs text-muted-foreground inline-flex items-center gap-1 hover:text-primary">Bản gốc<ExternalLink className="w-3 h-3" /></a>}>
+            {hl.length > 0 && (
+              <div className="grid grid-cols-2 sm:grid-cols-4 border-b">
+                {hl.slice(0, 4).map(([k, v], i) => (
+                  <div key={k} className={cn('px-4 py-3 min-w-0', i % 2 && 'border-l', i >= 2 && 'border-t sm:border-t-0', i === 2 && 'sm:border-l')}><div className="text-xs text-muted-foreground">{k}</div><div className="num text-[15px] font-medium mt-0.5">{v}</div></div>))}
+              </div>)}
+            {d === undefined ? <p className="p-4 text-xs text-muted-foreground">Đang tải…</p>
+              : d === null ? <p className="p-4 text-xs text-muted-foreground">Không có bản kế hoạch {ENT[e]} cho tháng này.</p>
+              : <ArchiveBlocks blocks={d.blocks} />}
+          </Panel>);
+      })}
+    </div>
+  );
+}
+
 export default function Plan() {
   const { editor, inputs, approvals, liveMonth } = useApp();
   const [month, setMonth] = useState(liveMonth || PLAN_MONTHS[0]?.key);
   const m = PLAN_MONTHS.find(x => x.key === month)!;
   if (!m) return <p className="text-muted-foreground">Chưa có kế hoạch tháng.</p>;
-  const live = m.live && !!inputs[month];
-  const lines = live ? buildPlan(month, inputs[month].recurring, inputs[month].adhoc) : [];
-  const op = live ? inputs[month].opening : { vihali: 0, personal: 0 };
+  const live = m.mode === 'live' && !!inputs[month];
+  const snap = m.mode === 'snapshot' ? inputs[month]?.snapshot : undefined;
+  const computed = m.mode !== 'archive' && !!inputs[month];
+  const lines = !computed ? [] : snap ? snap.lines : buildPlan(month, inputs[month].recurring, inputs[month].adhoc, inputs[month].carry);
+  const op = !computed ? { vihali: 0, personal: 0 } : snap ? snap.opening : inputs[month].opening;
   const vh = runBalance(lines, 'vihali', op.vihali), cn_ = runBalance(lines, 'personal', op.personal);
   const end = (rows: { bal: number }[], o: number) => (rows.length ? rows[rows.length - 1].bal : o);
   const minOf = (rows: { bal: number; date: string }[], o: number) => rows.reduce((a, r) => (r.bal < a.v ? { v: r.bal, d: r.date } : a), { v: o, d: m.from });
@@ -201,15 +264,17 @@ export default function Plan() {
   return (
     <div className="grid gap-4">
       <div className="flex flex-wrap items-center gap-3 bg-card border rounded-md px-4 py-3">
-        <div className="inline-flex border rounded-sm overflow-hidden text-[13px]">
-          {PLAN_MONTHS.map(x => {
-            const st = approvals[x.key]?.vihali.status;
-            return <button key={x.key} onClick={() => setMonth(x.key)} className={cn('px-3 py-1.5 flex items-center gap-1.5', month === x.key ? 'bg-primary text-primary-foreground' : 'hover:bg-muted')}>
-              {x.label.replace('Tháng ', 'T')}{st === 'approved' && <Check className="w-3 h-3" />}</button>;
-          })}
+        <div className="max-w-full overflow-x-auto">
+          <div className="inline-flex border rounded-sm overflow-hidden text-[13px]">
+            {PLAN_MONTHS.map(x => {
+              const st = approvals[x.key]?.vihali.status;
+              return <button key={x.key} onClick={() => setMonth(x.key)} className={cn('px-3 py-1.5 flex items-center gap-1.5 whitespace-nowrap', month === x.key ? 'bg-primary text-primary-foreground' : 'hover:bg-muted')}>
+                {x.label.replace('Tháng ', 'T')}{st === 'approved' && <Check className="w-3 h-3" />}</button>;
+            })}
+          </div>
         </div>
         <span className="text-[13px]">Kỳ kế hoạch <span className="num font-medium">{dmy(m.from)} – {dmy(m.to)}</span></span>
-        {live && <span className="text-xs text-muted-foreground ml-auto">Tự sinh từ dữ liệu tab Vihali, Cá nhân và các khoản định kỳ của tháng trước</span>}
+        <span className="text-xs text-muted-foreground ml-auto">{live ? 'Đang lập · tự sinh từ dữ liệu tab Vihali, Cá nhân và các khoản định kỳ' : snap ? `Bản đã lưu ${fmtStamp(snap.savedAt)}` : 'Bản kế hoạch đã trình'}</span>
       </div>
 
       {live && editor && <EditorPanel m={m} />}
@@ -221,17 +286,7 @@ export default function Plan() {
         </div>
       </Panel>
 
-      {!live ? (
-        <div className="grid md:grid-cols-2 gap-4">
-          {(['vihali', 'personal'] as Entity[]).map(e => (
-            <Panel key={e} title={e === 'vihali' ? 'Kế hoạch dòng tiền & hạn mức thấu chi' : 'Kế hoạch Individual Treasury'} sub={`${ENT[e]} · ${approvals[month][e].version}`}
-              right={<a href={`${OLD}${month}/${e === 'vihali' ? 'company' : 'personal'}.html`} target="_blank" rel="noreferrer" className="text-xs text-primary inline-flex items-center gap-1 hover:underline">Xem bản đã duyệt<ExternalLink className="w-3 h-3" /></a>}>
-              <dl className="grid grid-cols-2 gap-3">
-                {(PLAN_HIGHLIGHTS[month]?.[e] || []).map(([k, v]) => <div key={k} className="border rounded-sm px-3 py-2"><dt className="text-xs text-muted-foreground">{k}</dt><dd className="num text-[16px] font-medium mt-0.5">{v}</dd></div>)}
-              </dl>
-            </Panel>))}
-        </div>
-      ) : <>
+      {!computed ? <ArchiveView m={m} /> : <>
         <div className="grid xl:grid-cols-2 gap-4 items-start">
           {[
             { k: 'vihali', t: 'Vihali', h: 'Kế hoạch dòng tiền & hạn mức thấu chi', d: 'Trả nợ đến hạn lấy từ tab Vihali · nguồn trả là HM thấu chi BIDV', o: op.vihali, rows: vh, min: vmin, lbl: 'HM còn lại', opening: 'HM thấu chi BIDV khả dụng đầu kỳ' },
@@ -261,7 +316,7 @@ export default function Plan() {
             </ResponsiveContainer>
           </div>
         </Panel>
-        {!editor && <p className="text-xs text-muted-foreground flex items-center gap-1.5"><Lock className="w-3 h-3" />Thu chi phát sinh và khoản định kỳ do người lập nhập ở chế độ người lập.</p>}
+        {live && !editor && <p className="text-xs text-muted-foreground flex items-center gap-1.5"><Lock className="w-3 h-3" />Thu chi phát sinh và khoản định kỳ do người lập nhập ở chế độ người lập.</p>}
       </>}
     </div>
   );

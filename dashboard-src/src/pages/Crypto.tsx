@@ -7,7 +7,6 @@ const tok = (k: string) => CRYPTO_TOKENS.find(t => t.k === k) || { k, v: 0, qty:
 import { nf, ty, usd, FX } from '@/lib/fmt';
 import { Panel, Kpi, Donut, Legend, Chip, th, td, tn } from '@/components/kit';
 
-const TIERS: [number, number][] = [[50000, 110], [100000, 135], [200000, 185], [500000, 334], [1000000, 500]];
 
 function CryptoGate() {
   const { setCryptoOpen } = useApp();
@@ -45,15 +44,11 @@ function CryptoInner({ onLock }: { onLock: () => void }) {
   const [by, setBy] = useState<'ent' | 'chain'>('ent');
   const [hide, setHide] = useState(true);
   const [closed, setClosed] = useState<Record<string, boolean>>({});
-  const [q, setQ] = useState('500,000');
   const cv = (n: number) => (cur === 'USD' ? usd(n) : n ? ty(n * FX) : '–');
   const cell = (n: number) => (!n ? '–' : cur === 'USD' ? nf(n) : (n * FX / 1e9).toFixed(2));
   const st = WALLETS.reduce((a, w) => a + w.st, 0);
   const agg = Object.entries(WALLETS.reduce<Record<string, number>>((m, w) => { const k = by === 'ent' ? w.ent : w.chain; m[k] = (m[k] || 0) + w.tot; return m; }, {}))
     .filter(e => e[1] > 0).sort((a, b) => b[1] - a[1]);
-  const usdt = parseFloat(q.replace(/,/g, '')) || 0;
-  const fee = (TIERS.find(t => usdt <= t[0]) || TIERS[4])[1];
-  const bankVnd = (usdt * 0.9975 - fee) * FX, p2p = usdt * 26200, diff = p2p - bankVnd;
   const seg = (opts: [string, string][], v: string, set: (x: any) => void) => (
     <div className="inline-flex border rounded-sm overflow-hidden text-xs">
       {opts.map(([k, l]) => <button key={k} onClick={() => set(k)} className={'px-2.5 py-1 ' + (v === k ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted')}>{l}</button>)}
@@ -141,24 +136,6 @@ function CryptoInner({ onLock }: { onLock: () => void }) {
         </div>
       </Panel>
 
-      <Panel title="Quy đổi USDT → VND" sub="Theo bảng tier trong sheet: PSP 0.25%, phí chuyển USD theo bậc, tỷ giá ngân hàng 26,360 và P2P 26,200">
-        <div className="flex flex-wrap items-center gap-3 mb-3">
-          <label htmlFor="usdtIn" className="text-xs text-muted-foreground">Số USDT</label>
-          <input id="usdtIn" value={q} onChange={e => setQ(e.target.value)} onBlur={() => setQ(nf(usdt))} inputMode="decimal" className="num h-8 w-40 text-right rounded-sm border bg-background px-2" />
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-[13px] border-collapse">
-            <thead><tr><th className={th}>Bước</th><th className={th + ' text-right'}>PSP + ngân hàng</th><th className={th + ' text-right'}>P2P</th></tr></thead>
-            <tbody>
-              <tr><td className={td}>Đổi USDT → USD tại PSP (0.25%)</td><td className={tn}>{nf(usdt * 0.9975)} USD</td><td className={tn + ' text-muted-foreground'}>–</td></tr>
-              <tr><td className={td}>Phí chuyển USD về Vihali</td><td className={tn}>{nf(fee)} USD</td><td className={tn + ' text-muted-foreground'}>–</td></tr>
-              <tr><td className={td}>Tỷ giá</td><td className={tn}>{nf(FX)}</td><td className={tn}>26,200</td></tr>
-              <tr className="font-semibold bg-muted/50"><td className={td}>VND nhận được</td><td className={tn}>{nf(bankVnd)}</td><td className={tn}>{nf(p2p)}</td></tr>
-              <tr><td className={td}>Chênh lệch P2P so với ngân hàng</td><td className={tn} /><td className={tn + (diff < 0 ? ' text-neg' : ' text-pos')}>{diff > 0 ? '+' : ''}{nf(diff)} ({(diff / (bankVnd || 1) * 100).toFixed(2)}%)</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </Panel>
     </div>
   );
 }

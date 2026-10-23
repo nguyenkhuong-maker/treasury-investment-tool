@@ -1,0 +1,1245 @@
+{
+ "title": "KẾ HOẠCH NGÂN QUỸ CÁ NHÂN",
+ "meta": "Kỳ kế hoạch: 01/06/2026 - 15/07/2026 | Ngày lập: 03/06/2026 | Version: Draft 5",
+ "blocks": [
+  {
+   "type": "h",
+   "level": 2,
+   "text": "1. Tiền gửi đầu kỳ"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chủ tài khoản",
+    "Ngân hàng",
+    "Số tiền (VND)",
+    "Ngày đáo hạn",
+    "Trạng thái",
+    "Giá trị dự thu về (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - VIP0036804",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "8,658,663,289",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "28/04/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "9,351,356,352",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - VIP0108820",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "16,800,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "08/04/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "18,177,600,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - 813005446854",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,235,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "05/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,501,985,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - 817005446883",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,235,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "05/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,501,985,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - 817005446887",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,235,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "05/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,501,985,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - 816005446824",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,235,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "05/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,501,985,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - 814005446865",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,235,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "05/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,501,985,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - 813005446875",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,235,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "05/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,501,985,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VNDirect / VDR - GSC01",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,175,671,189",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "29/06/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,192,246,543",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VNDirect / VDR - GSC02",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "8,746,094,318",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "28/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "8,931,439,632",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "IPA / VDR",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,599,994,227",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "11/08/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,934,218,761",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Nguyễn Trung Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPBank - 586539639",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "19,466,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "11/11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "20,329,543,758",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC-HCM - 44-1470100-04",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "12,688,088,160",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "15/04/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "13,703,135,213",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC-HCM - 44-1470100-06",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "9,544,500,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "25/09/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "10,088,536,500",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "124,089,011,183",
+      "b": true,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "130,719,986,759",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "2. Dư nợ vay đầu kỳ"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chủ tài khoản",
+    "Ngân hàng",
+    "Dư nợ gốc kế hoạch (VND)",
+    "Ngày đáo hạn",
+    "Lãi suất",
+    "Lãi tháng 6 (VND)",
+    "Tổng tất toán (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "27,000,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "11/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "6.00%",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "263,226,027",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "27,048,821,918",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "27,000,000,000",
+      "b": true,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "263,226,027",
+      "b": true,
+      "n": true
+     },
+     {
+      "t": "27,048,821,918",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "3. Thanh khoản đầu kỳ"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chủ tài khoản",
+    "Ngân hàng",
+    "Số tài khoản",
+    "Số tiền (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPB-PL",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPB5678",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,309,780,631",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Nguyễn Trung Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPB-PL",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "543033162",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "36,616",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BVB-NSG",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "09388885678",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "111,439,728",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "8838888558",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "994,610",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC-HCM",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "99441890299",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "ACB-CVL",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "37472217",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,424,251,585",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "4. Dòng tiền VPBank chị Thảo (VPB5678)"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Nội dung giao dịch",
+    "Thu vào (VND)",
+    "Chi ra (VND)",
+    "Số dư (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "01/06/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Số dư đầu kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,309,780,631",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/06/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chi CP Opex DOPA",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "500,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "809,780,631",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/06/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chi CP Opex Beyond Atoms",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "500,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "309,780,631",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "29/06/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VNDirect / VDR GSC01 đáo hạn chuyển về VPB5678",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,192,246,543",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,502,027,174",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "30/06/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chi phí lãi vay cá nhân BIDV tháng 6",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "263,226,027",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,238,801,147",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "30/06/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chi CP nhân viên DOPA T06/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "600,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "638,801,147",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "05/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Tổng gốc lãi 6 sổ BIDV đến hạn nhập về VPB5678",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "33,011,910,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "33,650,711,147",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV thu nợ gốc và lãi khoản vay cá nhân đến hạn",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "27,048,821,918",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "6,601,889,229",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chuyển anh chị phần chênh lệch sau khi BIDV thu nợ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,963,088,082",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "638,801,147",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/07/2026",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "Số dư cuối kỳ",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "638,801,147",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "5. Kế hoạch xử lý khoản đáo hạn / thu nợ"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Khoản",
+    "Phương án xử lý",
+    "Số tiền (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "29/06/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VNDirect / VDR GSC01",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Đáo hạn và chuyển toàn bộ về VPB5678",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,192,246,543",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "05/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "06 sổ BIDV cá nhân của Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Tất toán toàn bộ gốc và lãi, nhập toàn bộ về VPB5678",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "33,011,910,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Khoản vay cá nhân BIDV",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV thu nợ gốc và lãi khoản vay cá nhân đến hạn",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "27,048,821,918",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Phần chênh sau thu nợ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chuyển từ VPB5678 cho anh chị trong cùng ngày",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,963,088,082",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/07/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Khoản vay cá nhân BIDV đến hạn",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Đã tất toán trong ngày từ nguồn tiền 6 sổ BIDV đáo hạn",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "6. Tóm tắt cuối kỳ"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chỉ tiêu",
+    "Giá trị"
+   ],
+   "rows": [
+    [
+     {
+      "t": "VPB5678 cuối kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "638,801,147",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Chi phí lãi vay cá nhân BIDV tháng 6",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "263,226,027",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng tất toán khoản vay BIDV ngày 11/07",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "27,048,821,918",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Phần chênh chuyển anh chị ngày 11/07",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,963,088,082",
+      "b": false,
+      "n": true
+     }
+    ]
+   ]
+  }
+ ],
+ "month": "2026-06",
+ "planType": "personal",
+ "source": "plans/2026-06/personal.html"
+}

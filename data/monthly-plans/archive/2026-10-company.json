@@ -1,0 +1,467 @@
+{
+ "title": "KẾ HOẠCH NGÂN QUỸ VIHALI — DRAFT",
+ "meta": "Kỳ kế hoạch: 01/10/2026 – 15/11/2026 | Ngày lập: 01/10/2026 | Cập nhật: 05/10/2026 | Version: Draft 4",
+ "blocks": [
+  {
+   "type": "h",
+   "level": 2,
+   "text": "1. Kế hoạch dòng tiền theo ngày"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "HM thấu chi đầu ngày",
+    "Thu",
+    "Chi",
+    "HM cuối ngày",
+    "Ghi chú"
+   ],
+   "rows": [
+    [
+     {
+      "t": "01/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,287,973,791",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "15,287,973,791",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Mở kỳ theo hạn mức thấu chi BIDV khả dụng trong snapshot live gần nhất.",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "09/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,287,973,791",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "743,615,555",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "14,544,358,236",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "SC 007349292\nThanh toán khế ước active",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "19/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "14,544,358,236",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "2,092,893,261",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "12,451,464,975",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "SC 007365017\nThanh toán khế ước active",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "20/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "12,451,464,975",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "100,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "12,351,464,975",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Chi phí Opex đi bằng thấu chi",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "02/11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "12,351,464,975",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "361,979,977",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "11,989,484,998",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "SC 007385614\nThanh toán khế ước active",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "06/11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "11,989,484,998",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "289,221,137",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "11,700,263,861",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "BIDV VLĐ 404004807798\nThanh toán khế ước active",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "15/11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "11,700,263,861",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "11,700,263,861",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Kết thúc kỳ; không có khoản thu DOPA trong kỳ.",
+      "b": false,
+      "n": false
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "2. Tóm tắt"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chỉ tiêu",
+    "Giá trị"
+   ],
+   "rows": [
+    [
+     {
+      "t": "HM thấu chi BIDV đầu kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "15,287,973,791 VND",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng thu DOPA",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "0 VND",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Chi đáo hạn khế ước trong kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "(3,487,709,930) VND",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Chi Opex đi bằng thấu chi (20/10)",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "(100,000,000) VND",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng chi trong kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "(3,587,709,930) VND",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "HM cuối kỳ theo draft",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "11,700,263,861 VND",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "3. Mốc cần theo dõi"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Khoản",
+    "Giá trị",
+    "Ghi chú"
+   ],
+   "rows": [
+    [
+     {
+      "t": "09/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC 007349292",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "743,615,555 VND",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán khế ước active",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "19/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC 007365017",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "2,092,893,261 VND",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán khế ước active",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "20/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Opex",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "100,000,000 VND",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Chi phí Opex đi bằng thấu chi",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "02/11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC 007385614",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "361,979,977 VND",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán khế ước active",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "06/11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV VLĐ 404004807798",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "289,221,137 VND",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán khế ước active",
+      "b": false,
+      "n": false
+     }
+    ]
+   ]
+  },
+  {
+   "type": "p",
+   "text": "Nguồn: Google Sheets / Loan-BIDV / Loan-SC; bản này là draft, cần đối chiếu row-level trước khi chốt CFO."
+  }
+ ],
+ "month": "2026-10",
+ "planType": "company",
+ "source": "plans/2026-10/company.html"
+}

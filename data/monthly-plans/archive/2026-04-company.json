@@ -1,0 +1,389 @@
+{
+ "title": "KẾ HOẠCH DÒNG TIỀN VÀ HẠN MỨC THẤU CHI KHẢ DỤNG (CÔNG TY)",
+ "meta": "",
+ "blocks": [
+  {
+   "type": "h",
+   "level": 2,
+   "text": "1. Mục đích và phạm vi"
+  },
+  {
+   "type": "p",
+   "text": "Kế hoạch quản lý dòng tiền và hạn mức thấu chi khả dụng của công ty trong kỳ 01/04/2026 - 15/05/2026, phục vụ điều phối thanh khoản và thanh toán nợ vay đúng hạn."
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "2. Thông tin kỳ kế hoạch"
+  },
+  {
+   "type": "ul",
+   "items": [
+    "Thời gian: 01/04/2026 - 15/05/2026",
+    "Ngày lập: 07/04/2026",
+    "Prepared date/time: 07/04/2026 13:02 GMT+7",
+    "Preparer: Vesper / Finance Team",
+    "Version: 1.5",
+    "Tỷ giá kế hoạch: 26,300 VND/USD",
+    "Hạn mức thấu chi khả dụng đầu kỳ: 6,154,631,449 VND"
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "3. Bảng kế hoạch chi tiết theo ngày"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Số dư HM TC đầu ngày",
+    "Phát sinh thu",
+    "Phát sinh chi",
+    "HM tái cấp",
+    "Số dư HM TC cuối ngày",
+    "Ghi chú"
+   ],
+   "rows": [
+    [
+     {
+      "t": "01/04/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "6,154,631,449",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "6,154,631,449",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Số dư thực tế đến hết 31/03/2026",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "03/04/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "6,154,631,449",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "476,826,499",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "5,677,804,950",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán SC 007085384",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "10/04/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,677,804,950",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "16,800,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "17,221,979,989",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "5,255,824,961",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "BIDV cấp hạn mức mới 16.8 tỷ; thanh toán SC 007095194; tất toán 1440328001 và 1440280147",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "24/04/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,255,824,961",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,895,891,250",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "3,359,933,711",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán SC 007116272",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "01/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,359,933,711",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "422,445,799",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "2,937,487,912",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán SC 007124748",
+      "b": false,
+      "n": false
+     }
+    ],
+    [
+     {
+      "t": "15/05/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "2,937,487,912",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "480,144,472",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "2,457,343,440",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "Thanh toán SC 007142807; kết thúc kỳ báo cáo",
+      "b": false,
+      "n": false
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "4. Tóm tắt thu - chi"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chỉ tiêu",
+    "Giá trị"
+   ],
+   "rows": [
+    [
+     {
+      "t": "Số dư đầu kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "6,154,631,449",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng thu trong kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "16,800,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng HM tái cấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng chi trong kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "(20,497,288,009)",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Số dư cuối kỳ",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "2,457,343,440",
+      "b": true,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Mức đáy thanh khoản",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "2,457,343,440 (ngày 15/05/2026)",
+      "b": false,
+      "n": false
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "5. Kết luận"
+  },
+  {
+   "type": "p",
+   "text": "Thanh khoản tổng thể: AN TOÀN CÓ KIỂM SOÁT."
+  },
+  {
+   "type": "h",
+   "level": 3,
+   "text": "Khuyến nghị chính"
+  },
+  {
+   "type": "ul",
+   "items": [
+    "Xác nhận chứng từ / lịch hiệu lực cấp hạn mức mới BIDV 16.8 tỷ ngày 10/04/2026.",
+    "Xác nhận hoàn tất tất toán 2 khoản thấu chi 1440328001 và 1440280147 trong ngày 10/04/2026.",
+    "Theo dõi khoản BIDV VLD ngày 19/05/2026 và đưa vào watchlist T-7.",
+    "Rà soát phương án bù đắp dòng thu DOPA bị loại khỏi kế hoạch cho kỳ sau."
+   ]
+  },
+  {
+   "type": "p",
+   "text": "Owner: Finance Team | Approver: CFO | Effective date: 2026-04-01 | Version: 1.5"
+  }
+ ],
+ "month": "2026-04",
+ "planType": "company",
+ "source": "plans/2026-04/company.html"
+}

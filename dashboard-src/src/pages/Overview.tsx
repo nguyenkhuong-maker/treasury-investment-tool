@@ -9,7 +9,9 @@ import { useApp } from '@/state';
 function CollateralMap() {
   const { src, links } = collateralFlows();
   const S = Object.entries(src).filter(([, v]) => v.amount > 0);
-  const G = GROUP_SUMMARY;
+  // Thứ tự bên phải: BIDV TN thấu chi, BIDV VLĐ, BIDV TS thấu chi, SC VLĐ để các dải nối không chồng lên nhau
+  const ORDER = ['bidv-od-tn', 'bidv-vld', 'bidv-od-ts', 'sc-vld'];
+  const G = [...GROUP_SUMMARY].sort((a, b) => ORDER.indexOf(a.key) - ORDER.indexOf(b.key));
   const W = 760, nodeW = 10, gap = 18, top = 10, minH = 30;
   const scale = 240 / Math.max(S.reduce((a, [, v]) => a + v.amount, 0), LOAN_TOTAL);
   let y = top; const sy: Record<string, { y: number; h: number; off: number }> = {};
@@ -56,7 +58,7 @@ export default function Overview() {
   const lastApproved = PLAN_MONTHS.filter(x => x.key < liveMonth).map(x => ({ x, a: approvals[x.key]?.vihali })).find(o => o.a?.status === 'approved');
   const W = RATE_WEEKS[RATE_WEEKS.length - 1], P = RATE_WEEKS[RATE_WEEKS.length - 2] || W;
   const top12 = [...W.medium].filter((i: any) => i.r['12m'] != null).sort((a: any, b: any) => b.r['12m'] - a.r['12m']).slice(0, 4);
-  const plan = pin ? buildPlan(liveMonth, pin.recurring, pin.adhoc) : [];
+  const plan = pin ? buildPlan(liveMonth, pin.recurring, pin.adhoc, pin.carry) : [];
   const vh = runBalance(plan, 'vihali', pin?.opening.vihali || 0), cn = runBalance(plan, 'personal', pin?.opening.personal || 0);
   const upcoming = plan.filter(l => daysTo(l.date) >= 0 && daysTo(l.date) <= 45);
   const unpledged = PERSONAL_TOTAL - PLEDGED_TOTAL;

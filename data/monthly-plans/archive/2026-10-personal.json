@@ -1,0 +1,1583 @@
+{
+ "title": "KẾ HOẠCH NGÂN QUỸ CÁ NHÂN",
+ "meta": "Kỳ kế hoạch: 01/10/2026 - 15/11/2026 | Ngày lập: 01/10/2026 | Cập nhật: 05/10/2026 | Version: Draft 4",
+ "blocks": [
+  {
+   "type": "h",
+   "level": 2,
+   "text": "1. Tiền gửi đầu kỳ"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chủ tài khoản",
+    "Ngân hàng",
+    "Số tiền (VND)",
+    "Ngày đáo hạn",
+    "Trạng thái",
+    "Giá trị dự thu về (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - 810004228033",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "8,658,663,289",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "28/04/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "9,351,356,352",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - 818016673105",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "16,800,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "08/04/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "18,177,600,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - 819017973477",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "8,280,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "09/06/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "8,942,400,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - 817018585429",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,000,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "06/07/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,240,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - 818020135596",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "2,500,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "10/09/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "2,700,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN - 8838888558",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "994,610",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "-",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không kỳ hạn",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "994,610",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Nguyễn Trung Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "NCB-SGN - LD2621148083",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "7,250,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "30/01/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "7,589,895,890",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Nguyễn Trung Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "NCB-SGN - LD2622463083",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "14,235,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "12/02/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "14,916,720,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Nguyễn Trung Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPB-PL - 586539639",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "19,466,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "11/11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "20,329,543,758",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Nguyễn Trung Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPB-PL - Chứng chỉ tiền gửi 1m",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "6,922,217,457",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "12/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "6,966,311,033",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC-HCM - 44-1470100-04",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "12,688,088,160",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "15/04/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "13,703,135,213",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC-HCM - 44-1470100-06",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "9,544,500,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "25/09/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "10,327,149,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Hồ Thị Yến Nhi",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC-HCM - SC-HCM-Hồ Thị Yến Nhi-2940000000",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "2,940,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "07/07/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Thế chấp",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,175,200,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC-HCM - 99441890299",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "-",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không kỳ hạn",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPB-PL - 09388885678",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,604,869,682",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "-",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không kỳ hạn",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,604,869,682",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Nguyễn Trung Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPB-PL - 543033162",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,377,782,543",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "-",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không kỳ hạn",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,377,782,543",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BVB-NSG - 09388885678",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "111,439,728",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "-",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không kỳ hạn",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "111,439,728",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "ACB-CVL - 37472217",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "-",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Không kỳ hạn",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "115,381,555,469",
+      "b": true,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "122,516,397,809",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "2. Dư nợ vay đầu kỳ"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Trạng thái",
+    "Giá trị"
+   ],
+   "rows": [
+    [
+     {
+      "t": "Dư nợ vay cá nhân active",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "3. Thanh khoản đầu kỳ"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chủ tài khoản",
+    "Ngân hàng",
+    "Số tài khoản",
+    "Số tiền (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BIDV-TN",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "8838888558",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "994,610",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "SC-HCM",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "99441890299",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPB-PL",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "09388885678",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,604,869,682",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Nguyễn Trung Tín",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPB-PL",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "543033162",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,377,782,543",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "BVB-NSG",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "09388885678",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "111,439,728",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Đặng Thu Thảo",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "ACB-CVL",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "37472217",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Tổng",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,097,086,563",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "4. Dòng tiền VPBank chị Thảo (VPB5678)"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Nội dung giao dịch",
+    "Thu vào (VND)",
+    "Chi ra (VND)",
+    "Số dư (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "01/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Số dư đầu kỳ VPB5678",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,604,869,682",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "10/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Rút một phần CCTG linh hoạt VPBank để chi Opex T10",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,700,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,304,869,682",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "10/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chi Opex DOPA",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "500,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "2,804,869,682",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "10/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chi Opex Beyond Atoms",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "500,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "2,304,869,682",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "10/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chi chi phí nhân viên DOPA T10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "700,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "1,604,869,682",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Rút phần còn lại CCTG linh hoạt VPBank",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,266,311,033",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "6,871,180,715",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Mua USDT T10/2026: 4,134,530,000 + 1,813,901,196 đẩy từ T02/2027",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,948,431,196",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "922,749,519",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/11/2026",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "Số dư cuối kỳ",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "922,749,519",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "5. Dòng tiền VPBank anh Tín (586539639)"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Nội dung giao dịch",
+    "Thu vào (VND)",
+    "Chi ra (VND)",
+    "Số dư (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "01/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Số dư gốc VPBank 586539639 đầu kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "19,466,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Đến hạn VPBank 586539639; nhận toàn bộ gốc + lãi",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "20,329,543,758",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "20,329,543,758",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Chi Opex T11/2026 (DOPA 500tr + Beyond Atoms 500tr + nhân viên 700tr)",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,700,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "18,629,543,758",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Mua USDT T11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "4,105,486,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "14,524,057,758",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Mua CCTG VPBank kỳ hạn 1 tháng, LS 7.30%/năm, đáo hạn 11/12/2026 (Opex 1.7 tỷ + USDT 7,671,432,000 T12/2026)",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "9,371,432,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "5,152,625,758",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Mua CCTG VPBank kỳ hạn 2 tháng, LS 7.50%/năm, đáo hạn 11/01/2027 (Opex + USDT T01/2027)",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,152,625,758",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/11/2026",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "Số dư cuối kỳ",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "0",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "6. Chứng chỉ tiền gửi linh hoạt VPBank"
+  },
+  {
+   "type": "p",
+   "text": "CCTG linh hoạt không tái đầu tư; chỉ rút một phần khi cần chi Opex hoặc mua USDT."
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Nội dung giao dịch",
+    "Thu vào (VND)",
+    "Chi ra (VND)",
+    "Số dư (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "01/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Giá trị CCTG linh hoạt đầu kỳ (gốc 6,922,217,457 + lãi)",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "6,966,311,033",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "10/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Rút một phần về VPB5678 chi Opex T10",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,700,000,000",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "5,266,311,033",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Rút phần còn lại về VPB5678 mua USDT T10",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,266,311,033",
+      "b": false,
+      "n": true
+     },
+     {
+      "t": "0",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/11/2026",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "Số dư cuối kỳ",
+      "b": true,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "0",
+      "b": true,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "7. Kế hoạch xử lý khoản đáo hạn / tái đầu tư"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Ngày",
+    "Khoản",
+    "Phương án xử lý",
+    "Số tiền (VND)"
+   ],
+   "rows": [
+    [
+     {
+      "t": "10/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPBank - CCTG linh hoạt",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Rút 1,700,000,000 về VPB5678 chi Opex DOPA 500tr, Opex Beyond Atoms 500tr, chi phí nhân viên DOPA 700tr T10/2026.",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "1,700,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "15/10/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPBank - CCTG linh hoạt + VPB5678",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Rút phần còn lại 5,266,311,033 của CCTG linh hoạt; cùng số dư VPB5678 mua USDT T10/2026 5,948,431,196 (gồm 1,813,901,196 đẩy từ T02/2027).",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,948,431,196",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "11/11/2026",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "VPBank - 586539639",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "Đến hạn nhận gốc + lãi 20,329,543,758: chi Opex T11 1,700,000,000; mua USDT T11 4,105,486,000; mua CCTG VPBank 1 tháng 9,371,432,000 (LS 7.30%, cho Opex + USDT T12/2026, đáo hạn 11/12/2026); phần còn lại 5,152,625,758 mua CCTG VPBank 2 tháng (LS 7.50%, cho Opex + USDT T01/2027, đáo hạn 11/01/2027).",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "20,329,543,758",
+      "b": false,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "8. Tóm tắt cuối kỳ"
+  },
+  {
+   "type": "table",
+   "head": [
+    "Chỉ tiêu",
+    "Giá trị"
+   ],
+   "rows": [
+    [
+     {
+      "t": "Tổng tiền gửi/giấy tờ có giá đầu kỳ",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "115,381,555,469",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Thanh khoản đầu kỳ (tài khoản thanh toán)",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,097,086,563",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Chi Opex + CP nhân viên T10 và T11",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "3,400,000,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Mua USDT T10 + T11",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "10,053,917,196",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "CCTG VPBank 1 tháng (T12/2026)",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "9,371,432,000",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "CCTG VPBank 2 tháng (T01/2027)",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "5,152,625,758",
+      "b": false,
+      "n": true
+     }
+    ],
+    [
+     {
+      "t": "Thanh khoản cuối kỳ 15/11/2026 (VPB5678 + TK anh Tín 543033162 + TK khác)",
+      "b": false,
+      "n": false
+     },
+     {
+      "t": "2,414,966,400",
+      "b": false,
+      "n": true
+     }
+    ]
+   ]
+  },
+  {
+   "type": "p",
+   "text": "Lịch mua USDT tiếp theo (ngoài kỳ): 11/12/2026 USDT T12 7,671,432,000; 15/01/2027 đợt 1 5,000,000,000; 30/01/2027 đợt 2 2,500,000,000 — hoàn tất 40 tỷ. Chi tiết: Bang_thanh_khoan_ca_nhan_10-2026_03-2027.xlsx."
+  }
+ ],
+ "month": "2026-10",
+ "planType": "personal",
+ "source": "plans/2026-10/personal.html"
+}

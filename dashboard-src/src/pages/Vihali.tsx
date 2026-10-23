@@ -30,7 +30,7 @@ function ContractCell({ code, group }: { code: string; group: string }) {
     <a href={href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline whitespace-nowrap"><FileText className="w-3.5 h-3.5" />{label}<ExternalLink className="w-3 h-3" /></a>);
   return (
     <div className="flex items-center gap-3">
-      {own ? <A href={own} label={group === 'sc-vld' ? 'Annex' : 'Khế ước'} /> : <span className="text-xs text-warn whitespace-nowrap">Thiếu bản scan</span>}
+      {own ? <A href={own} label={group === 'sc-vld' ? 'Annex' : group === 'bidv-vld' ? 'GNN' : 'HĐ thấu chi'} /> : <span className="text-xs text-warn whitespace-nowrap">Thiếu bản scan</span>}
       {frame && <A href={frame} label="HĐ khung" />}
       {editor && <button onClick={() => setEdit(true)} className="text-muted-foreground hover:text-primary" aria-label="Gắn link hợp đồng"><Link2 className="w-3.5 h-3.5" /></button>}
     </div>

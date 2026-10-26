@@ -1,0 +1,154 @@
+{
+  "asOf": "2026-10-26",
+  "source": "Dashboard Treasury Balance · sheet Balance",
+  "fx": 26300,
+  "total": 15984276,
+  "individuals": {
+    "banks": [
+      {
+        "bank": "ACB",
+        "pledged": 0,
+        "unpledged": 39
+      },
+      {
+        "bank": "BVBank",
+        "pledged": 0,
+        "unpledged": 4370
+      },
+      {
+        "bank": "NCB",
+        "pledged": 0,
+        "unpledged": 842549
+      },
+      {
+        "bank": "BIDV",
+        "pledged": 1538771,
+        "unpledged": 39
+      },
+      {
+        "bank": "SC",
+        "pledged": 987160,
+        "unpledged": 39
+      },
+      {
+        "bank": "VPBank",
+        "pledged": 0,
+        "unpledged": 1036637
+      }
+    ],
+    "pledged": 2525931,
+    "unpledged": 1883674,
+    "total": 4409605,
+    "loans": 0
+  },
+  "entities": [
+    {
+      "name": "Vihali",
+      "banks": [
+        {
+          "bank": "BIDV",
+          "depVnd": 9875411839,
+          "loanVnd": 36075285373,
+          "depUsd": 92,
+          "net": -996101
+        },
+        {
+          "bank": "VietinBank",
+          "depVnd": 12438348,
+          "loanVnd": 0,
+          "depUsd": 0,
+          "net": 473
+        },
+        {
+          "bank": "BVBank",
+          "depVnd": 1596641,
+          "loanVnd": 0,
+          "depUsd": 0,
+          "net": 61
+        },
+        {
+          "bank": "ACB",
+          "depVnd": 643971,
+          "loanVnd": 0,
+          "depUsd": 1,
+          "net": 25
+        },
+        {
+          "bank": "SC",
+          "depVnd": 276515607,
+          "loanVnd": 17871813373,
+          "depUsd": 9411,
+          "net": -659612
+        }
+      ],
+      "net": -1655154
+    },
+    {
+      "name": "Vixion",
+      "banks": [
+        {
+          "bank": "BIDV",
+          "depVnd": 36984972,
+          "loanVnd": 0,
+          "depUsd": 0,
+          "net": 1406
+        }
+      ],
+      "net": 1406
+    },
+    {
+      "name": "Beyond Atoms",
+      "banks": [
+        {
+          "bank": "BIDV",
+          "depVnd": 561102457,
+          "loanVnd": 0,
+          "depUsd": 0,
+          "net": 21335
+        }
+      ],
+      "net": 21335
+    }
+  ],
+  "osBank": 27548,
+  "tokens": {
+    "stable": 2157641,
+    "btc": 2621863,
+    "eth": 7629401,
+    "other": 770631,
+    "total": 13179536,
+    "btcQty": 32.8,
+    "ethQty": 3296
+  },
+  "runway": {
+    "cash": 15988667,
+    "cases": [
+      {
+        "key": "actual",
+        "label": "Thực tế · TB 3 tháng gần nhất",
+        "burn": null,
+        "months": 43.84,
+        "actual": true
+      },
+      {
+        "key": "350k",
+        "label": "Kịch bản 350K/tháng",
+        "burn": 350000,
+        "months": 45.68
+      },
+      {
+        "key": "400k",
+        "label": "Kịch bản 400K/tháng",
+        "burn": 400000,
+        "months": 39.97
+      },
+      {
+        "key": "600k",
+        "label": "Kịch bản 600K/tháng",
+        "burn": 600000,
+        "months": 26.65
+      }
+    ]
+  },
+  "generatedAt": "2026-10-26T08:39:42.118Z"
+}

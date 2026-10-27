@@ -1,20 +1,21 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-10-26T13:00:21+07:00",
-    "source": "Google Sheets live export 2026-10-26T06:00:02.734Z",
+    "updatedAt": "2026-10-27T13:00:28+07:00",
+    "source": "Google Sheets live export 2026-10-27T06:00:02.567Z",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet",
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-10-26T06:00:02.734Z",
+      "generatedAt": "2026-10-27T06:00:02.567Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",
-        "1x4Z5HIBqSI-9fIb9Z32vLc_L8Offea7aY6UU-ftC_6A"
+        "1x4Z5HIBqSI-9fIb9Z32vLc_L8Offea7aY6UU-ftC_6A",
+        "1n8p4pyZDg2e1w2nViNTwkBCcOtfas7NQzRtZ71tQhM4"
       ],
-      "sheets": "Loan-BIDV (gid 1186104758) / Loan-SC (gid 2025947730) / Dashboard-fix (gid 1112915361) / Crypto Assets (gid 1601120065)",
+      "sheets": "Loan-BIDV (gid 1186104758) / Loan-SC (gid 2025947730) / Dashboard-fix (gid 1112915361) / Crypto Assets (gid 1601120065) / Balance file · Balance (gid 2035452406) / Balance file · Crypto (gid 4545118) / Balance file · Individuals (gid 0) / Balance file · Vihali (gid 1070912545) / Balance file · Vixion (gid 1829766912)",
       "rule": "Always refresh via scripts/fetch_treasury_online_data.mjs before building a new monthly plan; do not use a prior tmp export or hand-edited JSON as source."
     }
   },
@@ -122,7 +123,8 @@
         "400004871689",
         "406004974623",
         "402005414934",
-        "401005541941"
+        "401005541941",
+        "400005566559"
       ],
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 817018585429 + tín chấp",
       "mappingNote": "Đang bảo đảm cho toàn bộ cụm vay vốn lưu động BIDV theo quyết định mapping mới; sổ 810004228033 đã được rút khỏi cụm này.",
@@ -297,7 +299,8 @@
         "007611201",
         "007619264",
         "007626477",
-        "007632204"
+        "007632204",
+        "007637861"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -352,7 +355,8 @@
         "007611201",
         "007619264",
         "007626477",
-        "007632204"
+        "007632204",
+        "007637861"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -390,7 +394,8 @@
         "007611201",
         "007619264",
         "007626477",
-        "007632204"
+        "007632204",
+        "007637861"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",

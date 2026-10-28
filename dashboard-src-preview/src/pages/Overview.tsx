@@ -220,7 +220,7 @@ export default function Overview() {
         <div className="text-xs text-muted-foreground">Theo sheet Balance ngày {dmy(B.asOf)} · đơn vị USD · tỷ giá quy đổi <b className="num font-medium text-foreground">{nf(FX)}</b> VND/USD</div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className={cn('grid gap-3', open ? 'grid-cols-2 lg:grid-cols-4' : 'grid-cols-1 sm:grid-cols-3')}>
         <div className="bg-card border rounded-md px-4 py-3 min-w-0">
           <div className="text-xs text-muted-foreground">Tổng tài sản{tag}</div>
           <div className="mt-1"><M v={R.assets} big /></div>
@@ -233,11 +233,11 @@ export default function Overview() {
           <div className="text-xs text-muted-foreground">Thanh khoản ròng = tài sản − dư nợ{tag}</div>
           <div className="mt-1"><M v={R.net} big tone={R.net < 0 ? 'neg' : 'pos'} /></div>
         </div>
-        <div className={cn('bg-card border rounded-md px-4 py-3 min-w-0', actual.months < THRESHOLD && 'border-[hsl(var(--neg))]/60')}>
+        {open && <div className={cn('bg-card border rounded-md px-4 py-3 min-w-0', actual.months < THRESHOLD && 'border-[hsl(var(--neg))]/60')}>
           <div className="text-xs text-muted-foreground">Runway theo chi thực tế{tag}</div>
           <div className={cn('num text-[21px] font-medium mt-1 leading-tight', actual.months < THRESHOLD ? 'text-neg' : 'text-pos')}>{actual.months.toFixed(1)} tháng</div>
           <div className="text-[11px] text-muted-foreground mt-0.5">{actual.months < THRESHOLD ? <span className="text-neg font-medium inline-flex items-center gap-1"><TriangleAlert className="w-3 h-3" />Dưới {THRESHOLD} tháng · </span> : null}chi TB {usdM(R.actualBurn, 2)}/tháng</div>
-        </div>
+        </div>}
       </div>
 
       <div className="grid lg:grid-cols-12 gap-4">
@@ -246,14 +246,14 @@ export default function Overview() {
             <Donut data={slices} center={usdM(R.assets)} sub="Tổng tài sản" size={176} />
             <Legend rows={slices.map(s => ({ k: s.k, c: s.c, v: usdM(s.v), p: (s.v / R.assets * 100).toFixed(1) + '%' }))} />
           </div>
-          {!open && <div className="mt-4 rounded-sm border border-dashed px-3 py-2 text-xs text-muted-foreground flex items-center gap-2"><Lock className="w-3.5 h-3.5 shrink-0" />Phần tokens đang ẩn. Tổng tài sản, thanh khoản và runway ở trang này đang tính không gồm token.</div>}
+          {!open && <div className="mt-4 rounded-sm border border-dashed px-3 py-2 text-xs text-muted-foreground flex items-center gap-2"><Lock className="w-3.5 h-3.5 shrink-0" />Phần tokens đang ẩn. Tổng tài sản và thanh khoản đang tính không gồm token; runway chỉ hiện khi nhập mã.</div>}
         </Panel>
         <Panel className="lg:col-span-7" pad={false} title="Tài sản và dư nợ theo nguồn" sub="Bấm từng dòng để xem chi tiết theo ngân hàng">
           <BreakdownTable R={R} B={B} open={open} />
         </Panel>
       </div>
 
-      <Runway R={R} open={open} />
+      {open && <Runway R={R} open={open} />}
 
       <div className="grid xl:grid-cols-12 gap-4">
         <Panel className="xl:col-span-8" title="Cấu trúc bảo đảm khoản vay Vihali" sub="Sổ tiết kiệm (bên trái) đang cầm cố cho nhóm khoản vay nào (bên phải) · độ dày theo số tiền"

@@ -1,8 +1,8 @@
 {
-  "asOf": "2026-10-26",
+  "asOf": "2026-10-29",
   "source": "Dashboard Treasury Balance · sheet Balance",
   "fx": 26300,
-  "total": 15984276,
+  "total": 15908025,
   "individuals": {
     "banks": [
       {
@@ -48,9 +48,9 @@
         {
           "bank": "BIDV",
           "depVnd": 9875411839,
-          "loanVnd": 36075285373,
+          "loanVnd": 36115038973,
           "depUsd": 92,
-          "net": -996101
+          "net": -997612
         },
         {
           "bank": "VietinBank",
@@ -76,12 +76,12 @@
         {
           "bank": "SC",
           "depVnd": 276515607,
-          "loanVnd": 17871813373,
+          "loanVnd": 20267409585,
           "depUsd": 9411,
-          "net": -659612
+          "net": -750699
         }
       ],
-      "net": -1655154
+      "net": -1747753
     },
     {
       "name": "Vixion",
@@ -112,43 +112,43 @@
   ],
   "osBank": 27548,
   "tokens": {
-    "stable": 2157641,
-    "btc": 2621863,
-    "eth": 7629401,
-    "other": 770631,
-    "total": 13179536,
+    "stable": 2130497,
+    "btc": 2632025,
+    "eth": 7663302,
+    "other": 770060,
+    "total": 13195883,
     "btcQty": 32.8,
-    "ethQty": 3296
+    "ethQty": 3298
   },
   "runway": {
-    "cash": 15988667,
+    "cash": 15911667,
     "cases": [
       {
         "key": "actual",
         "label": "Thực tế · TB 3 tháng gần nhất",
         "burn": null,
-        "months": 43.84,
+        "months": 43.63,
         "actual": true
       },
       {
         "key": "350k",
         "label": "Kịch bản 350K/tháng",
         "burn": 350000,
-        "months": 45.68
+        "months": 45.46
       },
       {
         "key": "400k",
         "label": "Kịch bản 400K/tháng",
         "burn": 400000,
-        "months": 39.97
+        "months": 39.78
       },
       {
         "key": "600k",
         "label": "Kịch bản 600K/tháng",
         "burn": 600000,
-        "months": 26.65
+        "months": 26.52
       }
     ]
   },
-  "generatedAt": "2026-10-26T08:39:42.118Z"
+  "generatedAt": "2026-10-29T06:00:48.479Z"
 }

@@ -1,10 +1,10 @@
 import { useState, Fragment } from 'react';
 import type { ReactNode } from 'react';
 import { ArrowRight, Lock, LockOpen, TriangleAlert, ChevronDown, ChevronRight } from 'lucide-react';
-import { RATE_WEEKS, PERSONAL_DEPOSITS, COMPANY_DEPOSITS, BALANCE } from '@/data/static';
+import { RATE_WEEKS, PERSONAL_DEPOSITS, COMPANY_DEPOSITS, BALANCE, CARDS } from '@/data/static';
 import type { Balance } from '@/data/static';
-import { GROUP_SUMMARY, LOAN_TOTAL, PERSONAL_TOTAL, PLEDGED_TOTAL, collateralFlows } from '@/lib/calc';
-import { ty, pct, dmy, FX, TODAY, usdFull, usdM, vndOf, nf } from '@/lib/fmt';
+import { GROUP_SUMMARY, LOAN_TOTAL, PERSONAL_TOTAL, PLEDGED_TOTAL, collateralFlows, CARD_LIMIT, CARD_USED, CARD_COLLATERAL } from '@/lib/calc';
+import { ty, tr, pct, dmy, FX, TODAY, usdFull, usdM, vndOf, nf } from '@/lib/fmt';
 import { Panel, Chip, Delta, Donut, Legend, th, td, tn } from '@/components/kit';
 import { useApp } from '@/state';
 import { cn } from '@/lib/utils';
@@ -13,7 +13,7 @@ function CollateralMap() {
   const { src, links } = collateralFlows();
   const S = Object.entries(src).filter(([, v]) => v.amount > 0);
   // Thứ tự bên phải: BIDV TN thấu chi, BIDV VLĐ, BIDV TS thấu chi, SC VLĐ để các dải nối không chồng lên nhau
-  const ORDER = ['bidv-od-tn', 'bidv-vld', 'bidv-od-ts', 'sc-vld'];
+  const ORDER = ['bidv-od-tn', 'bidv-vld', 'bidv-od-ts', 'sc-vld', 'card'];
   const G = [...GROUP_SUMMARY].sort((a, b) => ORDER.indexOf(a.key) - ORDER.indexOf(b.key));
   const W = 860, nodeW = 10, gap = 18, top = 10, minH = 30;
   const scale = 240 / Math.max(S.reduce((a, [, v]) => a + v.amount, 0), LOAN_TOTAL);
@@ -38,7 +38,7 @@ function CollateralMap() {
           <g key={k}>
             <rect x={xL} y={sy[k].y} width={nodeW} height={sy[k].h} fill={v.tone} rx={1.5} />
             <text x={xL - 10} y={sy[k].y + sy[k].h / 2 - 3} textAnchor="end" fontSize="12.5" fontWeight={600} fill="hsl(var(--foreground))">{v.label}</text>
-            <text x={xL - 10} y={sy[k].y + sy[k].h / 2 + 12} textAnchor="end" fontSize="11" fill="hsl(var(--muted-foreground))" fontFamily="var(--font-num)">{usdM(v.amount / FX)} · {ty(v.amount, 1)}</text>
+            <text x={xL - 10} y={sy[k].y + sy[k].h / 2 + 12} textAnchor="end" fontSize="11" fill="hsl(var(--muted-foreground))" fontFamily="var(--font-num)">{v.amount < 1e9 ? `${usdFull(v.amount / FX)} · ${tr(v.amount)}` : `${usdM(v.amount / FX)} · ${ty(v.amount, 1)}`}</text>
           </g>))}
         {G.map(g => {
           const cov = Object.entries(links).filter(([k]) => k.endsWith('|' + g.key) && !k.startsWith('none')).reduce((a, [, v]) => a + v, 0);
@@ -46,7 +46,9 @@ function CollateralMap() {
             <g key={g.key}>
               <rect x={xR} y={gy[g.key].y} width={nodeW} height={gy[g.key].h} fill={g.color} rx={1.5} />
               <text x={xR + 18} y={gy[g.key].y + gy[g.key].h / 2 - 3} fontSize="12.5" fontWeight={600} fill="hsl(var(--foreground))">{g.short}</text>
-              <text x={xR + 18} y={gy[g.key].y + gy[g.key].h / 2 + 12} fontSize="11" fill="hsl(var(--muted-foreground))" fontFamily="var(--font-num)">Dư nợ {usdM(g.out / FX)} ({ty(g.out, 1)}) · TSĐB/nợ {(cov / g.out * 100).toFixed(0)}%</text>
+              <text x={xR + 18} y={gy[g.key].y + gy[g.key].h / 2 + 12} fontSize="11" fill="hsl(var(--muted-foreground))" fontFamily="var(--font-num)">{g.key === 'card'
+                ? <>Dư nợ {tr(g.out)} · HM {tr(CARD_LIMIT)} · TSĐB/HM {(cov / (CARD_LIMIT || 1) * 100).toFixed(0)}%</>
+                : <>Dư nợ {usdM(g.out / FX)} ({ty(g.out, 1)}) · TSĐB/nợ {(cov / g.out * 100).toFixed(0)}%</>}</text>
             </g>);
         })}
       </svg>
@@ -75,7 +77,8 @@ function compute(B: Balance, open: boolean) {
   });
   const entDep = ents.reduce((a, e) => a + e.dep, 0), entLoan = ents.reduce((a, e) => a + e.loan, 0);
   const fiat = B.individuals.total + entDep + B.osBank;
-  const debt = entLoan + (B.individuals.loans || 0);
+  // Dư nợ thẻ tín dụng đã sử dụng (data/credit-cards.json) cộng thêm; sheet Balance hiện chỉ có khoản vay BIDV + SC
+  const debt = entLoan + (B.individuals.loans || 0) + CARD_USED / B.fx;
   const tokens = open ? B.tokens.total : 0;
   const assets = fiat + tokens;
   const cashEx = fiat - debt;
@@ -226,7 +229,7 @@ export default function Overview() {
           <div className="mt-1"><M v={R.assets} big /></div>
         </div>
         <button onClick={() => go('vihali')} className="text-left bg-card border rounded-md px-4 py-3 min-w-0 hover:border-primary/50 transition-colors">
-          <div className="text-xs text-muted-foreground">Tổng dư nợ · Vihali BIDV + SC</div>
+          <div className="text-xs text-muted-foreground">Tổng dư nợ · Vihali BIDV + SC{CARDS.length ? ' + thẻ tín dụng' : ''}</div>
           <div className="mt-1"><M v={R.debt} big /></div>
         </button>
         <div className="bg-card border rounded-md px-4 py-3 min-w-0">
@@ -262,7 +265,7 @@ export default function Overview() {
           <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-muted-foreground mt-3 pt-3 border-t">
             <span>Tiền gửi cá nhân không cầm cố <b className="num font-medium text-foreground">{usdFull(unpledged / FX)}</b> <span className="num">≈ {ty(unpledged)}</span></span>
             <span>Tổng TSĐB / dư nợ <b className="num font-medium text-foreground">{((PLEDGED_TOTAL + COMPANY_DEPOSITS.reduce((a, d) => a + d.principal, 0)) / LOAN_TOTAL * 100).toFixed(0)}%</b></span>
-            <span>{PERSONAL_DEPOSITS.filter(d => d.pledged).length} sổ cá nhân + 2 sổ công ty</span>
+            <span>{PERSONAL_DEPOSITS.filter(d => d.pledged).length} sổ cá nhân + {COMPANY_DEPOSITS.length} sổ công ty{CARD_COLLATERAL ? <> + ký quỹ thẻ tín dụng <span className="num">{tr(CARD_COLLATERAL)}</span></> : null}</span>
           </div>
         </Panel>
         <Panel className="xl:col-span-4" title="Lãi suất 12 tháng cao nhất" sub={`${W.label} · so với tuần trước`} right={<button onClick={() => go('lai-suat')} className="text-xs text-primary inline-flex items-center gap-1 hover:underline">Tab Đầu tư<ArrowRight className="w-3 h-3" /></button>}>

@@ -1,4 +1,4 @@
-import { LOANS, PERSONAL_DEPOSITS, COMPANY_DEPOSITS } from '@/data/static';
+import { LOANS, PERSONAL_DEPOSITS, COMPANY_DEPOSITS, CARDS } from '@/data/static';
 import { LOAN_GROUPS, BIDV_VLD_LIMIT, SC_LIMIT, PLAN_MONTHS, PLAN_INPUTS } from '@/data/static';
 import type { PlanLine, Recurring } from '@/data/static';
 
@@ -10,10 +10,23 @@ export let HM_TOTAL = 0;
 export let OD_HM = 0;
 export let PERSONAL_TOTAL = 0;
 export let PLEDGED_TOTAL = 0;
+/* Thẻ tín dụng: hạn mức, dư nợ đã dùng, tiền ký quỹ bảo đảm */
+export let CARD_LIMIT = 0;
+export let CARD_USED = 0;
+export let CARD_COLLATERAL = 0;
 
 /* Gọi lại sau khi tải dữ liệu */
 export function recompute() {
-  GROUP_SUMMARY = LOAN_GROUPS.map(g => {
+  CARD_LIMIT = CARDS.reduce((a, c) => a + c.limit, 0);
+  CARD_USED = CARDS.reduce((a, c) => a + c.used, 0);
+  CARD_COLLATERAL = CARDS.reduce((a, c) => a + (c.collateral?.amount || 0), 0);
+  GROUP_SUMMARY = LOAN_GROUPS.filter(g => g.key !== 'card' || CARDS.length).map(g => {
+    if (g.key === 'card') {
+      // Lãi suất nhóm thẻ: bình quân theo hạn mức (thẻ chưa dùng vẫn hiện lãi suất hợp đồng)
+      const rated = CARDS.filter(c => c.rate != null);
+      const rate = rated.reduce((a, c) => a + (c.rate || 0) * c.limit, 0) / (rated.reduce((a, c) => a + c.limit, 0) || 1);
+      return { ...g, count: CARDS.length, out: CARD_USED, hm: Math.max(CARD_LIMIT - CARD_USED, 0), rate, next: undefined };
+    }
     const ls = loansOf(g.key);
     const out = ls.reduce((a, l) => a + l.principal, 0);
     const hm = g.key === 'bidv-vld' ? BIDV_VLD_LIMIT : g.key === 'sc-vld' ? SC_LIMIT : ls.reduce((a, l) => a + (l.limit || 0), 0);
@@ -35,6 +48,7 @@ export function collateralFlows() {
     'p-bidv': { label: 'Sổ cá nhân BIDV TN', sub: 'Cá nhân · cầm cố', amount: 0, tone: 'hsl(var(--c1))' },
     'c-bidv': { label: 'Sổ công ty BIDV TS', sub: 'Vihali · cầm cố', amount: 0, tone: 'hsl(var(--c2))' },
     'p-sc': { label: 'Sổ cá nhân SC', sub: 'Cá nhân · cầm cố', amount: 0, tone: 'hsl(var(--c4))' },
+    'c-card': { label: 'Ký quỹ TK thanh toán Vihali', sub: 'Vihali · phong tỏa', amount: 0, tone: 'hsl(var(--c7))' },
     'none': { label: 'Chưa gắn TSĐB', sub: 'Theo dữ liệu sheet', amount: 0, tone: 'hsl(var(--c6))' },
   };
   const links: Record<string, number> = {};
@@ -49,6 +63,7 @@ export function collateralFlows() {
     const gs = [...new Set(d.loans.map(loanGroupOf).filter(Boolean))] as string[];
     gs.forEach(g => add('c-bidv', g, d.principal / gs.length));
   });
+  CARDS.forEach(c => { if (c.collateral?.amount) add('c-card', 'card', c.collateral.amount); });
   LOANS.filter(l => !l.deposits.length).forEach(l => add('none', l.group, l.principal));
   return { src, links };
 }

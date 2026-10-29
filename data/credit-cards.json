@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "name": "Thẻ tín dụng Vihali",
+    "updatedAt": "2026-10-29T17:30:00+07:00",
+    "note": "Nhập tay, pipeline hằng ngày không ghi đè file này. Mỗi lần cập nhật dư nợ thẻ (outstanding) hoặc thông tin thẻ thì sửa file và bump data/site-version.json. Hiện chỉ bản /preview/ đọc file này.",
+    "fields": {
+      "creditLimit": "Hạn mức thẻ (VND)",
+      "outstanding": "Dư nợ thẻ đã sử dụng (VND), cập nhật theo sao kê",
+      "interestRate": "Lãi suất thẻ %/năm (null nếu chưa có)",
+      "statementDay": "Ngày sao kê hằng tháng",
+      "dueDay": "Ngày đến hạn thanh toán hằng tháng",
+      "collateral": "Tài sản bảo đảm: tiền ký quỹ/phong tỏa tại tài khoản thanh toán Vihali"
+    }
+  },
+  "cards": [
+    {
+      "code": "VIHALI-CC-01",
+      "active": true,
+      "name": "Thẻ tín dụng Vihali",
+      "bank": "",
+      "cardLast4": null,
+      "holder": null,
+      "creditLimit": 100000000,
+      "outstanding": 0,
+      "interestRate": null,
+      "issueDate": null,
+      "expiryDate": null,
+      "statementDay": null,
+      "dueDay": null,
+      "collateral": {
+        "type": "Ký quỹ / phong tỏa",
+        "account": "TK thanh toán Vihali",
+        "amount": 112000000
+      },
+      "contractUrl": null,
+      "notes": "Chưa sử dụng. Bảo đảm bằng 112,000,000 VND tại tài khoản thanh toán của Vihali."
+    }
+  ]
+}

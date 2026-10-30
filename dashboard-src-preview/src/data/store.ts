@@ -9,18 +9,11 @@ export interface Deposit {
   owner: string; bank: string; code: string; type: string; principal: number; rate: number | null;
   open: string | null; due: string | null; pledged: boolean; settle: number; loans: string[];
 }
-/* Thẻ tín dụng của Vihali: hạn mức tín dụng quay vòng, bảo đảm bằng tiền ký quỹ/phong tỏa (nhập tay tại data/credit-cards.json) */
-export interface CreditCard {
-  code: string; name: string; bank: string; last4: string | null; holder: string | null;
-  limit: number; used: number; rate: number | null; issue: string | null; expiry: string | null;
-  statementDay: number | null; dueDay: number | null;
-  collateral: { type: string; account: string; amount: number } | null; contract: string | null; note: string;
-}
 export interface CompanyDeposit { bank: string; code: string; principal: number; rate: number; open: string; due: string; settle: number; loans: string[] }
 export interface Wallet { grp: string; name: string; ent: string; chain: string; type: string; addr: string; st: number; btc: number; eth: number; oth: number; tot: number }
 export interface Token { k: string; v: number; qty: number; c: string }
 export type Entity = 'vihali' | 'personal';
-export type Source = 'loan' | 'deposit' | 'carry' | 'recurring' | 'adhoc';
+export type Source = 'loan' | 'deposit' | 'carry' | 'recurring' | 'adhoc' | 'interest';
 export interface PlanLine { id: string; date: string; entity: Entity; dir: 'in' | 'out'; label: string; amount: number; source: Source; note?: string }
 export interface Recurring { id: string; label: string; entity: Entity; dir: 'in' | 'out'; day: number; amount: number; seen: string; on: boolean; startMonth?: string }
 export interface PlanInputs {
@@ -51,10 +44,19 @@ export interface Balance {
   runway: { cash: number; cases: RunwayCase[] };
 }
 export let BALANCE: Balance | null = null;
+/* Thực chi theo tháng dương lịch (data/plan-actuals.json) để đối chiếu kế hoạch */
+export interface ActualRow { date: string; source?: string; cat: string; key?: string | null; label: string; payee: string; entity?: string; amount: number; usdt?: number }
+export interface ActualPlanLine { date: string; label: string; amount: number }
+export interface MonthActual {
+  vihali: ActualRow[]; personal: ActualRow[];
+  closing: { odAvailable: number; asOf: string } | null;
+  plan?: { source: 'archive'; openingVihali: number | null; vihali: ActualPlanLine[]; personal: ActualPlanLine[] };
+}
+export let PLAN_ACTUALS: Record<string, MonthActual> = {};
+export let ACTUALS_AT = '';
 export let LOANS: Loan[] = [];
 export let PERSONAL_DEPOSITS: Deposit[] = [];
 export let COMPANY_DEPOSITS: CompanyDeposit[] = [];
-export let CARDS: CreditCard[] = [];
 export let RATE_WEEKS: any[] = [];
 export let BIDV_VLD_LIMIT = 0;
 export let SC_LIMIT = 0;
@@ -131,17 +133,6 @@ function mapCompany(c: any) {
     rate: Number(d.interestRate) || 0, open: d.openDate, due: d.maturityDate, settle: Number(d.projectedSettlement) || 0, loans: (d.linkedLoanCodes || []).map(String),
   }));
   META.companyUpdatedAt = c.meta?.updatedAt || '';
-}
-
-function mapCards(c: any) {
-  const n = (v: any) => (v == null || v === '' ? null : Number(v));
-  CARDS = (c?.cards || []).filter((r: any) => r.active !== false).map((r: any) => ({
-    code: String(r.code), name: r.name || 'Thẻ tín dụng', bank: r.bank || '', last4: r.cardLast4 ? String(r.cardLast4) : null, holder: r.holder || null,
-    limit: Number(r.creditLimit) || 0, used: Number(r.outstanding) || 0, rate: n(r.interestRate),
-    issue: r.issueDate || null, expiry: r.expiryDate || null, statementDay: n(r.statementDay), dueDay: n(r.dueDay),
-    collateral: r.collateral ? { type: r.collateral.type || 'Ký quỹ', account: r.collateral.account || '', amount: Number(r.collateral.amount) || 0 } : null,
-    contract: r.contractUrl || null, note: r.notes || '',
-  }));
 }
 
 function mapPersonal(p: any) {
@@ -222,7 +213,7 @@ export async function loadAll() {
   META.siteVersion = sv?.version || String(Date.now());
   bust = `?v=${encodeURIComponent(META.siteVersion)}`;
 
-  const [company, personal, history, crypto, cryptoHist, links, live, plansIndex, balance, cards] = await Promise.all([
+  const [company, personal, history, crypto, cryptoHist, links, live, plansIndex, balance, actuals] = await Promise.all([
     getJson<any>(D + 'company-loans-current.json'),
     getJson<any>(D + 'personal-treasury-current.json'),
     getJson<any>(D + 'history.json'),
@@ -232,10 +223,12 @@ export async function loadAll() {
     getScriptGlobal(D + 'monthly-plans/live-index.js', 'MONTHLY_PLANS_LIVE_DATA'),
     getJson<any>(D + 'monthly-plans/inputs/index.json', true),
     getJson<Balance>(D + 'balance-current.json', true),
-    getJson<any>(D + 'credit-cards.json', true),
+    getJson<any>(D + 'plan-actuals.json', true),
   ]);
   BALANCE = balance;
-  mapCompany(company); mapCards(cards); mapPersonal(personal); mapRates(history); mapCrypto(crypto, cryptoHist);
+  PLAN_ACTUALS = actuals?.months || {};
+  ACTUALS_AT = actuals?.generatedAt || '';
+  mapCompany(company); mapPersonal(personal); mapRates(history); mapCrypto(crypto, cryptoHist);
   CONTRACT_LINKS = links?.links || {};
   CONTRACT_DEFAULTS = links?.defaults || {};
 

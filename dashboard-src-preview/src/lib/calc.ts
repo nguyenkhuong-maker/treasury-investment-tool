@@ -1,4 +1,4 @@
-import { LOANS, PERSONAL_DEPOSITS, COMPANY_DEPOSITS, CARDS } from '@/data/static';
+import { LOANS, PERSONAL_DEPOSITS, COMPANY_DEPOSITS } from '@/data/static';
 import { LOAN_GROUPS, BIDV_VLD_LIMIT, SC_LIMIT, PLAN_MONTHS, PLAN_INPUTS } from '@/data/static';
 import type { PlanLine, Recurring } from '@/data/static';
 
@@ -10,23 +10,10 @@ export let HM_TOTAL = 0;
 export let OD_HM = 0;
 export let PERSONAL_TOTAL = 0;
 export let PLEDGED_TOTAL = 0;
-/* Thẻ tín dụng: hạn mức, dư nợ đã dùng, tiền ký quỹ bảo đảm */
-export let CARD_LIMIT = 0;
-export let CARD_USED = 0;
-export let CARD_COLLATERAL = 0;
 
 /* Gọi lại sau khi tải dữ liệu */
 export function recompute() {
-  CARD_LIMIT = CARDS.reduce((a, c) => a + c.limit, 0);
-  CARD_USED = CARDS.reduce((a, c) => a + c.used, 0);
-  CARD_COLLATERAL = CARDS.reduce((a, c) => a + (c.collateral?.amount || 0), 0);
-  GROUP_SUMMARY = LOAN_GROUPS.filter(g => g.key !== 'card' || CARDS.length).map(g => {
-    if (g.key === 'card') {
-      // Lãi suất nhóm thẻ: bình quân theo hạn mức (thẻ chưa dùng vẫn hiện lãi suất hợp đồng)
-      const rated = CARDS.filter(c => c.rate != null);
-      const rate = rated.reduce((a, c) => a + (c.rate || 0) * c.limit, 0) / (rated.reduce((a, c) => a + c.limit, 0) || 1);
-      return { ...g, count: CARDS.length, out: CARD_USED, hm: Math.max(CARD_LIMIT - CARD_USED, 0), rate, next: undefined };
-    }
+  GROUP_SUMMARY = LOAN_GROUPS.map(g => {
     const ls = loansOf(g.key);
     const out = ls.reduce((a, l) => a + l.principal, 0);
     const hm = g.key === 'bidv-vld' ? BIDV_VLD_LIMIT : g.key === 'sc-vld' ? SC_LIMIT : ls.reduce((a, l) => a + (l.limit || 0), 0);
@@ -48,7 +35,6 @@ export function collateralFlows() {
     'p-bidv': { label: 'Sổ cá nhân BIDV TN', sub: 'Cá nhân · cầm cố', amount: 0, tone: 'hsl(var(--c1))' },
     'c-bidv': { label: 'Sổ công ty BIDV TS', sub: 'Vihali · cầm cố', amount: 0, tone: 'hsl(var(--c2))' },
     'p-sc': { label: 'Sổ cá nhân SC', sub: 'Cá nhân · cầm cố', amount: 0, tone: 'hsl(var(--c4))' },
-    'c-card': { label: 'Ký quỹ TK thanh toán Vihali', sub: 'Vihali · phong tỏa', amount: 0, tone: 'hsl(var(--c7))' },
     'none': { label: 'Chưa gắn TSĐB', sub: 'Theo dữ liệu sheet', amount: 0, tone: 'hsl(var(--c6))' },
   };
   const links: Record<string, number> = {};
@@ -63,7 +49,6 @@ export function collateralFlows() {
     const gs = [...new Set(d.loans.map(loanGroupOf).filter(Boolean))] as string[];
     gs.forEach(g => add('c-bidv', g, d.principal / gs.length));
   });
-  CARDS.forEach(c => { if (c.collateral?.amount) add('c-card', 'card', c.collateral.amount); });
   LOANS.filter(l => !l.deposits.length).forEach(l => add('none', l.group, l.principal));
   return { src, links };
 }
@@ -92,10 +77,49 @@ export function buildPlan(monthKey: string, recurring: Recurring[], adhoc: PlanL
     });
   });
   lines.push(...adhoc.filter(a => inP(a.date)));
+  // Lãi vay BIDV định kỳ: BIDV thu lãi hằng tháng theo dư nợ và số ngày thực tế; file theo dõi tính lãi cuối kỳ nên không dùng được
+  if (!lines.some(l => l.entity === 'vihali' && /lãi vay bidv/i.test(l.label))) {
+    months.forEach(mm => {
+      const date = bidvInterestDate(mm);
+      if (!inP(date)) return;
+      const est = bidvInterestEstimate(date, bidvInterestDate(prevMonth(mm)), lines.filter(l => l.entity === 'vihali'));
+      lines.push({ id: 'INT' + mm, date, entity: 'vihali', dir: 'out', label: `Lãi vay BIDV định kỳ T${Number(mm.slice(5))} (ước tính)`, amount: Math.round(est.amount), source: 'interest',
+        note: `Dư nợ BIDV thấu chi + VLĐ × lãi suất × ${est.days} ngày/365${est.delta ? ` · gồm ${Math.round(est.delta).toLocaleString('en-US')} do thấu chi tăng trong kỳ (LS bq ${est.odRate.toFixed(2)}%)` : ''}` });
+    });
+  }
   return lines.sort((a, b) => a.date.localeCompare(b.date) || (a.dir === 'in' ? -1 : 1));
 }
 
 export function runBalance(lines: PlanLine[], entity: 'vihali' | 'personal', open: number) {
   let bal = open;
   return lines.filter(l => l.entity === entity).map(l => { bal += l.dir === 'in' ? l.amount : -l.amount; return { ...l, bal }; });
+}
+
+/* ---- Lãi vay BIDV định kỳ ----
+   Ngày thu lãi: 24 hằng tháng (rơi vào thứ Bảy/Chủ nhật thì lùi về thứ Sáu).
+   Ước tính = Σ dư nợ từng khế ước BIDV (thấu chi TN, TS + VLĐ BIDV) × lãi suất × số ngày nắm giữ trong kỳ / 365
+            + phần thấu chi tăng thêm do các khoản chi trong kỳ × lãi suất thấu chi bình quân × số ngày còn lại / 365 */
+const isoD = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+export const prevMonth = (ym: string) => { const [y, m] = ym.split('-').map(Number); return m === 1 ? `${y - 1}-12` : `${y}-${String(m - 1).padStart(2, '0')}`; };
+export function bidvInterestDate(ym: string) {
+  const [y, m] = ym.split('-').map(Number); const d = new Date(y, m - 1, 24); const w = d.getDay();
+  if (w === 6) d.setDate(23); if (w === 0) d.setDate(22);
+  return isoD(d);
+}
+const dayDiff = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
+export function bidvInterestEstimate(payDate: string, prevPay: string, vihaliLines: PlanLine[] = []) {
+  const bidv = LOANS.filter(l => l.group.startsWith('bidv'));
+  let base = 0;
+  bidv.forEach(l => {
+    const start = l.disb && l.disb > prevPay ? l.disb : prevPay;
+    const end = l.due < payDate ? l.due : payDate;
+    const d = dayDiff(start, end);
+    if (d > 0) base += l.principal * l.rate / 100 * d / 365;
+  });
+  const od = bidv.filter(l => l.group.startsWith('bidv-od'));
+  const odOut = od.reduce((a, l) => a + l.principal, 0);
+  const odRate = odOut ? od.reduce((a, l) => a + l.principal * l.rate, 0) / odOut : 0;
+  const delta = vihaliLines.filter(l => l.date > prevPay && l.date < payDate)
+    .reduce((a, l) => a + (l.dir === 'out' ? 1 : -1) * l.amount * odRate / 100 * dayDiff(l.date, payDate) / 365, 0);
+  return { amount: base + delta, base, delta, odRate, days: dayDiff(prevPay, payDate) };
 }

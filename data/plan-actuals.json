@@ -1,0 +1,1026 @@
+{
+ "generatedAt": "2026-10-30T04:17:30.162Z",
+ "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
+ "months": {
+  "2026-10": {
+   "vihali": [
+    {
+     "date": "2026-10-01",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Office rental fee",
+     "payee": "AN THUY ANH",
+     "amount": 291000600
+    },
+    {
+     "date": "2026-10-01",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Electricity bills",
+     "payee": "AN THUY ANH",
+     "amount": 78792832
+    },
+    {
+     "date": "2026-10-01",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Parking fee",
+     "payee": "AN THUY ANH",
+     "amount": 20693750
+    },
+    {
+     "date": "2026-10-01",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Cleaning service",
+     "payee": "RENTOKIL",
+     "amount": 3330720
+    },
+    {
+     "date": "2026-10-01",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Cleaning service",
+     "payee": "RENTOKIL",
+     "amount": 3330720
+    },
+    {
+     "date": "2026-10-01",
+     "source": "SC VLD",
+     "cat": "salary",
+     "key": null,
+     "label": "Lương, BH, thuế TNCN",
+     "payee": "Vihali",
+     "amount": 2337424603
+    },
+    {
+     "date": "2026-10-01",
+     "source": "BIDV TC",
+     "cat": "loan",
+     "key": "BIDV|2026-09-29",
+     "label": "Trả gốc lãi BIDV VLĐ đến hạn 29/09/2026",
+     "payee": "BIDV",
+     "amount": 102079434
+    },
+    {
+     "date": "2026-10-01",
+     "source": "BIDV TC",
+     "cat": "loan",
+     "key": "BIDV|2026-09-29",
+     "label": "Trả gốc lãi BIDV VLĐ đến hạn 29/09/2026",
+     "payee": "BIDV",
+     "amount": 755108
+    },
+    {
+     "date": "2026-10-01",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "SẤM NHIỆT ĐỚI",
+     "amount": 39690000
+    },
+    {
+     "date": "2026-10-01",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Snack & Drinks",
+     "payee": "QUEEN FOOD",
+     "amount": 3018600
+    },
+    {
+     "date": "2026-10-01",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Stationery, mineral water, express delivery, phone charges",
+     "payee": "SAPUWA",
+     "amount": 3858567
+    },
+    {
+     "date": "2026-10-02",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Team Building",
+     "payee": "HAVIAS",
+     "amount": 7830000
+    },
+    {
+     "date": "2026-10-02",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Team Building",
+     "payee": "MINH HOÀNG",
+     "amount": 4174200
+    },
+    {
+     "date": "2026-10-02",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Team Building",
+     "payee": "SZW",
+     "amount": 3456000
+    },
+    {
+     "date": "2026-10-07",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 4350000
+    },
+    {
+     "date": "2026-10-07",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Airplane ticket & meals & hotel & travel for biz trip",
+     "payee": "AN THUY ANH",
+     "amount": 13200000
+    },
+    {
+     "date": "2026-10-07",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Snack & Drinks",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 1577500
+    },
+    {
+     "date": "2026-10-07",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Snack & Drinks",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 943000
+    },
+    {
+     "date": "2026-10-07",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 382000
+    },
+    {
+     "date": "2026-10-07",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Office rental fee",
+     "payee": "AN THUY ANH",
+     "amount": 291000600
+    },
+    {
+     "date": "2026-10-07",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Electricity bills",
+     "payee": "AN THUY ANH",
+     "amount": 77032192
+    },
+    {
+     "date": "2026-10-07",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Parking fee",
+     "payee": "AN THUY ANH",
+     "amount": 21037500
+    },
+    {
+     "date": "2026-10-07",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Team Building",
+     "payee": "MKLT",
+     "amount": 1680000
+    },
+    {
+     "date": "2026-10-07",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Office rental fee",
+     "payee": "SƠN THÁI",
+     "amount": 414711825
+    },
+    {
+     "date": "2026-10-07",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Electricity bills",
+     "payee": "SƠN THÁI",
+     "amount": 34793280
+    },
+    {
+     "date": "2026-10-07",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Parking fee",
+     "payee": "SƠN THÁI",
+     "amount": 2310000
+    },
+    {
+     "date": "2026-10-09",
+     "source": "BIDV TC",
+     "cat": "loan",
+     "key": "SC|2026-10-09",
+     "label": "Trả gốc lãi SC VLĐ đến hạn 09/10/2026",
+     "payee": "Standard Chartered",
+     "amount": 723221694
+    },
+    {
+     "date": "2026-10-09",
+     "source": "BIDV TC",
+     "cat": "loan",
+     "key": "SC|2026-10-09",
+     "label": "Trả gốc lãi SC VLĐ đến hạn 09/10/2026",
+     "payee": "Standard Chartered",
+     "amount": 20393861
+    },
+    {
+     "date": "2026-10-09",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "SIEU TOC",
+     "amount": 155697000
+    },
+    {
+     "date": "2026-10-12",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "PIT (%)",
+     "payee": "Chi cục thuế",
+     "amount": 457597419
+    },
+    {
+     "date": "2026-10-12",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Chi phí khác",
+     "payee": "BHXH",
+     "amount": 250639040
+    },
+    {
+     "date": "2026-10-12",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Cleaning service",
+     "payee": "NOVOKING",
+     "amount": 6350400
+    },
+    {
+     "date": "2026-10-12",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Cleaning service",
+     "payee": "VIET CLEAN",
+     "amount": 9720000
+    },
+    {
+     "date": "2026-10-15",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Back-up/ Contingency",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 1308480
+    },
+    {
+     "date": "2026-10-15",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 842400
+    },
+    {
+     "date": "2026-10-15",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Stationery, mineral water, express delivery, phone charges",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 1744200
+    },
+    {
+     "date": "2026-10-15",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Snack & Drinks",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 379500
+    },
+    {
+     "date": "2026-10-15",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Snack & Drinks",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 3282639
+    },
+    {
+     "date": "2026-10-15",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Stationery, mineral water, express delivery, phone charges",
+     "payee": "GIA PHÁT",
+     "amount": 939600
+    },
+    {
+     "date": "2026-10-15",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Chi phí khác",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 10500000
+    },
+    {
+     "date": "2026-10-15",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "SIEU TOC",
+     "amount": 363293000
+    },
+    {
+     "date": "2026-10-19",
+     "source": "BIDV TC",
+     "cat": "loan",
+     "key": "SC|2026-10-19",
+     "label": "Trả gốc lãi SC VLĐ đến hạn 19/10/2026",
+     "payee": "Standard Chartered",
+     "amount": 2035495088
+    },
+    {
+     "date": "2026-10-19",
+     "source": "BIDV TC",
+     "cat": "loan",
+     "key": "SC|2026-10-19",
+     "label": "Trả gốc lãi SC VLĐ đến hạn 19/10/2026",
+     "payee": "Standard Chartered",
+     "amount": 57398173
+    },
+    {
+     "date": "2026-10-20",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Cleaning service",
+     "payee": "RENTOKIL",
+     "amount": 3330720
+    },
+    {
+     "date": "2026-10-20",
+     "source": "BIDV VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Team Building",
+     "payee": "TRINITY",
+     "amount": 464524433
+    },
+    {
+     "date": "2026-10-20",
+     "source": "BIDV VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Plants Fee",
+     "payee": "HOÀNG DUY",
+     "amount": 2592000
+    },
+    {
+     "date": "2026-10-20",
+     "source": "BIDV VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Snack & Drinks",
+     "payee": "QUEEN FOOD",
+     "amount": 3018600
+    },
+    {
+     "date": "2026-10-20",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "SIEU TOC",
+     "amount": 309750000
+    },
+    {
+     "date": "2026-10-22",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Event - Vietnam women",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 10932200
+    },
+    {
+     "date": "2026-10-22",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Recharge time",
+     "payee": "SAO PHUONG NAM",
+     "amount": 21000000
+    },
+    {
+     "date": "2026-10-22",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Chi phí khác",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 9000000
+    },
+    {
+     "date": "2026-10-23",
+     "source": "BIDV TC",
+     "cat": "interest",
+     "key": null,
+     "label": "Lãi vay BIDV định kỳ",
+     "payee": "BIDV",
+     "amount": 242619514
+    },
+    {
+     "date": "2026-10-26",
+     "source": "BIDV VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Plants Fee",
+     "payee": "HOÀNG DUY",
+     "amount": 2592000
+    },
+    {
+     "date": "2026-10-26",
+     "source": "BIDV VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Audit fee, Accounting Software, Tokens, Local Banks fee for Vihali only",
+     "payee": "A&C",
+     "amount": 35000000
+    },
+    {
+     "date": "2026-10-26",
+     "source": "BIDV VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Plants Fee",
+     "payee": "DNX",
+     "amount": 1134000
+    },
+    {
+     "date": "2026-10-26",
+     "source": "BIDV VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Stationery, mineral water, express delivery, phone charges",
+     "payee": "GIA PHÁT",
+     "amount": 939600
+    },
+    {
+     "date": "2026-10-26",
+     "source": "Khác",
+     "cat": "opex",
+     "key": null,
+     "label": "Recharge time",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 5542560
+    },
+    {
+     "date": "2026-10-27",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Electricity bills",
+     "payee": "SƠN THÁI",
+     "amount": 13154400
+    },
+    {
+     "date": "2026-10-27",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Parking fee",
+     "payee": "SƠN THÁI",
+     "amount": 1061500
+    },
+    {
+     "date": "2026-10-27",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "SIEU TOC",
+     "amount": 722750000
+    },
+    {
+     "date": "2026-10-27",
+     "source": "SC VLD",
+     "cat": "salary",
+     "key": null,
+     "label": "Lương, BH, thuế TNCN",
+     "payee": "Vihali",
+     "amount": 2395596212
+    },
+    {
+     "date": "2026-10-27",
+     "source": "SC VLD",
+     "cat": "salary",
+     "key": null,
+     "label": "Lương, BH, thuế TNCN",
+     "payee": "Vihali",
+     "amount": 2385311
+    },
+    {
+     "date": "2026-10-27",
+     "source": "SC VLD",
+     "cat": "salary",
+     "key": null,
+     "label": "Lương, BH, thuế TNCN",
+     "payee": "Vihali",
+     "amount": 158684909
+    },
+    {
+     "date": "2026-10-27",
+     "source": "SC VLD",
+     "cat": "salary",
+     "key": null,
+     "label": "Lương, BH, thuế TNCN",
+     "payee": "Vihali",
+     "amount": 81390435
+    },
+    {
+     "date": "2026-10-27",
+     "source": "SC VLD",
+     "cat": "salary",
+     "key": null,
+     "label": "Lương, BH, thuế TNCN",
+     "payee": "Vihali",
+     "amount": 166656605
+    },
+    {
+     "date": "2026-10-28",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 791000
+    },
+    {
+     "date": "2026-10-28",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Others",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 540000
+    },
+    {
+     "date": "2026-10-28",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Chi phí khác",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 2700000
+    },
+    {
+     "date": "2026-10-28",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Stationery, mineral water, express delivery, phone charges",
+     "payee": "ASEAN",
+     "amount": 2301685
+    },
+    {
+     "date": "2026-10-28",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Other expenses ( bank fee, fomopay fee...)",
+     "payee": "BIDV",
+     "amount": 500000
+    },
+    {
+     "date": "2026-10-28",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Recharge time",
+     "payee": "SAO PHUONG NAM",
+     "amount": 43738300
+    }
+   ],
+   "personal": [
+    {
+     "date": "2026-10-01",
+     "cat": "usdt",
+     "label": "Mua USDT",
+     "entity": "Cá nhân",
+     "payee": "Mua USDT",
+     "amount": 500000000,
+     "usdt": 19233.5
+    },
+    {
+     "date": "2026-10-02",
+     "cat": "usdt",
+     "label": "Mua USDT",
+     "entity": "Cá nhân",
+     "payee": "Mua USDT",
+     "amount": 500000000,
+     "usdt": 19224.9
+    },
+    {
+     "date": "2026-10-07",
+     "cat": "usdt",
+     "label": "Mua USDT",
+     "entity": "Cá nhân",
+     "payee": "Mua USDT",
+     "amount": 500000000,
+     "usdt": 19142.4
+    },
+    {
+     "date": "2026-10-09",
+     "cat": "opex-dopa",
+     "label": "Team Building",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 45555240
+    },
+    {
+     "date": "2026-10-09",
+     "cat": "opex-dopa",
+     "label": "Team Building",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 1197000
+    },
+    {
+     "date": "2026-10-09",
+     "cat": "opex-dopa",
+     "label": "Back-up/ Contingency",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 2343000
+    },
+    {
+     "date": "2026-10-09",
+     "cat": "opex-dopa",
+     "label": "Lunch & Dinner & tea break requested by boss",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 210800
+    },
+    {
+     "date": "2026-10-09",
+     "cat": "opex-dopa",
+     "label": "Office Equipment",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 190000
+    },
+    {
+     "date": "2026-10-09",
+     "cat": "opex-dopa",
+     "label": "Office Equipment",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 24008000
+    },
+    {
+     "date": "2026-10-11",
+     "cat": "usdt",
+     "label": "Mua USDT",
+     "entity": "Cá nhân",
+     "payee": "Mua USDT",
+     "amount": 500000000,
+     "usdt": 19129.2
+    },
+    {
+     "date": "2026-10-13",
+     "cat": "usdt",
+     "label": "Mua USDT",
+     "entity": "Cá nhân",
+     "payee": "Mua USDT",
+     "amount": 427000000,
+     "usdt": 16343.4
+    },
+    {
+     "date": "2026-10-15",
+     "cat": "opex-dopa",
+     "label": "Cloud Accounting System for 5 Entities",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 5890500
+    },
+    {
+     "date": "2026-10-15",
+     "cat": "opex-dopa",
+     "label": "Cloud Accounting System for 5 Entities",
+     "entity": "Sipher JSC",
+     "payee": "Ẩn tên",
+     "amount": 5890500
+    },
+    {
+     "date": "2026-10-15",
+     "cat": "opex-dopa",
+     "label": "Cloud Accounting System for 5 Entities",
+     "entity": "Aventix",
+     "payee": "Ẩn tên",
+     "amount": 5890500
+    },
+    {
+     "date": "2026-10-15",
+     "cat": "opex-dopa",
+     "label": "Cloud Accounting System for 5 Entities",
+     "entity": "Ather Labs",
+     "payee": "Ẩn tên",
+     "amount": 5890500
+    },
+    {
+     "date": "2026-10-15",
+     "cat": "opex-dopa",
+     "label": "Office Equipment",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 26774800
+    },
+    {
+     "date": "2026-10-15",
+     "cat": "opex-dopa",
+     "label": "Office Equipment",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 8500000
+    },
+    {
+     "date": "2026-10-15",
+     "cat": "usdt",
+     "label": "Mua USDT",
+     "entity": "Cá nhân",
+     "payee": "Mua USDT",
+     "amount": 500000000,
+     "usdt": 19155.3
+    },
+    {
+     "date": "2026-10-18",
+     "cat": "usdt",
+     "label": "Mua USDT",
+     "entity": "Cá nhân",
+     "payee": "Mua USDT",
+     "amount": 500000000,
+     "usdt": 19137.3
+    },
+    {
+     "date": "2026-10-24",
+     "cat": "usdt",
+     "label": "Mua USDT",
+     "entity": "Cá nhân",
+     "payee": "Mua USDT",
+     "amount": 500000000,
+     "usdt": 18973.1
+    },
+    {
+     "date": "2026-10-26",
+     "cat": "opex-ba",
+     "label": "Điều tiền Beyond Atoms theo KHNQ",
+     "entity": "Beyond Atoms",
+     "payee": "Beyond Atoms",
+     "amount": 500000000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Marketplace - Tools",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 910000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Wedding/New Born/ Sickness...",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 971000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Buddy",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 2000000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Birthday Gift",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 11000000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Dining meals",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 2400000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Event - Vietnam women",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 1233000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Lunch & Dinner & tea break requested by boss",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 416450
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Snack & Drinks",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 414900
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Snack & Drinks",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 3932800
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Stationery, mineral water, express delivery, phone charges",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 2500000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Womenday (20/10 & 8/3)",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 5800000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Womenday (20/10 & 8/3)",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 1320000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Team Building",
+     "entity": "Dopa JSC",
+     "payee": "CÔNG TY CỔ PHẦN ĐẦU TƯ AN THÙY ANH",
+     "amount": 1800000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Lunch & Dinner & tea break requested by boss",
+     "entity": "Dopa JSC",
+     "payee": "CÔNG TY CỔ PHẦN QUẢN LÝ LANCASTER LEGACY",
+     "amount": 9940000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Team Building",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 15000000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Domain( Namecheap, Mat Bao...)",
+     "entity": "1102 Holding",
+     "payee": "Ẩn tên",
+     "amount": 516240
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Office Equipment",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 11750000
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "opex-dopa",
+     "label": "Chi phí khác",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 66606066
+    },
+    {
+     "date": "2026-10-28",
+     "cat": "staff-dopa",
+     "label": "Lương nhân viên DOPA",
+     "entity": "Dopa JSC",
+     "payee": "DOPA",
+     "amount": 677987700
+    }
+   ],
+   "closing": {
+    "odAvailable": 11848011714,
+    "asOf": "2026-10-29"
+   },
+   "plan": {
+    "source": "archive",
+    "openingVihali": 15287973791,
+    "vihali": [
+     {
+      "date": "2026-10-09",
+      "label": "SC 007349292",
+      "amount": 743615555
+     },
+     {
+      "date": "2026-10-19",
+      "label": "SC 007365017",
+      "amount": 2092893261
+     },
+     {
+      "date": "2026-10-20",
+      "label": "Chi phí Opex đi bằng thấu chi",
+      "amount": 100000000
+     }
+    ],
+    "personal": [
+     {
+      "date": "2026-10-10",
+      "label": "Chi Opex DOPA",
+      "amount": 500000000
+     },
+     {
+      "date": "2026-10-10",
+      "label": "Chi Opex Beyond Atoms",
+      "amount": 500000000
+     },
+     {
+      "date": "2026-10-10",
+      "label": "Chi chi phí nhân viên DOPA T10/2026",
+      "amount": 700000000
+     },
+     {
+      "date": "2026-10-15",
+      "label": "Mua USDT T10/2026",
+      "amount": 5948431196
+     }
+    ]
+   }
+  }
+ }
+}

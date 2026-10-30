@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend as RLegend } from 'recharts';
 import { Send, Check, RotateCcw, FilePen, Plus, Trash2, Lock, ExternalLink, Save } from 'lucide-react';
-import { PLAN_MONTHS, PLAN_HIGHLIGHTS, SOURCE_LABEL, STATUS_LABEL } from '@/data/static';
+import { PLAN_MONTHS, PLAN_HIGHLIGHTS, SOURCE_LABEL, STATUS_LABEL, PLAN_ACTUALS } from '@/data/static';
+import PlanActuals from '@/pages/PlanActuals';
+import { prevMonth } from '@/lib/calc';
 import type { PlanLine, PlanApproval, Entity, PlanMonth, ArchivePlan, ArchiveBlock } from '@/data/static';
 import { postToAppsScript, loadArchive, fmtStamp } from '@/data/store';
 import { buildPlan, runBalance } from '@/lib/calc';
@@ -252,13 +254,20 @@ export default function Plan() {
   const snap = m.mode === 'snapshot' ? inputs[month]?.snapshot : undefined;
   const computed = m.mode !== 'archive' && !!inputs[month];
   const lines = !computed ? [] : snap ? snap.lines : buildPlan(month, inputs[month].recurring, inputs[month].adhoc, inputs[month].carry);
-  const op = !computed ? { vihali: 0, personal: 0 } : snap ? snap.opening : inputs[month].opening;
+  const prevClose = PLAN_ACTUALS[prevMonth(month)]?.closing;
+  // Kế hoạch đang lập: HM thấu chi đầu kỳ = HM thấu chi BIDV thực tế cuối tháng trước
+  const op = !computed ? { vihali: 0, personal: 0 } : snap ? snap.opening : live && prevClose ? { ...inputs[month].opening, vihali: prevClose.odAvailable } : inputs[month].opening;
   const vh = runBalance(lines, 'vihali', op.vihali), cn_ = runBalance(lines, 'personal', op.personal);
   const end = (rows: { bal: number }[], o: number) => (rows.length ? rows[rows.length - 1].bal : o);
   const minOf = (rows: { bal: number; date: string }[], o: number) => rows.reduce((a, r) => (r.bal < a.v ? { v: r.bal, d: r.date } : a), { v: o, d: m.from });
   const dates = [...new Set([m.from, ...lines.map(l => l.date), m.to])].sort();
   const chart = dates.map(d => ({ d: dm(d), vh: end(vh.filter(r => r.date <= d), op.vihali) / 1e9, cn: end(cn_.filter(r => r.date <= d), op.personal) / 1e9 }));
   const vmin = minOf(vh, op.vihali), cmin = minOf(cn_, op.personal);
+  const monthEnd = `${month}-${String(new Date(+month.slice(0, 4), +month.slice(5, 7), 0).getDate()).padStart(2, '0')}`;
+  const arch = PLAN_ACTUALS[month]?.plan;
+  const actualsPlan = computed
+    ? { v: lines.filter(l => l.entity === 'vihali' && l.dir === 'out'), p: lines.filter(l => l.entity === 'personal' && l.dir === 'out'), close: end(vh.filter(r => r.date <= monthEnd), op.vihali) as number | null }
+    : { v: arch?.vihali || [], p: arch?.personal || [], close: arch?.openingVihali != null ? arch.openingVihali - (arch.vihali || []).reduce((a, x) => a + x.amount, 0) : null };
   const sum = (rows: PlanLine[], dir: 'in' | 'out') => rows.filter(r => r.dir === dir).reduce((a, r) => a + r.amount, 0);
 
   return (
@@ -289,7 +298,7 @@ export default function Plan() {
       {!computed ? <ArchiveView m={m} /> : <>
         <div className="grid xl:grid-cols-2 gap-4 items-start">
           {[
-            { k: 'vihali', t: 'Vihali', h: 'Kế hoạch dòng tiền & hạn mức thấu chi', d: 'Trả nợ đến hạn lấy từ tab Vihali · nguồn trả là HM thấu chi BIDV', o: op.vihali, rows: vh, min: vmin, lbl: 'HM còn lại', opening: 'HM thấu chi BIDV khả dụng đầu kỳ' },
+            { k: 'vihali', t: 'Vihali', h: 'Kế hoạch dòng tiền & hạn mức thấu chi', d: live && prevClose ? `Đầu kỳ = HM thấu chi BIDV thực tế ngày ${dmy(prevClose.asOf)} · trả nợ đến hạn từ tab Vihali · lãi BIDV định kỳ ước tính` : 'Trả nợ đến hạn lấy từ tab Vihali · nguồn trả là HM thấu chi BIDV', o: op.vihali, rows: vh, min: vmin, lbl: 'HM còn lại', opening: 'HM thấu chi BIDV khả dụng đầu kỳ' },
             { k: 'personal', t: 'Cá nhân', h: 'Kế hoạch Individual Treasury', d: 'Sổ đến hạn lấy từ tab Cá nhân · chi định kỳ theo các tháng trước', o: op.personal, rows: cn_, min: cmin, lbl: 'Thanh khoản', opening: 'Thanh khoản đầu kỳ (tài khoản thanh toán)' },
           ].map(x => (
             <Panel key={x.k} pad={false} title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.h}</span>} sub={x.d}>
@@ -318,6 +327,7 @@ export default function Plan() {
         </Panel>
         {live && !editor && <p className="text-xs text-muted-foreground flex items-center gap-1.5"><Lock className="w-3 h-3" />Thu chi phát sinh và khoản định kỳ do người lập nhập ở chế độ người lập.</p>}
       </>}
+      <PlanActuals month={month} vihaliPlan={actualsPlan.v} personalPlan={actualsPlan.p} planClosing={actualsPlan.close} />
     </div>
   );
 }

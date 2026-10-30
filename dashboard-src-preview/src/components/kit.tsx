@@ -16,7 +16,7 @@ export function Panel({ title, sub, right, children, className, pad = true }: {
           {right && <div className="flex items-center gap-2 flex-wrap">{right}</div>}
         </header>
       )}
-      <div className={cn('min-w-0 flex-1', pad && 'p-4')}>{children}</div>
+      <div className={cn('min-w-0 min-h-0 flex-1', pad && 'p-4')}>{children}</div>
     </section>
   );
 }

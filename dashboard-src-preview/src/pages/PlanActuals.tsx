@@ -48,8 +48,8 @@ function vihaliRows(month: string, plan: PlanItem[], rows: ActualRow[]): Row[] {
   const offLoans = [...new Set(tc.filter(r => r.cat === 'loan' && !used.has(r.key || '')).map(r => r.key))];
   offLoans.forEach(k => {
     const d = tc.filter(r => r.key === k);
-    out.push({ id: 'X' + k, label: d[0].label, plan: 0, actual: sum(d), actDate: lastDate(d), status: { t: 'Ngoài kế hoạch tháng', tone: 'neg' }, detail: d,
-      extra: (k || '').split('|')[1] < `${month}-01` ? 'Khoản đến hạn tháng trước, trả trong tháng này' : undefined });
+    out.push({ id: 'X' + k, label: d[0].label, plan: 0, actual: sum(d), actDate: lastDate(d), status: { t: 'Ngoài kế hoạch', tone: 'neg' }, detail: d,
+      extra: (k || '').split('|')[1] < `${month}-01` ? 'đến hạn tháng trước' : undefined });
   });
   const pi = plan.filter(isInt), di = tc.filter(r => r.cat === 'interest');
   if (pi.length || di.length) out.push({ id: 'INT', label: 'Lãi vay BIDV định kỳ', planDate: pi[0]?.date, plan: sum(pi), actual: sum(di), actDate: lastDate(di), status: status(sum(pi), sum(di), pi[0]?.date, lastDate(di)), detail: di, extra: pi.length ? 'Kế hoạch là số ước tính theo dư nợ × lãi suất × số ngày' : undefined });
@@ -81,33 +81,32 @@ function Table({ rows }: { rows: Row[] }) {
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const P = sum(rows.map(r => ({ amount: r.plan }))), A = sum(rows.map(r => ({ amount: r.actual })));
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[720px] text-[13px] border-collapse">
-        <thead><tr><th className={th + ' w-[46%]'}>Khoản</th><th className={th + ' text-right'}>Kế hoạch</th><th className={th + ' text-right'}>Thực chi</th><th className={th + ' text-right'}>Chênh</th><th className={th}>Trạng thái</th></tr></thead>
+    <div className="scrollbox overflow-auto flex-1 min-h-0 max-h-[520px] xl:max-h-none">
+      <table className="w-full min-w-[540px] text-[13px] border-collapse">
+        <thead><tr><th className={th}>Khoản</th><th className={th + ' text-right'}>Kế hoạch</th><th className={th + ' text-right'}>Thực chi</th><th className={th + ' text-right'}>Chênh</th></tr></thead>
         <tbody>
           {rows.map(r => {
             const diff = r.actual - r.plan; const can = r.detail.length > 0;
             return (
               <Fragment key={r.id}>
                 <tr className={cn('hover:bg-accent/40 align-top', can && 'cursor-pointer')} onClick={() => can && setOpen(o => ({ ...o, [r.id]: !o[r.id] }))}>
-                  <td className={td}>
+                  <td className={td + ' min-w-[230px]'}>
                     <span className="inline-flex items-start gap-1.5">{can ? (open[r.id] ? <ChevronDown className="w-4 h-4 mt-px shrink-0" /> : <ChevronRight className="w-4 h-4 mt-px shrink-0" />) : <i className="w-4 shrink-0" />}
-                      <span><span className="font-medium">{r.label}</span>
-                        <span className="block text-xs text-muted-foreground">{r.planDate ? `KH ${dm(r.planDate)}` : 'Không có trong kế hoạch'}{r.actDate ? ` · chi ${r.detail.length > 1 && r.id !== 'INT' && !r.id.startsWith('L') && !r.id.startsWith('X') ? 'đến ' : ''}${dm(r.actDate)}` : ''}{r.extra ? ` · ${r.extra}` : ''}</span></span></span>
+                      <span><span className="font-medium">{r.label}</span> <Chip tone={r.status.tone} className="ml-1 align-middle">{r.status.t}</Chip>
+                        <span className="block text-xs text-muted-foreground">{r.planDate ? `KH ${dm(r.planDate)}` : 'Ngoài KH'}{r.actDate ? ` · chi ${r.detail.length > 1 && r.id !== 'INT' && !r.id.startsWith('L') && !r.id.startsWith('X') ? 'đến ' : ''}${dm(r.actDate)}` : ''}{r.extra ? ` · ${r.extra}` : ''}</span></span></span>
                   </td>
                   <td className={tn}>{r.plan ? nf(r.plan) : '–'}</td>
                   <td className={tn}>{r.actual ? nf(r.actual) : '–'}</td>
                   <td className={cn(tn, diff > 0 && 'text-neg', diff < 0 && 'text-pos')}>{r.plan || r.actual ? (diff > 0 ? '+' : '') + nf(diff) : '–'}</td>
-                  <td className={td + ' whitespace-nowrap'}><Chip tone={r.status.tone}>{r.status.t}</Chip></td>
-                </tr>
+                                  </tr>
                 {open[r.id] && r.detail.map((x, i) => (
                   <tr key={r.id + i} className="text-xs text-muted-foreground bg-muted/30">
                     <td className={td + ' pl-10'}><span className="num">{dm(x.date)}</span> · {x.label}<span className="text-foreground/70"> · {x.payee}</span>{x.entity && x.entity !== x.payee ? ` · ${x.entity}` : ''}</td>
-                    <td className={tn} /><td className={tn}>{nf(x.amount)}</td><td className={tn} /><td className={td} />
+                    <td className={tn} /><td className={tn}>{nf(x.amount)}</td><td className={tn} />
                   </tr>))}
               </Fragment>);
           })}
-          <tr className="font-semibold bg-muted/60"><td className={td}>Cộng</td><td className={tn}>{nf(P)}</td><td className={tn}>{nf(A)}</td><td className={cn(tn, A - P > 0 ? 'text-neg' : 'text-pos')}>{(A - P > 0 ? '+' : '') + nf(A - P)}</td><td className={td} /></tr>
+          <tr className="font-semibold bg-muted/60"><td className={td}>Cộng</td><td className={tn}>{nf(P)}</td><td className={tn}>{nf(A)}</td><td className={cn(tn, A - P > 0 ? 'text-neg' : 'text-pos')}>{(A - P > 0 ? '+' : '') + nf(A - P)}</td></tr>
         </tbody>
       </table>
     </div>);
@@ -129,8 +128,9 @@ export default function PlanActuals({ month, vihaliPlan, personalPlan, planClosi
         <div><div className="eyebrow">Thực chi so với kế hoạch</div><h2 className="text-[17px] font-semibold mt-0.5">Tháng {Number(mm)}/{y} · 01/{mm} – {dm(`${month}-${new Date(+y, +mm, 0).getDate()}`)}</h2></div>
         <span className="text-xs text-muted-foreground">Nguồn: Payment & Fund Request, NPV comparison · cập nhật {ACTUALS_AT ? dmy(ACTUALS_AT.slice(0, 10)) : '–'} · tên cá nhân đã ẩn</span>
       </div>
-      <div className="grid gap-4">
-        <Panel pad={false} title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">Vihali</span>Chi đi bằng thấu chi BIDV</span>} sub="Chỉ các PR có nguồn tiền BIDV TC · bấm từng dòng để xem chi tiết">
+      <div className="grid xl:grid-cols-2 gap-4">
+        <Panel pad={false} className="xl:h-[600px]" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">Vihali</span>Chi đi bằng thấu chi BIDV</span>} sub="Chỉ các PR có nguồn tiền BIDV TC · bấm từng dòng để xem chi tiết">
+          <div className="flex flex-col h-full">
           {(closing || planClosing != null) && (
             <div className="grid grid-cols-3 border-b">
               {[['HM thấu chi cuối tháng · KH', planClosing != null ? ty(planClosing) : '–', ''],
@@ -144,9 +144,10 @@ export default function PlanActuals({ month, vihaliPlan, personalPlan, planClosi
               <span className="inline-flex items-center gap-1"><Info className="w-3.5 h-3.5" />Không tính vào kế hoạch thấu chi:</span>
               {other.map(([k, v]) => <span key={k}>{SRC[k] || k} <b className="num font-medium text-foreground">{ty(v)}</b></span>)}
             </div>)}
+          </div>
         </Panel>
-        <Panel pad={false} title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">Cá nhân</span>Chi từ Individual Treasury</span>} sub="Chi từ VPB5678 (FR 1102 Group), điều tiền Beyond Atoms, mua USDT (NPV comparison)">
-          <Table rows={pRows} />
+        <Panel pad={false} className="xl:h-[600px]" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">Cá nhân</span>Chi từ Individual Treasury</span>} sub="Chi từ VPB5678 (FR 1102 Group), điều tiền Beyond Atoms, mua USDT (NPV comparison)">
+          <div className="flex flex-col h-full"><Table rows={pRows} /></div>
         </Panel>
       </div>
     </div>

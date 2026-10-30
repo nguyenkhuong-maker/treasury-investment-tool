@@ -57,6 +57,7 @@
   h1, h2, h3 { text-wrap: balance; }
 }
 @layer utilities {
+  .scrollbox thead th { position: sticky; top: 0; z-index: 2; background-color: hsl(var(--muted)); }
   .num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
   .gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
   .eyebrow { font-size: 11px; letter-spacing: .09em; text-transform: uppercase; font-weight: 600; color: hsl(var(--muted-foreground)); }

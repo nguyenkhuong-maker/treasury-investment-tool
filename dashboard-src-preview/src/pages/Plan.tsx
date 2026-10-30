@@ -88,7 +88,7 @@ function Approval({ month, ent, readonly }: { month: string; ent: Entity; readon
 function FlowTable({ rows, open, label, opening, m }: { rows: (PlanLine & { bal: number })[]; open: number; label: string; opening: string; m: PlanMonth }) {
   const tin = rows.filter(r => r.dir === 'in').reduce((a, r) => a + r.amount, 0), tout = rows.filter(r => r.dir === 'out').reduce((a, r) => a + r.amount, 0);
   return (
-    <div className="overflow-x-auto">
+    <div className="scrollbox overflow-auto flex-1 min-h-0 max-h-[520px] xl:max-h-none">
       <table className="w-full text-[13px] border-collapse">
         <thead><tr><th className={th + ' w-14'}>Ngày</th><th className={th}>Nội dung</th><th className={th + ' text-right'}>Thu / chi</th><th className={th + ' text-right'}>{label}</th></tr></thead>
         <tbody>
@@ -223,14 +223,15 @@ function ArchiveView({ m }: { m: PlanMonth }) {
     return () => { on = false; };
   }, [m.key]);
   return (
-    <div className="grid xl:grid-cols-2 gap-4 items-start">
+    <div className="grid xl:grid-cols-2 gap-4">
       {(['vihali', 'personal'] as Entity[]).map(e => {
         const d = data[e];
         const hl = PLAN_HIGHLIGHTS[m.key]?.[e] || [];
         return (
-          <Panel key={e} pad={false} title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{ENT[e]}</span>{e === 'vihali' ? 'Kế hoạch dòng tiền & hạn mức thấu chi' : 'Kế hoạch Individual Treasury'}</span>}
+          <Panel key={e} pad={false} className="xl:h-[760px]" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{ENT[e]}</span>{e === 'vihali' ? 'Kế hoạch dòng tiền & hạn mức thấu chi' : 'Kế hoạch Individual Treasury'}</span>}
             sub={d?.meta || `${approvals[m.key]?.[e]?.version || ''}`}
             right={<a href={`${OLD}${m.key}/${e === 'vihali' ? 'company' : 'personal'}.html`} target="_blank" rel="noreferrer" className="text-xs text-muted-foreground inline-flex items-center gap-1 hover:text-primary">Bản gốc<ExternalLink className="w-3 h-3" /></a>}>
+            <div className="flex flex-col h-full">
             {hl.length > 0 && (
               <div className="grid grid-cols-2 sm:grid-cols-4 border-b">
                 {hl.slice(0, 4).map(([k, v], i) => (
@@ -238,7 +239,8 @@ function ArchiveView({ m }: { m: PlanMonth }) {
               </div>)}
             {d === undefined ? <p className="p-4 text-xs text-muted-foreground">Đang tải…</p>
               : d === null ? <p className="p-4 text-xs text-muted-foreground">Không có bản kế hoạch {ENT[e]} cho tháng này.</p>
-              : <ArchiveBlocks blocks={d.blocks} />}
+              : <div className="scrollbox overflow-auto flex-1 min-h-0 max-h-[520px] xl:max-h-none"><ArchiveBlocks blocks={d.blocks} /></div>}
+            </div>
           </Panel>);
       })}
     </div>
@@ -271,8 +273,8 @@ export default function Plan() {
   const sum = (rows: PlanLine[], dir: 'in' | 'out') => rows.filter(r => r.dir === dir).reduce((a, r) => a + r.amount, 0);
 
   return (
-    <div className="grid gap-4">
-      <div className="flex flex-wrap items-center gap-3 bg-card border rounded-md px-4 py-3">
+    <div className="grid gap-4 grid-cols-[minmax(0,1fr)]">
+      <div className="flex flex-wrap items-center gap-3 bg-card border rounded-md px-4 py-3 min-w-0">
         <div className="max-w-full overflow-x-auto">
           <div className="inline-flex border rounded-sm overflow-hidden text-[13px]">
             {PLAN_MONTHS.map(x => {
@@ -296,18 +298,20 @@ export default function Plan() {
       </Panel>
 
       {!computed ? <ArchiveView m={m} /> : <>
-        <div className="grid xl:grid-cols-2 gap-4 items-start">
+        <div className="grid xl:grid-cols-2 gap-4">
           {[
             { k: 'vihali', t: 'Vihali', h: 'Kế hoạch dòng tiền & hạn mức thấu chi', d: live && prevClose ? `Đầu kỳ = HM thấu chi BIDV thực tế ngày ${dmy(prevClose.asOf)} · trả nợ đến hạn từ tab Vihali · lãi BIDV định kỳ ước tính` : 'Trả nợ đến hạn lấy từ tab Vihali · nguồn trả là HM thấu chi BIDV', o: op.vihali, rows: vh, min: vmin, lbl: 'HM còn lại', opening: 'HM thấu chi BIDV khả dụng đầu kỳ' },
             { k: 'personal', t: 'Cá nhân', h: 'Kế hoạch Individual Treasury', d: 'Sổ đến hạn lấy từ tab Cá nhân · chi định kỳ theo các tháng trước', o: op.personal, rows: cn_, min: cmin, lbl: 'Thanh khoản', opening: 'Thanh khoản đầu kỳ (tài khoản thanh toán)' },
           ].map(x => (
-            <Panel key={x.k} pad={false} title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.h}</span>} sub={x.d}>
+            <Panel key={x.k} pad={false} className="xl:h-[720px]" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.h}</span>} sub={x.d}>
+              <div className="flex flex-col h-full">
               <div className="grid grid-cols-4 border-b">
                 {[['Đầu kỳ', ty(x.o), ''], ['Thu', ty(sum(x.rows, 'in')), 'text-pos'], ['Chi', ty(sum(x.rows, 'out')), 'text-neg'], ['Cuối kỳ', ty(end(x.rows, x.o)), 'font-semibold']].map(([l, v, c], i) => (
                   <div key={l} className={cn('px-4 py-3 min-w-0', i && 'border-l')}><div className="text-xs text-muted-foreground">{l}</div><div className={cn('num text-[15px] sm:text-[17px] font-medium mt-0.5', c)}>{v}</div></div>))}
               </div>
               <div className="px-4 py-2 text-xs text-muted-foreground border-b">{x.lbl} thấp nhất trong kỳ <span className="num text-foreground">{ty(x.min.v)}</span> ngày <span className="num">{dm(x.min.d)}</span></div>
               <FlowTable rows={x.rows} open={x.o} label={x.lbl} opening={x.opening} m={m} />
+              </div>
             </Panel>))}
         </div>
         <Panel title="Diễn biến số dư trong kỳ" sub="Tỷ VND · cập nhật theo từng ngày có thu chi">

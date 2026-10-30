@@ -3,7 +3,7 @@ import { ChevronDown, ChevronRight, Info } from 'lucide-react';
 import { PLAN_ACTUALS, ACTUALS_AT } from '@/data/static';
 import type { ActualRow } from '@/data/static';
 import { nf, ty, dmy, dm, TODAY } from '@/lib/fmt';
-import { Panel, Chip, th, td, tn } from '@/components/kit';
+import { Panel, Chip, rowToggle, scrollBody, th, td, tn } from '@/components/kit';
 import { cn } from '@/lib/utils';
 
 /* Thực chi so với kế hoạch theo tháng dương lịch.
@@ -81,15 +81,15 @@ function Table({ rows }: { rows: Row[] }) {
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const P = sum(rows.map(r => ({ amount: r.plan }))), A = sum(rows.map(r => ({ amount: r.actual })));
   return (
-    <div className="scrollbox overflow-auto flex-1 min-h-0 max-h-[520px] xl:max-h-none">
-      <table className="w-full min-w-[540px] text-[13px] border-collapse">
+    <div className={scrollBody}>
+      <table className="w-full min-w-[540px] text-body border-collapse">
         <thead><tr><th className={th}>Khoản</th><th className={th + ' text-right'}>Kế hoạch</th><th className={th + ' text-right'}>Thực chi</th><th className={th + ' text-right'}>Chênh</th></tr></thead>
         <tbody>
           {rows.map(r => {
             const diff = r.actual - r.plan; const can = r.detail.length > 0;
             return (
               <Fragment key={r.id}>
-                <tr className={cn('hover:bg-accent/40 align-top', can && 'cursor-pointer')} onClick={() => can && setOpen(o => ({ ...o, [r.id]: !o[r.id] }))}>
+                <tr {...rowToggle(!!open[r.id], () => setOpen(o => ({ ...o, [r.id]: !o[r.id] })), can)} className={cn('hover:bg-accent/40 align-top', can && rowToggle(true, () => {}).className)}>
                   <td className={td + ' min-w-[230px]'}>
                     <span className="inline-flex items-start gap-1.5">{can ? (open[r.id] ? <ChevronDown className="w-4 h-4 mt-px shrink-0" /> : <ChevronRight className="w-4 h-4 mt-px shrink-0" />) : <i className="w-4 shrink-0" />}
                       <span><span className="font-medium">{r.label}</span> <Chip tone={r.status.tone} className="ml-1 align-middle">{r.status.t}</Chip>
@@ -125,7 +125,7 @@ export default function PlanActuals({ month, vihaliPlan, personalPlan, planClosi
   return (
     <div className="grid gap-3">
       <div className="flex flex-wrap items-end justify-between gap-2 pt-2">
-        <div><div className="eyebrow">Thực chi so với kế hoạch</div><h2 className="text-[17px] font-semibold mt-0.5">Tháng {Number(mm)}/{y} · 01/{mm} – {dm(`${month}-${new Date(+y, +mm, 0).getDate()}`)}</h2></div>
+        <div><div className="eyebrow">Thực chi so với kế hoạch</div><h2 className="text-h3 font-semibold mt-0.5">Tháng {Number(mm)}/{y} · 01/{mm} – {dm(`${month}-${new Date(+y, +mm, 0).getDate()}`)}</h2></div>
         <span className="text-xs text-muted-foreground">Nguồn: Payment & Fund Request, NPV comparison · cập nhật {ACTUALS_AT ? dmy(ACTUALS_AT.slice(0, 10)) : '–'} · tên cá nhân đã ẩn</span>
       </div>
       <div className="grid xl:grid-cols-2 gap-4">
@@ -136,7 +136,7 @@ export default function PlanActuals({ month, vihaliPlan, personalPlan, planClosi
               {[['HM thấu chi cuối tháng · KH', planClosing != null ? ty(planClosing) : '–', ''],
                 [`Thực tế${closing ? ` (${dm(closing.asOf)})` : ''}`, closing ? ty(closing.odAvailable) : '–', ''],
                 ['Chênh', closing && planClosing != null ? ty(closing.odAvailable - planClosing) : '–', closing && planClosing != null && closing.odAvailable < planClosing ? 'text-neg' : 'text-pos']].map(([l, v, c], i) => (
-                <div key={l} className={cn('px-4 py-3 min-w-0', i && 'border-l')}><div className="text-xs text-muted-foreground">{l}</div><div className={cn('num text-[15px] font-medium mt-0.5', c)}>{v}</div></div>))}
+                <div key={l} className={cn('px-4 py-3 min-w-0', i && 'border-l')}><div className="text-xs text-muted-foreground">{l}</div><div className={cn('num text-kpi-sm font-medium mt-0.5', c)}>{v}</div></div>))}
             </div>)}
           <Table rows={vRows} />
           {other.length > 0 && (

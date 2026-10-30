@@ -5,7 +5,7 @@ import { RATE_WEEKS, PERSONAL_DEPOSITS, COMPANY_DEPOSITS, BALANCE, CARDS } from 
 import type { Balance } from '@/data/static';
 import { GROUP_SUMMARY, LOAN_TOTAL, PERSONAL_TOTAL, PLEDGED_TOTAL, collateralFlows, CARD_LIMIT, CARD_USED, CARD_COLLATERAL } from '@/lib/calc';
 import { ty, tr, pct, dmy, FX, TODAY, usdFull, usdM, vndOf, nf } from '@/lib/fmt';
-import { Panel, Chip, Delta, Donut, Legend, th, td, tn } from '@/components/kit';
+import { Kpi, Panel, Chip, Delta, Donut, Legend, th, td, tn, rowToggle } from '@/components/kit';
 import { useApp } from '@/state';
 import { cn } from '@/lib/utils';
 
@@ -63,8 +63,8 @@ const THRESHOLD = 24;
 function M({ v, big, tone, className }: { v: number; big?: boolean; tone?: 'pos' | 'neg'; className?: string }) {
   return (
     <span className={cn('inline-flex flex-col leading-tight', className)}>
-      <span className={cn('num', big ? 'text-[21px] font-medium' : 'font-medium', tone === 'pos' && 'text-pos', tone === 'neg' && 'text-neg')}>{usdFull(v)}</span>
-      <span className="num text-[11px] text-muted-foreground mt-0.5">≈ {vndOf(v)}</span>
+      <span className={cn('num', big ? 'text-kpi font-medium' : 'font-medium', tone === 'pos' && 'text-pos', tone === 'neg' && 'text-neg')}>{usdFull(v)}</span>
+      <span className="num text-caption text-muted-foreground mt-0.5">≈ {vndOf(v)}</span>
     </span>
   );
 }
@@ -100,12 +100,12 @@ function TokenSwitch() {
   const [code, setCode] = useState('');
   const [err, setErr] = useState(false);
   if (cryptoOpen) return (
-    <div className="flex flex-wrap items-center gap-2 text-[13px]">
+    <div className="flex flex-wrap items-center gap-2 text-body">
       <Chip tone="pos"><LockOpen className="w-3 h-3" />Đã gồm token</Chip>
       <button onClick={() => setCryptoOpen(false)} className="inline-flex items-center gap-1 h-7 px-2.5 rounded-sm border text-xs text-muted-foreground hover:text-foreground"><Lock className="w-3 h-3" />Khóa lại</button>
     </div>);
   return (
-    <form className="flex flex-wrap items-center gap-2 text-[13px]" onSubmit={e => { e.preventDefault(); if (code === '1993') { setCryptoOpen(true); setCode(''); } else { setErr(true); setCode(''); } }}>
+    <form className="flex flex-wrap items-center gap-2 text-body" onSubmit={e => { e.preventDefault(); if (code === '1993') { setCryptoOpen(true); setCode(''); } else { setErr(true); setCode(''); } }}>
       <Chip tone="warn"><Lock className="w-3 h-3" />Chưa gồm token</Chip>
       <label htmlFor="ovCode" className="sr-only">Mã xem token</label>
       <input id="ovCode" type="password" inputMode="numeric" autoComplete="off" placeholder="Mã xem token" value={code} onChange={e => { setCode(e.target.value); setErr(false); }}
@@ -124,7 +124,7 @@ function Runway({ R, open }: { R: ReturnType<typeof compute>; open: boolean }) {
       sub={<>Tiền & tương đương <b className="num font-medium text-foreground">{usdFull(R.cash)}</b>{!open && ' (chưa gồm token)'} ÷ mức chi mỗi tháng · ngưỡng cảnh báo {THRESHOLD} tháng</>}
       right={low ? <Chip tone="neg"><TriangleAlert className="w-3 h-3" />{low}/{R.cases.length} kịch bản dưới {THRESHOLD} tháng</Chip> : <Chip tone="pos">Cả {R.cases.length} kịch bản ≥ {THRESHOLD} tháng</Chip>}>
       <div className="grid gap-1">
-        <div className="hidden md:grid grid-cols-[230px_1fr_150px] gap-4 text-[11px] uppercase tracking-wide text-muted-foreground font-semibold pb-1">
+        <div className="hidden md:grid grid-cols-[230px_1fr_150px] gap-4 text-caption uppercase tracking-wide text-muted-foreground font-semibold pb-1">
           <span>Kịch bản · mức chi/tháng</span><span className="relative">0<span className="absolute right-0">{max} tháng</span></span><span className="text-right whitespace-nowrap">Runway · cạn quỹ dự kiến</span>
         </div>
         {R.cases.map(c => {
@@ -132,7 +132,7 @@ function Runway({ R, open }: { R: ReturnType<typeof compute>; open: boolean }) {
           return (
             <div key={c.key} className={cn('grid md:grid-cols-[230px_1fr_190px] gap-x-4 gap-y-1.5 items-center rounded-sm px-2 py-2.5 -mx-2', c.actual && 'bg-accent/50')}>
               <div className="min-w-0">
-                <div className="text-[13px] font-medium flex items-center gap-1.5 flex-wrap">{c.label}{c.actual && <Chip tone="primary">Số chi thực tế</Chip>}</div>
+                <div className="text-body font-medium flex items-center gap-1.5 flex-wrap">{c.label}{c.actual && <Chip tone="primary">Số chi thực tế</Chip>}</div>
                 <div className="text-xs text-muted-foreground num">{usdFull(c.burn)}/tháng · ≈ {vndOf(c.burn)}</div>
               </div>
               <div className="relative h-6">
@@ -142,7 +142,7 @@ function Runway({ R, open }: { R: ReturnType<typeof compute>; open: boolean }) {
                 <div className="absolute -top-0.5 -bottom-0.5 border-l-2 border-dashed" style={{ left: pctOf(THRESHOLD) + '%', borderColor: 'hsl(var(--warn))' }} />
               </div>
               <div className="flex md:flex-col md:items-end items-baseline gap-2 md:gap-0">
-                <span className={cn('num text-[18px] font-semibold leading-tight', warn ? 'text-neg' : 'text-pos')}>{c.months.toFixed(1)} <span className="text-xs font-normal text-muted-foreground">tháng</span></span>
+                <span className={cn('num text-h3 font-semibold leading-tight', warn ? 'text-neg' : 'text-pos')}>{c.months.toFixed(1)} <span className="text-xs font-normal text-muted-foreground">tháng</span></span>
                 <span className="text-xs text-muted-foreground whitespace-nowrap">{warn ? <span className="text-neg font-medium">Dưới {THRESHOLD} tháng · </span> : null}cạn quỹ ~ {addMonthsLabel(c.months)}</span>
               </div>
             </div>);
@@ -161,16 +161,16 @@ function BreakdownTable({ R, B, open }: { R: ReturnType<typeof compute>; B: Bala
   const [x, setX] = useState<Record<string, boolean>>({});
   const t = (k: string) => setX(o => ({ ...o, [k]: !o[k] }));
   const Head = ({ k, label, hint, dep, loan, c }: { k: string; label: string; hint?: string; dep: number; loan: number; c: string }) => (
-    <tr className="hover:bg-muted/60 cursor-pointer" onClick={() => t(k)}>
+    <tr {...rowToggle(!!x[k], () => t(k))} className={'hover:bg-muted/60 ' + rowToggle(true, () => {}).className}>
       <td className={td}><span className="inline-flex items-center gap-1.5 font-medium">{x[k] ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}<i className="w-2.5 h-2.5 rounded-[2px]" style={{ background: c }} />{label}</span>{hint && <div className="text-xs text-muted-foreground pl-[38px]">{hint}</div>}</td>
       <td className={tn}><M v={dep} /></td><td className={tn}>{loan ? <M v={-loan} /> : <span className="text-muted-foreground">–</span>}</td><td className={tn}><M v={dep - loan} tone={dep - loan < 0 ? 'neg' : undefined} /></td>
     </tr>);
   const Sub = ({ label, dep, loan }: { label: ReactNode; dep: number; loan: number }) => (
-    <tr className="text-muted-foreground"><td className={td + ' pl-[46px] text-[13px]'}>{label}</td><td className={tn + ' text-xs'}>{dep ? usdFull(dep) : '–'}</td><td className={tn + ' text-xs'}>{loan ? usdFull(-loan) : '–'}</td><td className={tn + ' text-xs'}>{usdFull(dep - loan)}</td></tr>);
+    <tr className="text-muted-foreground"><td className={td + ' pl-[46px] text-body'}>{label}</td><td className={tn + ' text-xs'}>{dep ? usdFull(dep) : '–'}</td><td className={tn + ' text-xs'}>{loan ? usdFull(-loan) : '–'}</td><td className={tn + ' text-xs'}>{usdFull(dep - loan)}</td></tr>);
   const vn = R.ents;
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-[600px] text-[13px] border-collapse">
+      <table className="w-full min-w-[600px] text-body border-collapse">
         <thead><tr><th className={th}>Nguồn</th><th className={th + ' text-right'}>Tài sản</th><th className={th + ' text-right'}>Dư nợ</th><th className={th + ' text-right'}>Ròng</th></tr></thead>
         <tbody>
           <Head k="ind" label="Cá nhân" hint={`Cầm cố cho Vihali ${usdFull(B.individuals.pledged)}`} dep={B.individuals.total} loan={B.individuals.loans} c="hsl(var(--c4))" />
@@ -224,23 +224,11 @@ export default function Overview() {
       </div>
 
       <div className={cn('grid gap-3', open ? 'grid-cols-2 lg:grid-cols-4' : 'grid-cols-1 sm:grid-cols-3')}>
-        <div className="bg-card border rounded-md px-4 py-3 min-w-0">
-          <div className="text-xs text-muted-foreground">Tổng tài sản{tag}</div>
-          <div className="mt-1"><M v={R.assets} big /></div>
-        </div>
-        <button onClick={() => go('vihali')} className="text-left bg-card border rounded-md px-4 py-3 min-w-0 hover:border-primary/50 transition-colors">
-          <div className="text-xs text-muted-foreground">Tổng dư nợ · Vihali BIDV + SC{CARDS.length ? ' + thẻ tín dụng' : ''}</div>
-          <div className="mt-1"><M v={R.debt} big /></div>
-        </button>
-        <div className="bg-card border rounded-md px-4 py-3 min-w-0">
-          <div className="text-xs text-muted-foreground">Thanh khoản ròng = tài sản − dư nợ{tag}</div>
-          <div className="mt-1"><M v={R.net} big tone={R.net < 0 ? 'neg' : 'pos'} /></div>
-        </div>
-        {open && <div className={cn('bg-card border rounded-md px-4 py-3 min-w-0', actual.months < THRESHOLD && 'border-[hsl(var(--neg))]/60')}>
-          <div className="text-xs text-muted-foreground">Runway theo chi thực tế{tag}</div>
-          <div className={cn('num text-[21px] font-medium mt-1 leading-tight', actual.months < THRESHOLD ? 'text-neg' : 'text-pos')}>{actual.months.toFixed(1)} tháng</div>
-          <div className="text-[11px] text-muted-foreground mt-0.5">{actual.months < THRESHOLD ? <span className="text-neg font-medium inline-flex items-center gap-1"><TriangleAlert className="w-3 h-3" />Dưới {THRESHOLD} tháng · </span> : null}chi TB {usdM(R.actualBurn, 2)}/tháng</div>
-        </div>}
+        <Kpi label={<>Tổng tài sản{tag}</>} value={<M v={R.assets} big />} />
+        <Kpi label={`Tổng dư nợ · Vihali BIDV + SC${CARDS.length ? ' + thẻ tín dụng' : ''}`} value={<M v={R.debt} big />} onClick={() => go('vihali')} />
+        <Kpi label={<>Thanh khoản ròng = tài sản − dư nợ{tag}</>} value={<M v={R.net} big tone={R.net < 0 ? 'neg' : 'pos'} />} />
+        {open && <Kpi alert={actual.months < THRESHOLD} label={<>Runway theo chi thực tế{tag}</>} tone={actual.months < THRESHOLD ? 'neg' : 'pos'} value={`${actual.months.toFixed(1)} tháng`}
+          sub={<>{actual.months < THRESHOLD && <span className="text-neg font-medium inline-flex items-center gap-1"><TriangleAlert className="w-3 h-3" />Dưới {THRESHOLD} tháng · </span>}chi TB {usdM(R.actualBurn, 2)}/tháng</>} />}
       </div>
 
       <div className="grid lg:grid-cols-12 gap-4">
@@ -271,7 +259,7 @@ export default function Overview() {
         <Panel className="xl:col-span-4" title="Lãi suất 12 tháng cao nhất" sub={`${W.label} · so với tuần trước`} right={<button onClick={() => go('lai-suat')} className="text-xs text-primary inline-flex items-center gap-1 hover:underline">Tab Đầu tư<ArrowRight className="w-3 h-3" /></button>}>
           <div className="grid gap-2">
             {top12.map((i: any) => { const p = (P.medium as readonly any[]).find(x => x.name === i.name)?.r['12m']; return (
-              <div key={i.name} className="grid grid-cols-[1fr_auto_76px] gap-2 text-[13px] items-center">
+              <div key={i.name} className="grid grid-cols-[1fr_auto_76px] gap-2 text-body items-center">
                 <span>{i.name}</span><span className="num font-medium">{pct(i.r['12m'])}</span><span className="text-right text-xs">{p != null ? <Delta v={i.r['12m'] - p} /> : '–'}</span>
               </div>); })}
           </div>

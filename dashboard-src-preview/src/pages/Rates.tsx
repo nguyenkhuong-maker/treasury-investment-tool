@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList, Legend as RLegend } from 'recharts';
 import { RATE_WEEKS } from '@/data/static';
 import { nf, pct } from '@/lib/fmt';
-import { Panel, Kpi, Chip, Delta, th, td, tn } from '@/components/kit';
+import { Panel, Kpi, Chip, Delta, th, td, tn, chartAxisTick, chartAxisLine, chartGrid, chartTip } from '@/components/kit';
 import { cn } from '@/lib/utils';
 
 type Week = (typeof RATE_WEEKS)[number];
@@ -17,15 +17,15 @@ const catOf = (t: string): Cat => (['6m', '9m', '12m'].includes(t) ? 'medium' : 
 const items = (w: Week, c: Cat) => (w[c] as readonly any[]);
 const rateOf = (w: Week | undefined, c: Cat, name: string, t: string): number | null =>
   w ? (items(w, c).find((i: any) => i.name === name)?.r?.[t] ?? null) : null;
-const tip = { contentStyle: { background: 'hsl(var(--popover))', border: '1px solid hsl(var(--border))', borderRadius: 4, fontSize: 12 }, itemStyle: { color: 'hsl(var(--foreground))' }, labelStyle: { color: 'hsl(var(--muted-foreground))' } };
-const axis = { tick: { fill: 'hsl(var(--muted-foreground))', fontSize: 11 }, axisLine: { stroke: 'hsl(var(--border))' }, tickLine: false };
+const tip = chartTip;
+const axis = { tick: chartAxisTick, axisLine: chartAxisLine, tickLine: false };
 
 function RateCell({ v, prev, best }: { v: number | null; prev: number | null; best: boolean }) {
   if (v == null) return <td className={tn + ' text-muted-foreground'}>–</td>;
   return (
     <td className={tn}>
       <div className={cn(best && 'text-primary font-semibold')}>{pct(v)}</div>
-      {prev != null && Math.abs(v - prev) > 0.001 && <div className="text-[11px]"><Delta v={v - prev} /></div>}
+      {prev != null && Math.abs(v - prev) > 0.001 && <div className="text-caption"><Delta v={v - prev} /></div>}
     </td>
   );
 }
@@ -69,7 +69,7 @@ export default function Rates() {
     return out.sort((a, b) => b.interest - a.interest).slice(0, 3);
   }, [W, tenor, amount]);
 
-  const sel = 'h-8 rounded-sm border bg-background px-2 text-[13px]';
+  const sel = 'h-8 rounded-sm border bg-background px-2 text-body';
   const kpis: [Cat, string, string][] = [['medium', '12m', 'Cao nhất 12 tháng'], ['medium', '6m', 'Cao nhất 6 tháng'], ['short', '1m', 'Cao nhất 1 tháng'], ['ultra', '1d', 'Qua đêm tốt nhất']];
 
   return (
@@ -97,7 +97,7 @@ export default function Rates() {
           <div className="h-[280px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={compareData} margin={{ top: 18, right: 8, left: -12, bottom: 0 }} barGap={2}>
-                <CartesianGrid vertical={false} stroke="hsl(var(--border))" strokeDasharray="2 3" />
+                <CartesianGrid {...chartGrid} />
                 <XAxis dataKey="name" {...axis} interval={0} />
                 <YAxis {...axis} domain={[(m: number) => Math.max(0, Math.floor(m - 1)), (m: number) => Math.ceil(m + 0.5)]} tickFormatter={v => v + '%'} />
                 <Tooltip {...tip} formatter={(v: number) => pct(v)} />
@@ -116,7 +116,7 @@ export default function Rates() {
           <div className="h-[280px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={trend} margin={{ top: 18, right: 4, left: -14, bottom: 0 }}>
-                <CartesianGrid vertical={false} stroke="hsl(var(--border))" strokeDasharray="2 3" />
+                <CartesianGrid {...chartGrid} />
                 <XAxis dataKey="k" {...axis} interval={1} />
                 <YAxis {...axis} domain={[(m: number) => Math.max(0, Math.floor(m - 1)), (m: number) => Math.ceil(m + 0.3)]} tickFormatter={v => v + '%'} />
                 <Tooltip {...tip} formatter={(v: number) => pct(v)} />
@@ -131,7 +131,7 @@ export default function Rates() {
 
       <Panel pad={false} title="Tiền gửi trung hạn 6–12 tháng" sub="Kèm khả năng hỗ trợ vay · số nhỏ dưới mỗi mức là biến động so với kỳ so sánh">
         <div className="overflow-x-auto">
-          <table className="w-full text-[13px] border-collapse">
+          <table className="w-full text-body border-collapse">
             <thead><tr><th className={th}>Ngân hàng</th>{TENORS.medium.map(([k, l]) => <th key={k} className={th + ' text-right'}>{l}</th>)}<th className={th}>Hỗ trợ vay</th><th className={th}>Định hướng sử dụng</th><th className={th + ' min-w-[240px]'}>Nhận định</th></tr></thead>
             <tbody>{W.medium.map((i: any) => (
               <tr key={i.name} className="hover:bg-accent/40">
@@ -152,7 +152,7 @@ export default function Rates() {
       <div className="grid xl:grid-cols-12 gap-4">
         <Panel pad={false} className="xl:col-span-7" title="Đầu tư ngắn hạn 1–5 tháng">
           <div className="overflow-x-auto">
-            <table className="w-full text-[13px] border-collapse">
+            <table className="w-full text-body border-collapse">
               <thead><tr><th className={th}>Sản phẩm</th>{TENORS.short.map(([k]) => <th key={k} className={th + ' text-right'}>{k.replace('m', ' th')}</th>)}<th className={th + ' min-w-[200px]'}>Đề xuất sử dụng</th></tr></thead>
               <tbody>{W.short.map((i: any) => (
                 <tr key={i.name} className="hover:bg-accent/40"><td className={td + ' font-medium'}>{i.name}</td>
@@ -163,10 +163,10 @@ export default function Rates() {
         </Panel>
         <Panel pad={false} className="xl:col-span-5" title="Phương án dưới 1 tháng">
           <div className="overflow-x-auto">
-            <table className="w-full text-[13px] border-collapse">
+            <table className="w-full text-body border-collapse">
               <thead><tr><th className={th}>Sản phẩm</th>{TENORS.ultra.map(([k, l]) => <th key={k} className={th + ' text-right'}>{l}</th>)}</tr></thead>
               <tbody>{W.ultra.map((i: any) => (
-                <tr key={i.name} className="hover:bg-accent/40"><td className={td}><div className="font-medium">{i.name}</div><div className="text-[11px] text-muted-foreground">{i.roll ? 'Quay vòng hằng ngày' : 'Khóa kỳ hạn'}</div></td>
+                <tr key={i.name} className="hover:bg-accent/40"><td className={td}><div className="font-medium">{i.name}</div><div className="text-caption text-muted-foreground">{i.roll ? 'Quay vòng hằng ngày' : 'Khóa kỳ hạn'}</div></td>
                   {TENORS.ultra.map(([k]) => <RateCell key={k} v={i.r[k]} prev={rateOf(P, 'ultra', i.name, k)} best={i.r[k] === best('ultra', k)} />)}</tr>))}</tbody>
             </table>
           </div>
@@ -176,11 +176,11 @@ export default function Rates() {
       <div className="grid lg:grid-cols-12 gap-4">
         <Panel className="lg:col-span-7" title="Công cụ khuyến nghị" sub="Xếp hạng 3 phương án tiền lãi cao nhất của kỳ đang xem · lãi = số tiền × lãi suất × số ngày / 365">
           <div className="flex flex-wrap gap-3 items-end mb-3">
-            <label className="grid gap-1 text-xs text-muted-foreground">Số tiền (VND)<input id="rAmt" value={amt} onChange={e => setAmt(e.target.value)} onBlur={() => setAmt(nf(amount))} inputMode="numeric" className="num h-8 w-44 text-right rounded-sm border bg-background px-2 text-[13px] text-foreground" /></label>
+            <label className="grid gap-1 text-xs text-muted-foreground">Số tiền (VND)<input id="rAmt" value={amt} onChange={e => setAmt(e.target.value)} onBlur={() => setAmt(nf(amount))} inputMode="numeric" className="num h-8 w-44 text-right rounded-sm border bg-background px-2 text-body text-foreground" /></label>
             <label className="grid gap-1 text-xs text-muted-foreground">Kỳ hạn<select id="rTen" className={sel} value={tenor} onChange={e => setTenor(e.target.value)}>{[...TENORS.ultra, ...TENORS.short, ...TENORS.medium].map(([k, l]) => <option key={k} value={k}>{l}</option>)}</select></label>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-[13px] border-collapse">
+            <table className="w-full text-body border-collapse">
               <thead><tr><th className={th}>Hạng</th><th className={th}>Sản phẩm</th><th className={th + ' text-right'}>Lãi suất</th><th className={th + ' text-right'}>Tiền lãi ước tính</th><th className={th}>Ghi chú</th></tr></thead>
               <tbody>{reco.map((r, i) => (
                 <tr key={r.name + r.t}><td className={td}><span className={cn('inline-grid place-items-center w-6 h-6 rounded-sm text-xs font-semibold', i === 0 ? 'bg-primary text-primary-foreground' : 'bg-muted')}>{i + 1}</span></td>
@@ -190,7 +190,7 @@ export default function Rates() {
           </div>
         </Panel>
         <Panel className="lg:col-span-5" title="Ghi chú cập nhật tuần" sub={W.label}>
-          <p className="text-[13px] leading-relaxed text-muted-foreground">{W.note}</p>
+          <p className="text-body leading-relaxed text-muted-foreground">{W.note}</p>
         </Panel>
       </div>
     </div>

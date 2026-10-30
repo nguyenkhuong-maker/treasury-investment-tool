@@ -3,7 +3,7 @@ import { ChevronDown, ChevronRight, FileText, ExternalLink, Link2 } from 'lucide
 import { COMPANY_DEPOSITS, CARDS } from '@/data/static';
 import { GROUP_SUMMARY, LOAN_TOTAL, HM_TOTAL, loansOf, CARD_LIMIT } from '@/lib/calc';
 import { nf, ty, tr, pct, dmy, daysTo } from '@/lib/fmt';
-import { Panel, Kpi, Donut, Legend, Chip, th, td, tn } from '@/components/kit';
+import { Panel, Kpi, Donut, Legend, Chip, th, td, tn, rowToggle } from '@/components/kit';
 import { useApp } from '@/state';
 import { LOANS, CONTRACT_DEFAULTS } from '@/data/static';
 
@@ -23,7 +23,7 @@ function ContractCell({ code, group, fallback }: { code: string; group: string; 
       <input id={'lk' + code} name="u" defaultValue={own || ''} placeholder="Link Drive giấy nhận nợ (trống để xóa)" className="h-7 w-52 rounded-sm border bg-background px-2 text-xs" autoFocus />
       <button disabled={busy} className="h-7 px-2 text-xs rounded-sm bg-primary text-primary-foreground disabled:opacity-60">{busy ? '…' : 'Lưu'}</button>
       <button type="button" onClick={() => setEdit(false)} className="h-7 px-2 text-xs rounded-sm border">Hủy</button>
-      {err && <span className="text-[11px] text-neg">{err}</span>}
+      {err && <span className="text-caption text-neg">{err}</span>}
     </form>
   );
   const A = ({ href, label }: { href: string; label: string }) => (
@@ -64,7 +64,7 @@ export default function Vihali() {
             {GROUP_SUMMARY.map(g => {
               const tot = g.out + g.hm, max = Math.max(...GROUP_SUMMARY.map(x => x.out + x.hm));
               return (
-                <div key={g.key} className="grid grid-cols-[minmax(0,120px)_1fr] sm:grid-cols-[150px_1fr_150px] gap-x-3 gap-y-1 items-center text-[13px]">
+                <div key={g.key} className="grid grid-cols-[minmax(0,120px)_1fr] sm:grid-cols-[150px_1fr_150px] gap-x-3 gap-y-1 items-center text-body">
                   <span className="truncate">{g.short}</span>
                   <div className="h-3 rounded-sm bg-muted overflow-hidden flex" style={{ width: `${(tot / max) * 100}%` }}>
                     <span style={{ width: `${(g.out / tot) * 100}%`, background: g.color }} />
@@ -84,7 +84,7 @@ export default function Vihali() {
 
       <Panel pad={false} title="Chi tiết khế ước theo nhóm" sub="Bấm nhóm để mở · cột Hợp đồng mở bản cứng trên Google Drive">
         <div className="overflow-x-auto">
-          <table className="w-full text-[13px] border-collapse">
+          <table className="w-full text-body border-collapse">
             <thead><tr>
               <th className={th}>Khế ước</th><th className={th}>Giải ngân</th><th className={th}>Đáo hạn</th><th className={th + ' text-right'}>Còn</th>
               <th className={th + ' text-right'}>Lãi suất</th><th className={th + ' text-right'}>Dư nợ gốc</th><th className={th + ' text-right'}>Lãi phải trả</th>
@@ -93,7 +93,7 @@ export default function Vihali() {
             <tbody>
               {GROUP_SUMMARY.map(g => (
                 <Fragment key={g.key}>
-                  <tr className="bg-muted/40 cursor-pointer hover:bg-muted" onClick={() => setOpen(o => ({ ...o, [g.key]: !o[g.key] }))}>
+                  <tr {...rowToggle(!!open[g.key], () => setOpen(o => ({ ...o, [g.key]: !o[g.key] })))} className={'bg-muted/40 hover:bg-muted ' + rowToggle(true, () => {}).className}>
                     <td className={td + ' font-semibold'} colSpan={4}>
                       <span className="inline-flex items-center gap-1.5">
                         {open[g.key] ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
@@ -157,7 +157,7 @@ export default function Vihali() {
 
       <Panel pad={false} title="Tài sản bảo đảm của công ty" sub={CARDS.length ? 'Sổ tiết kiệm BIDV chi nhánh Trường Sơn đảm bảo thấu chi · tiền ký quỹ đảm bảo thẻ tín dụng' : 'Sổ tiết kiệm BIDV chi nhánh Trường Sơn đảm bảo thấu chi'}>
         <div className="overflow-x-auto">
-          <table className="w-full text-[13px] border-collapse">
+          <table className="w-full text-body border-collapse">
             <thead><tr><th className={th}>Mã sổ</th><th className={th}>Ngày gửi</th><th className={th}>Đáo hạn</th><th className={th + ' text-right'}>Lãi suất</th><th className={th + ' text-right'}>Số tiền trên sổ</th><th className={th + ' text-right'}>Dự thu cuối kỳ</th><th className={th}>Đảm bảo cho</th></tr></thead>
             <tbody>{COMPANY_DEPOSITS.map(d => (
               <tr key={d.code}><td className={td + ' num'}>{d.code}</td><td className={td + ' num text-muted-foreground'}>{dmy(d.open)}</td><td className={td + ' num'}>{dmy(d.due)}</td>

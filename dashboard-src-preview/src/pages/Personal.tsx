@@ -4,7 +4,7 @@ import { PERSONAL_DEPOSITS } from '@/data/static';
 import { PERSONAL_TOTAL, PLEDGED_TOTAL, loanGroupOf } from '@/lib/calc';
 import { LOAN_GROUPS } from '@/data/static';
 import { nf, ty, pct, dmy, daysTo } from '@/lib/fmt';
-import { Panel, Kpi, Donut, Legend, Chip, th, td, tn } from '@/components/kit';
+import { Panel, Kpi, Donut, Legend, Chip, th, td, tn, Segmented, rowToggle } from '@/components/kit';
 import { useApp } from '@/state';
 
 const OWNER_C = ['hsl(var(--c1))', 'hsl(var(--c4))', 'hsl(var(--c3))'];
@@ -42,16 +42,14 @@ export default function Personal() {
 
       <div className="grid lg:grid-cols-12 gap-4">
         <Panel className="lg:col-span-5" title="Cơ cấu tiền gửi" right={
-          <div className="inline-flex border rounded-sm overflow-hidden text-xs">
-            {(['owner', 'bank'] as const).map(v => <button key={v} onClick={() => setView(v)} className={'px-2.5 py-1 ' + (view === v ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted')}>{v === 'owner' ? 'Chủ sổ' : 'Ngân hàng'}</button>)}
-          </div>}>
+          <Segmented label="Xem theo" options={[['owner', 'Chủ sổ'], ['bank', 'Ngân hàng']] as const} value={view} onChange={setView} />}>
           <div className="flex flex-wrap items-center gap-5">
             {view === 'owner' ? <>
               <Donut data={owners} center={ty(PERSONAL_TOTAL, 1)} sub="Tổng" />
               <Legend rows={owners.map(o => ({ k: o.k, c: o.c, v: ty(o.v), p: (o.v / PERSONAL_TOTAL * 100).toFixed(1) + '%' }))} />
             </> : <div className="grid gap-2.5 w-full">
               {banks.map(([b, v]) => (
-                <div key={b} className="grid grid-cols-[70px_1fr_80px] gap-3 items-center text-[13px]">
+                <div key={b} className="grid grid-cols-[70px_1fr_80px] gap-3 items-center text-body">
                   <span>{b}</span>
                   <div className="h-2.5 bg-muted rounded-sm overflow-hidden"><span className="block h-full bg-primary" style={{ width: `${Math.max(v / banks[0][1] * 100, 0.8)}%` }} /></div>
                   <span className="num text-right">{ty(v)}</span>
@@ -64,7 +62,7 @@ export default function Personal() {
             {PERSONAL_DEPOSITS.filter(d => d.pledged).map(d => {
               const gs = [...new Set(d.loans.map(loanGroupOf).filter(Boolean))];
               return (
-                <div key={d.code} className="grid grid-cols-[1fr_auto] sm:grid-cols-[170px_1fr_auto] gap-x-3 gap-y-1 items-center text-[13px] border-b last:border-0 pb-2.5 last:pb-0">
+                <div key={d.code} className="grid grid-cols-[1fr_auto] sm:grid-cols-[170px_1fr_auto] gap-x-3 gap-y-1 items-center text-body border-b last:border-0 pb-2.5 last:pb-0">
                   <span className="num truncate">{bankName(d.bank)} · {d.code.length > 14 ? d.code.slice(0, 14) + '…' : d.code}</span>
                   <span className="flex flex-wrap gap-1 order-3 sm:order-none col-span-2 sm:col-span-1">
                     {gs.map(g => <Chip key={g} tone="primary">{LOAN_GROUPS.find(x => x.key === g)?.short}</Chip>)}
@@ -81,12 +79,12 @@ export default function Personal() {
       <Panel pad={false} title="Bảng kê tiền gửi" sub="Cộng theo ngân hàng · bấm từng ngân hàng để xem chi tiết sổ"
         right={<button onClick={() => setOpenB(o => Object.keys(o).length === bankRows.length && Object.values(o).every(Boolean) ? {} : Object.fromEntries(bankRows.map(b => [b.k, true])))} className="text-xs text-primary hover:underline">{bankRows.every(b => openB[b.k]) ? 'Thu gọn tất cả' : 'Mở tất cả'}</button>}>
         <div className="overflow-x-auto">
-          <table className="w-full text-[13px] border-collapse">
+          <table className="w-full text-body border-collapse">
             <thead><tr><th className={th}>Ngân hàng</th><th className={th}>Chủ sổ</th><th className={th}>Mã sổ / tài khoản</th><th className={th + ' text-right'}>Số tiền gốc</th><th className={th + ' text-right'}>Lãi suất</th><th className={th}>Ngày mở</th><th className={th}>Đáo hạn</th><th className={th + ' text-right'}>Dự thu cuối kỳ</th><th className={th}>Cầm cố</th></tr></thead>
             <tbody>
               {bankRows.map(b => (
                 <Fragment key={b.k}>
-                  <tr className="bg-muted/40 cursor-pointer hover:bg-muted" onClick={() => setOpenB(o => ({ ...o, [b.k]: !o[b.k] }))}>
+                  <tr {...rowToggle(!!openB[b.k], () => setOpenB(o => ({ ...o, [b.k]: !o[b.k] })))} className={'bg-muted/40 hover:bg-muted ' + rowToggle(true, () => {}).className}>
                     <td className={td + ' font-semibold'} colSpan={3}>
                       <span className="inline-flex items-center gap-1.5">{openB[b.k] ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}{b.k}
                         <span className="font-normal text-muted-foreground">· {b.rows.length} sổ · {b.share.toFixed(1)}%</span></span>

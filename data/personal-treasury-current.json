@@ -1,28 +1,29 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-10-29T13:00:48+07:00",
-    "source": "Google Sheets live export 2026-10-29T06:00:02.646Z",
+    "updatedAt": "2026-10-30T13:00:58+07:00",
+    "source": "Google Sheets live export 2026-10-30T06:00:02.547Z",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet",
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-10-29T06:00:02.646Z",
+      "generatedAt": "2026-10-30T06:00:02.547Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",
         "1x4Z5HIBqSI-9fIb9Z32vLc_L8Offea7aY6UU-ftC_6A",
-        "1n8p4pyZDg2e1w2nViNTwkBCcOtfas7NQzRtZ71tQhM4"
+        "1n8p4pyZDg2e1w2nViNTwkBCcOtfas7NQzRtZ71tQhM4",
+        "1rT7HkZcvLkNBg1KMbeIaEqmWz6J1RT-ALM_Tpu-GrxE"
       ],
-      "sheets": "Loan-BIDV (gid 1186104758) / Loan-SC (gid 2025947730) / Dashboard-fix (gid 1112915361) / Crypto Assets (gid 1601120065) / Balance file · Balance (gid 2035452406) / Balance file · Crypto (gid 4545118) / Balance file · Individuals (gid 0) / Balance file · Vihali (gid 1070912545) / Balance file · Vixion (gid 1829766912) / Balance file · Beyond Atoms (gid 593536246)",
+      "sheets": "Loan-BIDV (gid 1186104758) / Loan-SC (gid 2025947730) / Dashboard-fix (gid 1112915361) / Crypto Assets (gid 1601120065) / Balance file · Balance (gid 2035452406) / Balance file · Crypto (gid 4545118) / Balance file · Individuals (gid 0) / Balance file · Vihali (gid 1070912545) / Balance file · Vixion (gid 1829766912) / Balance file · Beyond Atoms (gid 593536246) / Payment & Fund Request · PR (Vihali)-2026 (gid 405119343) / Payment & Fund Request · FR (1102 Group)-2026 (gid 1686054692) / Payment & Fund Request · PR(Beyond Atoms) (gid 1623707887) / Treasury Individuals_VND · NPV comparison (mua USDT) (gid 1056104597)",
       "rule": "Always refresh via scripts/fetch_treasury_online_data.mjs before building a new monthly plan; do not use a prior tmp export or hand-edited JSON as source."
     }
   },
   "summary": {
-    "totalPersonalDeposits": 112444936126,
+    "totalPersonalDeposits": 111054933930,
     "totalPersonalLoans": 0,
-    "netPersonalTreasury": 112444936126
+    "netPersonalTreasury": 111054933930
   },
   "personalDeposits": [
     {
@@ -433,17 +434,17 @@
       "depositCode": "VPB-PL-DTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "09388885678",
-      "principal": 1546032882,
-      "amountOnCertificate": 1546032882,
+      "principal": 156030686,
+      "amountOnCertificate": 156030686,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 1546032882,
+      "unpledgedAmount": 156030686,
       "accruedInterest": 0,
-      "projectedSettlement": 1546032882
+      "projectedSettlement": 156030686
     },
     {
       "owner": "Nguyễn Trung Tín",

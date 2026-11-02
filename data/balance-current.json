@@ -2,7 +2,7 @@
   "asOf": "2026-11-02",
   "source": "Dashboard Treasury Balance · sheet Balance",
   "fx": 26300,
-  "total": 15651701,
+  "total": 15651974,
   "individuals": {
     "banks": [
       {
@@ -113,10 +113,10 @@
   "osBank": 27548,
   "tokens": {
     "stable": 2130497,
-    "btc": 2572460,
-    "eth": 7560563,
-    "other": 730550,
-    "total": 12994070,
+    "btc": 2571442,
+    "eth": 7561783,
+    "other": 730619,
+    "total": 12994342,
     "btcQty": 32.8,
     "ethQty": 3298
   },
@@ -143,5 +143,5 @@
       }
     ]
   },
-  "generatedAt": "2026-11-02T02:13:52.937Z"
+  "generatedAt": "2026-11-02T06:00:57.461Z"
 }

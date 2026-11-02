@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-30T06:00:59.008Z",
+ "generatedAt": "2026-11-02T02:13:53.140Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1020,6 +1020,14 @@
       "amount": 5948431196
      }
     ]
+   }
+  },
+  "2026-11": {
+   "vihali": [],
+   "personal": [],
+   "closing": {
+    "odAvailable": 11848011714,
+    "asOf": "2026-11-02"
    }
   }
  }

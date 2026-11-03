@@ -1,0 +1,26 @@
+{
+  "planId": "2026-11-personal",
+  "month": "2026-11",
+  "planType": "personal",
+  "planTypeLabel": "CÁ NHÂN",
+  "makerEmail": "nguyen.khuong@atherlabs.com",
+  "approverEmail": "duc.ho@atherlabs.com",
+  "version": "Draft 1",
+  "contentHash": "2026-11-personal:Draft 1",
+  "status": "pending_cfo_review",
+  "channel": "google_apps_script_mail",
+  "submittedAt": "2026-11-03T12:16:58.851Z",
+  "title": "Kế hoạch quản lý Individual Treasury",
+  "planUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/#ke-hoach",
+  "indexUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/#ke-hoach",
+  "slackChannelId": "C0AT2E4CBDX",
+  "slackChannelName": "#treasury-management",
+  "slackMessageTs": null,
+  "history": [
+    {
+      "at": "2026-11-03T12:16:58.851Z",
+      "status": "pending_cfo_review",
+      "version": "Draft 1"
+    }
+  ]
+}

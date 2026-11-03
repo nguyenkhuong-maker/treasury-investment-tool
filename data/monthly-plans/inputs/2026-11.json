@@ -131,5 +131,25 @@
       "on": true
     }
   ],
-  "adhoc": []
+  "adhoc": [],
+  "snapshot": {
+    "savedAt": "2026-11-03T18:45:00+07:00",
+    "opening": {
+      "vihali": 12351464975,
+      "personal": 3414966400
+    },
+    "note": "Bổ sung 03/11/2026: giữ khoản trả nợ SC 007385614 (đến hạn 02/11) theo dữ liệu sheet ngày 02/11/2026 13:00, vì sheet đã xóa khoản này sau khi tất toán. Bản lưu đầy đủ sẽ được ghi lại khi bấm Lưu kế hoạch / Trình CFO.",
+    "lines": [
+      {
+        "id": "L007385614",
+        "date": "2026-11-02",
+        "entity": "vihali",
+        "dir": "out",
+        "label": "Trả nợ SC 007385614",
+        "amount": 361979977,
+        "source": "loan",
+        "note": "Gốc 352,052,577 · LS 5.75%"
+      }
+    ]
+  }
 }

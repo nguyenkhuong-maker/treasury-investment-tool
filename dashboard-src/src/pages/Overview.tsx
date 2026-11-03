@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { RATE_WEEKS, PERSONAL_DEPOSITS, COMPANY_DEPOSITS } from '@/data/static';
-import { CRYPTO_TOTAL, CRYPTO_TOKENS, STATUS_LABEL, PLAN_MONTHS } from '@/data/static';
-import { GROUP_SUMMARY, LOAN_TOTAL, HM_TOTAL, PERSONAL_TOTAL, PLEDGED_TOTAL, collateralFlows, buildPlan, runBalance } from '@/lib/calc';
+import { CRYPTO_TOTAL, CRYPTO_TOKENS, STATUS_LABEL } from '@/data/static';
+import { GROUP_SUMMARY, LOAN_TOTAL, HM_TOTAL, PERSONAL_TOTAL, PLEDGED_TOTAL, collateralFlows, planLines, runBalance } from '@/lib/calc';
 import { nf, ty, usd, pct, dm, dmy, daysTo, FX } from '@/lib/fmt';
 import { Panel, Kpi, Chip, Delta, th, td, tn } from '@/components/kit';
 import { useApp } from '@/state';
@@ -52,13 +52,13 @@ function CollateralMap() {
 }
 
 export default function Overview() {
-  const { go, approvals, inputs, liveMonth, cryptoOpen } = useApp();
-  const pm = PLAN_MONTHS.find(x => x.key === liveMonth);
+  const { go, approvals, inputs, liveMonth, months, cryptoOpen } = useApp();
+  const pm = months.find(x => x.key === liveMonth);
   const pin = inputs[liveMonth];
-  const lastApproved = PLAN_MONTHS.filter(x => x.key < liveMonth).map(x => ({ x, a: approvals[x.key]?.vihali })).find(o => o.a?.status === 'approved');
+  const lastApproved = months.filter(x => x.key < liveMonth).map(x => ({ x, a: approvals[x.key]?.vihali })).find(o => o.a?.status === 'approved');
   const W = RATE_WEEKS[RATE_WEEKS.length - 1], P = RATE_WEEKS[RATE_WEEKS.length - 2] || W;
   const top12 = [...W.medium].filter((i: any) => i.r['12m'] != null).sort((a: any, b: any) => b.r['12m'] - a.r['12m']).slice(0, 4);
-  const plan = pin ? buildPlan(liveMonth, pin.recurring, pin.adhoc, pin.carry) : [];
+  const plan = pin ? planLines(liveMonth, pin) : [];
   const vh = runBalance(plan, 'vihali', pin?.opening.vihali || 0), cn = runBalance(plan, 'personal', pin?.opening.personal || 0);
   const upcoming = plan.filter(l => daysTo(l.date) >= 0 && daysTo(l.date) <= 45);
   const unpledged = PERSONAL_TOTAL - PLEDGED_TOTAL;

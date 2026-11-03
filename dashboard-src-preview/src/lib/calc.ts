@@ -1,6 +1,7 @@
 import { LOANS, PERSONAL_DEPOSITS, COMPANY_DEPOSITS, CARDS } from '@/data/static';
-import { LOAN_GROUPS, BIDV_VLD_LIMIT, SC_LIMIT, PLAN_MONTHS, PLAN_INPUTS } from '@/data/static';
-import type { PlanLine, Recurring } from '@/data/static';
+import { LOAN_GROUPS, BIDV_VLD_LIMIT, SC_LIMIT, PLAN_INPUTS } from '@/data/static';
+import type { PlanLine, Recurring, PlanInputs } from '@/data/static';
+import { monthPeriod } from '@/data/store';
 
 export const loansOf = (g: string) => LOANS.filter(l => l.group === g);
 type GroupSummary = (typeof LOAN_GROUPS)[number] & { count: number; out: number; hm: number; rate: number; next: (typeof LOANS)[number] | undefined };
@@ -70,8 +71,7 @@ export function collateralFlows() {
 
 /* Kế hoạch: khoản đến hạn lấy từ các tab + kế thừa + định kỳ + phát sinh (từ file nhập liệu tháng) */
 export function buildPlan(monthKey: string, recurring: Recurring[], adhoc: PlanLine[], carry?: PlanLine[]): PlanLine[] {
-  const m = PLAN_MONTHS.find(x => x.key === monthKey);
-  if (!m) return [];
+  const m = monthPeriod(monthKey);
   const inP = (d?: string | null) => !!d && d >= m.from && d <= m.to;
   const lines: PlanLine[] = [];
   LOANS.filter(l => inP(l.due)).forEach(l => lines.push({
@@ -103,6 +103,16 @@ export function buildPlan(monthKey: string, recurring: Recurring[], adhoc: PlanL
     });
   }
   return lines.sort((a, b) => a.date.localeCompare(b.date) || (a.dir === 'in' ? -1 : 1));
+}
+
+/* Dòng kế hoạch của tháng đang mở: tự sinh từ dữ liệu hiện tại + giữ các khoản trả nợ / sổ đến hạn đã qua ngày
+   (sheet xóa khoản đã tất toán nên không còn trong dữ liệu) theo bản lưu gần nhất */
+export function planLines(monthKey: string, p: PlanInputs): PlanLine[] {
+  const lines = buildPlan(monthKey, p.recurring, p.adhoc, p.carry);
+  const d = new Date(); const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const have = new Set(lines.map(l => l.id));
+  const kept = (p.snapshot?.lines || []).filter(l => (l.source === 'loan' || l.source === 'deposit') && l.date < today && !have.has(l.id));
+  return [...lines, ...kept].sort((a, b) => a.date.localeCompare(b.date) || (a.dir === 'in' ? -1 : 1));
 }
 
 export function runBalance(lines: PlanLine[], entity: 'vihali' | 'personal', open: number) {

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend as RLegend } from 'recharts';
 import { Send, Check, RotateCcw, FilePen, Plus, Trash2, Lock, ExternalLink, Save } from 'lucide-react';
-import { PLAN_MONTHS, PLAN_HIGHLIGHTS, SOURCE_LABEL, STATUS_LABEL, PLAN_ACTUALS } from '@/data/static';
+import { PLAN_HIGHLIGHTS, SOURCE_LABEL, STATUS_LABEL, PLAN_ACTUALS } from '@/data/static';
 import PlanActuals from '@/pages/PlanActuals';
 import { prevMonth } from '@/lib/calc';
 import type { PlanLine, PlanApproval, Entity, PlanMonth, ArchivePlan, ArchiveBlock } from '@/data/static';
 import { postToAppsScript, loadArchive, fmtStamp } from '@/data/store';
-import { buildPlan, runBalance } from '@/lib/calc';
+import { planLines, runBalance } from '@/lib/calc';
 import { nf, ty, dm, dmy } from '@/lib/fmt';
 import { Panel, Chip, th, td, tn, Segmented, chartAxisTick, chartAxisLine, chartGrid, chartTip, scrollBody } from '@/components/kit';
 import { useApp } from '@/state';
@@ -85,14 +85,14 @@ function Approval({ month, ent, readonly }: { month: string; ent: Entity; readon
   );
 }
 
-function FlowTable({ rows, open, label, opening, m }: { rows: (PlanLine & { bal: number })[]; open: number; label: string; opening: string; m: PlanMonth }) {
+function FlowTable({ rows, open, label, opening, openNote, m }: { rows: (PlanLine & { bal: number })[]; open: number; label: string; opening: string; openNote?: string; m: PlanMonth }) {
   const tin = rows.filter(r => r.dir === 'in').reduce((a, r) => a + r.amount, 0), tout = rows.filter(r => r.dir === 'out').reduce((a, r) => a + r.amount, 0);
   return (
     <div className={scrollBody}>
       <table className="w-full text-body border-collapse">
         <thead><tr><th className={th + ' w-14'}>Ngày</th><th className={th}>Nội dung</th><th className={th + ' text-right'}>Thu / chi</th><th className={th + ' text-right'}>{label}</th></tr></thead>
         <tbody>
-          <tr className="bg-muted/40"><td className={td + ' num'}>{dm(m.from)}</td><td className={td + ' font-medium'}>{opening}</td><td className={tn} /><td className={tn + ' font-medium'}>{nf(open)}</td></tr>
+          <tr className="bg-muted/40"><td className={td + ' num'}>{dm(m.from)}</td><td className={td}><div className="font-medium">{opening}</div>{openNote && <div className="text-xs text-muted-foreground mt-0.5">{openNote}</div>}</td><td className={tn} /><td className={tn + ' font-medium'}>{nf(open)}</td></tr>
           {rows.map(r => (
             <tr key={r.id} className="hover:bg-accent/40 align-top">
               <td className={td + ' num'}>{dm(r.date)}</td>
@@ -248,17 +248,19 @@ function ArchiveView({ m }: { m: PlanMonth }) {
 }
 
 export default function Plan() {
-  const { editor, inputs, approvals, liveMonth } = useApp();
-  const [month, setMonth] = useState(liveMonth || PLAN_MONTHS[0]?.key);
-  const m = PLAN_MONTHS.find(x => x.key === month)!;
+  const { editor, inputs, approvals, liveMonth, months, nextMonthKey, createMonth, dirty } = useApp();
+  const [month, setMonth] = useState(liveMonth || months[0]?.key);
+  const m = months.find(x => x.key === month)!;
   if (!m) return <p className="text-muted-foreground">Chưa có kế hoạch tháng.</p>;
   const live = m.mode === 'live' && !!inputs[month];
   const snap = m.mode === 'snapshot' ? inputs[month]?.snapshot : undefined;
   const computed = m.mode !== 'archive' && !!inputs[month];
-  const lines = !computed ? [] : snap ? snap.lines : buildPlan(month, inputs[month].recurring, inputs[month].adhoc, inputs[month].carry);
+  const lines = !computed ? [] : snap ? snap.lines : planLines(month, inputs[month]);
   const prevClose = PLAN_ACTUALS[prevMonth(month)]?.closing;
   // Kế hoạch đang lập: HM thấu chi đầu kỳ = HM thấu chi BIDV thực tế cuối tháng trước
   const op = !computed ? { vihali: 0, personal: 0 } : snap ? snap.opening : live && prevClose ? { ...inputs[month].opening, vihali: prevClose.odAvailable } : inputs[month].opening;
+  // Diễn giải số dư đầu kỳ do người lập ghi khi lập kế hoạch
+  const opNote = computed && !snap ? { vihali: inputs[month].opening.vihaliNote, personal: inputs[month].opening.personalNote } : { vihali: undefined, personal: undefined };
   const vh = runBalance(lines, 'vihali', op.vihali), cn_ = runBalance(lines, 'personal', op.personal);
   const end = (rows: { bal: number }[], o: number) => (rows.length ? rows[rows.length - 1].bal : o);
   const minOf = (rows: { bal: number; date: string }[], o: number) => rows.reduce((a, r) => (r.bal < a.v ? { v: r.bal, d: r.date } : a), { v: o, d: m.from });
@@ -277,10 +279,11 @@ export default function Plan() {
       <div className="flex flex-wrap items-center gap-3 bg-card border rounded-md px-4 py-3 min-w-0">
         <div className="max-w-full overflow-x-auto">
           <Segmented size="md" label="Chọn tháng kế hoạch" value={month} onChange={setMonth}
-            options={PLAN_MONTHS.map(x => [x.key, <>{x.label.replace('Tháng ', 'T')}{approvals[x.key]?.vihali.status === 'approved' && <Check className="w-3 h-3" aria-label="CFO đã duyệt" />}</>] as const)} />
+            options={months.map(x => [x.key, <>{x.label.replace('Tháng ', 'T')}{approvals[x.key]?.vihali.status === 'approved' && <Check className="w-3 h-3" aria-label="CFO đã duyệt" />}</>] as const)} />
         </div>
         <span className="text-body">Kỳ kế hoạch <span className="num font-medium">{dmy(m.from)} – {dmy(m.to)}</span></span>
-        <span className="text-xs text-muted-foreground ml-auto">{live ? 'Đang lập · tự sinh từ dữ liệu tab Vihali, Cá nhân và các khoản định kỳ' : snap ? `Bản đã lưu ${fmtStamp(snap.savedAt)}` : 'Bản kế hoạch đã trình'}</span>
+        {editor && !inputs[nextMonthKey] && !dirty[months[0]?.key] && <button onClick={() => setMonth(createMonth())} className="inline-flex items-center gap-1.5 h-8 px-3 rounded-sm border border-dashed border-[hsl(var(--gold))] text-xs font-medium hover:bg-muted"><Plus className="w-3.5 h-3.5" />Lập kế hoạch T{Number(nextMonthKey.slice(5))}/{nextMonthKey.slice(0, 4)}</button>}
+        <span className="text-xs text-muted-foreground ml-auto">{live ? 'Đang mở · khoản đến hạn lấy từ tab Vihali, Cá nhân, khoản đã qua giữ theo bản lưu gần nhất' : snap ? `Bản đã lưu ${fmtStamp(snap.savedAt)}` : 'Bản kế hoạch đã trình'}</span>
       </div>
 
       {live && editor && <EditorPanel m={m} />}
@@ -295,8 +298,8 @@ export default function Plan() {
       {!computed ? <ArchiveView m={m} /> : <>
         <div className="grid xl:grid-cols-2 gap-4">
           {[
-            { k: 'vihali', t: 'Vihali', h: 'Kế hoạch dòng tiền & hạn mức thấu chi', d: live && prevClose ? `Đầu kỳ = HM thấu chi BIDV thực tế ngày ${dmy(prevClose.asOf)} · trả nợ đến hạn từ tab Vihali · lãi BIDV định kỳ ước tính` : 'Trả nợ đến hạn lấy từ tab Vihali · nguồn trả là HM thấu chi BIDV', o: op.vihali, rows: vh, min: vmin, lbl: 'HM còn lại', opening: 'HM thấu chi BIDV khả dụng đầu kỳ' },
-            { k: 'personal', t: 'Cá nhân', h: 'Kế hoạch Individual Treasury', d: 'Sổ đến hạn lấy từ tab Cá nhân · chi định kỳ theo các tháng trước', o: op.personal, rows: cn_, min: cmin, lbl: 'Thanh khoản', opening: 'Thanh khoản đầu kỳ (tài khoản thanh toán)' },
+            { k: 'vihali', t: 'Vihali', h: 'Kế hoạch dòng tiền & hạn mức thấu chi', d: live && prevClose ? `Đầu kỳ = HM thấu chi BIDV thực tế ngày ${dmy(prevClose.asOf)} · trả nợ đến hạn từ tab Vihali · lãi BIDV định kỳ ước tính` : 'Trả nợ đến hạn lấy từ tab Vihali · nguồn trả là HM thấu chi BIDV', o: op.vihali, rows: vh, min: vmin, lbl: 'HM còn lại', opening: 'HM thấu chi BIDV khả dụng đầu kỳ', note: live && prevClose ? undefined : opNote.vihali },
+            { k: 'personal', t: 'Cá nhân', h: 'Kế hoạch Individual Treasury', d: 'Sổ đến hạn lấy từ tab Cá nhân · chi định kỳ theo các tháng trước', o: op.personal, rows: cn_, min: cmin, lbl: 'Thanh khoản', opening: 'Thanh khoản đầu kỳ (tài khoản thanh toán)', note: opNote.personal },
           ].map(x => (
             <Panel key={x.k} pad={false} className="xl:h-[720px]" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.h}</span>} sub={x.d}>
               <div className="flex flex-col h-full">
@@ -305,7 +308,7 @@ export default function Plan() {
                   <div key={l} className={cn('px-4 py-3 min-w-0', i && 'border-l')}><div className="text-xs text-muted-foreground">{l}</div><div className={cn('num text-kpi-sm sm:text-h3 font-medium mt-0.5', c)}>{v}</div></div>))}
               </div>
               <div className="px-4 py-2 text-xs text-muted-foreground border-b">{x.lbl} thấp nhất trong kỳ <span className="num text-foreground">{ty(x.min.v)}</span> ngày <span className="num">{dm(x.min.d)}</span></div>
-              <FlowTable rows={x.rows} open={x.o} label={x.lbl} opening={x.opening} m={m} />
+              <FlowTable rows={x.rows} open={x.o} label={x.lbl} opening={x.opening} openNote={x.note} m={m} />
               </div>
             </Panel>))}
         </div>

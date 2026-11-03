@@ -209,7 +209,8 @@ function eventsFromApproval(a: any): TLEvent[] {
   return ev;
 }
 
-function defaultInputs(key: string, prev: PlanInputs | undefined): PlanInputs {
+/* Nhập liệu mặc định cho tháng mới do người lập bấm tạo: đầu kỳ theo dữ liệu hiện tại, định kỳ kế thừa tháng trước */
+export function defaultInputs(key: string, prev: PlanInputs | undefined): PlanInputs {
   const liquid = PERSONAL_DEPOSITS.filter(d => !d.due).reduce((a, d) => a + d.principal, 0);
   const od = LOANS.filter(l => l.group.startsWith('bidv-od')).reduce((a, l) => a + (l.limit || 0), 0);
   return {
@@ -252,9 +253,9 @@ export async function loadAll() {
   CONTRACT_LINKS = links?.links || {};
   CONTRACT_DEFAULTS = links?.defaults || {};
 
-  // Tháng kế hoạch: tháng sau (đang lập) + các tháng có file nhập liệu + các tháng cũ trong live-index
-  const nextKey = addMonths(monthKey(new Date()), 1);
-  const inputMonths: string[] = Array.from(new Set<string>([...(plansIndex?.months || []), nextKey])).sort().reverse();
+  // Tháng kế hoạch: chỉ các tháng đã có file nhập liệu (người lập tự bấm lập tháng mới) + các tháng cũ trong live-index.
+  // Không tự sinh tháng kế tiếp, để kế hoạch đang chờ duyệt không bị chuyển sang chế độ chỉ xem khi sang tháng.
+  const inputMonths: string[] = Array.from(new Set<string>(plansIndex?.months || [])).sort().reverse();
   const loaded = await Promise.all(inputMonths.map(k => getJson<PlanInputs>(`${D}monthly-plans/inputs/${k}.json`, true)));
   const inputs: Record<string, PlanInputs> = {};
   [...inputMonths].reverse().forEach((k) => {
@@ -270,8 +271,7 @@ export async function loadAll() {
   const monthMap = new Map<string, PlanMonth>();
   archiveMonths.forEach(k => monthMap.set(k, { key: k, ...period(k), live: false, mode: 'archive' }));
   inputMonths.forEach(k => {
-    const mode: PlanMode = k >= nextKey ? 'live' : (inputs[k]?.snapshot ? 'snapshot' : (monthMap.has(k) ? 'archive' : 'snapshot'));
-    monthMap.set(k, { key: k, ...period(k), live: mode === 'live', mode });
+    monthMap.set(k, { key: k, ...period(k), live: true, mode: 'live' }); // chốt lại sau khi đọc trạng thái duyệt
   });
   PLAN_MONTHS = [...monthMap.values()].sort((a, b) => b.key.localeCompare(a.key));
 
@@ -301,6 +301,18 @@ export async function loadAll() {
     approvals[m.key] = { vihali: build(co), personal: build(pe) };
   }));
   APPROVALS = approvals;
+
+  // Tháng có nhập liệu còn mở (sửa, trình CFO được) khi chưa hết kỳ hoặc CFO chưa duyệt đủ Vihali + Cá nhân;
+  // đã hết kỳ và duyệt đủ thì xem bản đã lưu.
+  const today = todayIso();
+  PLAN_MONTHS = PLAN_MONTHS.map(m => {
+    if (!inputs[m.key]) return m;
+    const a = approvals[m.key];
+    const done = a?.vihali.status === 'approved' && a?.personal.status === 'approved';
+    if (m.to >= today || !done) return { ...m, live: true, mode: 'live' };
+    const mode: PlanMode = inputs[m.key].snapshot ? 'snapshot' : (archiveMonths.includes(m.key) ? 'archive' : 'snapshot');
+    return { ...m, live: false, mode };
+  });
 }
 
 export const CFO_APPROVAL_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyMyXnoXOj4PJ7f5w4fPaXzbt4DpsRfA6mxIWEFV3LeYCKUO0aWle-W20CZxzEjvMhWyA/exec';

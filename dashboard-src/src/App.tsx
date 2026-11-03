@@ -18,7 +18,7 @@ const VIEWS = [
   { k: 'ca-nhan', l: 'Cá nhân', t: 'Sổ tiết kiệm & tiền gửi cá nhân', src: () => `Dashboard-fix · cập nhật ${stamp(META.personalUpdatedAt)}`, C: Personal },
   { k: 'crypto', l: 'Crypto', t: 'Tài sản crypto', src: () => `Sheet Crypto Assets · giá ngày ${META.cryptoPriceDate || '–'}`, C: Crypto },
   { k: 'lai-suat', l: 'Lãi suất', t: 'Lãi suất tiền gửi & đầu tư', src: () => `history.json · cập nhật ${stamp(META.ratesUpdatedAt)}`, C: Rates },
-  { k: 'ke-hoach', l: 'Kế hoạch', t: 'Kế hoạch ngân quỹ tháng', src: () => 'Tự sinh từ dữ liệu các tab + khoản định kỳ các tháng trước', C: Plan },
+  { k: 'ke-hoach', l: 'Kế hoạch', t: 'Kế hoạch ngân quỹ tháng', src: () => 'Người lập lập từng tháng · khoản đến hạn lấy từ các tab + khoản định kỳ các tháng trước', C: Plan },
 ];
 
 function EditorGate() {

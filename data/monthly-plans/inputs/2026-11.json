@@ -1,7 +1,7 @@
 {
   "month": "2026-11",
   "version": "Draft 1",
-  "updatedAt": "2026-11-03T12:16:40.042Z",
+  "updatedAt": "2026-11-03T12:16:52.807Z",
   "opening": {
     "vihali": 11848011714,
     "personal": 1815465024,
@@ -367,7 +367,7 @@
     "personalLoans": 0
   },
   "snapshot": {
-    "savedAt": "2026-11-03T12:16:38.087Z",
+    "savedAt": "2026-11-03T12:16:50.480Z",
     "opening": {
       "vihali": 11848011714,
       "personal": 1815465024

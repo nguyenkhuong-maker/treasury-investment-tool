@@ -4,7 +4,8 @@ import { Send, Check, RotateCcw, FilePen, Plus, Trash2, Lock, ExternalLink, Save
 import { PLAN_HIGHLIGHTS, SOURCE_LABEL, STATUS_LABEL } from '@/data/static';
 import type { PlanLine, PlanApproval, Entity, PlanMonth, ArchivePlan, ArchiveBlock } from '@/data/static';
 import { postToAppsScript, loadArchive, fmtStamp } from '@/data/store';
-import { planLines, runBalance } from '@/lib/calc';
+import { planLines, runBalance, currentOpeningDetail } from '@/lib/calc';
+import { OpeningPanels, SummaryPanels } from '@/pages/PlanDetails';
 import { nf, ty, dm, dmy } from '@/lib/fmt';
 import { Panel, Chip, th, td, tn } from '@/components/kit';
 import { useApp } from '@/state';
@@ -117,7 +118,7 @@ function FlowTable({ rows, open, label, opening, openNote, m }: { rows: (PlanLin
 }
 
 function EditorPanel({ m }: { m: PlanMonth }) {
-  const { inputs, editInputs, dirty, saveInputs, discardInputs } = useApp();
+  const { inputs, editInputs, dirty, saveInputs, discardInputs, refreshOpening } = useApp();
   const p = inputs[m.key];
   const [f, setF] = useState({ date: m.from, entity: 'vihali' as Entity, dir: 'out' as 'in' | 'out', label: '', amount: '' });
   const [busy, setBusy] = useState(false);
@@ -135,7 +136,8 @@ function EditorPanel({ m }: { m: PlanMonth }) {
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="grid gap-4 content-start">
           <div className="grid gap-2">
-            <h3 className="eyebrow">Số dư đầu kỳ</h3>
+            <div className="flex flex-wrap items-center justify-between gap-2"><h3 className="eyebrow">Số dư đầu kỳ</h3><button type="button" onClick={() => refreshOpening(m.key)} className="h-7 px-2.5 rounded-sm border text-xs inline-flex items-center gap-1 hover:bg-muted"><RotateCcw className="w-3 h-3" />Cập nhật theo dữ liệu hiện tại</button></div>
+            {p.openingDetail && <p className="text-xs text-muted-foreground">Đã chốt đầu kỳ theo sheet ngày {fmtStamp(p.openingDetail.companyAsOf)}</p>}
             <div className="grid sm:grid-cols-2 gap-2">
               {(['vihali', 'personal'] as Entity[]).map(e => (
                 <label key={e} className="grid gap-1 text-xs text-muted-foreground">{e === 'vihali' ? 'Vihali · HM thấu chi khả dụng' : 'Cá nhân · thanh khoản'}
@@ -255,6 +257,8 @@ export default function Plan() {
   const op = !computed ? { vihali: 0, personal: 0 } : snap ? snap.opening : inputs[month].opening;
   // Diễn giải số dư đầu kỳ do người lập ghi khi lập kế hoạch
   const opNote = computed && !snap ? { vihali: inputs[month].opening.vihaliNote, personal: inputs[month].opening.personalNote } : { vihali: undefined, personal: undefined };
+  // Số đầu kỳ chi tiết: bản đã chốt trong file nhập liệu, chưa chốt thì lấy dữ liệu hiện tại khi tháng còn mở
+  const detail = computed ? (inputs[month].openingDetail || (live ? currentOpeningDetail() : undefined)) : undefined;
   const vh = runBalance(lines, 'vihali', op.vihali), cn_ = runBalance(lines, 'personal', op.personal);
   const end = (rows: { bal: number }[], o: number) => (rows.length ? rows[rows.length - 1].bal : o);
   const minOf = (rows: { bal: number; date: string }[], o: number) => rows.reduce((a, r) => (r.bal < a.v ? { v: r.bal, d: r.date } : a), { v: o, d: m.from });
@@ -264,8 +268,8 @@ export default function Plan() {
   const sum = (rows: PlanLine[], dir: 'in' | 'out') => rows.filter(r => r.dir === dir).reduce((a, r) => a + r.amount, 0);
 
   return (
-    <div className="grid gap-4">
-      <div className="flex flex-wrap items-center gap-3 bg-card border rounded-md px-4 py-3">
+    <div className="grid gap-4 grid-cols-[minmax(0,1fr)]">
+      <div className="flex flex-wrap items-center gap-3 bg-card border rounded-md px-4 py-3 min-w-0">
         <div className="max-w-full overflow-x-auto">
           <div className="inline-flex border rounded-sm overflow-hidden text-[13px]">
             {months.map(x => {
@@ -290,6 +294,7 @@ export default function Plan() {
       </Panel>
 
       {!computed ? <ArchiveView m={m} /> : <>
+        {detail && <OpeningPanels detail={detail} opening={op} />}
         <div className="grid xl:grid-cols-2 gap-4 items-start">
           {[
             { k: 'vihali', t: 'Vihali', h: 'Kế hoạch dòng tiền & hạn mức thấu chi', d: 'Trả nợ đến hạn lấy từ tab Vihali · nguồn trả là HM thấu chi BIDV', o: op.vihali, rows: vh, min: vmin, lbl: 'HM còn lại', opening: 'HM thấu chi BIDV khả dụng đầu kỳ', note: opNote.vihali },
@@ -304,6 +309,7 @@ export default function Plan() {
               <FlowTable rows={x.rows} open={x.o} label={x.lbl} opening={x.opening} openNote={x.note} m={m} />
             </Panel>))}
         </div>
+        <SummaryPanels m={m} vh={vh} cn={cn_} opening={op} detail={detail} live={live} />
         <Panel title="Diễn biến số dư trong kỳ" sub="Tỷ VND · cập nhật theo từng ngày có thu chi">
           <div className="h-[240px]">
             <ResponsiveContainer width="100%" height="100%">

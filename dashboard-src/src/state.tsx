@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { APPROVALS, PLAN_INPUTS, CONTRACT_LINKS, PLAN_MONTHS } from '@/data/static';
 import type { PlanInputs, PlanApproval, Entity, PlanMonth } from '@/data/static';
 import { postToAppsScript, EDITOR_CODE, fmtStamp, defaultInputs, addMonths, monthKey, monthPeriod } from '@/data/store';
-import { planLines } from '@/lib/calc';
+import { planLines, currentOpeningDetail } from '@/lib/calc';
 
 type Approvals = typeof APPROVALS;
 interface Ctx {
@@ -15,6 +15,7 @@ interface Ctx {
   approvals: Approvals; setApproval: (month: string, ent: Entity, a: PlanApproval) => void;
   liveMonth: string;
   months: PlanMonth[]; nextMonthKey: string; createMonth: () => string;
+  refreshOpening: (month: string) => void;
   go: (v: string) => void;
 }
 const C = createContext<Ctx>(null as unknown as Ctx);
@@ -87,6 +88,15 @@ export function AppProvider({ children, go }: { children: ReactNode; go: (v: str
     }
     return null;
   };
+  /* Người lập cập nhật số đầu kỳ theo dữ liệu hiện tại: HM thấu chi BIDV, HM VLĐ, tiền gửi và thanh khoản cá nhân */
+  const refreshOpening = (month: string) => {
+    const d = currentOpeningDetail();
+    const liq = d.deposits.filter(x => !x.due).reduce((a, x) => a + x.principal, 0);
+    const at = (s: string) => fmtStamp(s).slice(0, 10);
+    editInputs(month, x => ({ ...x, openingDetail: d, opening: { ...x.opening, vihali: d.odLimit, personal: liq,
+      vihaliNote: `HM thấu chi BIDV khả dụng theo sheet Loan-BIDV ngày ${at(d.companyAsOf)}`,
+      personalNote: `Tổng tài khoản không kỳ hạn theo sheet Dashboard-fix ngày ${at(d.personalAsOf)}` } }));
+  };
   const discardInputs = (month: string) => { setInputs(x => ({ ...x, [month]: structuredClone(saved[month]) })); setDirty(d => ({ ...d, [month]: false })); };
 
   return (
@@ -94,7 +104,7 @@ export function AppProvider({ children, go }: { children: ReactNode; go: (v: str
       editor, setEditor, cryptoOpen, setCryptoOpen, links, saveLink,
       inputs, editInputs, dirty, saveInputs, discardInputs,
       approvals, setApproval: (m, e, a) => setApprovals(x => ({ ...x, [m]: { ...x[m], [e]: a } })),
-      liveMonth, months, nextMonthKey, createMonth, go,
+      liveMonth, months, nextMonthKey, createMonth, refreshOpening, go,
     }}>{children}</C.Provider>
   );
 }

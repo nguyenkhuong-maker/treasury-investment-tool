@@ -6,7 +6,8 @@ import PlanActuals from '@/pages/PlanActuals';
 import { prevMonth } from '@/lib/calc';
 import type { PlanLine, PlanApproval, Entity, PlanMonth, ArchivePlan, ArchiveBlock } from '@/data/static';
 import { postToAppsScript, loadArchive, fmtStamp } from '@/data/store';
-import { planLines, runBalance } from '@/lib/calc';
+import { planLines, runBalance, currentOpeningDetail } from '@/lib/calc';
+import { OpeningPanels, SummaryPanels } from '@/pages/PlanDetails';
 import { nf, ty, dm, dmy } from '@/lib/fmt';
 import { Panel, Chip, th, td, tn, Segmented, chartAxisTick, chartAxisLine, chartGrid, chartTip, scrollBody } from '@/components/kit';
 import { useApp } from '@/state';
@@ -119,7 +120,7 @@ function FlowTable({ rows, open, label, opening, openNote, m }: { rows: (PlanLin
 }
 
 function EditorPanel({ m }: { m: PlanMonth }) {
-  const { inputs, editInputs, dirty, saveInputs, discardInputs } = useApp();
+  const { inputs, editInputs, dirty, saveInputs, discardInputs, refreshOpening } = useApp();
   const p = inputs[m.key];
   const [f, setF] = useState({ date: m.from, entity: 'vihali' as Entity, dir: 'out' as 'in' | 'out', label: '', amount: '' });
   const [busy, setBusy] = useState(false);
@@ -137,7 +138,8 @@ function EditorPanel({ m }: { m: PlanMonth }) {
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="grid gap-4 content-start">
           <div className="grid gap-2">
-            <h3 className="eyebrow">Số dư đầu kỳ</h3>
+            <div className="flex flex-wrap items-center justify-between gap-2"><h3 className="eyebrow">Số dư đầu kỳ</h3><button type="button" onClick={() => refreshOpening(m.key)} className="h-7 px-2.5 rounded-sm border text-xs inline-flex items-center gap-1 hover:bg-muted"><RotateCcw className="w-3 h-3" />Cập nhật theo dữ liệu hiện tại</button></div>
+            {p.openingDetail && <p className="text-xs text-muted-foreground">Đã chốt đầu kỳ theo sheet ngày {fmtStamp(p.openingDetail.companyAsOf)}</p>}
             <div className="grid sm:grid-cols-2 gap-2">
               {(['vihali', 'personal'] as Entity[]).map(e => (
                 <label key={e} className="grid gap-1 text-xs text-muted-foreground">{e === 'vihali' ? 'Vihali · HM thấu chi khả dụng' : 'Cá nhân · thanh khoản'}
@@ -258,9 +260,11 @@ export default function Plan() {
   const lines = !computed ? [] : snap ? snap.lines : planLines(month, inputs[month]);
   const prevClose = PLAN_ACTUALS[prevMonth(month)]?.closing;
   // Kế hoạch đang lập: HM thấu chi đầu kỳ = HM thấu chi BIDV thực tế cuối tháng trước
-  const op = !computed ? { vihali: 0, personal: 0 } : snap ? snap.opening : live && prevClose ? { ...inputs[month].opening, vihali: prevClose.odAvailable } : inputs[month].opening;
+  const op = !computed ? { vihali: 0, personal: 0 } : snap ? snap.opening : live && prevClose && !inputs[month].openingDetail ? { ...inputs[month].opening, vihali: prevClose.odAvailable } : inputs[month].opening;
   // Diễn giải số dư đầu kỳ do người lập ghi khi lập kế hoạch
   const opNote = computed && !snap ? { vihali: inputs[month].opening.vihaliNote, personal: inputs[month].opening.personalNote } : { vihali: undefined, personal: undefined };
+  // Số đầu kỳ chi tiết: bản đã chốt trong file nhập liệu, chưa chốt thì lấy dữ liệu hiện tại khi tháng còn mở
+  const detail = computed ? (inputs[month].openingDetail || (live ? currentOpeningDetail() : undefined)) : undefined;
   const vh = runBalance(lines, 'vihali', op.vihali), cn_ = runBalance(lines, 'personal', op.personal);
   const end = (rows: { bal: number }[], o: number) => (rows.length ? rows[rows.length - 1].bal : o);
   const minOf = (rows: { bal: number; date: string }[], o: number) => rows.reduce((a, r) => (r.bal < a.v ? { v: r.bal, d: r.date } : a), { v: o, d: m.from });
@@ -296,9 +300,10 @@ export default function Plan() {
       </Panel>
 
       {!computed ? <ArchiveView m={m} /> : <>
+        {detail && <OpeningPanels detail={detail} opening={op} />}
         <div className="grid xl:grid-cols-2 gap-4">
           {[
-            { k: 'vihali', t: 'Vihali', h: 'Kế hoạch dòng tiền & hạn mức thấu chi', d: live && prevClose ? `Đầu kỳ = HM thấu chi BIDV thực tế ngày ${dmy(prevClose.asOf)} · trả nợ đến hạn từ tab Vihali · lãi BIDV định kỳ ước tính` : 'Trả nợ đến hạn lấy từ tab Vihali · nguồn trả là HM thấu chi BIDV', o: op.vihali, rows: vh, min: vmin, lbl: 'HM còn lại', opening: 'HM thấu chi BIDV khả dụng đầu kỳ', note: live && prevClose ? undefined : opNote.vihali },
+            { k: 'vihali', t: 'Vihali', h: 'Kế hoạch dòng tiền & hạn mức thấu chi', d: live && prevClose && !inputs[month].openingDetail ? `Đầu kỳ = HM thấu chi BIDV thực tế ngày ${dmy(prevClose.asOf)} · trả nợ đến hạn từ tab Vihali · lãi BIDV định kỳ ước tính` : 'Trả nợ đến hạn lấy từ tab Vihali · nguồn trả là HM thấu chi BIDV', o: op.vihali, rows: vh, min: vmin, lbl: 'HM còn lại', opening: 'HM thấu chi BIDV khả dụng đầu kỳ', note: live && prevClose && !inputs[month].openingDetail ? undefined : opNote.vihali },
             { k: 'personal', t: 'Cá nhân', h: 'Kế hoạch Individual Treasury', d: 'Sổ đến hạn lấy từ tab Cá nhân · chi định kỳ theo các tháng trước', o: op.personal, rows: cn_, min: cmin, lbl: 'Thanh khoản', opening: 'Thanh khoản đầu kỳ (tài khoản thanh toán)', note: opNote.personal },
           ].map(x => (
             <Panel key={x.k} pad={false} className="xl:h-[720px]" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.h}</span>} sub={x.d}>
@@ -312,6 +317,7 @@ export default function Plan() {
               </div>
             </Panel>))}
         </div>
+        <SummaryPanels m={m} vh={vh} cn={cn_} opening={op} detail={detail} live={live} />
         <Panel title="Diễn biến số dư trong kỳ" sub="Tỷ VND · cập nhật theo từng ngày có thu chi">
           <div className="h-[240px]">
             <ResponsiveContainer width="100%" height="100%">

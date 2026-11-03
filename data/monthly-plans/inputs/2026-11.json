@@ -1,12 +1,12 @@
 {
   "month": "2026-11",
   "version": "Draft 1",
-  "updatedAt": "2026-10-22T14:30:00+07:00",
+  "updatedAt": "2026-11-03T19:30:00+07:00",
   "opening": {
-    "vihali": 12351464975,
-    "personal": 3414966400,
-    "vihaliNote": "HM thấu chi BIDV sau các khoản chi của kế hoạch T10",
-    "personalNote": "Số dư VPB5678 cuối kỳ T10 + các tài khoản không kỳ hạn"
+    "vihali": 11848011714,
+    "personal": 1815465024,
+    "vihaliNote": "HM thấu chi BIDV khả dụng đầu kỳ 01/11 theo sheet Loan-BIDV (anh Nguyên xác nhận 03/11/2026); HM VLĐ SC còn lại 3,898,275,049",
+    "personalNote": "Tổng tài khoản không kỳ hạn theo sheet Dashboard-fix ngày 03/11/2026"
   },
   "carry": [
     {
@@ -135,8 +135,8 @@
   "snapshot": {
     "savedAt": "2026-11-03T18:45:00+07:00",
     "opening": {
-      "vihali": 12351464975,
-      "personal": 3414966400
+      "vihali": 11848011714,
+      "personal": 1815465024
     },
     "note": "Bổ sung 03/11/2026: giữ khoản trả nợ SC 007385614 (đến hạn 02/11) theo dữ liệu sheet ngày 02/11/2026 13:00, vì sheet đã xóa khoản này sau khi tất toán. Bản lưu đầy đủ sẽ được ghi lại khi bấm Lưu kế hoạch / Trình CFO.",
     "lines": [
@@ -151,5 +151,197 @@
         "note": "Gốc 352,052,577 · LS 5.75%"
       }
     ]
+  },
+  "openingDetail": {
+    "companyAsOf": "2026-11-03T18:35:00+07:00",
+    "personalAsOf": "2026-11-03T13:00:56+07:00",
+    "odLimit": 11848011714,
+    "odTn": 11840711407,
+    "odTs": 7300307,
+    "bidvVldLimit": 2825612602,
+    "scLimit": 3898275049,
+    "deposits": [
+      {
+        "owner": "Hồ Thị Yến Nhi",
+        "bank": "BIDV-TN",
+        "code": "810004228033",
+        "principal": 8658663289,
+        "rate": 8,
+        "due": "2027-04-28",
+        "pledged": true,
+        "settle": 9351356352
+      },
+      {
+        "owner": "Hồ Thị Yến Nhi",
+        "bank": "BIDV-TN",
+        "code": "818016673105",
+        "principal": 16800000000,
+        "rate": 8.2,
+        "due": "2027-04-08",
+        "pledged": true,
+        "settle": 18177600000
+      },
+      {
+        "owner": "Hồ Thị Yến Nhi",
+        "bank": "BIDV-TN",
+        "code": "819017973477",
+        "principal": 8280000000,
+        "rate": 8,
+        "due": "2027-06-09",
+        "pledged": true,
+        "settle": 8942400000
+      },
+      {
+        "owner": "Hồ Thị Yến Nhi",
+        "bank": "BIDV-TN",
+        "code": "817018585429",
+        "principal": 3000000000,
+        "rate": 8,
+        "due": "2027-07-06",
+        "pledged": true,
+        "settle": 3240000000
+      },
+      {
+        "owner": "Hồ Thị Yến Nhi",
+        "bank": "BIDV-TN",
+        "code": "818020135596",
+        "principal": 2500000000,
+        "rate": 8,
+        "due": "2027-09-10",
+        "pledged": true,
+        "settle": 2700000000
+      },
+      {
+        "owner": "Đặng Thu Thảo",
+        "bank": "BIDV-TN",
+        "code": "8838888558",
+        "principal": 994610,
+        "rate": null,
+        "due": null,
+        "pledged": false,
+        "settle": 994610
+      },
+      {
+        "owner": "Nguyễn Trung Tín",
+        "bank": "NCB-SGN",
+        "code": "LD2621148083",
+        "principal": 7250000000,
+        "rate": 9.3,
+        "due": "2027-01-30",
+        "pledged": false,
+        "settle": 7589895890
+      },
+      {
+        "owner": "Nguyễn Trung Tín",
+        "bank": "NCB-SGN",
+        "code": "LD2622463083",
+        "principal": 14235000000,
+        "rate": 9.5,
+        "due": "2027-02-12",
+        "pledged": false,
+        "settle": 14916720000
+      },
+      {
+        "owner": "Nguyễn Trung Tín",
+        "bank": "VPB-PL",
+        "code": "586539639",
+        "principal": 19466000000,
+        "rate": 8.8,
+        "due": "2026-11-11",
+        "pledged": false,
+        "settle": 20329543758
+      },
+      {
+        "owner": "Nguyễn Trung Tín",
+        "bank": "VPB-PL",
+        "code": "Chứng chỉ tiền gửi 1m",
+        "principal": 3877217457,
+        "rate": 7.5,
+        "due": "2026-11-12",
+        "pledged": false,
+        "settle": 3926612145
+      },
+      {
+        "owner": "Hồ Thị Yến Nhi",
+        "bank": "SC-HCM",
+        "code": "44-1470100-04",
+        "principal": 12688088160,
+        "rate": 8,
+        "due": "2027-04-15",
+        "pledged": true,
+        "settle": 13703135213
+      },
+      {
+        "owner": "Hồ Thị Yến Nhi",
+        "bank": "SC-HCM",
+        "code": "44-1470100-06",
+        "principal": 9544500000,
+        "rate": 8.2,
+        "due": "2027-09-25",
+        "pledged": true,
+        "settle": 10327149000
+      },
+      {
+        "owner": "Hồ Thị Yến Nhi",
+        "bank": "SC-HCM",
+        "code": "SC-HCM-Hồ Thị Yến Nhi-2940000000",
+        "principal": 2940000000,
+        "rate": 8,
+        "due": "2027-07-07",
+        "pledged": true,
+        "settle": 3175200000
+      },
+      {
+        "owner": "Đặng Thu Thảo",
+        "bank": "SC-HCM",
+        "code": "99441890299",
+        "principal": 1000000,
+        "rate": null,
+        "due": null,
+        "pledged": false,
+        "settle": 1000000
+      },
+      {
+        "owner": "Đặng Thu Thảo",
+        "bank": "VPB-PL",
+        "code": "09388885678",
+        "principal": 156030686,
+        "rate": null,
+        "due": null,
+        "pledged": false,
+        "settle": 156030686
+      },
+      {
+        "owner": "Nguyễn Trung Tín",
+        "bank": "VPB-PL",
+        "code": "543033162",
+        "principal": 1545000000,
+        "rate": null,
+        "due": null,
+        "pledged": false,
+        "settle": 1545000000
+      },
+      {
+        "owner": "Đặng Thu Thảo",
+        "bank": "BVB-NSG",
+        "code": "09388885678",
+        "principal": 111439728,
+        "rate": null,
+        "due": null,
+        "pledged": false,
+        "settle": 111439728
+      },
+      {
+        "owner": "Đặng Thu Thảo",
+        "bank": "ACB-CVL",
+        "code": "37472217",
+        "principal": 1000000,
+        "rate": null,
+        "due": null,
+        "pledged": false,
+        "settle": 1000000
+      }
+    ],
+    "personalLoans": 0
   }
 }

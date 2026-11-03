@@ -23,12 +23,20 @@ export type Entity = 'vihali' | 'personal';
 export type Source = 'loan' | 'deposit' | 'carry' | 'recurring' | 'adhoc' | 'interest';
 export interface PlanLine { id: string; date: string; entity: Entity; dir: 'in' | 'out'; label: string; amount: number; source: Source; note?: string }
 export interface Recurring { id: string; label: string; entity: Entity; dir: 'in' | 'out'; day: number; amount: number; seen: string; on: boolean; startMonth?: string }
+/* Số đầu kỳ của tháng kế hoạch, chốt tại thời điểm lập / cập nhật đầu kỳ (sheet xóa sổ, khế ước đã tất toán nên phải lưu lại) */
+export interface OpeningDeposit { owner: string; bank: string; code: string; principal: number; rate: number | null; due: string | null; pledged: boolean; settle: number }
+export interface OpeningDetail {
+  companyAsOf: string; personalAsOf: string;
+  odLimit: number; odTn: number; odTs: number; bidvVldLimit: number; scLimit: number;
+  deposits: OpeningDeposit[]; personalLoans: number;
+}
 export interface PlanInputs {
   month: string; version: string; updatedAt?: string;
   opening: { vihali: number; personal: number; vihaliNote?: string; personalNote?: string };
   carry: PlanLine[]; recurring: Recurring[]; adhoc: PlanLine[];
   /* Ảnh chụp kế hoạch tại lần lưu/trình CFO gần nhất, dùng khi tháng đã qua */
   snapshot?: { savedAt: string; opening: { vihali: number; personal: number }; lines: PlanLine[] };
+  openingDetail?: OpeningDetail;
 }
 export type ApprovalStatus = 'draft' | 'pending_cfo_review' | 'revision_requested' | 'approved';
 export interface TLEvent { at: string; kind: 'draft' | 'submit' | 'revise' | 'approve'; text: string }
@@ -158,7 +166,10 @@ function mapPersonal(p: any) {
   PERSONAL_DEPOSITS = (p.personalDeposits || []).map((r: any) => ({
     owner: r.owner, bank: r.bank, code: String(r.certificateNumber || r.depositCode), type: r.depositType,
     principal: Number(r.principal) || 0, rate: r.interestRate ?? null, open: r.openDate ?? null, due: r.maturityDate ?? null,
-    pledged: !!r.pledged, settle: Number(r.projectedSettlement) || 0, loans: (r.linkedLoanCodes || []).map(String),
+    pledged: !!r.pledged, loans: (r.linkedLoanCodes || []).map(String),
+    // CCTG đã rút một phần: "số tiền trên sổ" vẫn là số ban đầu nên cột dự thu của sheet bị lớn; dùng gốc còn lại + lãi dự thu
+    settle: Number(r.amountOnCertificate) > Number(r.principal) && Number(r.accruedInterest) > 0
+      ? Number(r.principal) + Number(r.accruedInterest) : Number(r.projectedSettlement) || 0,
   }));
   META.personalUpdatedAt = p.meta?.updatedAt || '';
 }

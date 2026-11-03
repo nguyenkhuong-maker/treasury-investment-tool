@@ -1,6 +1,7 @@
 import { LOANS, PERSONAL_DEPOSITS, COMPANY_DEPOSITS } from '@/data/static';
 import { LOAN_GROUPS, BIDV_VLD_LIMIT, SC_LIMIT, PLAN_INPUTS } from '@/data/static';
-import type { PlanLine, Recurring, PlanInputs } from '@/data/static';
+import type { PlanLine, Recurring, PlanInputs, OpeningDetail } from '@/data/static';
+import { META } from '@/data/static';
 import { monthPeriod } from '@/data/store';
 
 export const loansOf = (g: string) => LOANS.filter(l => l.group === g);
@@ -88,6 +89,17 @@ export function planLines(monthKey: string, p: PlanInputs): PlanLine[] {
   const have = new Set(lines.map(l => l.id));
   const kept = (p.snapshot?.lines || []).filter(l => (l.source === 'loan' || l.source === 'deposit') && l.date < today && !have.has(l.id));
   return [...lines, ...kept].sort((a, b) => a.date.localeCompare(b.date) || (a.dir === 'in' ? -1 : 1));
+}
+
+/* Số đầu kỳ theo dữ liệu hiện tại (sheet Loan-BIDV, Loan-SC, Dashboard-fix) */
+export function currentOpeningDetail(): OpeningDetail {
+  const g = (k: string) => GROUP_SUMMARY.find(x => x.key === k)?.hm || 0;
+  return {
+    companyAsOf: META.companyUpdatedAt, personalAsOf: META.personalUpdatedAt,
+    odLimit: OD_HM, odTn: g('bidv-od-tn'), odTs: g('bidv-od-ts'), bidvVldLimit: BIDV_VLD_LIMIT, scLimit: SC_LIMIT,
+    deposits: PERSONAL_DEPOSITS.map(d => ({ owner: d.owner, bank: d.bank, code: d.code, principal: d.principal, rate: d.rate, due: d.due, pledged: d.pledged, settle: d.settle })),
+    personalLoans: 0,
+  };
 }
 
 export function runBalance(lines: PlanLine[], entity: 'vihali' | 'personal', open: number) {

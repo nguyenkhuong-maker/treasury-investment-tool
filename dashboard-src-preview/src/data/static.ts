@@ -3,7 +3,7 @@ export {
   CRYPTO_PRICES, CRYPTO_TOKENS, WALLETS, CRYPTO_TOTAL, CRYPTO_HISTORY,
   PLAN_MONTHS, PLAN_INPUTS, APPROVALS, PLAN_HIGHLIGHTS, CONTRACT_LINKS, CONTRACT_DEFAULTS, META, BALANCE, PLAN_ACTUALS, ACTUALS_AT,
 } from './store';
-export type { OpeningDetail, OpeningDeposit, CreditCard, Balance, RunwayCase, MonthActual, ActualRow, ActualPlanLine, Loan, Deposit, Wallet, Entity, Source, PlanLine, Recurring, PlanInputs, ApprovalStatus, TLEvent, PlanApproval, PlanMonth, PlanMode, ArchivePlan, ArchiveBlock } from './store';
+export type { ArchiveCell, OpeningDetail, OpeningDeposit, CreditCard, Balance, RunwayCase, MonthActual, ActualRow, ActualPlanLine, Loan, Deposit, Wallet, Entity, Source, PlanLine, Recurring, PlanInputs, ApprovalStatus, TLEvent, PlanApproval, PlanMonth, PlanMode, ArchivePlan, ArchiveBlock } from './store';
 import type { Source, ApprovalStatus } from './store';
 
 export const LOAN_GROUPS = [

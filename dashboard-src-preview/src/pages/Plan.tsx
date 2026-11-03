@@ -4,10 +4,10 @@ import { Send, Check, RotateCcw, FilePen, Plus, Trash2, Lock, ExternalLink, Save
 import { PLAN_HIGHLIGHTS, SOURCE_LABEL, STATUS_LABEL, PLAN_ACTUALS } from '@/data/static';
 import PlanActuals from '@/pages/PlanActuals';
 import { prevMonth } from '@/lib/calc';
-import type { PlanLine, PlanApproval, Entity, PlanMonth, ArchivePlan, ArchiveBlock } from '@/data/static';
+import type { PlanLine, PlanApproval, Entity, PlanMonth, PlanInputs, ArchivePlan, ArchiveBlock } from '@/data/static';
 import { postToAppsScript, loadArchive, fmtStamp } from '@/data/store';
 import { planLines, runBalance, currentOpeningDetail } from '@/lib/calc';
-import { OpeningPanels, SummaryPanels } from '@/pages/PlanDetails';
+import { VihaliOpening, PersonalLiquidity, PersonalDeposits, vihaliDoc, personalDoc } from '@/pages/PlanDetails';
 import { nf, ty, dm, dmy } from '@/lib/fmt';
 import { Panel, Chip, th, td, tn, Segmented, chartAxisTick, chartAxisLine, chartGrid, chartTip, scrollBody } from '@/components/kit';
 import { useApp } from '@/state';
@@ -300,24 +300,43 @@ export default function Plan() {
       </Panel>
 
       {!computed ? <ArchiveView m={m} /> : <>
-        {detail && <OpeningPanels detail={detail} opening={op} />}
-        <div className="grid xl:grid-cols-2 gap-4">
+        <div className="grid xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-4 items-start">
           {[
-            { k: 'vihali', t: 'Vihali', h: 'Kế hoạch dòng tiền & hạn mức thấu chi', d: live && prevClose && !inputs[month].openingDetail ? `Đầu kỳ = HM thấu chi BIDV thực tế ngày ${dmy(prevClose.asOf)} · trả nợ đến hạn từ tab Vihali · lãi BIDV định kỳ ước tính` : 'Trả nợ đến hạn lấy từ tab Vihali · nguồn trả là HM thấu chi BIDV', o: op.vihali, rows: vh, min: vmin, lbl: 'HM còn lại', opening: 'HM thấu chi BIDV khả dụng đầu kỳ', note: live && prevClose && !inputs[month].openingDetail ? undefined : opNote.vihali },
-            { k: 'personal', t: 'Cá nhân', h: 'Kế hoạch Individual Treasury', d: 'Sổ đến hạn lấy từ tab Cá nhân · chi định kỳ theo các tháng trước', o: op.personal, rows: cn_, min: cmin, lbl: 'Thanh khoản', opening: 'Thanh khoản đầu kỳ (tài khoản thanh toán)', note: opNote.personal },
-          ].map(x => (
-            <Panel key={x.k} pad={false} className="xl:h-[720px]" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.h}</span>} sub={x.d}>
-              <div className="flex flex-col h-full">
-              <div className="grid grid-cols-4 border-b">
-                {[['Đầu kỳ', ty(x.o), ''], ['Thu', ty(sum(x.rows, 'in')), 'text-pos'], ['Chi', ty(sum(x.rows, 'out')), 'text-neg'], ['Cuối kỳ', ty(end(x.rows, x.o)), 'font-semibold']].map(([l, v, c], i) => (
-                  <div key={l} className={cn('px-4 py-3 min-w-0', i && 'border-l')}><div className="text-xs text-muted-foreground">{l}</div><div className={cn('num text-kpi-sm sm:text-h3 font-medium mt-0.5', c)}>{v}</div></div>))}
-              </div>
-              <div className="px-4 py-2 text-xs text-muted-foreground border-b">{x.lbl} thấp nhất trong kỳ <span className="num text-foreground">{ty(x.min.v)}</span> ngày <span className="num">{dm(x.min.d)}</span></div>
-              <FlowTable rows={x.rows} open={x.o} label={x.lbl} opening={x.opening} openNote={x.note} m={m} />
-              </div>
-            </Panel>))}
+            { ...{ k: 'vihali', t: 'Vihali', h: 'Kế hoạch dòng tiền & hạn mức thấu chi', d: live && prevClose && !inputs[month].openingDetail ? `Đầu kỳ = HM thấu chi BIDV thực tế ngày ${dmy(prevClose.asOf)} · trả nợ đến hạn từ tab Vihali · lãi BIDV định kỳ ước tính` : 'Trả nợ đến hạn lấy từ tab Vihali · nguồn trả là HM thấu chi BIDV', o: op.vihali, rows: vh, min: vmin, lbl: 'HM còn lại', opening: 'HM thấu chi BIDV khả dụng đầu kỳ', note: live && prevClose && !inputs[month].openingDetail ? undefined : opNote.vihali }, pre: detail && <VihaliOpening detail={detail} opening={op.vihali} />, doc: 'Kế hoạch dòng tiền & hạn mức thấu chi' },
+            { ...{ k: 'personal', t: 'Cá nhân', h: 'Kế hoạch Individual Treasury', d: 'Sổ đến hạn lấy từ tab Cá nhân · chi định kỳ theo các tháng trước', o: op.personal, rows: cn_, min: cmin, lbl: 'Thanh khoản', opening: 'Thanh khoản đầu kỳ (tài khoản thanh toán)', note: opNote.personal }, pre: detail && <><PersonalLiquidity detail={detail} opening={op.personal} /><PersonalDeposits detail={detail} /></>, doc: 'Kế hoạch Individual Treasury' },
+          ].map(x => {
+            const ent = x.k as Entity;
+            const ap = approvals[month]?.[ent];
+            // CFO đã duyệt: hiện bản đầy đủ theo mẫu kế hoạch đã duyệt (T10/2026), số liệu theo bản lưu lúc trình
+            if (ap?.status === 'approved') {
+              const sv = inputs[month]?.snapshot as (PlanInputs['snapshot'] & { note?: string }) | undefined;
+              const full = sv && !sv.note;
+              const o = full ? sv!.opening[ent] : x.o;
+              const rows = full ? runBalance(sv!.lines, ent, o) : x.rows;
+              const args = { m, rows, opening: o, openNote: x.note, detail };
+              const at = [...ap.events].reverse().find(e => e.kind === 'approve')?.at;
+              return (
+                <Panel key={x.k} pad={false} className="xl:col-span-2" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.doc}</span>}
+                  sub={`Kỳ kế hoạch ${dmy(m.from)} – ${dmy(m.to)} · ${ap.version} · CFO đã duyệt${at ? ' ' + at : ''}`}>
+                  <ArchiveBlocks blocks={ent === 'vihali' ? vihaliDoc(args) : personalDoc(args)} />
+                </Panel>);
+            }
+            return (
+              <div key={x.k} className="grid gap-4 min-w-0 grid-cols-[minmax(0,1fr)]">
+                {x.pre}
+              <Panel pad={false} className="xl:h-[720px]" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.h}</span>} sub={x.d}>
+                <div className="flex flex-col h-full">
+                <div className="grid grid-cols-4 border-b">
+                  {[['Đầu kỳ', ty(x.o), ''], ['Thu', ty(sum(x.rows, 'in')), 'text-pos'], ['Chi', ty(sum(x.rows, 'out')), 'text-neg'], ['Cuối kỳ', ty(end(x.rows, x.o)), 'font-semibold']].map(([l, v, c], i) => (
+                    <div key={l} className={cn('px-4 py-3 min-w-0', i && 'border-l')}><div className="text-xs text-muted-foreground">{l}</div><div className={cn('num text-kpi-sm sm:text-h3 font-medium mt-0.5', c)}>{v}</div></div>))}
+                </div>
+                <div className="px-4 py-2 text-xs text-muted-foreground border-b">{x.lbl} thấp nhất trong kỳ <span className="num text-foreground">{ty(x.min.v)}</span> ngày <span className="num">{dm(x.min.d)}</span></div>
+                <FlowTable rows={x.rows} open={x.o} label={x.lbl} opening={x.opening} openNote={x.note} m={m} />
+                </div>
+              </Panel>
+              </div>);
+          })}
         </div>
-        <SummaryPanels m={m} vh={vh} cn={cn_} opening={op} detail={detail} live={live} />
         <Panel title="Diễn biến số dư trong kỳ" sub="Tỷ VND · cập nhật theo từng ngày có thu chi">
           <div className="h-[240px]">
             <ResponsiveContainer width="100%" height="100%">

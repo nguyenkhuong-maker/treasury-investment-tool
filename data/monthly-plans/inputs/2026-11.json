@@ -1,7 +1,7 @@
 {
   "month": "2026-11",
   "version": "Draft 1",
-  "updatedAt": "2026-11-03T20:00:00+07:00",
+  "updatedAt": "2026-11-03T12:16:40.042Z",
   "opening": {
     "vihali": 11848011714,
     "personal": 1815465024,
@@ -174,26 +174,6 @@
       "note": "Đáo hạn 12/01/2027"
     }
   ],
-  "snapshot": {
-    "savedAt": "2026-11-03T18:45:00+07:00",
-    "opening": {
-      "vihali": 11848011714,
-      "personal": 1815465024
-    },
-    "note": "Bổ sung 03/11/2026: giữ khoản trả nợ SC 007385614 (đến hạn 02/11) theo dữ liệu sheet ngày 02/11/2026 13:00, vì sheet đã xóa khoản này sau khi tất toán. Bản lưu đầy đủ sẽ được ghi lại khi bấm Lưu kế hoạch / Trình CFO.",
-    "lines": [
-      {
-        "id": "L007385614",
-        "date": "2026-11-02",
-        "entity": "vihali",
-        "dir": "out",
-        "label": "Trả nợ SC 007385614",
-        "amount": 361979977,
-        "source": "loan",
-        "note": "Gốc 352,052,577 · LS 5.75%"
-      }
-    ]
-  },
   "openingDetail": {
     "companyAsOf": "2026-11-03T18:35:00+07:00",
     "personalAsOf": "2026-11-03T13:00:56+07:00",
@@ -385,5 +365,256 @@
       }
     ],
     "personalLoans": 0
-  }
+  },
+  "snapshot": {
+    "savedAt": "2026-11-03T12:16:38.087Z",
+    "opening": {
+      "vihali": 11848011714,
+      "personal": 1815465024
+    },
+    "lines": [
+      {
+        "id": "L007385614",
+        "date": "2026-11-02",
+        "entity": "vihali",
+        "dir": "out",
+        "label": "Trả nợ SC 007385614",
+        "amount": 361979977,
+        "source": "loan",
+        "note": "Gốc 352,052,577 · LS 5.75%"
+      },
+      {
+        "id": "L404004807798",
+        "date": "2026-11-06",
+        "entity": "vihali",
+        "dir": "out",
+        "label": "Trả nợ BIDV 404004807798",
+        "amount": 287504141,
+        "source": "loan",
+        "note": "Gốc 286,952,249 · LS 7.8%"
+      },
+      {
+        "id": "D586539639",
+        "date": "2026-11-11",
+        "entity": "personal",
+        "dir": "in",
+        "label": "VPB-PL 586539639 đến hạn",
+        "amount": 20329543758,
+        "source": "deposit",
+        "note": "Nguyễn Trung Tín · gốc 19,466,000,000 · LS 8.8%"
+      },
+      {
+        "id": "c1",
+        "date": "2026-11-11",
+        "entity": "personal",
+        "dir": "out",
+        "label": "Chi Opex DOPA T11",
+        "amount": 500000000,
+        "source": "carry"
+      },
+      {
+        "id": "c2",
+        "date": "2026-11-11",
+        "entity": "personal",
+        "dir": "out",
+        "label": "Chi Opex Beyond Atoms T11",
+        "amount": 500000000,
+        "source": "carry"
+      },
+      {
+        "id": "c3",
+        "date": "2026-11-11",
+        "entity": "personal",
+        "dir": "out",
+        "label": "Chi phí nhân viên DOPA T11",
+        "amount": 700000000,
+        "source": "carry"
+      },
+      {
+        "id": "c4",
+        "date": "2026-11-11",
+        "entity": "personal",
+        "dir": "out",
+        "label": "Mua USDT T11/2026",
+        "amount": 4105486000,
+        "source": "carry"
+      },
+      {
+        "id": "c5",
+        "date": "2026-11-11",
+        "entity": "personal",
+        "dir": "out",
+        "label": "Mua CCTG VPBank 1 tháng · 7.30%",
+        "amount": 9371432000,
+        "source": "carry",
+        "note": "Đáo hạn 11/12/2026"
+      },
+      {
+        "id": "c6",
+        "date": "2026-11-11",
+        "entity": "personal",
+        "dir": "out",
+        "label": "Mua CCTG VPBank 2 tháng · 7.50%",
+        "amount": 5152625758,
+        "source": "carry",
+        "note": "Đáo hạn 11/01/2027 · Opex + USDT T01/2027 (theo KH T10 đã duyệt)"
+      },
+      {
+        "id": "DChứng chỉ tiền gửi 1m",
+        "date": "2026-11-12",
+        "entity": "personal",
+        "dir": "in",
+        "label": "VPB-PL Chứng chỉ tiền gửi 1m đến hạn",
+        "amount": 3926612145,
+        "source": "deposit",
+        "note": "Nguyễn Trung Tín · gốc 3,877,217,457 · LS 7.5%"
+      },
+      {
+        "id": "a20261103-1",
+        "date": "2026-11-12",
+        "entity": "personal",
+        "dir": "out",
+        "label": "Roll CCTG VPBank 1 tháng · 7.50%",
+        "amount": 3926612145,
+        "source": "adhoc",
+        "note": "Toàn bộ CCTG 1m đến hạn 12/11 · đáo hạn 12/12/2026"
+      },
+      {
+        "id": "L007405487",
+        "date": "2026-11-16",
+        "entity": "vihali",
+        "dir": "out",
+        "label": "Trả nợ SC 007405487",
+        "amount": 400327996,
+        "source": "loan",
+        "note": "Gốc 389,289,246 · LS 5.75%"
+      },
+      {
+        "id": "L400004871689",
+        "date": "2026-11-20",
+        "entity": "vihali",
+        "dir": "out",
+        "label": "Trả nợ BIDV 400004871689",
+        "amount": 146301560,
+        "source": "loan",
+        "note": "Gốc 146,020,720 · LS 7.8%"
+      },
+      {
+        "id": "r52026-11",
+        "date": "2026-11-20",
+        "entity": "vihali",
+        "dir": "out",
+        "label": "Opex Vihali đi bằng thấu chi T11",
+        "amount": 100000000,
+        "source": "recurring"
+      },
+      {
+        "id": "L007419194",
+        "date": "2026-11-24",
+        "entity": "vihali",
+        "dir": "out",
+        "label": "Trả nợ SC 007419194",
+        "amount": 2115052547,
+        "source": "loan",
+        "note": "Gốc 2,056,731,530 · LS 5.75%"
+      },
+      {
+        "id": "L007431226",
+        "date": "2026-12-02",
+        "entity": "vihali",
+        "dir": "out",
+        "label": "Trả nợ SC 007431226",
+        "amount": 231288654,
+        "source": "loan",
+        "note": "Gốc 224,911,040 · LS 5.75%"
+      },
+      {
+        "id": "c7",
+        "date": "2026-12-11",
+        "entity": "personal",
+        "dir": "in",
+        "label": "CCTG VPBank 1 tháng đáo hạn (gốc + lãi)",
+        "amount": 9427660592,
+        "source": "carry",
+        "note": "9,371,432,000 × (1 + 7.30% × 30/365)"
+      },
+      {
+        "id": "L406004974623",
+        "date": "2026-12-11",
+        "entity": "vihali",
+        "dir": "out",
+        "label": "Trả nợ BIDV 406004974623",
+        "amount": 578409253,
+        "source": "loan",
+        "note": "Gốc 577,298,941 · LS 7.8%"
+      },
+      {
+        "id": "r12026-12",
+        "date": "2026-12-11",
+        "entity": "personal",
+        "dir": "out",
+        "label": "Chi Opex DOPA T12",
+        "amount": 500000000,
+        "source": "recurring"
+      },
+      {
+        "id": "r22026-12",
+        "date": "2026-12-11",
+        "entity": "personal",
+        "dir": "out",
+        "label": "Chi Opex Beyond Atoms T12",
+        "amount": 500000000,
+        "source": "recurring"
+      },
+      {
+        "id": "r32026-12",
+        "date": "2026-12-11",
+        "entity": "personal",
+        "dir": "out",
+        "label": "Chi phí nhân viên DOPA T12",
+        "amount": 700000000,
+        "source": "recurring"
+      },
+      {
+        "id": "r42026-12",
+        "date": "2026-12-11",
+        "entity": "personal",
+        "dir": "out",
+        "label": "Mua USDT T12",
+        "amount": 7671432000,
+        "source": "recurring"
+      },
+      {
+        "id": "a20261103-2",
+        "date": "2026-12-11",
+        "entity": "personal",
+        "dir": "out",
+        "label": "Roll phần dư vào CCTG VPBank 1 tháng · 7.50%",
+        "amount": 56228592,
+        "source": "adhoc",
+        "note": "Phần còn lại của CCTG đáo hạn 11/12 sau chi Opex + USDT T12 · đáo hạn 11/01/2027"
+      },
+      {
+        "id": "a20261103-3",
+        "date": "2026-12-12",
+        "entity": "personal",
+        "dir": "in",
+        "label": "CCTG VPBank 1 tháng (roll 12/11) đáo hạn (gốc + lãi)",
+        "amount": 3950817288,
+        "source": "adhoc",
+        "note": "3,926,612,145 × (1 + 7.50% × 30/365)"
+      },
+      {
+        "id": "a20261103-4",
+        "date": "2026-12-12",
+        "entity": "personal",
+        "dir": "out",
+        "label": "Roll tiếp CCTG VPBank 1 tháng · 7.50%",
+        "amount": 3950817288,
+        "source": "adhoc",
+        "note": "Đáo hạn 12/01/2027"
+      }
+    ]
+  },
+  "updatedBy": "nguyen.khuong@atherlabs.com"
 }

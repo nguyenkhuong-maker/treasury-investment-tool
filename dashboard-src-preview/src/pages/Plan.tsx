@@ -323,9 +323,9 @@ export default function Plan() {
               const args = { m, rows, opening: o, openNote: x.note, detail };
               const at = [...ap.events].reverse().find(e => e.kind === 'approve')?.at;
               return (
-                <Panel key={x.k} pad={false} className="xl:col-span-2" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.doc}</span>}
+                <Panel key={x.k} pad={false} className="xl:h-[760px]" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.doc}</span>}
                   sub={`Kỳ kế hoạch ${dmy(m.from)} – ${dmy(m.to)} · ${ap.version} · CFO đã duyệt${at ? ' ' + at : ''}`}>
-                  <ArchiveBlocks blocks={ent === 'vihali' ? vihaliDoc(args) : personalDoc(args)} />
+                  <div className="flex flex-col h-full"><div className={scrollBody}><ArchiveBlocks blocks={ent === 'vihali' ? vihaliDoc(args) : personalDoc(args)} /></div></div>
                 </Panel>);
             }
             return (

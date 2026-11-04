@@ -1,8 +1,8 @@
 {
-  "asOf": "2026-11-03",
+  "asOf": "2026-11-04",
   "source": "Dashboard Treasury Balance · sheet Balance",
   "fx": 26300,
-  "total": 15431389,
+  "total": 15635458,
   "individuals": {
     "banks": [
       {
@@ -113,35 +113,35 @@
   "osBank": 27548,
   "tokens": {
     "stable": 2130497,
-    "btc": 2516406,
-    "eth": 7421050,
-    "other": 706106,
-    "total": 12774060,
+    "btc": 2554419,
+    "eth": 7578109,
+    "other": 715103,
+    "total": 12978129,
     "btcQty": 32.8,
     "ethQty": 3298
   },
   "runway": {
-    "cash": 15434333,
+    "cash": 15638000,
     "cases": [
       {
         "key": "350k",
         "label": "Kịch bản 350K/tháng",
         "burn": 350000,
-        "months": 44.1
+        "months": 44.68
       },
       {
         "key": "400k",
         "label": "Kịch bản 400K/tháng",
         "burn": 400000,
-        "months": 38.59
+        "months": 39.1
       },
       {
         "key": "600k",
         "label": "Kịch bản 600K/tháng",
         "burn": 600000,
-        "months": 25.72
+        "months": 26.06
       }
     ]
   },
-  "generatedAt": "2026-11-03T06:00:56.475Z"
+  "generatedAt": "2026-11-04T06:00:59.591Z"
 }

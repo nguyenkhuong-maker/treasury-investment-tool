@@ -5,12 +5,11 @@
   "planTypeLabel": "VIHALI",
   "makerEmail": "nguyen.khuong@atherlabs.com",
   "approverEmail": "duc.ho@atherlabs.com",
-  "version": "Draft 1",
-  "contentHash": "2026-11-company:Draft 1",
-  "status": "revision_requested",
+  "version": "Draft 2",
+  "contentHash": "2026-11-company:Draft 2",
+  "status": "pending_cfo_review",
   "channel": "google_apps_script_mail",
-  "reviewedAt": "2026-11-04T03:43:15.889Z",
-  "submittedAt": "2026-11-03T12:16:43.827Z",
+  "submittedAt": "2026-11-04T04:55:38.058Z",
   "title": "Kế hoạch dòng tiền & hạn mức thấu chi khả dụng",
   "planUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/#ke-hoach",
   "indexUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/#ke-hoach",
@@ -27,6 +26,12 @@
       "at": "2026-11-04T03:43:15.889Z",
       "status": "revision_requested",
       "version": "Draft 1"
+    },
+    {
+      "at": "2026-11-04T04:55:38.058Z",
+      "status": "pending_cfo_review",
+      "version": "Draft 2",
+      "comment": null
     }
   ]
 }

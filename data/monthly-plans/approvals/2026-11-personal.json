@@ -7,8 +7,9 @@
   "approverEmail": "duc.ho@atherlabs.com",
   "version": "Draft 2",
   "contentHash": "2026-11-personal:Draft 2",
-  "status": "pending_cfo_review",
+  "status": "approved",
   "channel": "google_apps_script_mail",
+  "reviewedAt": "2026-11-04T05:33:11.642Z",
   "submittedAt": "2026-11-04T04:55:40.704Z",
   "title": "Kế hoạch quản lý Individual Treasury",
   "planUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/#ke-hoach",
@@ -16,6 +17,10 @@
   "slackChannelId": "C0AT2E4CBDX",
   "slackChannelName": "#treasury-management",
   "slackMessageTs": null,
+  "reviewComment": "Lưu ý trong thực tế thực hiện, đánh giá lại để tìm phương án đầu tư có lợi suất cao hơn với kỳ hạn dài hơn.",
+  "approvedBy": "duc.ho@atherlabs.com",
+  "approvedByLabel": "duc.ho@atherlabs.com",
+  "approvedAt": "2026-11-04T05:33:11.642Z",
   "history": [
     {
       "at": "2026-11-03T12:16:58.851Z",
@@ -32,6 +37,12 @@
       "status": "pending_cfo_review",
       "version": "Draft 2",
       "comment": null
+    },
+    {
+      "at": "2026-11-04T05:33:11.642Z",
+      "status": "approved",
+      "version": "Draft 2",
+      "comment": "Lưu ý trong thực tế thực hiện, đánh giá lại để tìm phương án đầu tư có lợi suất cao hơn với kỳ hạn dài hơn."
     }
   ]
 }

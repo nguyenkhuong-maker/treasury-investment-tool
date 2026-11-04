@@ -7,8 +7,9 @@
   "approverEmail": "duc.ho@atherlabs.com",
   "version": "Draft 2",
   "contentHash": "2026-11-company:Draft 2",
-  "status": "pending_cfo_review",
+  "status": "approved",
   "channel": "google_apps_script_mail",
+  "reviewedAt": "2026-11-04T05:29:46.510Z",
   "submittedAt": "2026-11-04T04:55:38.058Z",
   "title": "Kế hoạch dòng tiền & hạn mức thấu chi khả dụng",
   "planUrl": "https://nguyenkhuong-maker.github.io/treasury-investment-tool/#ke-hoach",
@@ -16,6 +17,10 @@
   "slackChannelId": "C0AT2E4CBDX",
   "slackChannelName": "#treasury-management",
   "slackMessageTs": null,
+  "reviewComment": "Lưu ý thời gian để chuyển tiền từ DP về VHL có thể mất 2-3 ngày làm việc.",
+  "approvedBy": "duc.ho@atherlabs.com",
+  "approvedByLabel": "duc.ho@atherlabs.com",
+  "approvedAt": "2026-11-04T05:29:46.510Z",
   "history": [
     {
       "at": "2026-11-03T12:16:43.827Z",
@@ -32,6 +37,12 @@
       "status": "pending_cfo_review",
       "version": "Draft 2",
       "comment": null
+    },
+    {
+      "at": "2026-11-04T05:29:46.510Z",
+      "status": "approved",
+      "version": "Draft 2",
+      "comment": "Lưu ý thời gian để chuyển tiền từ DP về VHL có thể mất 2-3 ngày làm việc."
     }
   ]
 }

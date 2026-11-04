@@ -32,8 +32,11 @@ function doGet(e) {
     if (!action) {
       return HtmlService.createHtmlOutput(buildReviewPageHtml(record));
     }
-    const result = applyReviewAction(record, action, { source: 'web_link' });
-    return HtmlService.createHtmlOutput(buildResultHtml(result));
+    // Link Duyệt / Cần điều chỉnh trong mail: mở trang để CFO ghi nội dung phản hồi rồi mới gửi
+    assertActionToken(record, token, action);
+    return HtmlService.createHtmlOutput(buildFeedbackPageHtml(record, token, action))
+      .setTitle('Phản hồi kế hoạch ngân quỹ')
+      .addMetaTag('viewport', 'width=device-width, initial-scale=1');
   } catch (error) {
     return HtmlService.createHtmlOutput(`<h3>Lỗi xử lý review</h3><pre>${escapeHtml(String(error))}</pre>`);
   }
@@ -82,6 +85,7 @@ function submitPlanToCfo(plan) {
         <a href="${reviseUrl}" style="display:inline-block;padding:10px 14px;background:#f59e0b;color:#fff;text-decoration:none;border-radius:8px;margin-right:8px">Cần điều chỉnh</a>
         <a href="${approveUrl}" style="display:inline-block;padding:10px 14px;background:#1e3a8a;color:#fff;text-decoration:none;border-radius:8px">Duyệt kế hoạch</a>
       </p>
+      <p style="color:#475569;font-size:13px">Bấm một trong hai nút sẽ mở trang để anh ghi nội dung phản hồi (bắt buộc khi yêu cầu điều chỉnh) trước khi gửi.</p>
       <p style="color:#64748b;font-size:12px">Mail này được gửi từ Google Apps Script do ${CONFIG.makerEmail} deploy.</p>
     </div>
   `;
@@ -262,7 +266,8 @@ function applyReviewAction(record, action, options) {
     indexUrl: record.indexUrl,
     slackChannelId: record.slackChannelId || null,
     slackChannelName: record.slackChannelName || null,
-    slackMessageTs: record.slackMessageTs || null
+    slackMessageTs: record.slackMessageTs || null,
+    reviewComment: options && options.comment ? String(options.comment) : null
   };
 
   if (options && options.reviewedBySlackUserId) {
@@ -423,7 +428,8 @@ function upsertGitHubApproval(payload) {
   payload.history = previousHistory.concat([{
     at: payload.reviewedAt || payload.submittedAt || new Date().toISOString(),
     status: payload.status,
-    version: payload.version
+    version: payload.version,
+    comment: payload.reviewComment || null
   }]);
 
   const body = {
@@ -601,3 +607,107 @@ function saveContractLink(payload) {
   githubPutJson(CONFIG.contractLinksPath, data, `Update contract link for ${code}`, current.sha);
   return { code, url };
 }
+
+
+/* ---------- Phản hồi CFO kèm nội dung (trang mở từ link trong mail) ---------- */
+
+function assertActionToken(record, token, action) {
+  const expected = action === 'approve' ? record.tokens.approve : action === 'revise' ? record.tokens.revise : null;
+  if (!expected || expected !== token) throw new Error('Link phản hồi không hợp lệ.');
+}
+
+function buildFeedbackPageHtml(record, token, action) {
+  const isRevise = action === 'revise';
+  const done = record.reviewedStatus
+    ? `<div style="padding:12px 14px;background:#f1f5f9;border-radius:8px;margin:12px 0">Kế hoạch này đã được xử lý: <strong>${record.reviewedStatus === 'approved' ? 'CFO đã duyệt' : 'CFO yêu cầu điều chỉnh'}</strong> lúc ${escapeHtml(formatVnTime(record.reviewedAt))}.${record.reviewComment ? `<br/>Nội dung: ${escapeHtml(record.reviewComment)}` : ''}<br/>Nếu cần phản hồi thêm, vui lòng trao đổi trực tiếp với người lập.</div>`
+    : '';
+  const color = isRevise ? '#b45309' : '#1e3a8a';
+  return `<!DOCTYPE html><html><head><base target="_top"><meta charset="utf-8"></head>
+  <body style="margin:0;background:#f8fafc;font-family:Arial,Helvetica,sans-serif;color:#0f172a">
+  <div style="max-width:640px;margin:0 auto;padding:24px 16px;line-height:1.55">
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:20px">
+      <div style="font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#64748b">Kế hoạch ngân quỹ · ${escapeHtml(record.planTypeLabel)}</div>
+      <h2 style="margin:6px 0 4px;font-size:20px">${isRevise ? 'Yêu cầu điều chỉnh kế hoạch' : 'Duyệt kế hoạch'}</h2>
+      <table style="font-size:14px;border-collapse:collapse;margin:10px 0 4px">
+        <tr><td style="color:#64748b;padding:2px 12px 2px 0">Kế hoạch</td><td>${escapeHtml(record.title)}</td></tr>
+        <tr><td style="color:#64748b;padding:2px 12px 2px 0">Tháng</td><td>${escapeHtml(record.month)}</td></tr>
+        <tr><td style="color:#64748b;padding:2px 12px 2px 0">Version</td><td>${escapeHtml(record.version)}</td></tr>
+        <tr><td style="color:#64748b;padding:2px 12px 2px 0">Người trình</td><td>${escapeHtml(record.makerEmail)}</td></tr>
+      </table>
+      <p style="margin:6px 0 14px"><a href="${record.indexUrl}" style="color:#1d4ed8">Mở kế hoạch trên dashboard</a></p>
+      ${done || `
+      <label for="cmt" style="display:block;font-weight:bold;font-size:14px;margin-bottom:6px">${isRevise ? 'Nội dung cần điều chỉnh (bắt buộc)' : 'Ghi chú khi duyệt (không bắt buộc)'}</label>
+      <textarea id="cmt" rows="7" maxlength="4000" style="width:100%;box-sizing:border-box;font:inherit;font-size:14px;padding:10px;border:1px solid #cbd5e1;border-radius:8px" placeholder="${isRevise ? 'Ví dụ: bổ sung khoản thu DOPA; phần tiền còn lại chuyển sang trái phiếu VNDirect 3 tháng…' : 'Ghi chú cho người lập (nếu có)'}"></textarea>
+      <div id="err" style="color:#b91c1c;font-size:13px;min-height:18px;margin-top:6px"></div>
+      <button id="btn" onclick="send()" style="margin-top:4px;padding:11px 16px;background:${color};color:#fff;border:0;border-radius:8px;font-size:15px;font-weight:bold;cursor:pointer">${isRevise ? 'Gửi yêu cầu điều chỉnh' : 'Xác nhận duyệt'}</button>
+      <div id="ok" style="display:none;margin-top:14px;padding:12px 14px;background:#ecfdf5;border-radius:8px;color:#065f46"></div>`}
+    </div>
+  </div>
+  <script>
+    function send() {
+      var c = document.getElementById('cmt').value.trim();
+      var err = document.getElementById('err'), btn = document.getElementById('btn');
+      if (${isRevise ? 'true' : 'false'} && !c) { err.textContent = 'Vui lòng ghi nội dung cần điều chỉnh.'; return; }
+      err.textContent = ''; btn.disabled = true; btn.textContent = 'Đang gửi…';
+      google.script.run
+        .withSuccessHandler(function (r) {
+          btn.style.display = 'none'; document.getElementById('cmt').disabled = true;
+          var ok = document.getElementById('ok'); ok.style.display = 'block'; ok.textContent = r.message;
+        })
+        .withFailureHandler(function (e) {
+          btn.disabled = false; btn.textContent = '${isRevise ? 'Gửi yêu cầu điều chỉnh' : 'Xác nhận duyệt'}';
+          err.textContent = 'Không gửi được: ' + (e && e.message ? e.message : e);
+        })
+        .submitReviewFeedback('${token}', '${action}', c);
+    }
+  </script>
+  </body></html>`;
+}
+
+/* Gọi từ trang phản hồi (google.script.run) */
+function submitReviewFeedback(token, action, comment) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    const record = loadApprovalRecord(token);
+    assertActionToken(record, token, action);
+    if (record.reviewedStatus) throw new Error('Kế hoạch này đã được xử lý trước đó.');
+    const text = String(comment || '').trim().slice(0, 4000);
+    if (action === 'revise' && !text) throw new Error('Vui lòng ghi nội dung cần điều chỉnh.');
+    const result = applyReviewAction(record, action, { source: 'web_form', comment: text });
+    record.reviewedStatus = result.status;
+    record.reviewedAt = result.reviewedAt;
+    record.reviewComment = text || null;
+    storeApprovalRecord(record);
+    try { notifyMakerOfReview(record, result, text); } catch (e) { console.error('notifyMakerOfReview', e); }
+    return {
+      ok: true,
+      status: result.status,
+      message: result.status === 'approved'
+        ? 'Đã duyệt kế hoạch. Người lập sẽ nhận mail thông báo.'
+        : 'Đã gửi yêu cầu điều chỉnh. Người lập sẽ nhận mail kèm nội dung phản hồi.'
+    };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function notifyMakerOfReview(record, result, comment) {
+  const approved = result.status === 'approved';
+  const subject = `[Treasury] CFO ${approved ? 'đã duyệt' : 'yêu cầu điều chỉnh'} kế hoạch ${record.month} - ${record.planTypeLabel} (${record.version})`;
+  const htmlBody = `
+    <div style="font-family:Arial,sans-serif;line-height:1.6">
+      <h3>${approved ? 'CFO đã duyệt kế hoạch' : 'CFO yêu cầu điều chỉnh kế hoạch'}</h3>
+      <p><strong>Kế hoạch:</strong> ${escapeHtml(record.title)} · ${escapeHtml(record.month)} · ${escapeHtml(record.planTypeLabel)} · ${escapeHtml(record.version)}</p>
+      <p><strong>Thời gian:</strong> ${escapeHtml(formatVnTime(result.reviewedAt))}</p>
+      ${comment ? `<p><strong>Nội dung phản hồi:</strong></p><div style="white-space:pre-wrap;padding:10px 12px;background:#f8fafc;border-left:3px solid ${approved ? '#1e3a8a' : '#f59e0b'}">${escapeHtml(comment)}</div>` : ''}
+      <p><a href="${record.indexUrl}">Mở kế hoạch trên dashboard</a></p>
+    </div>`;
+  GmailApp.sendEmail(CONFIG.makerEmail, subject, `${subject}\n\n${comment || ''}\n\n${record.indexUrl}`, { htmlBody, name: 'Treasury Approval' });
+}
+
+function formatVnTime(iso) {
+  if (!iso) return '';
+  return Utilities.formatDate(new Date(iso), 'Asia/Ho_Chi_Minh', 'dd/MM/yyyy HH:mm');
+}
+

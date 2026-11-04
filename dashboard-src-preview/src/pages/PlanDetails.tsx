@@ -146,7 +146,7 @@ export function personalDoc({ m, rows, opening, openNote, detail }: { m: PlanMon
       const p = outs.filter(o => o.date === r.date);
       return [C(dmy(r.date)), C(r.label), C(p.length ? `Nhận ${nf(r.amount)}: ` + p.map(o => `${o.label} ${nf(o.amount)}${o.note ? ` (${o.note})` : ''}`).join('; ') + '.' : 'Về tài khoản thanh toán.'), C(nf(r.amount), true)];
     })));
-  const cat = (l: PlanLine) => /usdt/i.test(l.label) ? 'usdt' : /cctg|tiết kiệm|chứng chỉ|gửi/i.test(l.label) ? 'save' : /opex|nhân viên|lương|chi phí/i.test(l.label) ? 'opex' : 'other';
+  const cat = (l: PlanLine) => /usdt/i.test(l.label) ? 'usdt' : /cctg|tiết kiệm|chứng chỉ|trái phiếu|gửi/i.test(l.label) ? 'save' : /opex|nhân viên|lương|chi phí/i.test(l.label) ? 'opex' : 'other';
   const isMat = (l: PlanLine) => l.dir === 'in' && (l.source === 'deposit' || /đến hạn|đáo hạn|tất toán/i.test(l.label));
   const so = (k: string) => sum(outs, l => cat(l) === k);
   const inOther = sum(rows, l => l.dir === 'in' && !isMat(l));
@@ -157,7 +157,7 @@ export function personalDoc({ m, rows, opening, openNote, detail }: { m: PlanMon
     ...(inOther ? [[C('Thu khác'), C(nf(inOther), true)]] : []),
     [C('Chi Opex + chi phí nhân viên'), C(nf(so('opex')), true)],
     [C('Mua USDT'), C(nf(so('usdt')), true)],
-    [C('Gửi tiết kiệm / mua CCTG'), C(nf(so('save')), true)],
+    [C('Gửi tiết kiệm / mua CCTG / trái phiếu'), C(nf(so('save')), true)],
     ...(so('other') ? [[C('Chi khác'), C(nf(so('other')), true)]] : []),
     [C(`Thanh khoản cuối kỳ ${dmy(m.to)}`, false, true), C(nf(end), true, true)],
   ]));

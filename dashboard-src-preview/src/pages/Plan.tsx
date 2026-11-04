@@ -44,11 +44,13 @@ function Approval({ month, ent, readonly }: { month: string; ent: Entity; readon
     setMsg('Đã gửi mail trình CFO.');
   };
   const last = (k: string) => [...a.events].reverse().find(e => e.kind === k);
+  // Phản hồi CFO gần nhất có nội dung (trả về hoặc duyệt kèm ghi chú)
+  const fb = [...a.events].reverse().find(e => (e.kind === 'revise' || e.kind === 'approve') && e.note);
   const submitted = a.status !== 'draft';
   const steps = [
     { l: 'Lập kế hoạch', done: true, at: last('draft')?.at },
     { l: 'Trình CFO', done: submitted, at: submitted ? last('submit')?.at : undefined },
-    { l: a.status === 'revision_requested' ? 'CFO trả về' : 'CFO duyệt', done: a.status === 'approved' || a.status === 'revision_requested', at: (last('approve') || last('revise'))?.at, bad: a.status === 'revision_requested' },
+    { l: a.status === 'revision_requested' ? 'CFO trả về' : 'CFO duyệt', done: a.status === 'approved' || a.status === 'revision_requested', at: a.status === 'approved' || a.status === 'revision_requested' ? (last('approve') || last('revise'))?.at : undefined, bad: a.status === 'revision_requested' },
   ];
   const canSubmit = !readonly && (a.status === 'draft' || a.status === 'revision_requested');
   return (
@@ -66,6 +68,11 @@ function Approval({ month, ent, readonly }: { month: string; ent: Entity; readon
           <button onClick={() => setConfirm(false)} className="h-7 px-3 rounded-sm border text-xs">Hủy</button>
         </div>)}
       {msg && <div className={cn('text-xs', msg.startsWith('Đã') ? 'text-pos' : 'text-neg')}>{msg}</div>}
+      {fb && (
+        <div className={cn('rounded-sm border-l-2 px-3 py-2 bg-muted/50', fb.kind === 'revise' ? 'border-[hsl(var(--warn))]' : 'border-[hsl(var(--pos))]')}>
+          <div className="text-xs text-muted-foreground">Phản hồi CFO · {fb.text.replace(/^CFO /, '')} · <span className="num">{fb.at}</span></div>
+          <div className="text-body whitespace-pre-line mt-0.5">{fb.note}</div>
+        </div>)}
       <ol className="grid grid-cols-3 gap-1">
         {steps.map((s, i) => (
           <li key={i} className="grid gap-1.5">
@@ -79,7 +86,7 @@ function Approval({ month, ent, readonly }: { month: string; ent: Entity; readon
         <ul className="mt-2 grid gap-1.5 border-l pl-3">
           {[...a.events].reverse().map((e, i) => (
             <li key={i} className="grid grid-cols-[112px_1fr] gap-2"><span className="num text-muted-foreground">{e.at}</span>
-              <span className={cn(e.kind === 'approve' && 'text-pos', e.kind === 'revise' && 'text-neg')}>{e.text}</span></li>))}
+              <span className={cn(e.kind === 'approve' && 'text-pos', e.kind === 'revise' && 'text-neg')}>{e.text}{e.note && <span className="block text-muted-foreground whitespace-pre-line">“{e.note}”</span>}</span></li>))}
         </ul>
       </details>
     </div>
@@ -293,7 +300,7 @@ export default function Plan() {
       {live && editor && <EditorPanel m={m} />}
 
       <Panel title="Phê duyệt CFO" sub="Trình CFO gửi mail duyệt tới CFO; trạng thái cập nhật khi CFO duyệt hoặc trả về">
-        <div className="grid md:grid-cols-2 gap-3">
+        <div className="grid md:grid-cols-2 gap-3 items-start">
           <Approval month={month} ent="vihali" readonly={!live} />
           <Approval month={month} ent="personal" readonly={!live} />
         </div>

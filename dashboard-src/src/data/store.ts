@@ -32,7 +32,7 @@ export interface PlanInputs {
   openingDetail?: OpeningDetail;
 }
 export type ApprovalStatus = 'draft' | 'pending_cfo_review' | 'revision_requested' | 'approved';
-export interface TLEvent { at: string; kind: 'draft' | 'submit' | 'revise' | 'approve'; text: string }
+export interface TLEvent { at: string; kind: 'draft' | 'submit' | 'revise' | 'approve'; text: string; note?: string }
 export interface PlanApproval { version: string; status: ApprovalStatus; events: TLEvent[] }
 export type PlanMode = 'live' | 'snapshot' | 'archive';
 export interface PlanMonth { key: string; label: string; from: string; to: string; live: boolean; mode: PlanMode }
@@ -166,12 +166,13 @@ function eventsFromApproval(a: any): TLEvent[] {
   const ev: TLEvent[] = [];
   const hist = Array.isArray(a.history) && a.history.length ? a.history : [
     ...(a.submittedAt ? [{ at: a.submittedAt, status: 'pending_cfo_review', version: a.version }] : []),
-    ...(a.reviewedAt || a.approvedAt ? [{ at: a.reviewedAt || a.approvedAt, status: a.status, version: a.version }] : []),
+    ...(a.reviewedAt || a.approvedAt ? [{ at: a.reviewedAt || a.approvedAt, status: a.status, version: a.version, comment: a.reviewComment }] : []),
   ];
   hist.forEach((h: any) => {
     if (h.status === 'pending_cfo_review') ev.push({ at: fmt(h.at), kind: 'submit', text: `Trình CFO ${h.version || ''}`.trim() });
-    else if (h.status === 'approved') ev.push({ at: fmt(h.at), kind: 'approve', text: `CFO duyệt ${h.version || ''}`.trim() });
-    else if (h.status === 'revision_requested') ev.push({ at: fmt(h.at), kind: 'revise', text: `CFO yêu cầu chỉnh sửa ${h.version || ''}`.trim() });
+    // Nội dung phản hồi CFO ghi trên trang phản hồi (Apps Script lưu vào history[].comment)
+    else if (h.status === 'approved') ev.push({ at: fmt(h.at), kind: 'approve', text: `CFO duyệt ${h.version || ''}`.trim(), note: h.comment || undefined });
+    else if (h.status === 'revision_requested') ev.push({ at: fmt(h.at), kind: 'revise', text: `CFO yêu cầu chỉnh sửa ${h.version || ''}`.trim(), note: h.comment || undefined });
   });
   return ev;
 }

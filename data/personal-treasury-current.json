@@ -1,14 +1,14 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-11-04T13:00:59+07:00",
-    "source": "Google Sheets live export 2026-11-04T06:00:03.022Z",
+    "updatedAt": "2026-11-05T13:01:03+07:00",
+    "source": "Google Sheets live export 2026-11-05T06:00:03.260Z",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet",
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-11-04T06:00:03.022Z",
+      "generatedAt": "2026-11-05T06:00:03.260Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",
@@ -230,7 +230,7 @@
       "pledgedAmount": 0,
       "unpledgedAmount": 19466000000,
       "accruedInterest": 863543759,
-      "projectedSettlement": 20329543758
+      "projectedSettlement": 20329543759
     },
     {
       "owner": "Nguyễn Trung Tín",
@@ -249,7 +249,7 @@
       "pledgedAmount": 0,
       "unpledgedAmount": 3877217457,
       "accruedInterest": 49394688,
-      "projectedSettlement": 7010404610
+      "projectedSettlement": 3926612145
     },
     {
       "owner": "Hồ Thị Yến Nhi",

@@ -1,14 +1,14 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-11-05T13:01:03+07:00",
-    "source": "Google Sheets live export 2026-11-05T06:00:03.260Z",
+    "updatedAt": "2026-11-06T13:00:55+07:00",
+    "source": "Google Sheets live export 2026-11-06T06:00:03.357Z",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet",
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-11-05T06:00:03.260Z",
+      "generatedAt": "2026-11-06T06:00:03.357Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",
@@ -120,7 +120,6 @@
       "accruedInterest": 240000000,
       "projectedSettlement": 3240000000,
       "linkedLoanCodes": [
-        "404004807798",
         "400004871689",
         "406004974623",
         "402005414934",

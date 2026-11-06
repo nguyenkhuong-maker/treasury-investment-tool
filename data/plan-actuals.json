@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-05T06:01:03.866Z",
+ "generatedAt": "2026-11-06T06:00:56.385Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1041,12 +1041,93 @@
      "label": "Trả gốc lãi SC VLĐ đến hạn 02/11/2026",
      "payee": "Standard Chartered",
      "amount": 9927400
+    },
+    {
+     "date": "2026-11-05",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Adoha (3D character & weapon modelling)",
+     "payee": "ADOHA",
+     "amount": 366801307
+    },
+    {
+     "date": "2026-11-05",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Cleaning service",
+     "payee": "NOVOKING",
+     "amount": 6350400
+    },
+    {
+     "date": "2026-11-05",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Cleaning service",
+     "payee": "VIET CLEAN",
+     "amount": 9720000
+    },
+    {
+     "date": "2026-11-05",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "SIEU TOC",
+     "amount": 610590000
+    },
+    {
+     "date": "2026-11-05",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Office rental fee",
+     "payee": "AN THUY ANH",
+     "amount": 291000600
+    },
+    {
+     "date": "2026-11-05",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Electricity bills",
+     "payee": "AN THUY ANH",
+     "amount": 80159424
+    },
+    {
+     "date": "2026-11-05",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Parking fee",
+     "payee": "AN THUY ANH",
+     "amount": 22562750
+    },
+    {
+     "date": "2026-11-06",
+     "source": "BIDV TC",
+     "cat": "loan",
+     "key": "BIDV|2026-11-06",
+     "label": "Trả gốc lãi BIDV VLĐ đến hạn 06/11/2026",
+     "payee": "BIDV",
+     "amount": 286952249
+    },
+    {
+     "date": "2026-11-06",
+     "source": "BIDV TC",
+     "cat": "loan",
+     "key": "BIDV|2026-11-06",
+     "label": "Trả gốc lãi BIDV VLĐ đến hạn 06/11/2026",
+     "payee": "BIDV",
+     "amount": 735856
     }
    ],
    "personal": [],
    "closing": {
-    "odAvailable": 11488011714,
-    "asOf": "2026-11-05"
+    "odAvailable": 11201011714,
+    "asOf": "2026-11-06"
    }
   }
  }

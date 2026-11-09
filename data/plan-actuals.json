@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-06T06:00:56.385Z",
+ "generatedAt": "2026-11-09T02:16:55.512Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1124,10 +1124,67 @@
      "amount": 735856
     }
    ],
-   "personal": [],
+   "personal": [
+    {
+     "date": "2026-11-06",
+     "cat": "opex-dopa",
+     "label": "Mid Autumn & Halloween Decorations",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 3345000
+    },
+    {
+     "date": "2026-11-06",
+     "cat": "opex-dopa",
+     "label": "Cleaning service",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 300000
+    },
+    {
+     "date": "2026-11-06",
+     "cat": "opex-dopa",
+     "label": "Snack & Drinks",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 320000
+    },
+    {
+     "date": "2026-11-06",
+     "cat": "opex-dopa",
+     "label": "Office Equipment",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 959800
+    },
+    {
+     "date": "2026-11-06",
+     "cat": "opex-dopa",
+     "label": "Snack & Drinks",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 365000
+    },
+    {
+     "date": "2026-11-06",
+     "cat": "opex-dopa",
+     "label": "Office Equipment",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 17620000
+    },
+    {
+     "date": "2026-11-06",
+     "cat": "opex-dopa",
+     "label": "Google Mail, Google Docs, Google Sheet",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 354869103
+    }
+   ],
    "closing": {
-    "odAvailable": 11201011714,
-    "asOf": "2026-11-06"
+    "odAvailable": 11200934714,
+    "asOf": "2026-11-09"
    }
   }
  }

@@ -1,9 +1,9 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-11-09T09:16:54+07:00",
+    "updatedAt": "2026-11-09T13:00:58+07:00",
     "hasHistory": false,
-    "source": "Google Sheets live export 2026-11-09T02:14:06.831Z",
+    "source": "Google Sheets live export 2026-11-09T06:00:03.067Z",
     "abbreviationDefinitions": {
       "BIDV TN": "BIDV chi nhánh Thống Nhất",
       "BIDV TS": "BIDV chi nhánh Trường Sơn",
@@ -17,7 +17,7 @@
     },
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-11-09T02:14:06.831Z",
+      "generatedAt": "2026-11-09T06:00:03.067Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",
@@ -25,17 +25,17 @@
         "1n8p4pyZDg2e1w2nViNTwkBCcOtfas7NQzRtZ71tQhM4",
         "1rT7HkZcvLkNBg1KMbeIaEqmWz6J1RT-ALM_Tpu-GrxE"
       ],
-      "sheets": "Loan-BIDV (gid 1186104758) / Loan-SC (gid 2025947730) / Dashboard-fix (gid 1112915361) / Crypto Assets (gid 1601120065) / Balance file · Balance (gid 2035452406) / Balance file · Vihali (gid 1070912545) / Balance file · Vixion (gid 1829766912) / Balance file · Beyond Atoms (gid 593536246) / Payment & Fund Request · PR (Vihali)-2026 (gid 405119343) / Payment & Fund Request · FR (1102 Group)-2026 (gid 1686054692) / Payment & Fund Request · PR(Beyond Atoms) (gid 1623707887) / Treasury Individuals_VND · NPV comparison (mua USDT) (gid 1056104597)",
+      "sheets": "Loan-BIDV (gid 1186104758) / Loan-SC (gid 2025947730) / Dashboard-fix (gid 1112915361) / Crypto Assets (gid 1601120065) / Balance file · Balance (gid 2035452406) / Balance file · Crypto (gid 4545118) / Balance file · Individuals (gid 0) / Balance file · Vihali (gid 1070912545) / Balance file · Vixion (gid 1829766912) / Balance file · Beyond Atoms (gid 593536246) / Payment & Fund Request · PR (Vihali)-2026 (gid 405119343) / Payment & Fund Request · FR (1102 Group)-2026 (gid 1686054692) / Payment & Fund Request · PR(Beyond Atoms) (gid 1623707887) / Treasury Individuals_VND · NPV comparison (mua USDT) (gid 1056104597)",
       "rule": "Always refresh via scripts/fetch_treasury_online_data.mjs before building a new monthly plan; do not use a prior tmp export or hand-edited JSON as source."
     }
   },
   "summary": {
-    "totalOutstanding": 57777705213,
-    "availableLimit": 17176642710,
-    "bidvAvailableLimit": 14313499565,
+    "totalOutstanding": 57838570353,
+    "availableLimit": 17115777570,
+    "bidvAvailableLimit": 14252634425,
     "scAvailableLimit": 2863143145,
     "bidvOverdraftAvailableLimit": 11200934714,
-    "bidvWorkingCapitalAvailableLimit": 3112564851
+    "bidvWorkingCapitalAvailableLimit": 3051699711
   },
   "maturityFocus": [
     {
@@ -336,6 +336,26 @@
       "principalOutstanding": 39665600,
       "interestPayable": 136928,
       "projectedSettlement": 39802528,
+      "notes": "Khế ước active.",
+      "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 817018585429 + tín chấp",
+      "depositCodes": [
+        "817018585429"
+      ],
+      "mappingStatus": "confirmed",
+      "mappingNote": "Theo quyết định mapping mới: toàn bộ khoản vay vốn lưu động BIDV được chuyển sang bảo đảm bằng sổ cá nhân BIDV 817018585429; sổ 810004228033 được rút khỏi cụm này."
+    },
+    {
+      "bank": "BIDV",
+      "group": "working-capital",
+      "company": "VIHALI",
+      "loanCode": "402005625765",
+      "loanName": "BIDV VLĐ",
+      "disbursementDate": "2026-11-06",
+      "maturityDate": "2027-05-05",
+      "interestRate": 8.4,
+      "principalOutstanding": 60865140,
+      "interestPayable": 210110,
+      "projectedSettlement": 61075250,
       "notes": "Khế ước active.",
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 817018585429 + tín chấp",
       "depositCodes": [

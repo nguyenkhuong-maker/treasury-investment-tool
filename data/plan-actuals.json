@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-09T02:16:55.512Z",
+ "generatedAt": "2026-11-09T06:00:59.224Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1107,6 +1107,42 @@
     },
     {
      "date": "2026-11-06",
+     "source": "BIDV VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Team Building",
+     "payee": "PHÚ HƯNG",
+     "amount": 3608064
+    },
+    {
+     "date": "2026-11-06",
+     "source": "BIDV VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "BETTER THING",
+     "amount": 1792152
+    },
+    {
+     "date": "2026-11-06",
+     "source": "BIDV VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Stationery, mineral water, express delivery, phone charges",
+     "payee": "SAPUWA",
+     "amount": 3514932
+    },
+    {
+     "date": "2026-11-06",
+     "source": "BIDV VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Annual Health Check, PTI",
+     "payee": "BERNARD",
+     "amount": 51949992
+    },
+    {
+     "date": "2026-11-06",
      "source": "BIDV TC",
      "cat": "loan",
      "key": "BIDV|2026-11-06",
@@ -1180,6 +1216,15 @@
      "entity": "Dopa JSC",
      "payee": "Ẩn tên",
      "amount": 354869103
+    },
+    {
+     "date": "2026-11-07",
+     "cat": "usdt",
+     "label": "Mua USDT",
+     "entity": "Cá nhân",
+     "payee": "Mua USDT",
+     "amount": 500000000,
+     "usdt": 19171.8
     }
    ],
    "closing": {

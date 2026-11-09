@@ -1,14 +1,14 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-11-09T09:16:54+07:00",
-    "source": "Google Sheets live export 2026-11-09T02:14:06.831Z",
+    "updatedAt": "2026-11-09T13:00:58+07:00",
+    "source": "Google Sheets live export 2026-11-09T06:00:03.067Z",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet",
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-11-09T02:14:06.831Z",
+      "generatedAt": "2026-11-09T06:00:03.067Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",
@@ -16,14 +16,14 @@
         "1n8p4pyZDg2e1w2nViNTwkBCcOtfas7NQzRtZ71tQhM4",
         "1rT7HkZcvLkNBg1KMbeIaEqmWz6J1RT-ALM_Tpu-GrxE"
       ],
-      "sheets": "Loan-BIDV (gid 1186104758) / Loan-SC (gid 2025947730) / Dashboard-fix (gid 1112915361) / Crypto Assets (gid 1601120065) / Balance file · Balance (gid 2035452406) / Balance file · Vihali (gid 1070912545) / Balance file · Vixion (gid 1829766912) / Balance file · Beyond Atoms (gid 593536246) / Payment & Fund Request · PR (Vihali)-2026 (gid 405119343) / Payment & Fund Request · FR (1102 Group)-2026 (gid 1686054692) / Payment & Fund Request · PR(Beyond Atoms) (gid 1623707887) / Treasury Individuals_VND · NPV comparison (mua USDT) (gid 1056104597)",
+      "sheets": "Loan-BIDV (gid 1186104758) / Loan-SC (gid 2025947730) / Dashboard-fix (gid 1112915361) / Crypto Assets (gid 1601120065) / Balance file · Balance (gid 2035452406) / Balance file · Crypto (gid 4545118) / Balance file · Individuals (gid 0) / Balance file · Vihali (gid 1070912545) / Balance file · Vixion (gid 1829766912) / Balance file · Beyond Atoms (gid 593536246) / Payment & Fund Request · PR (Vihali)-2026 (gid 405119343) / Payment & Fund Request · FR (1102 Group)-2026 (gid 1686054692) / Payment & Fund Request · PR(Beyond Atoms) (gid 1623707887) / Treasury Individuals_VND · NPV comparison (mua USDT) (gid 1056104597)",
       "rule": "Always refresh via scripts/fetch_treasury_online_data.mjs before building a new monthly plan; do not use a prior tmp export or hand-edited JSON as source."
     }
   },
   "summary": {
-    "totalPersonalDeposits": 111054933930,
+    "totalPersonalDeposits": 110155155027,
     "totalPersonalLoans": 0,
-    "netPersonalTreasury": 111054933930
+    "netPersonalTreasury": 110155155027
   },
   "personalDeposits": [
     {
@@ -124,7 +124,8 @@
         "406004974623",
         "402005414934",
         "401005541941",
-        "400005566559"
+        "400005566559",
+        "402005625765"
       ],
       "collateralGroupName": "Cụm BIDV VLĐ — sổ cá nhân BIDV 817018585429 + tín chấp",
       "mappingNote": "Đang bảo đảm cho toàn bộ cụm vay vốn lưu động BIDV theo quyết định mapping mới; sổ 810004228033 đã được rút khỏi cụm này.",
@@ -451,17 +452,17 @@
       "depositCode": "VPB-PL-NTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "543033162",
-      "principal": 1545000000,
-      "amountOnCertificate": 1545000000,
+      "principal": 645221097,
+      "amountOnCertificate": 645221097,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 1545000000,
+      "unpledgedAmount": 645221097,
       "accruedInterest": 0,
-      "projectedSettlement": 1545000000
+      "projectedSettlement": 645221097
     },
     {
       "owner": "Đặng Thu Thảo",

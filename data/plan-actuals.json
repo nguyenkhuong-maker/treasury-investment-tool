@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-10T06:00:58.996Z",
+ "generatedAt": "2026-11-11T06:00:46.904Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1229,7 +1229,7 @@
    ],
    "closing": {
     "odAvailable": 11200934714,
-    "asOf": "2026-11-10"
+    "asOf": "2026-11-11"
    }
   }
  }

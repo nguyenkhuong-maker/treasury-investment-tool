@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-11T06:00:46.904Z",
+ "generatedAt": "2026-11-13T06:00:56.930Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1158,6 +1158,78 @@
      "label": "Trả gốc lãi BIDV VLĐ đến hạn 06/11/2026",
      "payee": "BIDV",
      "amount": 735856
+    },
+    {
+     "date": "2026-11-12",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Snack & Drinks",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 3443086
+    },
+    {
+     "date": "2026-11-12",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Snack & Drinks",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 1038600
+    },
+    {
+     "date": "2026-11-12",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Back-up/ Contingency",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 22000
+    },
+    {
+     "date": "2026-11-12",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "SIEU TOC",
+     "amount": 1424710000
+    },
+    {
+     "date": "2026-11-12",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Tax expenses (CIT, business tax…)",
+     "payee": "Chi cục thuế",
+     "amount": 4855137
+    },
+    {
+     "date": "2026-11-12",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "BETTER THING",
+     "amount": 1792152
+    },
+    {
+     "date": "2026-11-12",
+     "source": "ACB VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "PIT (%)",
+     "payee": "Chi cục thuế",
+     "amount": 349335
+    },
+    {
+     "date": "2026-11-12",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Chi phí khác",
+     "payee": "BIDV",
+     "amount": 3000000000
     }
    ],
    "personal": [
@@ -1225,11 +1297,29 @@
      "payee": "Mua USDT",
      "amount": 500000000,
      "usdt": 19171.8
+    },
+    {
+     "date": "2026-11-11",
+     "cat": "usdt",
+     "label": "Mua USDT",
+     "entity": "Cá nhân",
+     "payee": "Mua USDT",
+     "amount": 641000000,
+     "usdt": 24751.9
+    },
+    {
+     "date": "2026-11-11",
+     "cat": "usdt",
+     "label": "Mua USDT",
+     "entity": "Cá nhân",
+     "payee": "Mua USDT",
+     "amount": 14245000000,
+     "usdt": 550000
     }
    ],
    "closing": {
-    "odAvailable": 11200934714,
-    "asOf": "2026-11-11"
+    "odAvailable": 11700934714,
+    "asOf": "2026-11-13"
    }
   }
  }

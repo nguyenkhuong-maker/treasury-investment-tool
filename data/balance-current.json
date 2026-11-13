@@ -1,8 +1,8 @@
 {
-  "asOf": "2026-11-11",
+  "asOf": "2026-11-13",
   "source": "Dashboard Treasury Balance · sheet Balance",
   "fx": 26300,
-  "total": 14480242,
+  "total": 13397079,
   "individuals": {
     "banks": [
       {
@@ -33,12 +33,12 @@
       {
         "bank": "VPBank",
         "pledged": 0,
-        "unpledged": 946842
+        "unpledged": 7143
       }
     ],
     "pledged": 2525931,
-    "unpledged": 1793879,
-    "total": 4319810,
+    "unpledged": 854180,
+    "total": 3380111,
     "loans": 0
   },
   "entities": [
@@ -48,9 +48,9 @@
         {
           "bank": "BIDV",
           "depVnd": 9875411839,
-          "loanVnd": 36536028864,
+          "loanVnd": 33536028864,
           "depUsd": 92,
-          "net": -1013620
+          "net": -899551
         },
         {
           "bank": "VietinBank",
@@ -76,12 +76,12 @@
         {
           "bank": "SC",
           "depVnd": 276515607,
-          "loanVnd": 21302541489,
+          "loanVnd": 22727251489,
           "depUsd": 9411,
-          "net": -790058
+          "net": -844229
         }
       ],
-      "net": -1803119
+      "net": -1743222
     },
     {
       "name": "Vixion",
@@ -112,36 +112,36 @@
   ],
   "osBank": 27548,
   "tokens": {
-    "stable": 2006161,
-    "btc": 2424980,
-    "eth": 6839818,
-    "other": 642303,
-    "total": 11913262,
+    "stable": 2580911,
+    "btc": 2231730,
+    "eth": 6293038,
+    "other": 604221,
+    "total": 11709900,
     "btcQty": 32.8,
     "ethQty": 3301
   },
   "runway": {
-    "cash": 14483667,
+    "cash": 13399833,
     "cases": [
       {
         "key": "350k",
         "label": "Kịch bản 350K/tháng",
         "burn": 350000,
-        "months": 41.38
+        "months": 38.29
       },
       {
         "key": "400k",
         "label": "Kịch bản 400K/tháng",
         "burn": 400000,
-        "months": 36.21
+        "months": 33.5
       },
       {
         "key": "600k",
         "label": "Kịch bản 600K/tháng",
         "burn": 600000,
-        "months": 24.14
+        "months": 22.33
       }
     ]
   },
-  "generatedAt": "2026-11-11T06:00:46.708Z"
+  "generatedAt": "2026-11-13T06:00:56.751Z"
 }

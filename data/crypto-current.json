@@ -1,38 +1,38 @@
 {
   "meta": {
     "name": "Crypto Assets Snapshot",
-    "updatedAt": "2026-11-16T09:03:20+07:00",
+    "updatedAt": "2026-11-16T13:01:05+07:00",
     "priceDate": "15-Nov-2026",
     "source": "Sheet Crypto Assets (Sipher's Wallets)"
   },
   "prices": {
-    "SOL": 71.45,
-    "BTC": 64668.55,
-    "ETH": 1798.66,
-    "JitoSOL": 93.55,
+    "SOL": 71.05,
+    "BTC": 64361.65,
+    "ETH": 1813.37,
+    "JitoSOL": 93.67,
     "SIPHER": 0.00189,
     "SAFE": 0.0803
   },
   "tokens": [
     {
       "k": "USDC/USDT",
-      "qty": 2580903,
-      "usd": 2580903
+      "qty": 2180230,
+      "usd": 2180230
     },
     {
       "k": "BTC",
       "qty": 32.8,
-      "usd": 2121146
+      "usd": 2111079
     },
     {
       "k": "ETH",
-      "qty": 3300.82,
-      "usd": 5966885
+      "qty": 3301.64,
+      "usd": 6017165
     },
     {
       "k": "SOL",
       "qty": 7324.94,
-      "usd": 523367
+      "usd": 520437
     },
     {
       "k": "OP",
@@ -42,15 +42,15 @@
     {
       "k": "Others",
       "qty": 0,
-      "usd": 8865
+      "usd": 8931
     }
   ],
   "totals": {
-    "stable": 2580911,
-    "btc": 2121145,
-    "eth": 5966883,
-    "other": 549630,
-    "total": 11218569
+    "stable": 2180238,
+    "btc": 2111080,
+    "eth": 6017165,
+    "other": 546765,
+    "total": 10855248
   },
   "wallets": [
     {
@@ -75,9 +75,9 @@
       "address": "0x1198…1295",
       "stable": 0,
       "btc": 0,
-      "eth": 3786336,
-      "other": 498,
-      "total": 3786834
+      "eth": 3818788,
+      "other": 495,
+      "total": 3819283
     },
     {
       "group": "ERC-20 Wallet",
@@ -88,9 +88,9 @@
       "address": "0x1299…b663",
       "stable": 0,
       "btc": 0,
-      "eth": 265397,
-      "other": 2040,
-      "total": 267437
+      "eth": 267567,
+      "other": 2055,
+      "total": 269622
     },
     {
       "group": "ERC-20 Wallet",
@@ -112,11 +112,11 @@
       "chain": "Ethereum",
       "type": "Gnosis Safe",
       "address": "0x1390…243F",
-      "stable": 2578044,
+      "stable": 2177371,
       "btc": 17,
-      "eth": 457727,
-      "other": 6327,
-      "total": 3042115
+      "eth": 461470,
+      "other": 6380,
+      "total": 2645238
     },
     {
       "group": "ERC-20 Wallet",
@@ -140,9 +140,9 @@
       "address": "0x1299…b663",
       "stable": 0,
       "btc": 0,
-      "eth": 3408,
+      "eth": 3436,
       "other": 0,
-      "total": 3408
+      "total": 3436
     },
     {
       "group": "Polygon Wallet",
@@ -178,10 +178,10 @@
       "type": "Ví thường",
       "address": "0x3e8c…9a16",
       "stable": 0,
-      "btc": 1862455,
+      "btc": 1853617,
       "eth": 0,
       "other": 0,
-      "total": 1862455
+      "total": 1853617
     },
     {
       "group": "ERC-20 Wallet & Solana Wallet",
@@ -193,8 +193,8 @@
       "stable": 0,
       "btc": 0,
       "eth": 0,
-      "other": 523367,
-      "total": 523367
+      "other": 520437,
+      "total": 520437
     },
     {
       "group": "ERC-20 Wallet & Solana Wallet",
@@ -204,10 +204,10 @@
       "type": "Ví lạnh",
       "address": "0x3BC1…c002",
       "stable": 0,
-      "btc": 258673,
-      "eth": 1452517,
+      "btc": 257446,
+      "eth": 1464393,
       "other": 0,
-      "total": 1711190
+      "total": 1721839
     },
     {
       "group": "Sipher Gaming Revenue",
@@ -218,9 +218,9 @@
       "address": "0x6EFE…cdb2",
       "stable": 1550,
       "btc": 0,
-      "eth": 102,
+      "eth": 103,
       "other": 0,
-      "total": 1652
+      "total": 1653
     },
     {
       "group": "Sipher Gaming Revenue",
@@ -231,9 +231,9 @@
       "address": "0x819B…1e41",
       "stable": 521,
       "btc": 0,
-      "eth": 91,
+      "eth": 92,
       "other": 0,
-      "total": 612
+      "total": 613
     },
     {
       "group": "Sipher Gaming Revenue",
@@ -244,9 +244,9 @@
       "address": "0xb1d0…2723",
       "stable": 766,
       "btc": 0,
-      "eth": 1304,
+      "eth": 1315,
       "other": 0,
-      "total": 2070
+      "total": 2081
     },
     {
       "group": "Capytal War Gaming Revenue",

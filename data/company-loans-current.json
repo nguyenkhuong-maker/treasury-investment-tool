@@ -1,9 +1,9 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-11-16T09:03:20+07:00",
+    "updatedAt": "2026-11-16T13:01:05+07:00",
     "hasHistory": false,
-    "source": "Google Sheets live export 2026-11-16T02:02:29.382Z",
+    "source": "Google Sheets live export 2026-11-16T06:00:03.042Z",
     "abbreviationDefinitions": {
       "BIDV TN": "BIDV chi nhánh Thống Nhất",
       "BIDV TS": "BIDV chi nhánh Trường Sơn",
@@ -17,7 +17,7 @@
     },
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-11-16T02:02:29.382Z",
+      "generatedAt": "2026-11-16T06:00:03.042Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",

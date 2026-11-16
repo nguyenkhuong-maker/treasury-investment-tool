@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-13T06:00:56.930Z",
+ "generatedAt": "2026-11-16T02:03:21.115Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1160,6 +1160,15 @@
      "amount": 735856
     },
     {
+     "date": "2026-11-11",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "DIEU PHUC",
+     "amount": 25960000
+    },
+    {
      "date": "2026-11-12",
      "source": "BIDV VTC",
      "cat": "opex",
@@ -1319,7 +1328,7 @@
    ],
    "closing": {
     "odAvailable": 11700934714,
-    "asOf": "2026-11-13"
+    "asOf": "2026-11-16"
    }
   }
  }

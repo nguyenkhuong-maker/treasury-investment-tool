@@ -1,8 +1,8 @@
 {
-  "asOf": "2026-11-13",
+  "asOf": "2026-11-16",
   "source": "Dashboard Treasury Balance · sheet Balance",
   "fx": 26300,
-  "total": 13397079,
+  "total": 12905750,
   "individuals": {
     "banks": [
       {
@@ -22,8 +22,8 @@
       },
       {
         "bank": "BIDV",
-        "pledged": 1538771,
-        "unpledged": 39
+        "pledged": 1440732,
+        "unpledged": 98078
       },
       {
         "bank": "SC",
@@ -36,8 +36,8 @@
         "unpledged": 7143
       }
     ],
-    "pledged": 2525931,
-    "unpledged": 854180,
+    "pledged": 2427892,
+    "unpledged": 952219,
     "total": 3380111,
     "loans": 0
   },
@@ -113,35 +113,35 @@
   "osBank": 27548,
   "tokens": {
     "stable": 2580911,
-    "btc": 2231730,
-    "eth": 6293038,
-    "other": 604221,
-    "total": 11709900,
+    "btc": 2121146,
+    "eth": 5966885,
+    "other": 549630,
+    "total": 11218572,
     "btcQty": 32.8,
     "ethQty": 3301
   },
   "runway": {
-    "cash": 13399833,
+    "cash": 12907333,
     "cases": [
       {
         "key": "350k",
         "label": "Kịch bản 350K/tháng",
         "burn": 350000,
-        "months": 38.29
+        "months": 36.88
       },
       {
         "key": "400k",
         "label": "Kịch bản 400K/tháng",
         "burn": 400000,
-        "months": 33.5
+        "months": 32.27
       },
       {
         "key": "600k",
         "label": "Kịch bản 600K/tháng",
         "burn": 600000,
-        "months": 22.33
+        "months": 21.51
       }
     ]
   },
-  "generatedAt": "2026-11-13T06:00:56.751Z"
+  "generatedAt": "2026-11-16T02:03:20.853Z"
 }

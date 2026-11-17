@@ -9,11 +9,18 @@ export interface Deposit {
   owner: string; bank: string; code: string; type: string; principal: number; rate: number | null;
   open: string | null; due: string | null; pledged: boolean; settle: number; loans: string[];
 }
+/* Thẻ tín dụng của Vihali: hạn mức tín dụng quay vòng, bảo đảm bằng tiền ký quỹ/phong tỏa (nhập tay tại data/credit-cards.json) */
+export interface CreditCard {
+  code: string; name: string; bank: string; last4: string | null; holder: string | null;
+  limit: number; used: number; rate: number | null; issue: string | null; expiry: string | null;
+  statementDay: number | null; dueDay: number | null;
+  collateral: { type: string; account: string; amount: number } | null; contract: string | null; note: string;
+}
 export interface CompanyDeposit { bank: string; code: string; principal: number; rate: number; open: string; due: string; settle: number; loans: string[] }
 export interface Wallet { grp: string; name: string; ent: string; chain: string; type: string; addr: string; st: number; btc: number; eth: number; oth: number; tot: number }
 export interface Token { k: string; v: number; qty: number; c: string }
 export type Entity = 'vihali' | 'personal';
-export type Source = 'loan' | 'deposit' | 'carry' | 'recurring' | 'adhoc';
+export type Source = 'loan' | 'deposit' | 'carry' | 'recurring' | 'adhoc' | 'interest';
 export interface PlanLine { id: string; date: string; entity: Entity; dir: 'in' | 'out'; label: string; amount: number; source: Source; note?: string }
 export interface Recurring { id: string; label: string; entity: Entity; dir: 'in' | 'out'; day: number; amount: number; seen: string; on: boolean; startMonth?: string }
 /* Số đầu kỳ của tháng kế hoạch, chốt tại thời điểm lập / cập nhật đầu kỳ (sheet xóa sổ, khế ước đã tất toán nên phải lưu lại) */
@@ -40,9 +47,32 @@ export interface ArchiveCell { t: string; b: boolean; n: boolean }
 export type ArchiveBlock = { type: 'h'; level: number; text: string } | { type: 'p'; text: string } | { type: 'ul'; items: string[] } | { type: 'table'; head: string[]; rows: ArchiveCell[][] };
 export interface ArchivePlan { title: string; meta: string; blocks: ArchiveBlock[]; source: string }
 
+/* Sheet Balance (Dashboard Treasury Balance): số liệu hợp nhất cho tab Tổng quan, đơn vị USD */
+export interface BalanceBank { bank: string; depVnd: number; loanVnd: number; depUsd: number; net: number }
+export interface BalanceEntity { name: string; banks: BalanceBank[]; net: number }
+export interface RunwayCase { key: string; label: string; burn: number | null; months: number; actual?: boolean }
+export interface Balance {
+  asOf: string; fx: number; total: number;
+  individuals: { banks: { bank: string; pledged: number; unpledged: number }[]; pledged: number; unpledged: number; total: number; loans: number };
+  entities: BalanceEntity[]; osBank: number;
+  tokens: { stable: number; btc: number; eth: number; other: number; total: number; btcQty?: number; ethQty?: number };
+  runway: { cash: number; cases: RunwayCase[] };
+}
+export let BALANCE: Balance | null = null;
+/* Thực chi theo tháng dương lịch (data/plan-actuals.json) để đối chiếu kế hoạch */
+export interface ActualRow { date: string; source?: string; cat: string; key?: string | null; label: string; payee: string; entity?: string; amount: number; usdt?: number }
+export interface ActualPlanLine { date: string; label: string; amount: number }
+export interface MonthActual {
+  vihali: ActualRow[]; personal: ActualRow[];
+  closing: { odAvailable: number; asOf: string } | null;
+  plan?: { source: 'archive'; openingVihali: number | null; vihali: ActualPlanLine[]; personal: ActualPlanLine[] };
+}
+export let PLAN_ACTUALS: Record<string, MonthActual> = {};
+export let ACTUALS_AT = '';
 export let LOANS: Loan[] = [];
 export let PERSONAL_DEPOSITS: Deposit[] = [];
 export let COMPANY_DEPOSITS: CompanyDeposit[] = [];
+export let CARDS: CreditCard[] = [];
 export let RATE_WEEKS: any[] = [];
 export let BIDV_VLD_LIMIT = 0;
 export let SC_LIMIT = 0;
@@ -74,6 +104,9 @@ export function monthPeriod(key: string) {
 export const addMonths = (key: string, n: number) => { const [y, m] = key.split('-').map(Number); return monthKey(new Date(y, m - 1 + n, 1)); };
 
 let bust = '';
+/* Bản mẫu đặt ở /preview/ đọc dữ liệu chung ở thư mục cha và không ghi gì về Apps Script */
+export const PREVIEW = typeof window !== 'undefined' && !!(window as any).__TM_PREVIEW;
+const D = ((typeof window !== 'undefined' && (window as any).__TM_BASE) || './') + 'data/';
 async function getJson<T>(path: string, optional = false): Promise<T | null> {
   try {
     const res = await fetch(`${path}${bust}`, { cache: 'no-store' });
@@ -116,6 +149,17 @@ function mapCompany(c: any) {
     rate: Number(d.interestRate) || 0, open: d.openDate, due: d.maturityDate, settle: Number(d.projectedSettlement) || 0, loans: (d.linkedLoanCodes || []).map(String),
   }));
   META.companyUpdatedAt = c.meta?.updatedAt || '';
+}
+
+function mapCards(c: any) {
+  const n = (v: any) => (v == null || v === '' ? null : Number(v));
+  CARDS = (c?.cards || []).filter((r: any) => r.active !== false).map((r: any) => ({
+    code: String(r.code), name: r.name || 'Thẻ tín dụng', bank: r.bank || '', last4: r.cardLast4 ? String(r.cardLast4) : null, holder: r.holder || null,
+    limit: Number(r.creditLimit) || 0, used: Number(r.outstanding) || 0, rate: n(r.interestRate),
+    issue: r.issueDate || null, expiry: r.expiryDate || null, statementDay: n(r.statementDay), dueDay: n(r.dueDay),
+    collateral: r.collateral ? { type: r.collateral.type || 'Ký quỹ', account: r.collateral.account || '', amount: Number(r.collateral.amount) || 0 } : null,
+    contract: r.contractUrl || null, note: r.notes || '',
+  }));
 }
 
 function mapPersonal(p: any) {
@@ -192,33 +236,39 @@ export function defaultInputs(key: string, prev: PlanInputs | undefined): PlanIn
 const archiveCache: Record<string, Promise<ArchivePlan | null>> = {};
 export function loadArchive(month: string, kind: 'company' | 'personal') {
   const k = `${month}-${kind}`;
-  if (!archiveCache[k]) archiveCache[k] = getJson<ArchivePlan>(`./data/monthly-plans/archive/${k}.json`, true);
+  if (!archiveCache[k]) archiveCache[k] = getJson<ArchivePlan>(`${D}monthly-plans/archive/${k}.json`, true);
   return archiveCache[k];
 }
 
 export async function loadAll() {
-  const sv = await getJson<any>('./data/site-version.json', true);
+  const sv = await getJson<any>(D + 'site-version.json', true);
   META.siteVersion = sv?.version || String(Date.now());
   bust = `?v=${encodeURIComponent(META.siteVersion)}`;
 
-  const [company, personal, history, crypto, cryptoHist, links, live, plansIndex] = await Promise.all([
-    getJson<any>('./data/company-loans-current.json'),
-    getJson<any>('./data/personal-treasury-current.json'),
-    getJson<any>('./data/history.json'),
-    getJson<any>('./data/crypto-current.json', true),
-    getJson<any>('./data/crypto-history.json', true),
-    getJson<any>('./data/contract-links.json', true),
-    getScriptGlobal('./data/monthly-plans/live-index.js', 'MONTHLY_PLANS_LIVE_DATA'),
-    getJson<any>('./data/monthly-plans/inputs/index.json', true),
+  const [company, personal, history, crypto, cryptoHist, links, live, plansIndex, balance, cards, actuals] = await Promise.all([
+    getJson<any>(D + 'company-loans-current.json'),
+    getJson<any>(D + 'personal-treasury-current.json'),
+    getJson<any>(D + 'history.json'),
+    getJson<any>(D + 'crypto-current.json', true),
+    getJson<any>(D + 'crypto-history.json', true),
+    getJson<any>(D + 'contract-links.json', true),
+    getScriptGlobal(D + 'monthly-plans/live-index.js', 'MONTHLY_PLANS_LIVE_DATA'),
+    getJson<any>(D + 'monthly-plans/inputs/index.json', true),
+    getJson<Balance>(D + 'balance-current.json', true),
+    getJson<any>(D + 'credit-cards.json', true),
+    getJson<any>(D + 'plan-actuals.json', true),
   ]);
-  mapCompany(company); mapPersonal(personal); mapRates(history); mapCrypto(crypto, cryptoHist);
+  BALANCE = balance;
+  PLAN_ACTUALS = actuals?.months || {};
+  ACTUALS_AT = actuals?.generatedAt || '';
+  mapCompany(company); mapCards(cards); mapPersonal(personal); mapRates(history); mapCrypto(crypto, cryptoHist);
   CONTRACT_LINKS = links?.links || {};
   CONTRACT_DEFAULTS = links?.defaults || {};
 
   // Tháng kế hoạch: chỉ các tháng đã có file nhập liệu (người lập tự bấm lập tháng mới) + các tháng cũ trong live-index.
   // Không tự sinh tháng kế tiếp, để kế hoạch đang chờ duyệt không bị chuyển sang chế độ chỉ xem khi sang tháng.
   const inputMonths: string[] = Array.from(new Set<string>(plansIndex?.months || [])).sort().reverse();
-  const loaded = await Promise.all(inputMonths.map(k => getJson<PlanInputs>(`./data/monthly-plans/inputs/${k}.json`, true)));
+  const loaded = await Promise.all(inputMonths.map(k => getJson<PlanInputs>(`${D}monthly-plans/inputs/${k}.json`, true)));
   const inputs: Record<string, PlanInputs> = {};
   [...inputMonths].reverse().forEach((k) => {
     const i = inputMonths.indexOf(k);
@@ -227,7 +277,7 @@ export async function loadAll() {
   });
   PLAN_INPUTS = inputs;
 
-  const archiveIdx = await getJson<any>('./data/monthly-plans/archive/index.json', true);
+  const archiveIdx = await getJson<any>(D + 'monthly-plans/archive/index.json', true);
   const period = (k: string) => { const p = monthPeriod(k); return { from: p.from, to: p.to, label: p.label }; };
   const archiveMonths: string[] = Array.from(new Set<string>([...(archiveIdx?.months || []), ...((live?.availableMonths || []).map((m: any) => m.key))]));
   const monthMap = new Map<string, PlanMonth>();
@@ -248,8 +298,8 @@ export async function loadAll() {
   const approvals: Record<string, Record<Entity, PlanApproval>> = {};
   await Promise.all(PLAN_MONTHS.map(async (m) => {
     const [co, pe] = await Promise.all([
-      getJson<any>(`./data/monthly-plans/approvals/${m.key}-company.json`, true),
-      getJson<any>(`./data/monthly-plans/approvals/${m.key}-personal.json`, true),
+      getJson<any>(`${D}monthly-plans/approvals/${m.key}-company.json`, true),
+      getJson<any>(`${D}monthly-plans/approvals/${m.key}-personal.json`, true),
     ]);
     const version = inputs[m.key]?.version || live?.months?.[m.key]?.company?.version || 'Draft 1';
     const build = (a: any): PlanApproval => {
@@ -281,6 +331,7 @@ export const CFO_APPROVAL_WEB_APP_URL = 'https://script.google.com/macros/s/AKfy
 export const EDITOR_CODE = '1993';
 
 export async function postToAppsScript(payload: unknown): Promise<{ ok: boolean; error?: string; opaque?: boolean }> {
+  if (PREVIEW) return { ok: false, error: 'Bản mẫu chỉ để xem, không lưu dữ liệu' };
   const body = JSON.stringify(payload);
   try {
     const res = await fetch(CFO_APPROVAL_WEB_APP_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body, redirect: 'follow' });

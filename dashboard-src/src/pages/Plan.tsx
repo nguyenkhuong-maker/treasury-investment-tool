@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend as RLegend } from 'recharts';
 import { Send, Check, RotateCcw, FilePen, Plus, Trash2, Lock, ExternalLink, Save } from 'lucide-react';
-import { PLAN_HIGHLIGHTS, SOURCE_LABEL, STATUS_LABEL } from '@/data/static';
+import { PLAN_HIGHLIGHTS, SOURCE_LABEL, STATUS_LABEL, PLAN_ACTUALS } from '@/data/static';
+import PlanActuals from '@/pages/PlanActuals';
+import { prevMonth } from '@/lib/calc';
 import type { PlanLine, PlanApproval, Entity, PlanMonth, PlanInputs, ArchivePlan, ArchiveBlock } from '@/data/static';
 import { postToAppsScript, loadArchive, fmtStamp } from '@/data/store';
 import { planLines, runBalance, currentOpeningDetail } from '@/lib/calc';
 import { VihaliOpening, PersonalLiquidity, PersonalDeposits, vihaliDoc, personalDoc } from '@/pages/PlanDetails';
 import { nf, ty, dm, dmy } from '@/lib/fmt';
-import { Panel, Chip, th, td, tn } from '@/components/kit';
+import { Panel, Chip, th, td, tn, Segmented, chartAxisTick, chartAxisLine, chartGrid, chartTip, scrollBody } from '@/components/kit';
 import { useApp } from '@/state';
 import { cn } from '@/lib/utils';
 
@@ -56,11 +58,11 @@ function Approval({ month, ent, readonly }: { month: string; ent: Entity; readon
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2 flex-wrap"><span className="font-semibold">{ENT[ent]}</span><Chip>{a.version}</Chip><Chip tone={statusTone(a.status)}>{STATUS_LABEL[a.status]}</Chip></div>
         {canSubmit && !confirm && dirty[month] && <span className="text-xs text-warn">Lưu kế hoạch trước khi trình</span>}
-        {canSubmit && !confirm && !dirty[month] && <button onClick={() => setConfirm(true)} className="inline-flex items-center gap-1.5 h-8 px-3 rounded-sm bg-primary text-primary-foreground text-[13px] font-medium hover:opacity-90"><Send className="w-3.5 h-3.5" />Trình CFO</button>}
+        {canSubmit && !confirm && !dirty[month] && <button onClick={() => setConfirm(true)} className="inline-flex items-center gap-1.5 h-8 px-3 rounded-sm bg-primary text-primary-foreground text-body font-medium hover:opacity-90"><Send className="w-3.5 h-3.5" />Trình CFO</button>}
         {a.status === 'pending_cfo_review' && <span className="text-xs text-muted-foreground">Đã gửi mail tới CFO · chờ phản hồi</span>}
       </div>
       {confirm && (
-        <div className="flex flex-wrap items-center gap-2 bg-accent/60 rounded-sm px-3 py-2 text-[13px]">
+        <div className="flex flex-wrap items-center gap-2 bg-accent/60 rounded-sm px-3 py-2 text-body">
           <span className="flex-1 min-w-[180px]">Gửi {a.version} kế hoạch {ENT[ent]} tới CFO duyệt?</span>
           <button disabled={busy} onClick={submit} className="h-7 px-3 rounded-sm bg-primary text-primary-foreground text-xs font-medium disabled:opacity-60">{busy ? 'Đang gửi…' : 'Gửi'}</button>
           <button onClick={() => setConfirm(false)} className="h-7 px-3 rounded-sm border text-xs">Hủy</button>
@@ -69,14 +71,14 @@ function Approval({ month, ent, readonly }: { month: string; ent: Entity; readon
       {fb && (
         <div className={cn('rounded-sm border-l-2 px-3 py-2 bg-muted/50', fb.kind === 'revise' ? 'border-[hsl(var(--warn))]' : 'border-[hsl(var(--pos))]')}>
           <div className="text-xs text-muted-foreground">Phản hồi CFO · {fb.text.replace(/^CFO /, '')} · <span className="num">{fb.at}</span></div>
-          <div className="text-[13px] whitespace-pre-line mt-0.5">{fb.note}</div>
+          <div className="text-body whitespace-pre-line mt-0.5">{fb.note}</div>
         </div>)}
       <ol className="grid grid-cols-3 gap-1">
         {steps.map((s, i) => (
           <li key={i} className="grid gap-1.5">
             <div className={cn('h-1 rounded-full', s.done ? (s.bad ? 'bg-[hsl(var(--neg))]' : 'bg-[hsl(var(--pos))]') : 'bg-muted')} />
             <div className="text-xs font-medium flex items-center gap-1">{s.done && (s.bad ? <RotateCcw className="w-3 h-3 text-neg" /> : <Check className="w-3 h-3 text-pos" />)}{s.l}</div>
-            <div className="num text-[11px] text-muted-foreground">{s.at || '—'}</div>
+            <div className="num text-caption text-muted-foreground">{s.at || '—'}</div>
           </li>))}
       </ol>
       <details className="text-xs">
@@ -94,8 +96,8 @@ function Approval({ month, ent, readonly }: { month: string; ent: Entity; readon
 function FlowTable({ rows, open, label, opening, openNote, m }: { rows: (PlanLine & { bal: number })[]; open: number; label: string; opening: string; openNote?: string; m: PlanMonth }) {
   const tin = rows.filter(r => r.dir === 'in').reduce((a, r) => a + r.amount, 0), tout = rows.filter(r => r.dir === 'out').reduce((a, r) => a + r.amount, 0);
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-[13px] border-collapse">
+    <div className={scrollBody}>
+      <table className="w-full text-body border-collapse">
         <thead><tr><th className={th + ' w-14'}>Ngày</th><th className={th}>Nội dung</th><th className={th + ' text-right'}>Thu / chi</th><th className={th + ' text-right'}>{label}</th></tr></thead>
         <tbody>
           <tr className="bg-muted/40"><td className={td + ' num'}>{dm(m.from)}</td><td className={td}><div className="font-medium">{opening}</div>{openNote && <div className="text-xs text-muted-foreground mt-0.5">{openNote}</div>}</td><td className={tn} /><td className={tn + ' font-medium'}>{nf(open)}</td></tr>
@@ -106,7 +108,7 @@ function FlowTable({ rows, open, label, opening, openNote, m }: { rows: (PlanLin
                 <div className="leading-snug">{r.label}</div>
                 <div className="flex flex-wrap items-center gap-1.5 mt-1">
                   <Chip tone={r.source === 'adhoc' ? 'gold' : r.source === 'loan' || r.source === 'deposit' ? 'primary' : 'default'}>{SOURCE_LABEL[r.source]}</Chip>
-                  {r.note && <span className="text-[11px] text-muted-foreground">{r.note}</span>}
+                  {r.note && <span className="text-caption text-muted-foreground">{r.note}</span>}
                 </div>
               </td>
               <td className={tn + (r.dir === 'in' ? ' text-pos' : ' text-neg')}>{r.dir === 'in' ? '+' : '−'}{nf(r.amount)}</td>
@@ -115,8 +117,8 @@ function FlowTable({ rows, open, label, opening, openNote, m }: { rows: (PlanLin
           {!rows.length && <tr><td className={td + ' text-muted-foreground'} colSpan={4}>Không có thu chi trong kỳ.</td></tr>}
         </tbody>
         <tfoot>
-          <tr className="bg-muted/60 text-[12.5px]"><td className={td} colSpan={2}>Tổng thu</td><td className={tn + ' text-pos'}>+{nf(tin)}</td><td className={tn} /></tr>
-          <tr className="bg-muted/60 text-[12.5px]"><td className={td} colSpan={2}>Tổng chi</td><td className={tn + ' text-neg'}>−{nf(tout)}</td><td className={tn} /></tr>
+          <tr className="bg-muted/60 text-small"><td className={td} colSpan={2}>Tổng thu</td><td className={tn + ' text-pos'}>+{nf(tin)}</td><td className={tn} /></tr>
+          <tr className="bg-muted/60 text-small"><td className={td} colSpan={2}>Tổng chi</td><td className={tn + ' text-neg'}>−{nf(tout)}</td><td className={tn} /></tr>
           <tr className="bg-muted/60 font-semibold"><td className={td} colSpan={3}>Cuối kỳ {dm(m.to)}</td><td className={tn}>{nf(open + tin - tout)}</td></tr>
         </tfoot>
       </table>
@@ -130,15 +132,15 @@ function EditorPanel({ m }: { m: PlanMonth }) {
   const [f, setF] = useState({ date: m.from, entity: 'vihali' as Entity, dir: 'out' as 'in' | 'out', label: '', amount: '' });
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState('');
-  const inp = 'h-8 rounded-sm border bg-background px-2 text-[13px]';
+  const inp = 'h-8 rounded-sm border bg-background px-2 text-body';
   const money = (v: string) => parseFloat(v.replace(/,/g, '')) || 0;
   const save = async () => { setBusy(true); setMsg(''); const err = await saveInputs(m.key); setBusy(false); setMsg(err || 'Đã lưu. Người xem thấy bản mới sau khoảng 1 phút.'); };
   return (
     <Panel className="border-[hsl(var(--gold))] border-dashed" title={<span className="inline-flex items-center gap-1.5"><FilePen className="w-4 h-4 text-gold" />Nhập liệu người lập · {p.version}</span>} sub="Chỉ hiện ở chế độ người lập. Bấm Lưu để ghi lên GitHub cho mọi người xem."
       right={<>
         {msg && <span className={cn('text-xs', msg.startsWith('Đã') ? 'text-pos' : 'text-neg')}>{msg}</span>}
-        {dirty[m.key] && <button onClick={() => discardInputs(m.key)} className="h-8 px-3 rounded-sm border text-[13px] inline-flex items-center gap-1"><RotateCcw className="w-3.5 h-3.5" />Hoàn tác</button>}
-        <button disabled={!dirty[m.key] || busy} onClick={save} className="h-8 px-3 rounded-sm bg-primary text-primary-foreground text-[13px] font-medium inline-flex items-center gap-1.5 disabled:opacity-50"><Save className="w-3.5 h-3.5" />{busy ? 'Đang lưu…' : 'Lưu kế hoạch'}</button>
+        {dirty[m.key] && <button onClick={() => discardInputs(m.key)} className="h-8 px-3 rounded-sm border text-body inline-flex items-center gap-1"><RotateCcw className="w-3.5 h-3.5" />Hoàn tác</button>}
+        <button disabled={!dirty[m.key] || busy} onClick={save} className="h-8 px-3 rounded-sm bg-primary text-primary-foreground text-body font-medium inline-flex items-center gap-1.5 disabled:opacity-50"><Save className="w-3.5 h-3.5" />{busy ? 'Đang lưu…' : 'Lưu kế hoạch'}</button>
       </>}>
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="grid gap-4 content-start">
@@ -164,11 +166,11 @@ function EditorPanel({ m }: { m: PlanMonth }) {
               <select id="adDir" value={f.dir} onChange={e => setF({ ...f, dir: e.target.value as 'in' | 'out' })} className={inp}><option value="out">Chi</option><option value="in">Thu</option></select>
               <input id="adAmt" placeholder="Số tiền" inputMode="numeric" value={f.amount} onChange={e => setF({ ...f, amount: e.target.value })} onBlur={() => f.amount && setF({ ...f, amount: nf(money(f.amount)) })} className={inp + ' num text-right'} />
               <input id="adLbl" placeholder="Nội dung" value={f.label} onChange={e => setF({ ...f, label: e.target.value })} className={inp + ' col-span-2 sm:col-span-3'} />
-              <button className="h-8 rounded-sm bg-primary text-primary-foreground text-[13px] font-medium inline-flex items-center justify-center gap-1"><Plus className="w-3.5 h-3.5" />Thêm</button>
+              <button className="h-8 rounded-sm bg-primary text-primary-foreground text-body font-medium inline-flex items-center justify-center gap-1"><Plus className="w-3.5 h-3.5" />Thêm</button>
             </form>
             <ul className="grid gap-1.5">
               {[...p.adhoc, ...p.carry].map(a => (
-                <li key={a.id} className="flex items-center gap-2 text-[13px] border rounded-sm px-2.5 py-1.5">
+                <li key={a.id} className="flex items-center gap-2 text-body border rounded-sm px-2.5 py-1.5">
                   <span className="num text-muted-foreground w-11">{dm(a.date)}</span><Chip>{ENT[a.entity]}</Chip>
                   <span className="flex-1 truncate">{a.label}{a.source === 'carry' && <span className="text-muted-foreground"> · kế thừa</span>}</span>
                   <span className={cn('num', a.dir === 'in' ? 'text-pos' : 'text-neg')}>{a.dir === 'in' ? '+' : '−'}{nf(a.amount)}</span>
@@ -182,9 +184,9 @@ function EditorPanel({ m }: { m: PlanMonth }) {
           <h3 className="eyebrow">Khoản định kỳ theo các tháng trước</h3>
           <ul className="grid gap-1.5">
             {p.recurring.map((r, i) => (
-              <li key={r.id} className="grid grid-cols-[auto_1fr_130px] gap-2 items-center text-[13px] border rounded-sm px-2.5 py-1.5">
+              <li key={r.id} className="grid grid-cols-[auto_1fr_130px] gap-2 items-center text-body border rounded-sm px-2.5 py-1.5">
                 <input id={'rc' + r.id} type="checkbox" checked={r.on} onChange={e => editInputs(m.key, x => ({ ...x, recurring: x.recurring.map((y, j) => (j === i ? { ...y, on: e.target.checked } : y)) }))} className="accent-[hsl(var(--primary))]" />
-                <span className="min-w-0"><span className={cn(!r.on && 'line-through text-muted-foreground')}>{r.label}</span><span className="block text-[11px] text-muted-foreground">{ENT[r.entity]} · {r.dir === 'in' ? 'thu' : 'chi'} ngày {r.day} hằng tháng{r.startMonth ? ` · từ T${Number(r.startMonth.slice(5))}` : ''} · {r.seen}</span></span>
+                <span className="min-w-0"><span className={cn(!r.on && 'line-through text-muted-foreground')}>{r.label}</span><span className="block text-caption text-muted-foreground">{ENT[r.entity]} · {r.dir === 'in' ? 'thu' : 'chi'} ngày {r.day} hằng tháng{r.startMonth ? ` · từ T${Number(r.startMonth.slice(5))}` : ''} · {r.seen}</span></span>
                 <input id={'ra' + r.id} key={r.amount} defaultValue={nf(r.amount)} inputMode="numeric" onBlur={e => { const v = money(e.target.value); e.target.value = nf(v); if (v !== r.amount) editInputs(m.key, x => ({ ...x, recurring: x.recurring.map((y, j) => (j === i ? { ...y, amount: v } : y)) })); }} className={inp + ' num text-right w-full'} />
               </li>))}
             {!p.recurring.length && <li className="text-xs text-muted-foreground">Chưa có khoản định kỳ.</li>}
@@ -199,12 +201,12 @@ function ArchiveBlocks({ blocks }: { blocks: ArchiveBlock[] }) {
   return (
     <div className="grid">
       {blocks.map((b, i) => {
-        if (b.type === 'h') return <h3 key={i} className={cn('px-4 font-semibold', b.level <= 2 ? 'pt-4 pb-2 text-[13.5px] border-t first:border-t-0 bg-muted/30' : 'pt-3 pb-1.5 text-[13px] text-muted-foreground')}>{b.text}</h3>;
-        if (b.type === 'p') return <p key={i} className="px-4 py-1.5 text-[12.5px] text-muted-foreground leading-relaxed whitespace-pre-line">{b.text}</p>;
-        if (b.type === 'ul') return <ul key={i} className="px-4 py-1.5 grid gap-1 text-[12.5px] list-disc pl-8">{b.items.map((t, k) => <li key={k} className="whitespace-pre-line">{t}</li>)}</ul>;
+        if (b.type === 'h') return <h3 key={i} className={cn('px-4 font-semibold', b.level <= 2 ? 'pt-4 pb-2 text-body border-t first:border-t-0 bg-muted/30' : 'pt-3 pb-1.5 text-body text-muted-foreground')}>{b.text}</h3>;
+        if (b.type === 'p') return <p key={i} className="px-4 py-1.5 text-small text-muted-foreground leading-relaxed whitespace-pre-line">{b.text}</p>;
+        if (b.type === 'ul') return <ul key={i} className="px-4 py-1.5 grid gap-1 text-small list-disc pl-8">{b.items.map((t, k) => <li key={k} className="whitespace-pre-line">{t}</li>)}</ul>;
         return (
           <div key={i} className="overflow-x-auto">
-            <table className="w-full text-[12.5px] border-collapse">
+            <table className="w-full text-small border-collapse">
               {b.head.length > 0 && <thead><tr>{b.head.map((h, k) => <th key={k} className={th + (b.rows.some(r => r[k]?.n) ? ' text-right' : '')}>{h}</th>)}</tr></thead>}
               <tbody>{b.rows.map((r, k) => {
                 const total = r.length > 0 && /^(tổng|cộng|số dư cuối kỳ)/i.test(r[0].t);
@@ -230,22 +232,24 @@ function ArchiveView({ m }: { m: PlanMonth }) {
     return () => { on = false; };
   }, [m.key]);
   return (
-    <div className="grid xl:grid-cols-2 gap-4 items-start">
+    <div className="grid xl:grid-cols-2 gap-4">
       {(['vihali', 'personal'] as Entity[]).map(e => {
         const d = data[e];
         const hl = PLAN_HIGHLIGHTS[m.key]?.[e] || [];
         return (
-          <Panel key={e} pad={false} title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{ENT[e]}</span>{e === 'vihali' ? 'Kế hoạch dòng tiền & hạn mức thấu chi' : 'Kế hoạch Individual Treasury'}</span>}
+          <Panel key={e} pad={false} className="xl:h-[760px]" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{ENT[e]}</span>{e === 'vihali' ? 'Kế hoạch dòng tiền & hạn mức thấu chi' : 'Kế hoạch Individual Treasury'}</span>}
             sub={d?.meta || `${approvals[m.key]?.[e]?.version || ''}`}
             right={<a href={`${OLD}${m.key}/${e === 'vihali' ? 'company' : 'personal'}.html`} target="_blank" rel="noreferrer" className="text-xs text-muted-foreground inline-flex items-center gap-1 hover:text-primary">Bản gốc<ExternalLink className="w-3 h-3" /></a>}>
+            <div className="flex flex-col h-full">
             {hl.length > 0 && (
               <div className="grid grid-cols-2 sm:grid-cols-4 border-b">
                 {hl.slice(0, 4).map(([k, v], i) => (
-                  <div key={k} className={cn('px-4 py-3 min-w-0', i % 2 && 'border-l', i >= 2 && 'border-t sm:border-t-0', i === 2 && 'sm:border-l')}><div className="text-xs text-muted-foreground">{k}</div><div className="num text-[15px] font-medium mt-0.5">{v}</div></div>))}
+                  <div key={k} className={cn('px-4 py-3 min-w-0', i % 2 && 'border-l', i >= 2 && 'border-t sm:border-t-0', i === 2 && 'sm:border-l')}><div className="text-xs text-muted-foreground">{k}</div><div className="num text-kpi-sm font-medium mt-0.5">{v}</div></div>))}
               </div>)}
             {d === undefined ? <p className="p-4 text-xs text-muted-foreground">Đang tải…</p>
               : d === null ? <p className="p-4 text-xs text-muted-foreground">Không có bản kế hoạch {ENT[e]} cho tháng này.</p>
-              : <ArchiveBlocks blocks={d.blocks} />}
+              : <div className={scrollBody}><ArchiveBlocks blocks={d.blocks} /></div>}
+            </div>
           </Panel>);
       })}
     </div>
@@ -261,7 +265,9 @@ export default function Plan() {
   const snap = m.mode === 'snapshot' ? inputs[month]?.snapshot : undefined;
   const computed = m.mode !== 'archive' && !!inputs[month];
   const lines = !computed ? [] : snap ? snap.lines : planLines(month, inputs[month]);
-  const op = !computed ? { vihali: 0, personal: 0 } : snap ? snap.opening : inputs[month].opening;
+  const prevClose = PLAN_ACTUALS[prevMonth(month)]?.closing;
+  // Kế hoạch đang lập: HM thấu chi đầu kỳ = HM thấu chi BIDV thực tế cuối tháng trước
+  const op = !computed ? { vihali: 0, personal: 0 } : snap ? snap.opening : live && prevClose && !inputs[month].openingDetail ? { ...inputs[month].opening, vihali: prevClose.odAvailable } : inputs[month].opening;
   // Diễn giải số dư đầu kỳ do người lập ghi khi lập kế hoạch
   const opNote = computed && !snap ? { vihali: inputs[month].opening.vihaliNote, personal: inputs[month].opening.personalNote } : { vihali: undefined, personal: undefined };
   // Số đầu kỳ chi tiết: bản đã chốt trong file nhập liệu, chưa chốt thì lấy dữ liệu hiện tại khi tháng còn mở
@@ -272,21 +278,21 @@ export default function Plan() {
   const dates = [...new Set([m.from, ...lines.map(l => l.date), m.to])].sort();
   const chart = dates.map(d => ({ d: dm(d), vh: end(vh.filter(r => r.date <= d), op.vihali) / 1e9, cn: end(cn_.filter(r => r.date <= d), op.personal) / 1e9 }));
   const vmin = minOf(vh, op.vihali), cmin = minOf(cn_, op.personal);
+  const monthEnd = `${month}-${String(new Date(+month.slice(0, 4), +month.slice(5, 7), 0).getDate()).padStart(2, '0')}`;
+  const arch = PLAN_ACTUALS[month]?.plan;
+  const actualsPlan = computed
+    ? { v: lines.filter(l => l.entity === 'vihali' && l.dir === 'out'), p: lines.filter(l => l.entity === 'personal' && l.dir === 'out'), close: end(vh.filter(r => r.date <= monthEnd), op.vihali) as number | null }
+    : { v: arch?.vihali || [], p: arch?.personal || [], close: arch?.openingVihali != null ? arch.openingVihali - (arch.vihali || []).reduce((a, x) => a + x.amount, 0) : null };
   const sum = (rows: PlanLine[], dir: 'in' | 'out') => rows.filter(r => r.dir === dir).reduce((a, r) => a + r.amount, 0);
 
   return (
     <div className="grid gap-4 grid-cols-[minmax(0,1fr)]">
       <div className="flex flex-wrap items-center gap-3 bg-card border rounded-md px-4 py-3 min-w-0">
         <div className="max-w-full overflow-x-auto">
-          <div className="inline-flex border rounded-sm overflow-hidden text-[13px]">
-            {months.map(x => {
-              const st = approvals[x.key]?.vihali.status;
-              return <button key={x.key} onClick={() => setMonth(x.key)} className={cn('px-3 py-1.5 flex items-center gap-1.5 whitespace-nowrap', month === x.key ? 'bg-primary text-primary-foreground' : 'hover:bg-muted')}>
-                {x.label.replace('Tháng ', 'T')}{st === 'approved' && <Check className="w-3 h-3" />}</button>;
-            })}
-          </div>
+          <Segmented size="md" label="Chọn tháng kế hoạch" value={month} onChange={setMonth}
+            options={months.map(x => [x.key, <>{x.label.replace('Tháng ', 'T')}{approvals[x.key]?.vihali.status === 'approved' && <Check className="w-3 h-3" aria-label="CFO đã duyệt" />}</>] as const)} />
         </div>
-        <span className="text-[13px]">Kỳ kế hoạch <span className="num font-medium">{dmy(m.from)} – {dmy(m.to)}</span></span>
+        <span className="text-body">Kỳ kế hoạch <span className="num font-medium">{dmy(m.from)} – {dmy(m.to)}</span></span>
         {editor && !inputs[nextMonthKey] && !dirty[months[0]?.key] && <button onClick={() => setMonth(createMonth())} className="inline-flex items-center gap-1.5 h-8 px-3 rounded-sm border border-dashed border-[hsl(var(--gold))] text-xs font-medium hover:bg-muted"><Plus className="w-3.5 h-3.5" />Lập kế hoạch T{Number(nextMonthKey.slice(5))}/{nextMonthKey.slice(0, 4)}</button>}
         <span className="text-xs text-muted-foreground ml-auto">{live ? 'Đang mở · khoản đến hạn lấy từ tab Vihali, Cá nhân, khoản đã qua giữ theo bản lưu gần nhất' : snap ? `Bản đã lưu ${fmtStamp(snap.savedAt)}` : 'Bản kế hoạch đã trình'}</span>
       </div>
@@ -303,7 +309,7 @@ export default function Plan() {
       {!computed ? <ArchiveView m={m} /> : <>
         <div className="grid xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-4 items-start">
           {[
-            { ...{ k: 'vihali', t: 'Vihali', h: 'Kế hoạch dòng tiền & hạn mức thấu chi', d: 'Trả nợ đến hạn lấy từ tab Vihali · nguồn trả là HM thấu chi BIDV', o: op.vihali, rows: vh, min: vmin, lbl: 'HM còn lại', opening: 'HM thấu chi BIDV khả dụng đầu kỳ', note: opNote.vihali }, pre: detail && <VihaliOpening detail={detail} opening={op.vihali} />, doc: 'Kế hoạch dòng tiền & hạn mức thấu chi' },
+            { ...{ k: 'vihali', t: 'Vihali', h: 'Kế hoạch dòng tiền & hạn mức thấu chi', d: live && prevClose && !inputs[month].openingDetail ? `Đầu kỳ = HM thấu chi BIDV thực tế ngày ${dmy(prevClose.asOf)} · trả nợ đến hạn từ tab Vihali · lãi BIDV định kỳ ước tính` : 'Trả nợ đến hạn lấy từ tab Vihali · nguồn trả là HM thấu chi BIDV', o: op.vihali, rows: vh, min: vmin, lbl: 'HM còn lại', opening: 'HM thấu chi BIDV khả dụng đầu kỳ', note: live && prevClose && !inputs[month].openingDetail ? undefined : opNote.vihali }, pre: detail && <VihaliOpening detail={detail} opening={op.vihali} />, doc: 'Kế hoạch dòng tiền & hạn mức thấu chi' },
             { ...{ k: 'personal', t: 'Cá nhân', h: 'Kế hoạch Individual Treasury', d: 'Sổ đến hạn lấy từ tab Cá nhân · chi định kỳ theo các tháng trước', o: op.personal, rows: cn_, min: cmin, lbl: 'Thanh khoản', opening: 'Thanh khoản đầu kỳ (tài khoản thanh toán)', note: opNote.personal }, pre: detail && <><PersonalLiquidity detail={detail} opening={op.personal} /><PersonalDeposits detail={detail} /></>, doc: 'Kế hoạch Individual Treasury' },
           ].map(x => {
             const ent = x.k as Entity;
@@ -317,21 +323,23 @@ export default function Plan() {
               const args = { m, rows, opening: o, openNote: x.note, detail };
               const at = [...ap.events].reverse().find(e => e.kind === 'approve')?.at;
               return (
-                <Panel key={x.k} pad={false} title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.doc}</span>}
+                <Panel key={x.k} pad={false} className="xl:h-[760px]" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.doc}</span>}
                   sub={`Kỳ kế hoạch ${dmy(m.from)} – ${dmy(m.to)} · ${ap.version} · CFO đã duyệt${at ? ' ' + at : ''}`}>
-                  <ArchiveBlocks blocks={ent === 'vihali' ? vihaliDoc(args) : personalDoc(args)} />
+                  <div className="flex flex-col h-full"><div className={scrollBody}><ArchiveBlocks blocks={ent === 'vihali' ? vihaliDoc(args) : personalDoc(args)} /></div></div>
                 </Panel>);
             }
             return (
               <div key={x.k} className="grid gap-4 min-w-0 grid-cols-[minmax(0,1fr)]">
                 {x.pre}
-              <Panel pad={false} title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.h}</span>} sub={x.d}>
+              <Panel pad={false} className="xl:h-[720px]" title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">{x.t}</span>{x.h}</span>} sub={x.d}>
+                <div className="flex flex-col h-full">
                 <div className="grid grid-cols-4 border-b">
                   {[['Đầu kỳ', ty(x.o), ''], ['Thu', ty(sum(x.rows, 'in')), 'text-pos'], ['Chi', ty(sum(x.rows, 'out')), 'text-neg'], ['Cuối kỳ', ty(end(x.rows, x.o)), 'font-semibold']].map(([l, v, c], i) => (
-                    <div key={l} className={cn('px-4 py-3 min-w-0', i && 'border-l')}><div className="text-xs text-muted-foreground">{l}</div><div className={cn('num text-[15px] sm:text-[17px] font-medium mt-0.5', c)}>{v}</div></div>))}
+                    <div key={l} className={cn('px-4 py-3 min-w-0', i && 'border-l')}><div className="text-xs text-muted-foreground">{l}</div><div className={cn('num text-kpi-sm sm:text-h3 font-medium mt-0.5', c)}>{v}</div></div>))}
                 </div>
                 <div className="px-4 py-2 text-xs text-muted-foreground border-b">{x.lbl} thấp nhất trong kỳ <span className="num text-foreground">{ty(x.min.v)}</span> ngày <span className="num">{dm(x.min.d)}</span></div>
                 <FlowTable rows={x.rows} open={x.o} label={x.lbl} opening={x.opening} openNote={x.note} m={m} />
+                </div>
               </Panel>
               </div>);
           })}
@@ -340,10 +348,10 @@ export default function Plan() {
           <div className="h-[240px]">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={chart} margin={{ top: 8, right: 12, left: -10, bottom: 0 }}>
-                <CartesianGrid vertical={false} stroke="hsl(var(--border))" strokeDasharray="2 3" />
-                <XAxis dataKey="d" tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }} axisLine={{ stroke: 'hsl(var(--border))' }} tickLine={false} />
-                <YAxis tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }} axisLine={false} tickLine={false} />
-                <Tooltip formatter={(v: number) => v.toFixed(3) + ' tỷ'} contentStyle={{ background: 'hsl(var(--popover))', border: '1px solid hsl(var(--border))', borderRadius: 4, fontSize: 12 }} itemStyle={{ color: 'hsl(var(--foreground))' }} />
+                <CartesianGrid {...chartGrid} />
+                <XAxis dataKey="d" tick={chartAxisTick} axisLine={chartAxisLine} tickLine={false} />
+                <YAxis tick={chartAxisTick} axisLine={false} tickLine={false} />
+                <Tooltip formatter={(v: number) => v.toFixed(3) + ' tỷ'} {...chartTip} />
                 <RLegend wrapperStyle={{ fontSize: 12 }} />
                 <Line type="stepAfter" dataKey="vh" name="HM thấu chi Vihali" stroke="hsl(var(--c1))" strokeWidth={2} dot={{ r: 2.5 }} isAnimationActive={false} />
                 <Line type="stepAfter" dataKey="cn" name="Thanh khoản cá nhân" stroke="hsl(var(--c3))" strokeWidth={2} dot={{ r: 2.5 }} isAnimationActive={false} />
@@ -353,6 +361,7 @@ export default function Plan() {
         </Panel>
         {live && !editor && <p className="text-xs text-muted-foreground flex items-center gap-1.5"><Lock className="w-3 h-3" />Thu chi phát sinh và khoản định kỳ do người lập nhập ở chế độ người lập.</p>}
       </>}
+      <PlanActuals month={month} vihaliPlan={actualsPlan.v} personalPlan={actualsPlan.p} planClosing={actualsPlan.close} />
     </div>
   );
 }

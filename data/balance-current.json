@@ -1,8 +1,8 @@
 {
-  "asOf": "2026-11-16",
+  "asOf": "2026-11-17",
   "source": "Dashboard Treasury Balance · sheet Balance",
   "fx": 26300,
-  "total": 12567507,
+  "total": 12606902,
   "individuals": {
     "banks": [
       {
@@ -48,9 +48,9 @@
         {
           "bank": "BIDV",
           "depVnd": 9875411839,
-          "loanVnd": 33536028864,
+          "loanVnd": 33936028864,
           "depUsd": 92,
-          "net": -899551
+          "net": -914760
         },
         {
           "bank": "VietinBank",
@@ -76,12 +76,12 @@
         {
           "bank": "SC",
           "depVnd": 276515607,
-          "loanVnd": 22727251489,
+          "loanVnd": 22337962243,
           "depUsd": 9411,
-          "net": -844229
+          "net": -829427
         }
       ],
-      "net": -1743222
+      "net": -1743629
     },
     {
       "name": "Vixion",
@@ -113,35 +113,35 @@
   "osBank": 27548,
   "tokens": {
     "stable": 2180238,
-    "btc": 2130246,
-    "eth": 6017165,
-    "other": 552679,
-    "total": 10880328,
+    "btc": 2126010,
+    "eth": 6055662,
+    "other": 558221,
+    "total": 10920131,
     "btcQty": 32.8,
     "ethQty": 3302
   },
   "runway": {
-    "cash": 12571333,
+    "cash": 12610167,
     "cases": [
       {
         "key": "350k",
         "label": "Kịch bản 350K/tháng",
         "burn": 350000,
-        "months": 35.92
+        "months": 36.03
       },
       {
         "key": "400k",
         "label": "Kịch bản 400K/tháng",
         "burn": 400000,
-        "months": 31.43
+        "months": 31.52
       },
       {
         "key": "600k",
         "label": "Kịch bản 600K/tháng",
         "burn": 600000,
-        "months": 20.95
+        "months": 21.02
       }
     ]
   },
-  "generatedAt": "2026-11-16T06:01:06.163Z"
+  "generatedAt": "2026-11-17T06:01:00.792Z"
 }

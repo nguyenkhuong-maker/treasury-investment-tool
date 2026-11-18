@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-17T06:01:01.026Z",
+ "generatedAt": "2026-11-18T06:00:57.812Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1257,6 +1257,42 @@
      "label": "Trả gốc lãi SC VLĐ đến hạn 16/11/2026",
      "payee": "Standard Chartered",
      "amount": 11038750
+    },
+    {
+     "date": "2026-11-18",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Electricity bills",
+     "payee": "SƠN THÁI",
+     "amount": 11016000
+    },
+    {
+     "date": "2026-11-18",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Parking fee",
+     "payee": "SƠN THÁI",
+     "amount": 825000
+    },
+    {
+     "date": "2026-11-18",
+     "source": "SC VLD",
+     "cat": "opex",
+     "key": null,
+     "label": "Chi phí khác",
+     "payee": "BHXH",
+     "amount": 248047040
+    },
+    {
+     "date": "2026-11-18",
+     "source": "BIDV VTC",
+     "cat": "opex",
+     "key": null,
+     "label": "Chi phí khác",
+     "payee": "BIDV",
+     "amount": 10282000000
     }
    ],
    "personal": [
@@ -1345,8 +1381,8 @@
     }
    ],
    "closing": {
-    "odAvailable": 11300934714,
-    "asOf": "2026-11-17"
+    "odAvailable": 13302934714,
+    "asOf": "2026-11-18"
    }
   }
  }

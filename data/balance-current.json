@@ -1,8 +1,8 @@
 {
-  "asOf": "2026-11-17",
+  "asOf": "2026-11-18",
   "source": "Dashboard Treasury Balance · sheet Balance",
   "fx": 26300,
-  "total": 12606902,
+  "total": 12887845,
   "individuals": {
     "banks": [
       {
@@ -22,8 +22,8 @@
       },
       {
         "bank": "BIDV",
-        "pledged": 1440732,
-        "unpledged": 98078
+        "pledged": 1116026,
+        "unpledged": 422784
       },
       {
         "bank": "SC",
@@ -36,8 +36,8 @@
         "unpledged": 7143
       }
     ],
-    "pledged": 2427892,
-    "unpledged": 952219,
+    "pledged": 2103186,
+    "unpledged": 1276925,
     "total": 3380111,
     "loans": 0
   },
@@ -48,9 +48,9 @@
         {
           "bank": "BIDV",
           "depVnd": 9875411839,
-          "loanVnd": 33936028864,
+          "loanVnd": 23654028864,
           "depUsd": 92,
-          "net": -914760
+          "net": -523810
         },
         {
           "bank": "VietinBank",
@@ -76,12 +76,12 @@
         {
           "bank": "SC",
           "depVnd": 276515607,
-          "loanVnd": 22337962243,
+          "loanVnd": 22597850283,
           "depUsd": 9411,
-          "net": -829427
+          "net": -839309
         }
       ],
-      "net": -1743629
+      "net": -1362560
     },
     {
       "name": "Vixion",
@@ -113,35 +113,35 @@
   "osBank": 27548,
   "tokens": {
     "stable": 2180238,
-    "btc": 2126010,
-    "eth": 6055662,
-    "other": 558221,
-    "total": 10920131,
+    "btc": 2112429,
+    "eth": 5952882,
+    "other": 574455,
+    "total": 10820005,
     "btcQty": 32.8,
     "ethQty": 3302
   },
   "runway": {
-    "cash": 12610167,
+    "cash": 12890167,
     "cases": [
       {
         "key": "350k",
         "label": "Kịch bản 350K/tháng",
         "burn": 350000,
-        "months": 36.03
+        "months": 36.83
       },
       {
         "key": "400k",
         "label": "Kịch bản 400K/tháng",
         "burn": 400000,
-        "months": 31.52
+        "months": 32.23
       },
       {
         "key": "600k",
         "label": "Kịch bản 600K/tháng",
         "burn": 600000,
-        "months": 21.02
+        "months": 21.48
       }
     ]
   },
-  "generatedAt": "2026-11-17T06:01:00.792Z"
+  "generatedAt": "2026-11-18T06:00:57.494Z"
 }

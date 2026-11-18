@@ -1,14 +1,14 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-11-17T13:01:00+07:00",
-    "source": "Google Sheets live export 2026-11-17T06:00:03.189Z",
+    "updatedAt": "2026-11-18T13:00:57+07:00",
+    "source": "Google Sheets live export 2026-11-18T06:00:03.210Z",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet",
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-11-17T06:00:03.189Z",
+      "generatedAt": "2026-11-18T06:00:03.210Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",
@@ -89,9 +89,9 @@
       "openDate": "2026-06-09",
       "maturityDate": "2027-06-09",
       "interestPayoutType": "Cuối kỳ",
-      "pledged": true,
-      "pledgedAmount": 8280000000,
-      "unpledgedAmount": 0,
+      "pledged": false,
+      "pledgedAmount": 0,
+      "unpledgedAmount": 8280000000,
       "accruedInterest": 662400000,
       "projectedSettlement": 8942400000,
       "linkedLoanCodes": [
@@ -267,7 +267,8 @@
         "007648902",
         "007649234",
         "007664704",
-        "007672904"
+        "007672904",
+        "007679345"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -327,7 +328,8 @@
         "007648902",
         "007649234",
         "007664704",
-        "007672904"
+        "007672904",
+        "007679345"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",
@@ -368,7 +370,8 @@
         "007648902",
         "007649234",
         "007664704",
-        "007672904"
+        "007672904",
+        "007679345"
       ],
       "collateralGroupName": "Cụm SC VLĐ — 3 sổ cá nhân SC của Hồ Thị Yến Nhi",
       "mappingNote": "Đang đảm bảo cho toàn bộ cụm vay vốn lưu động SC.",

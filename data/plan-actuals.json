@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-18T06:00:57.812Z",
+ "generatedAt": "2026-11-19T06:01:52.161Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1293,6 +1293,60 @@
      "label": "Chi phí khác",
      "payee": "BIDV",
      "amount": 10282000000
+    },
+    {
+     "date": "2026-11-18",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Office Equipment",
+     "payee": "SIEU TOC",
+     "amount": 55000000
+    },
+    {
+     "date": "2026-11-19",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Stationery, mineral water, express delivery, phone charges",
+     "payee": "ASEAN",
+     "amount": 5696989
+    },
+    {
+     "date": "2026-11-19",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Snack & Drinks",
+     "payee": "QUEEN FOOD",
+     "amount": 2273400
+    },
+    {
+     "date": "2026-11-19",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Stationery, mineral water, express delivery, phone charges",
+     "payee": "SOUTH TELECOM",
+     "amount": 1584000
+    },
+    {
+     "date": "2026-11-19",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Snack & Drinks",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 1969100
+    },
+    {
+     "date": "2026-11-19",
+     "source": "BIDV TC",
+     "cat": "opex",
+     "key": null,
+     "label": "Snack & Drinks",
+     "payee": "Cá nhân (ẩn tên)",
+     "amount": 502500
     }
    ],
    "personal": [
@@ -1381,8 +1435,8 @@
     }
    ],
    "closing": {
-    "odAvailable": 13302934714,
-    "asOf": "2026-11-18"
+    "odAvailable": 13235908725,
+    "asOf": "2026-11-19"
    }
   }
  }

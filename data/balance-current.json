@@ -1,8 +1,8 @@
 {
-  "asOf": "2026-11-18",
+  "asOf": "2026-11-19",
   "source": "Dashboard Treasury Balance · sheet Balance",
   "fx": 26300,
-  "total": 12887845,
+  "total": 12833588,
   "individuals": {
     "banks": [
       {
@@ -48,9 +48,9 @@
         {
           "bank": "BIDV",
           "depVnd": 9875411839,
-          "loanVnd": 23654028864,
+          "loanVnd": 23721054853,
           "depUsd": 92,
-          "net": -523810
+          "net": -526358
         },
         {
           "bank": "VietinBank",
@@ -81,7 +81,7 @@
           "net": -839309
         }
       ],
-      "net": -1362560
+      "net": -1365108
     },
     {
       "name": "Vixion",
@@ -101,47 +101,54 @@
       "banks": [
         {
           "bank": "BIDV",
-          "depVnd": 561102457,
+          "depVnd": 425743178,
           "loanVnd": 0,
           "depUsd": 0,
-          "net": 21335
+          "net": 16188
         }
       ],
-      "net": 21335
+      "net": 16188
     }
   ],
   "osBank": 27548,
   "tokens": {
     "stable": 2180238,
-    "btc": 2112429,
-    "eth": 5952882,
-    "other": 574455,
-    "total": 10820005,
+    "btc": 2077631,
+    "eth": 5943394,
+    "other": 572180,
+    "total": 10773443,
     "btcQty": 32.8,
     "ethQty": 3302
   },
   "runway": {
-    "cash": 12890167,
+    "cash": 12836000,
     "cases": [
+      {
+        "key": "actual",
+        "label": "Thực tế · TB 3 tháng gần nhất",
+        "burn": null,
+        "months": 35.2,
+        "actual": true
+      },
       {
         "key": "350k",
         "label": "Kịch bản 350K/tháng",
         "burn": 350000,
-        "months": 36.83
+        "months": 36.68
       },
       {
         "key": "400k",
         "label": "Kịch bản 400K/tháng",
         "burn": 400000,
-        "months": 32.23
+        "months": 32.09
       },
       {
         "key": "600k",
         "label": "Kịch bản 600K/tháng",
         "burn": 600000,
-        "months": 21.48
+        "months": 21.39
       }
     ]
   },
-  "generatedAt": "2026-11-18T06:00:57.494Z"
+  "generatedAt": "2026-11-19T06:01:50.642Z"
 }

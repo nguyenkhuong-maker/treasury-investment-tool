@@ -57,4 +57,4 @@ Số luôn dùng lớp `num` (IBM Plex Mono, chữ số cùng độ rộng). Ch�
 
 ## 4. Quy trình build
 
-`dashboard-src-preview/` → `parcel build index.html` → `html-inline` → chèn `<head>` (tiêu đề, font, `__TM_BASE`, `__TM_PREVIEW`) → `preview/index.html`.
+`dashboard-src/` → `parcel build index.html` → `html-inline` → chèn `<head>` (tiêu đề, font) → `index.html` (bản chính). Bản mẫu `/preview/` đã ngừng từ 17/11/2026 (CFO duyệt), chỉ còn trang chuyển hướng về bản chính.

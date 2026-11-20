@@ -19,7 +19,7 @@ export function VihaliOpening({ detail, opening }: { detail: OpeningDetail; open
   return (
     <Panel pad={false} title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">Vihali</span>Hạn mức tín dụng đầu kỳ</span>}
       sub={`Theo sheet Loan-BIDV / Loan-SC · ${fmtStamp(detail.companyAsOf)}`}>
-      <table className="w-full text-[13px] border-collapse">
+      <table className="w-full text-body border-collapse">
         <tbody>
           <tr><td className={td}>HM thấu chi BIDV khả dụng<div className="text-xs text-muted-foreground">CN Thống Nhất <span className="num">{nf(detail.odTn)}</span> · CN Trường Sơn <span className="num">{nf(detail.odTs)}</span></div></td><td className={tn + ' font-semibold'}>{nf(detail.odLimit)}</td></tr>
           {rows.map(([k, v]) => <tr key={k}><td className={td}>{k}</td><td className={tn}>{nf(v)}</td></tr>)}
@@ -38,7 +38,7 @@ export function PersonalLiquidity({ detail, opening }: { detail: OpeningDetail; 
     <Panel pad={false} title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">Cá nhân</span>Thanh khoản đầu kỳ</span>}
       sub={`Tài khoản thanh toán, không kỳ hạn · Dashboard-fix ${fmtStamp(detail.personalAsOf)} · dư nợ vay cá nhân ${nf(detail.personalLoans)}`}>
       <div className="overflow-x-auto">
-        <table className="w-full text-[13px] border-collapse">
+        <table className="w-full text-body border-collapse">
           <thead><tr><th className={th}>Chủ tài khoản</th><th className={th}>Ngân hàng</th><th className={th}>Số tài khoản</th><th className={th + ' text-right'}>Số tiền</th></tr></thead>
           <tbody>{liquid.map(d => <tr key={d.bank + d.code}><td className={td}>{d.owner}</td><td className={td}>{d.bank}</td><td className={td + ' num'}>{d.code}</td><td className={tn}>{nf(d.principal)}</td></tr>)}</tbody>
           <tfoot><tr className="bg-muted/60 font-semibold"><td className={td} colSpan={3}>Tổng</td><td className={tn}>{nf(liq)}</td></tr></tfoot>
@@ -56,7 +56,7 @@ export function PersonalDeposits({ detail }: { detail: OpeningDetail }) {
     <Panel pad={false} title={<span className="flex items-center gap-2"><span className="eyebrow text-primary">Cá nhân</span>Tiền gửi đầu kỳ</span>}
       sub={`Sổ tiết kiệm / chứng chỉ tiền gửi có kỳ hạn · thế chấp ${nf(t(d => (d.pledged ? d.principal : 0)))}`}>
       <div className="overflow-x-auto">
-        <table className="w-full text-[13px] border-collapse min-w-[520px]">
+        <table className="w-full text-body border-collapse min-w-[520px]">
           <thead><tr><th className={th}>Chủ sổ · ngân hàng · số sổ</th><th className={th + ' text-right'}>Số tiền</th><th className={th}>Đáo hạn</th><th className={th + ' text-right'}>Dự thu về</th></tr></thead>
           <tbody>
             {term.map(d => (

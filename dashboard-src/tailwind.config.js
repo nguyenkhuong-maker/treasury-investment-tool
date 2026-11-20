@@ -7,7 +7,21 @@ module.exports = {
   ],
   theme: {
     extend: {
+      /* Thang chữ của dashboard (thay cho các giá trị text-[..px] rải rác) */
+      fontSize: {
+        caption: ['11px', { lineHeight: '1.35' }],
+        small: ['12.5px', { lineHeight: '1.45' }],
+        body: ['13px', { lineHeight: '1.45' }],
+        title: ['14px', { lineHeight: '1.3' }],
+        'kpi-sm': ['15px', { lineHeight: '1.25' }],
+        lead: ['16px', { lineHeight: '1.3' }],
+        h3: ['17px', { lineHeight: '1.3' }],
+        kpi: ['21px', { lineHeight: '1.15' }],
+        h1: ['22px', { lineHeight: '1.2' }],
+      },
       colors: {
+        pos: "hsl(var(--pos))", neg: "hsl(var(--neg))", warn: "hsl(var(--warn))", gold: "hsl(var(--gold))",
+        c1: "hsl(var(--c1))", c2: "hsl(var(--c2))", c3: "hsl(var(--c3))", c4: "hsl(var(--c4))", c5: "hsl(var(--c5))", c6: "hsl(var(--c6))", c7: "hsl(var(--c7))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

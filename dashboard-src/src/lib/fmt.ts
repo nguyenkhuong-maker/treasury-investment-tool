@@ -1,5 +1,5 @@
 export const TODAY = (() => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; })();
-export const FX = 26360;
+export const FX = 26300; // tỷ giá quy đổi thống nhất toàn dashboard (CFO chốt 26/10/2026)
 
 export const nf = (n: number | null | undefined) =>
   n == null || isNaN(n) ? '–' : Math.round(n).toLocaleString('en-US');
@@ -26,3 +26,8 @@ export function store<T>(key: string, fallback: T): T {
 export function save(key: string, v: unknown) {
   try { localStorage.setItem(key, JSON.stringify(v)); } catch { /* storage unavailable */ }
 }
+
+/* USD dạng đầy đủ cho Tổng quan: $15,984,276 · dòng phụ VND theo tỷ giá FX */
+export const usdFull = (n: number) => (n < 0 ? '−$' : '$') + Math.round(Math.abs(n)).toLocaleString('en-US');
+export const usdM = (n: number, dp = 2) => (n < 0 ? '−$' : '$') + (Math.abs(n) / 1e6).toFixed(dp) + 'M';
+export const vndOf = (usdAmt: number) => (usdAmt < 0 ? '−' : '') + (Math.abs(usdAmt) * FX / 1e9).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' tỷ VND';

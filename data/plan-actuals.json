@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-19T06:01:52.161Z",
+ "generatedAt": "2026-11-20T04:40:11.003Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1432,11 +1432,99 @@
      "payee": "Mua USDT",
      "amount": 14245000000,
      "usdt": 550000
+    },
+    {
+     "date": "2026-11-19",
+     "cat": "opex-dopa",
+     "label": "Wedding/New Born/ Sickness...",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 1000000
+    },
+    {
+     "date": "2026-11-19",
+     "cat": "opex-dopa",
+     "label": "Office Equipment",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 218400
+    },
+    {
+     "date": "2026-11-19",
+     "cat": "opex-dopa",
+     "label": "Lunch & Dinner & tea break requested by boss",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 502600
+    },
+    {
+     "date": "2026-11-19",
+     "cat": "opex-dopa",
+     "label": "Back-up/ Contingency",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 100000
+    },
+    {
+     "date": "2026-11-19",
+     "cat": "opex-dopa",
+     "label": "Back-up/ Contingency",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 1000000
+    },
+    {
+     "date": "2026-11-19",
+     "cat": "opex-dopa",
+     "label": "Office Equipment",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 14600000
+    },
+    {
+     "date": "2026-11-19",
+     "cat": "opex-dopa",
+     "label": "Game Development Assets",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 3024681
+    },
+    {
+     "date": "2026-11-19",
+     "cat": "opex-dopa",
+     "label": "Gift for Banks, States for Tet, Moon cake, ... for Vihali",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 494000
+    },
+    {
+     "date": "2026-11-19",
+     "cat": "opex-dopa",
+     "label": "Wedding/New Born/ Sickness...",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 5538000
+    },
+    {
+     "date": "2026-11-19",
+     "cat": "opex-dopa",
+     "label": "Birthday Gift",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 11000000
+    },
+    {
+     "date": "2026-11-19",
+     "cat": "opex-dopa",
+     "label": "Dining meals",
+     "entity": "Dopa JSC",
+     "payee": "Ẩn tên",
+     "amount": 1483360
     }
    ],
    "closing": {
-    "odAvailable": 13235908725,
-    "asOf": "2026-11-19"
+    "odAvailable": 13088908725,
+    "asOf": "2026-11-20"
    }
   }
  }

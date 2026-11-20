@@ -1,14 +1,14 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-11-19T13:01:43+07:00",
-    "source": "Google Sheets live export 2026-11-19T06:00:34.460Z",
+    "updatedAt": "2026-11-20T11:40:10+07:00",
+    "source": "Google Sheets live export 2026-11-20T04:39:17.646Z",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet",
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-11-19T06:00:34.460Z",
+      "generatedAt": "2026-11-20T04:39:17.646Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",
@@ -21,9 +21,9 @@
     }
   },
   "summary": {
-    "totalPersonalDeposits": 86192831535,
+    "totalPersonalDeposits": 86153870494,
     "totalPersonalLoans": 0,
-    "netPersonalTreasury": 86192831535
+    "netPersonalTreasury": 86153870494
   },
   "personalDeposits": [
     {
@@ -120,7 +120,6 @@
       "accruedInterest": 240000000,
       "projectedSettlement": 3240000000,
       "linkedLoanCodes": [
-        "400004871689",
         "406004974623",
         "402005414934",
         "401005541941",
@@ -403,17 +402,17 @@
       "depositCode": "VPB-PL-DTT-ACCOUNT",
       "depositType": "Không kỳ hạn",
       "certificateNumber": "09388885678",
-      "principal": 156030686,
-      "amountOnCertificate": 156030686,
+      "principal": 117069645,
+      "amountOnCertificate": 117069645,
       "interestRate": null,
       "openDate": null,
       "maturityDate": null,
       "interestPayoutType": "Không kỳ hạn",
       "pledged": false,
       "pledgedAmount": 0,
-      "unpledgedAmount": 156030686,
+      "unpledgedAmount": 117069645,
       "accruedInterest": 0,
-      "projectedSettlement": 156030686
+      "projectedSettlement": 117069645
     },
     {
       "owner": "Nguyễn Trung Tín",

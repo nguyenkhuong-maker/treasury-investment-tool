@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-20T06:01:00.823Z",
+ "generatedAt": "2026-11-21T06:00:58.502Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1347,6 +1347,24 @@
      "label": "Snack & Drinks",
      "payee": "Cá nhân (ẩn tên)",
      "amount": 502500
+    },
+    {
+     "date": "2026-11-20",
+     "source": "BIDV TC",
+     "cat": "loan",
+     "key": "BIDV|2026-11-20",
+     "label": "Trả gốc lãi BIDV VLĐ đến hạn 20/11/2026",
+     "payee": "BIDV",
+     "amount": 146020720
+    },
+    {
+     "date": "2026-11-20",
+     "source": "BIDV TC",
+     "cat": "loan",
+     "key": "BIDV|2026-11-20",
+     "label": "Trả gốc lãi BIDV VLĐ đến hạn 20/11/2026",
+     "payee": "BIDV",
+     "amount": 780111
     }
    ],
    "personal": [
@@ -1524,7 +1542,7 @@
    ],
    "closing": {
     "odAvailable": 13088908725,
-    "asOf": "2026-11-20"
+    "asOf": "2026-11-21"
    }
   }
  }

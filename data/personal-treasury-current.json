@@ -1,14 +1,14 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-11-25T16:10:59+07:00",
-    "source": "Google Sheets live export 2026-11-25T09:10:08.637Z",
+    "updatedAt": "2026-11-25T16:20:12+07:00",
+    "source": "Google Sheets live export 2026-11-25T09:19:25.002Z",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet",
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-11-25T09:10:08.637Z",
+      "generatedAt": "2026-11-25T09:19:25.002Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",
@@ -22,8 +22,8 @@
   },
   "summary": {
     "totalPersonalDeposits": 86933870494,
-    "totalPersonalLoans": 0,
-    "netPersonalTreasury": 86933870494
+    "totalPersonalLoans": 10780000000,
+    "netPersonalTreasury": 76153870494
   },
   "personalDeposits": [
     {
@@ -471,5 +471,24 @@
       "projectedSettlement": 1000000
     }
   ],
-  "personalLoans": []
+  "personalLoans": [
+    {
+      "borrower": "Hồ Thị Yến Nhi",
+      "bank": "BIDV",
+      "loanCode": "PERSONAL-BID-HOTHIYENNHI-2026-11-25",
+      "principalOriginal": 10780000000,
+      "principalOutstanding": 10780000000,
+      "interestRate": 9,
+      "interestPayoutType": "Cuối kỳ",
+      "disbursementDate": "2026-11-25",
+      "maturityDate": "2027-09-10",
+      "interestPayable": 768185753,
+      "projectedSettlement": 11548185753,
+      "collateralDepositCodes": [
+        "VIP0108857",
+        "VIP0108899"
+      ],
+      "notes": "Vay cá nhân HTYN cầm cố sổ BIDV VIP0108857 + VIP0108899 - đầu tư căn hộ Lincoln (10 tỷ), 780 tr về VPB a.Tín"
+    }
+  ]
 }

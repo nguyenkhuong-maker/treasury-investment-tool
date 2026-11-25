@@ -1,8 +1,8 @@
 {
-  "asOf": "2026-11-23",
+  "asOf": "2026-11-25",
   "source": "Dashboard Treasury Balance · sheet Balance",
   "fx": 26300,
-  "total": 12416219,
+  "total": 11677723,
   "individuals": {
     "banks": [
       {
@@ -48,9 +48,9 @@
         {
           "bank": "BIDV",
           "depVnd": 9875411839,
-          "loanVnd": 23722034133,
+          "loanVnd": 25838034133,
           "depUsd": 92,
-          "net": -526396
+          "net": -606852
         },
         {
           "bank": "VietinBank",
@@ -76,12 +76,12 @@
         {
           "bank": "SC",
           "depVnd": 276515607,
-          "loanVnd": 22597850283,
+          "loanVnd": 20541118753,
           "depUsd": 9411,
-          "net": -839309
+          "net": -761106
         }
       ],
-      "net": -1365146
+      "net": -1367399
     },
     {
       "name": "Vixion",
@@ -112,43 +112,43 @@
   ],
   "osBank": 27548,
   "tokens": {
-    "stable": 2180238,
-    "btc": 1995979,
-    "eth": 5642196,
-    "other": 539227,
-    "total": 10357640,
+    "stable": 1680238,
+    "btc": 1942432,
+    "eth": 5470332,
+    "other": 528394,
+    "total": 9621397,
     "btcQty": 32.8,
     "ethQty": 3302
   },
   "runway": {
-    "cash": 12419333,
+    "cash": 11680500,
     "cases": [
       {
         "key": "actual",
         "label": "Thực tế · TB 3 tháng gần nhất",
         "burn": null,
-        "months": 34.06,
+        "months": 32.03,
         "actual": true
       },
       {
         "key": "350k",
         "label": "Kịch bản 350K/tháng",
         "burn": 350000,
-        "months": 35.48
+        "months": 33.37
       },
       {
         "key": "400k",
         "label": "Kịch bản 400K/tháng",
         "burn": 400000,
-        "months": 31.05
+        "months": 29.2
       },
       {
         "key": "600k",
         "label": "Kịch bản 600K/tháng",
         "burn": 600000,
-        "months": 20.7
+        "months": 19.47
       }
     ]
   },
-  "generatedAt": "2026-11-23T02:12:42.349Z"
+  "generatedAt": "2026-11-25T02:04:46.393Z"
 }

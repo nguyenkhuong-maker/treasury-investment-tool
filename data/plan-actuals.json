@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-25T02:04:46.662Z",
+ "generatedAt": "2026-11-25T06:01:01.185Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1365,6 +1365,24 @@
      "label": "Trả gốc lãi BIDV VLĐ đến hạn 20/11/2026",
      "payee": "BIDV",
      "amount": 780111
+    },
+    {
+     "date": "2026-11-23",
+     "source": "BIDV TC",
+     "cat": "loan",
+     "key": "SC|2026-11-24",
+     "label": "Trả gốc lãi SC VLĐ đến hạn 24/11/2026",
+     "payee": "Standard Chartered",
+     "amount": 2056731530
+    },
+    {
+     "date": "2026-11-23",
+     "source": "BIDV TC",
+     "cat": "loan",
+     "key": "SC|2026-11-24",
+     "label": "Trả gốc lãi SC VLĐ đến hạn 24/11/2026",
+     "payee": "Standard Chartered",
+     "amount": 58321017
     }
    ],
    "personal": [

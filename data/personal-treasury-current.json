@@ -1,14 +1,14 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-11-25T16:20:12+07:00",
-    "source": "Google Sheets live export 2026-11-25T09:19:25.002Z",
+    "updatedAt": "2026-11-25T16:25:49+07:00",
+    "source": "Google Sheets live export 2026-11-25T09:24:42.200Z",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet",
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-11-25T09:19:25.002Z",
+      "generatedAt": "2026-11-25T09:24:42.200Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",
@@ -95,10 +95,10 @@
       "accruedInterest": 662400000,
       "projectedSettlement": 8942400000,
       "linkedLoanCodes": [
-        "1440280147"
+        "PERSONAL-BID-HOTHIYENNHI-2026-11-25"
       ],
-      "collateralGroupName": "S? c? nh?n BIDV c?a H? Th? Y?n Nhi",
-      "mappingNote": "?ang ??m b?o cho kho?n vay BIDV TN 1440280147 theo x?c nh?n m?i nh?t c?a anh Nguy?n.",
+      "collateralGroupName": "Cầm cố vay cá nhân BIDV — Hồ Thị Yến Nhi",
+      "mappingNote": "Đang bảo đảm cho khoản vay cá nhân PERSONAL-BID-HOTHIYENNHI-2026-11-25 (Hồ Thị Yến Nhi).",
       "mappingStatus": "confirmed"
     },
     {
@@ -149,11 +149,11 @@
       "accruedInterest": 200000000,
       "projectedSettlement": 2700000000,
       "linkedLoanCodes": [
-        "1440267672"
+        "PERSONAL-BID-HOTHIYENNHI-2026-11-25"
       ],
-      "collateralGroupName": "Sổ cá nhân BIDV-TN của Hồ Thị Yến Nhi — 818020135596",
+      "collateralGroupName": "Cầm cố vay cá nhân BIDV — Hồ Thị Yến Nhi",
       "mappingStatus": "confirmed",
-      "mappingNote": "Đang bảo đảm cho khoản vay 1440267672."
+      "mappingNote": "Đang bảo đảm cho khoản vay cá nhân PERSONAL-BID-HOTHIYENNHI-2026-11-25 (Hồ Thị Yến Nhi)."
     },
     {
       "owner": "Đặng Thu Thảo",

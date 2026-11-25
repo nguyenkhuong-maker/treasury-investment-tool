@@ -1,9 +1,9 @@
 {
   "meta": {
     "name": "Company Loans Current Snapshot",
-    "updatedAt": "2026-11-25T13:01:00+07:00",
+    "updatedAt": "2026-11-25T16:10:59+07:00",
     "hasHistory": false,
-    "source": "Google Sheets live export 2026-11-25T06:00:02.937Z",
+    "source": "Google Sheets live export 2026-11-25T09:10:08.637Z",
     "abbreviationDefinitions": {
       "BIDV TN": "BIDV chi nhánh Thống Nhất",
       "BIDV TS": "BIDV chi nhánh Trường Sơn",
@@ -17,7 +17,7 @@
     },
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-11-25T06:00:02.937Z",
+      "generatedAt": "2026-11-25T09:10:08.637Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",
@@ -30,11 +30,11 @@
     }
   },
   "summary": {
-    "totalOutstanding": 46379152886,
-    "availableLimit": 17795195037,
-    "bidvAvailableLimit": 14170629156,
+    "totalOutstanding": 46551152886,
+    "availableLimit": 17623195037,
+    "bidvAvailableLimit": 13998629156,
     "scAvailableLimit": 3624565881,
-    "bidvOverdraftAvailableLimit": 10972908725,
+    "bidvOverdraftAvailableLimit": 10800908725,
     "bidvWorkingCapitalAvailableLimit": 3197720431
   },
   "maturityFocus": [
@@ -121,10 +121,10 @@
       "maturityDate": "2027-03-22",
       "interestRate": 8.2,
       "pledgedAccount": "-",
-      "principalOutstanding": 8443439380,
-      "interestPayable": 58803350,
-      "projectedSettlement": 8502242730,
-      "availableLimit": 8356560620,
+      "principalOutstanding": 8615439380,
+      "interestPayable": 60001224,
+      "projectedSettlement": 8675440604,
+      "availableLimit": 8184560620,
       "notes": "Khoản thấu chi mới tại BIDV TN; đang còn dư nợ và còn hạn mức chưa giải ngân.",
       "collateralGroupName": "Sổ cá nhân BIDV của Hồ Thị Yến Nhi",
       "depositCodes": [
@@ -779,8 +779,8 @@
         "1440328001",
         "1440267672"
       ],
-      "totalOutstanding": 14493054871,
-      "totalAvailableLimit": 10965608418
+      "totalOutstanding": 14665054871,
+      "totalAvailableLimit": 10793608418
     },
     {
       "groupCode": "bidv-overdraft-ts",

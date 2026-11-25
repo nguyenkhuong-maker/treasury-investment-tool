@@ -1,14 +1,14 @@
 {
   "meta": {
     "name": "Personal Treasury Current Snapshot",
-    "updatedAt": "2026-11-25T16:25:49+07:00",
-    "source": "Google Sheets live export 2026-11-25T09:24:42.200Z",
+    "updatedAt": "2026-11-25T16:37:01+07:00",
+    "source": "Google Sheets live export 2026-11-25T09:36:11.478Z",
     "hasHistory": false,
     "focusSection": "Bảng kê theo dõi các khoản tiền gửi tiết kiệm VND từ nguồn HOÁN ĐỔI USD STABLES SANG VND",
     "status": "updated_from_live_online_sheet",
     "liveSource": {
       "type": "google-sheets-live-export",
-      "generatedAt": "2026-11-25T09:24:42.200Z",
+      "generatedAt": "2026-11-25T09:36:11.478Z",
       "workbookIds": [
         "1ewsrDgPFLHq-lTJOTliQ4YK8VxT-LHySLLSRvanLC-8",
         "14FCjPpMo3jOtT_52pI0ea5hw_IBFe76JXwm5QSV4DaQ",
@@ -23,7 +23,8 @@
   "summary": {
     "totalPersonalDeposits": 86933870494,
     "totalPersonalLoans": 10780000000,
-    "netPersonalTreasury": 76153870494
+    "netPersonalTreasury": 76153870494,
+    "totalOutsideInvestments": 20000000000
   },
   "personalDeposits": [
     {
@@ -489,6 +490,28 @@
         "VIP0108899"
       ],
       "notes": "Vay cá nhân HTYN cầm cố sổ BIDV VIP0108857 + VIP0108899 - đầu tư căn hộ Lincoln (10 tỷ), 780 tr về VPB a.Tín"
+    }
+  ],
+  "outsideInvestments": [
+    {
+      "group": "Đầu tư Lincoln",
+      "label": "Đầu tư căn hộ Lincoln - đợt 1",
+      "bank": "VPB-PL",
+      "owner": "Nguyễn Trung Tín",
+      "source": null,
+      "amount": 10000000000,
+      "date": "2026-11-12",
+      "notes": "Theo chỉ đạo anh Đức (FD) 25/11/2026"
+    },
+    {
+      "group": "Đầu tư Lincoln",
+      "label": "Đầu tư căn hộ Lincoln - đợt 2",
+      "bank": "BIDV",
+      "owner": "Hồ Thị Yến Nhi",
+      "source": null,
+      "amount": 10000000000,
+      "date": "2026-11-25",
+      "notes": "Khoản vay theo dõi ở bảng Các HĐ vay đang hiệu lực"
     }
   ]
 }

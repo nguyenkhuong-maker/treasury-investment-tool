@@ -16,6 +16,9 @@ export interface CreditCard {
   statementDay: number | null; dueDay: number | null;
   collateral: { type: string; account: string; amount: number } | null; contract: string | null; note: string;
 }
+/* Vay cá nhân (cầm cố sổ cá nhân) và khoản đầu tư ngoài ngân quỹ (không tính runway) — từ Dashboard-fix */
+export interface PersonalLoan { borrower: string; bank: string; code: string; principal: number; rate: number | null; disb: string | null; due: string | null; interest: number; collateral: string[]; notes: string }
+export interface OutsideInvestment { group: string; label: string; bank: string; owner: string; amount: number; date: string | null; source: string | null; notes: string }
 export interface CompanyDeposit { bank: string; code: string; principal: number; rate: number; open: string; due: string; settle: number; loans: string[] }
 export interface Wallet { grp: string; name: string; ent: string; chain: string; type: string; addr: string; st: number; btc: number; eth: number; oth: number; tot: number }
 export interface Token { k: string; v: number; qty: number; c: string }
@@ -71,6 +74,8 @@ export let PLAN_ACTUALS: Record<string, MonthActual> = {};
 export let ACTUALS_AT = '';
 export let LOANS: Loan[] = [];
 export let PERSONAL_DEPOSITS: Deposit[] = [];
+export let PERSONAL_LOANS: PersonalLoan[] = [];
+export let OUTSIDE_INVESTMENTS: OutsideInvestment[] = [];
 export let COMPANY_DEPOSITS: CompanyDeposit[] = [];
 export let CARDS: CreditCard[] = [];
 export let RATE_WEEKS: any[] = [];
@@ -170,6 +175,14 @@ function mapPersonal(p: any) {
     // CCTG đã rút một phần: "số tiền trên sổ" vẫn là số ban đầu nên cột dự thu của sheet bị lớn; dùng gốc còn lại + lãi dự thu
     settle: Number(r.amountOnCertificate) > Number(r.principal) && Number(r.accruedInterest) > 0
       ? Number(r.principal) + Number(r.accruedInterest) : Number(r.projectedSettlement) || 0,
+  }));
+  PERSONAL_LOANS = (p.personalLoans || []).filter((l: any) => Number(l.principalOutstanding) > 0).map((l: any) => ({
+    borrower: l.borrower, bank: l.bank, code: String(l.loanCode), principal: Number(l.principalOutstanding) || 0, rate: l.interestRate ?? null,
+    disb: l.disbursementDate ?? null, due: l.maturityDate ?? null, interest: Number(l.interestPayable) || 0,
+    collateral: (l.collateralDepositCodes || []).map(String), notes: l.notes || '',
+  }));
+  OUTSIDE_INVESTMENTS = (p.outsideInvestments || []).map((i: any) => ({
+    group: i.group, label: i.label, bank: i.bank, owner: i.owner, amount: Number(i.amount) || 0, date: i.date ?? null, source: i.source ?? null, notes: i.notes || '',
   }));
   META.personalUpdatedAt = p.meta?.updatedAt || '';
 }

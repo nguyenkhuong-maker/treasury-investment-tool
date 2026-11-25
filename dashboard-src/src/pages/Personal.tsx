@@ -1,7 +1,7 @@
 import { useState, Fragment } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
-import { PERSONAL_DEPOSITS } from '@/data/static';
-import { PERSONAL_TOTAL, PLEDGED_TOTAL, loanGroupOf } from '@/lib/calc';
+import { PERSONAL_DEPOSITS, PERSONAL_LOANS, OUTSIDE_INVESTMENTS } from '@/data/static';
+import { PERSONAL_TOTAL, PLEDGED_TOTAL, PERSONAL_PLEDGED_TOTAL, PERSONAL_LOAN_TOTAL, PERSONAL_NET, OUTSIDE_INVEST_TOTAL, isPersonalPledge, loanGroupOf } from '@/lib/calc';
 import { LOAN_GROUPS } from '@/data/static';
 import { nf, ty, pct, dmy, daysTo } from '@/lib/fmt';
 import { Panel, Kpi, Donut, Legend, Chip, th, td, tn, Segmented, rowToggle } from '@/components/kit';
@@ -34,11 +34,55 @@ export default function Personal() {
   return (
     <div className="grid gap-4">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <Kpi label="Tổng tiền gửi" value={ty(PERSONAL_TOTAL)} sub={`${PERSONAL_DEPOSITS.length} sổ / tài khoản · 0 nợ vay`} />
+        <Kpi label="Tổng tiền gửi" value={ty(PERSONAL_TOTAL)} sub={`${PERSONAL_DEPOSITS.length} sổ / tài khoản`} />
+        <Kpi label="Vay cá nhân" tone={PERSONAL_LOAN_TOTAL ? 'neg' : undefined} value={ty(PERSONAL_LOAN_TOTAL)}
+          sub={PERSONAL_LOANS.length ? `${PERSONAL_LOANS.length} khoản · cầm cố sổ ${ty(PERSONAL_PLEDGED_TOTAL)}` : 'Không có khoản vay'} />
+        <Kpi label="Ngân quỹ cá nhân ròng" tone="pos" value={ty(PERSONAL_NET)} sub="Tổng tiền gửi − vay cá nhân" />
+        <Kpi label="Đầu tư ngoài ngân quỹ" tone="gold" value={ty(OUTSIDE_INVEST_TOTAL)}
+          sub={([...new Set(OUTSIDE_INVESTMENTS.map(i => i.group))].join(', ') || 'Không có') + ' · không tính runway'} />
+      </div>
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
         <Kpi label="Đang cầm cố cho Vihali" value={ty(PLEDGED_TOTAL)} sub={(PLEDGED_TOTAL / PERSONAL_TOTAL * 100).toFixed(1) + '% tổng tiền gửi'} onClick={() => go('vihali')} />
         <Kpi label="Thanh khoản không kỳ hạn" value={ty(liquid)} sub="Sẵn sàng chi" />
         <Kpi label="Đến hạn trong 30 ngày" value={ty(due30.reduce((a, d) => a + d.settle, 0))} sub={due30.map(d => d.code).join(', ') || 'Không có'} onClick={() => go('ke-hoach')} />
       </div>
+
+      {(PERSONAL_LOANS.length > 0 || OUTSIDE_INVESTMENTS.length > 0) && <div className="grid lg:grid-cols-12 gap-4">
+        <Panel pad={false} className="lg:col-span-7" title="Vay cá nhân đang hiệu lực" sub="Cầm cố sổ tiết kiệm cá nhân · đã trừ vào ngân quỹ cá nhân ròng">
+          <div className="overflow-x-auto">
+            <table className="w-full text-body border-collapse">
+              <thead><tr><th className={th}>Người vay</th><th className={th}>Ngân hàng</th><th className={th + ' text-right'}>Dư nợ gốc</th><th className={th + ' text-right'}>Lãi suất</th><th className={th}>Giải ngân</th><th className={th}>Đáo hạn</th><th className={th + ' text-right'}>Lãi đến hạn</th><th className={th}>Sổ cầm cố</th></tr></thead>
+              <tbody>
+                {PERSONAL_LOANS.map(l => (
+                  <tr key={l.code} className="hover:bg-accent/40" title={l.notes}>
+                    <td className={td}>{l.borrower}</td><td className={td}>{l.bank}</td>
+                    <td className={tn}>{nf(l.principal)}</td><td className={tn}>{pct(l.rate)}</td>
+                    <td className={td + ' num text-muted-foreground'}>{dmy(l.disb)}</td>
+                    <td className={td + ' num'}>{l.due ? dmy(l.due) : '–'}</td>
+                    <td className={tn}>{nf(l.interest)}</td>
+                    <td className={td + ' num text-xs'}>{l.collateral.join(', ')}</td>
+                  </tr>))}
+                {!PERSONAL_LOANS.length && <tr><td className={td + ' text-muted-foreground'} colSpan={8}>Không có khoản vay cá nhân</td></tr>}
+              </tbody>
+            </table>
+          </div>
+        </Panel>
+        <Panel pad={false} className="lg:col-span-5" title="Đầu tư ngoài ngân quỹ" sub="Không cộng vào ngân quỹ cá nhân ròng và không tính runway">
+          <div className="overflow-x-auto">
+            <table className="w-full text-body border-collapse">
+              <thead><tr><th className={th}>Nội dung</th><th className={th}>Ngày chi</th><th className={th}>Nguồn</th><th className={th + ' text-right'}>Số tiền</th></tr></thead>
+              <tbody>
+                {OUTSIDE_INVESTMENTS.map((i, k) => (
+                  <tr key={k} className="hover:bg-accent/40" title={i.notes}>
+                    <td className={td}>{i.label}</td><td className={td + ' num text-muted-foreground'}>{dmy(i.date)}</td>
+                    <td className={td + ' text-xs'}>{i.source || `${i.bank} · ${i.owner}`}</td><td className={tn}>{nf(i.amount)}</td>
+                  </tr>))}
+                <tr className="font-semibold bg-muted/60"><td className={td} colSpan={3}>Tổng cộng</td><td className={tn}>{nf(OUTSIDE_INVEST_TOTAL)}</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </Panel>
+      </div>}
 
       <div className="grid lg:grid-cols-12 gap-4">
         <Panel className="lg:col-span-5" title="Cơ cấu tiền gửi" right={
@@ -59,7 +103,7 @@ export default function Personal() {
         </Panel>
         <Panel className="lg:col-span-7" title="Sổ cầm cố đảm bảo khoản vay Vihali" sub="Mỗi sổ và nhóm khoản vay mà sổ đang đảm bảo">
           <div className="grid gap-2.5">
-            {PERSONAL_DEPOSITS.filter(d => d.pledged).map(d => {
+            {PERSONAL_DEPOSITS.filter(d => d.pledged && !isPersonalPledge(d)).map(d => {
               const gs = [...new Set(d.loans.map(loanGroupOf).filter(Boolean))];
               return (
                 <div key={d.code} className="grid grid-cols-[1fr_auto] sm:grid-cols-[170px_1fr_auto] gap-x-3 gap-y-1 items-center text-body border-b last:border-0 pb-2.5 last:pb-0">
@@ -105,12 +149,12 @@ export default function Personal() {
                         <td className={td + ' num text-muted-foreground'}>{dmy(d.open)}</td>
                         <td className={td + ' num'}>{d.due ? dmy(d.due) : <span className="text-muted-foreground">Không kỳ hạn</span>} {dd != null && dd <= 30 && <Chip tone="warn" className="ml-1">{dd} ngày</Chip>}</td>
                         <td className={tn}>{nf(d.settle)}</td>
-                        <td className={td}>{d.pledged ? <Chip tone="primary">Cầm cố</Chip> : <span className="text-xs text-muted-foreground">Không</span>}</td>
+                        <td className={td}>{d.pledged ? <Chip tone="primary">{isPersonalPledge(d) ? 'Cầm cố vay CN' : 'Cầm cố'}</Chip> : <span className="text-xs text-muted-foreground">Không</span>}</td>
                       </tr>);
                   })}
                 </Fragment>
               ))}
-              <tr className="font-semibold bg-muted/60"><td className={td} colSpan={3}>Tổng cộng · {PERSONAL_DEPOSITS.length} sổ</td><td className={tn}>{nf(PERSONAL_TOTAL)}</td><td className={td} colSpan={3} /><td className={tn}>{nf(PERSONAL_DEPOSITS.reduce((a, d) => a + d.settle, 0))}</td><td className={td}><span className="num text-xs">{ty(PLEDGED_TOTAL)}</span></td></tr>
+              <tr className="font-semibold bg-muted/60"><td className={td} colSpan={3}>Tổng cộng · {PERSONAL_DEPOSITS.length} sổ</td><td className={tn}>{nf(PERSONAL_TOTAL)}</td><td className={td} colSpan={3} /><td className={tn}>{nf(PERSONAL_DEPOSITS.reduce((a, d) => a + d.settle, 0))}</td><td className={td}><span className="num text-xs">{ty(PLEDGED_TOTAL + PERSONAL_PLEDGED_TOTAL)}</span></td></tr>
             </tbody>
           </table>
         </div>

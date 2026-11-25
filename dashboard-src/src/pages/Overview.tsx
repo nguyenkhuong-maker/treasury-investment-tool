@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { ArrowRight, Lock, LockOpen, TriangleAlert, ChevronDown, ChevronRight } from 'lucide-react';
 import { RATE_WEEKS, PERSONAL_DEPOSITS, COMPANY_DEPOSITS, BALANCE, CARDS } from '@/data/static';
 import type { Balance } from '@/data/static';
-import { GROUP_SUMMARY, LOAN_TOTAL, PERSONAL_TOTAL, PLEDGED_TOTAL, collateralFlows, CARD_LIMIT, CARD_USED, CARD_COLLATERAL } from '@/lib/calc';
+import { GROUP_SUMMARY, LOAN_TOTAL, PERSONAL_TOTAL, PLEDGED_TOTAL, PERSONAL_PLEDGED_TOTAL, isPersonalPledge, collateralFlows, CARD_LIMIT, CARD_USED, CARD_COLLATERAL } from '@/lib/calc';
 import { ty, tr, pct, dmy, FX, TODAY, usdFull, usdM, vndOf, nf } from '@/lib/fmt';
 import { Kpi, Panel, Chip, Delta, Donut, Legend, th, td, tn, rowToggle } from '@/components/kit';
 import { useApp } from '@/state';
@@ -198,7 +198,7 @@ export default function Overview() {
   const B = BALANCE;
   const W = RATE_WEEKS[RATE_WEEKS.length - 1], P = RATE_WEEKS[RATE_WEEKS.length - 2] || W;
   const top12 = [...W.medium].filter((i: any) => i.r['12m'] != null).sort((a: any, b: any) => b.r['12m'] - a.r['12m']).slice(0, 4);
-  const unpledged = PERSONAL_TOTAL - PLEDGED_TOTAL;
+  const unpledged = PERSONAL_TOTAL - PLEDGED_TOTAL - PERSONAL_PLEDGED_TOTAL;
   if (!B) return <p className="text-muted-foreground">Chưa có dữ liệu sheet Balance (data/balance-current.json).</p>;
   const open = cryptoOpen;
   const R = compute(B, open);
@@ -253,7 +253,7 @@ export default function Overview() {
           <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-muted-foreground mt-3 pt-3 border-t">
             <span>Tiền gửi cá nhân không cầm cố <b className="num font-medium text-foreground">{usdFull(unpledged / FX)}</b> <span className="num">≈ {ty(unpledged)}</span></span>
             <span>Tổng TSĐB / dư nợ <b className="num font-medium text-foreground">{((PLEDGED_TOTAL + COMPANY_DEPOSITS.reduce((a, d) => a + d.principal, 0)) / LOAN_TOTAL * 100).toFixed(0)}%</b></span>
-            <span>{PERSONAL_DEPOSITS.filter(d => d.pledged).length} sổ cá nhân + {COMPANY_DEPOSITS.length} sổ công ty{CARD_COLLATERAL ? <> + ký quỹ thẻ tín dụng <span className="num">{tr(CARD_COLLATERAL)}</span></> : null}</span>
+            <span>{PERSONAL_DEPOSITS.filter(d => d.pledged && !isPersonalPledge(d)).length} sổ cá nhân + {COMPANY_DEPOSITS.length} sổ công ty{CARD_COLLATERAL ? <> + ký quỹ thẻ tín dụng <span className="num">{tr(CARD_COLLATERAL)}</span></> : null}</span>
           </div>
         </Panel>
         <Panel className="xl:col-span-4" title="Lãi suất 12 tháng cao nhất" sub={`${W.label} · so với tuần trước`} right={<button onClick={() => go('lai-suat')} className="text-xs text-primary inline-flex items-center gap-1 hover:underline">Tab Đầu tư<ArrowRight className="w-3 h-3" /></button>}>

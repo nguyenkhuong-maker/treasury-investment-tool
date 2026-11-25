@@ -1,4 +1,4 @@
-import { LOANS, PERSONAL_DEPOSITS, COMPANY_DEPOSITS, CARDS } from '@/data/static';
+import { LOANS, PERSONAL_DEPOSITS, PERSONAL_LOANS, OUTSIDE_INVESTMENTS, COMPANY_DEPOSITS, CARDS } from '@/data/static';
 import { LOAN_GROUPS, BIDV_VLD_LIMIT, SC_LIMIT, PLAN_INPUTS } from '@/data/static';
 import type { PlanLine, Recurring, PlanInputs, OpeningDetail } from '@/data/static';
 import { META } from '@/data/static';
@@ -11,7 +11,12 @@ export let LOAN_TOTAL = 0;
 export let HM_TOTAL = 0;
 export let OD_HM = 0;
 export let PERSONAL_TOTAL = 0;
-export let PLEDGED_TOTAL = 0;
+export let PLEDGED_TOTAL = 0; // sổ cá nhân cầm cố cho khoản vay Vihali
+export let PERSONAL_PLEDGED_TOTAL = 0; // sổ cá nhân cầm cố cho vay cá nhân
+export let PERSONAL_LOAN_TOTAL = 0;
+export let PERSONAL_NET = 0; // ngân quỹ cá nhân ròng = tiền gửi − vay cá nhân
+export let OUTSIDE_INVEST_TOTAL = 0; // đầu tư ngoài ngân quỹ, không tính runway
+export const isPersonalPledge = (d: { loans: string[] }) => d.loans.some(c => PERSONAL_LOANS.some(l => l.code === c));
 /* Thẻ tín dụng: hạn mức, dư nợ đã dùng, tiền ký quỹ bảo đảm */
 export let CARD_LIMIT = 0;
 export let CARD_USED = 0;
@@ -40,7 +45,11 @@ export function recompute() {
   HM_TOTAL = GROUP_SUMMARY.reduce((a, g) => a + g.hm, 0);
   OD_HM = GROUP_SUMMARY.filter(g => g.key.startsWith('bidv-od')).reduce((a, g) => a + g.hm, 0);
   PERSONAL_TOTAL = PERSONAL_DEPOSITS.reduce((a, d) => a + d.principal, 0);
-  PLEDGED_TOTAL = PERSONAL_DEPOSITS.filter(d => d.pledged).reduce((a, d) => a + d.principal, 0);
+  PLEDGED_TOTAL = PERSONAL_DEPOSITS.filter(d => d.pledged && !isPersonalPledge(d)).reduce((a, d) => a + d.principal, 0);
+  PERSONAL_PLEDGED_TOTAL = PERSONAL_DEPOSITS.filter(d => d.pledged && isPersonalPledge(d)).reduce((a, d) => a + d.principal, 0);
+  PERSONAL_LOAN_TOTAL = PERSONAL_LOANS.reduce((a, l) => a + l.principal, 0);
+  PERSONAL_NET = PERSONAL_TOTAL - PERSONAL_LOAN_TOTAL;
+  OUTSIDE_INVEST_TOTAL = OUTSIDE_INVESTMENTS.reduce((a, i) => a + i.amount, 0);
 }
 export const loanGroupOf = (code: string) => LOANS.find(l => l.code === code)?.group;
 

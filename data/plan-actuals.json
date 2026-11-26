@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-25T09:37:01.751Z",
+ "generatedAt": "2026-11-26T06:00:57.136Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1383,6 +1383,15 @@
      "label": "Trả gốc lãi SC VLĐ đến hạn 24/11/2026",
      "payee": "Standard Chartered",
      "amount": 58321017
+    },
+    {
+     "date": "2026-11-25",
+     "source": "BIDV TC",
+     "cat": "interest",
+     "key": null,
+     "label": "Lãi vay BIDV định kỳ",
+     "payee": "BIDV",
+     "amount": 171388493
     }
    ],
    "personal": [
@@ -1560,7 +1569,7 @@
    ],
    "closing": {
     "odAvailable": 10800908725,
-    "asOf": "2026-11-25"
+    "asOf": "2026-11-26"
    }
   }
  }

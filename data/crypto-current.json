@@ -1,17 +1,17 @@
 {
   "meta": {
     "name": "Crypto Assets Snapshot",
-    "updatedAt": "2026-11-25T16:37:01+07:00",
+    "updatedAt": "2026-11-26T13:00:56+07:00",
     "priceDate": "25-Nov-2026",
     "source": "Sheet Crypto Assets (Sipher's Wallets)"
   },
   "prices": {
-    "SOL": 67.62,
-    "BTC": 58967.69,
-    "ETH": 1632.7,
-    "JitoSOL": 89.38,
-    "SIPHER": 0.0016,
-    "SAFE": 0.0674
+    "SOL": 71.02,
+    "BTC": 60830.47,
+    "ETH": 1687.83,
+    "JitoSOL": 93.33,
+    "SIPHER": 0.0014,
+    "SAFE": 0.0691
   },
   "tokens": [
     {
@@ -22,35 +22,35 @@
     {
       "k": "BTC",
       "qty": 32.8,
-      "usd": 1934156
+      "usd": 1995256
     },
     {
       "k": "ETH",
       "qty": 3301.69,
-      "usd": 5417736
+      "usd": 5600683
     },
     {
       "k": "SOL",
       "qty": 7324.94,
-      "usd": 495312
+      "usd": 520217
     },
     {
       "k": "OP",
       "qty": 216666,
-      "usd": 14603
+      "usd": 14972
     },
     {
       "k": "Others",
       "qty": 0,
-      "usd": 8420
+      "usd": 8808
     }
   ],
   "totals": {
     "stable": 1680238,
-    "btc": 1934156,
-    "eth": 5417737,
-    "other": 518335,
-    "total": 9550466
+    "btc": 1995256,
+    "eth": 5600683,
+    "other": 543996,
+    "total": 9820173
   },
   "wallets": [
     {
@@ -75,9 +75,9 @@
       "address": "0x1198…1295",
       "stable": 0,
       "btc": 0,
-      "eth": 3438719,
-      "other": 463,
-      "total": 3439182
+      "eth": 3554838,
+      "other": 488,
+      "total": 3555326
     },
     {
       "group": "ERC-20 Wallet",
@@ -88,9 +88,9 @@
       "address": "0x1299…b663",
       "stable": 0,
       "btc": 0,
-      "eth": 240908,
-      "other": 1854,
-      "total": 242762
+      "eth": 249043,
+      "other": 1919,
+      "total": 250962
     },
     {
       "group": "ERC-20 Wallet",
@@ -114,9 +114,9 @@
       "address": "0x1390…243F",
       "stable": 1677371,
       "btc": 16,
-      "eth": 415164,
-      "other": 6103,
-      "total": 2098654
+      "eth": 429183,
+      "other": 6400,
+      "total": 2112970
     },
     {
       "group": "ERC-20 Wallet",
@@ -140,9 +140,9 @@
       "address": "0x1299…b663",
       "stable": 0,
       "btc": 0,
-      "eth": 3094,
+      "eth": 3198,
       "other": 0,
-      "total": 3094
+      "total": 3198
     },
     {
       "group": "Polygon Wallet",
@@ -178,10 +178,10 @@
       "type": "Ví thường",
       "address": "0x3e8c…9a16",
       "stable": 0,
-      "btc": 1698270,
+      "btc": 1751919,
       "eth": 0,
       "other": 0,
-      "total": 1698270
+      "total": 1751919
     },
     {
       "group": "ERC-20 Wallet & Solana Wallet",
@@ -193,8 +193,8 @@
       "stable": 0,
       "btc": 0,
       "eth": 0,
-      "other": 495312,
-      "total": 495312
+      "other": 520217,
+      "total": 520217
     },
     {
       "group": "ERC-20 Wallet & Solana Wallet",
@@ -204,10 +204,10 @@
       "type": "Ví lạnh",
       "address": "0x3BC1…c002",
       "stable": 0,
-      "btc": 235870,
-      "eth": 1318491,
+      "btc": 243321,
+      "eth": 1363014,
       "other": 0,
-      "total": 1554361
+      "total": 1606335
     },
     {
       "group": "Sipher Gaming Revenue",
@@ -218,9 +218,9 @@
       "address": "0x6EFE…cdb2",
       "stable": 1550,
       "btc": 0,
-      "eth": 93,
+      "eth": 96,
       "other": 0,
-      "total": 1643
+      "total": 1646
     },
     {
       "group": "Sipher Gaming Revenue",
@@ -231,9 +231,9 @@
       "address": "0x819B…1e41",
       "stable": 521,
       "btc": 0,
-      "eth": 83,
+      "eth": 86,
       "other": 0,
-      "total": 604
+      "total": 607
     },
     {
       "group": "Sipher Gaming Revenue",
@@ -244,9 +244,9 @@
       "address": "0xb1d0…2723",
       "stable": 766,
       "btc": 0,
-      "eth": 1184,
+      "eth": 1224,
       "other": 0,
-      "total": 1950
+      "total": 1990
     },
     {
       "group": "Capytal War Gaming Revenue",
@@ -323,8 +323,8 @@
       "stable": 0,
       "btc": 0,
       "eth": 0,
-      "other": 14603,
-      "total": 14603
+      "other": 14972,
+      "total": 14972
     },
     {
       "group": "GIN Limited - OP Funds",

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-26T06:00:57.136Z",
+ "generatedAt": "2026-11-28T02:24:15.739Z",
  "note": "Thực chi theo tháng dương lịch, tên cá nhân đã ẩn",
  "months": {
   "2026-10": {
@@ -1392,6 +1392,42 @@
      "label": "Lãi vay BIDV định kỳ",
      "payee": "BIDV",
      "amount": 171388493
+    },
+    {
+     "date": "2026-11-26",
+     "source": "SC VLD",
+     "cat": "salary",
+     "key": null,
+     "label": "Lương, BH, thuế TNCN",
+     "payee": "Vihali",
+     "amount": 2385430174
+    },
+    {
+     "date": "2026-11-26",
+     "source": "SC VLD",
+     "cat": "salary",
+     "key": null,
+     "label": "Lương, BH, thuế TNCN",
+     "payee": "Vihali",
+     "amount": 150051636
+    },
+    {
+     "date": "2026-11-26",
+     "source": "SC VLD",
+     "cat": "salary",
+     "key": null,
+     "label": "Lương, BH, thuế TNCN",
+     "payee": "Vihali",
+     "amount": 81285435
+    },
+    {
+     "date": "2026-11-26",
+     "source": "SC VLD",
+     "cat": "salary",
+     "key": null,
+     "label": "Lương, BH, thuế TNCN",
+     "payee": "Vihali",
+     "amount": 166441605
     }
    ],
    "personal": [
@@ -1565,11 +1601,19 @@
      "entity": "Dopa JSC",
      "payee": "Ẩn tên",
      "amount": 1483360
+    },
+    {
+     "date": "2026-11-26",
+     "cat": "staff-dopa",
+     "label": "Lương nhân viên DOPA",
+     "entity": "Dopa JSC",
+     "payee": "DOPA",
+     "amount": 1013233800
     }
    ],
    "closing": {
     "odAvailable": 10800908725,
-    "asOf": "2026-11-26"
+    "asOf": "2026-11-28"
    }
   }
  }
